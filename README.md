@@ -1,2 +1,2 @@
-# Project1
+# HBO-ICTMemes
 This repository is built for a school project. Usefull :)
