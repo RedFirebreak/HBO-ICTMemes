@@ -1,7 +1,5 @@
 <?php
-Echo "Hello World, this is project1!<br>";
+Echo "Hello World, this is develop HBO-ICTMemes<br>";
 
-Echo "testing pull speed <br>";
-
-echo "Dit is een test op school";
+Echo "Dit is de development branch van dit project";
 ?>
