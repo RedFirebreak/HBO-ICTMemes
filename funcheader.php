@@ -5,11 +5,10 @@
     <link rel="icon" href="favicon.ico">
 
     <!-- Bootstrap core CSS -->
-    <link href="src/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/src/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="src/jumbotron.css" rel="stylesheet">
-
+    <link href="/src/css/jumbotron.css" rel="stylesheet">
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +22,7 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/upload.php">Upload your meme!</a>
+            <a class="nav-link" href="/upload/">Upload your meme!</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/tags.php">Tags</a>
@@ -51,7 +50,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" href="/login.php">Log in</a>
               <a class="dropdown-item" href="/accountpage.php">AccountPage</a>
-              <a class="dropdown-item" href="/upload.php">Upload</a>
+              <a class="dropdown-item" href="/upload/">Upload</a>
               <a class="dropdown-item" href="#">Log-out</a>
             </div>
           </li>
