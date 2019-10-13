@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2019 at 11:50 AM
+-- Generation Time: Oct 13, 2019 at 08:31 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -74,7 +74,7 @@ CREATE TABLE `errors` (
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
-  `user-ID` int(10) UNSIGNED NOT NULL,
+  `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `tagnaam` varchar(20) COLLATE utf8_bin NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
@@ -89,9 +89,17 @@ CREATE TABLE `meme` (
 --
 
 CREATE TABLE `rollen` (
-  `userrole` varchar(20) COLLATE utf8_bin NOT NULL,
-  `user-ID` int(10) UNSIGNED NOT NULL
+  `userrole` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `rollen`
+--
+
+INSERT INTO `rollen` (`userrole`) VALUES
+('admin'),
+('uber-admin'),
+('user');
 
 -- --------------------------------------------------------
 
@@ -102,6 +110,16 @@ CREATE TABLE `rollen` (
 CREATE TABLE `school` (
   `schoolnaam` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `school`
+--
+
+INSERT INTO `school` (`schoolnaam`) VALUES
+('voorbeeldschool1'),
+('voorbeeldschool2'),
+('voorbeeldschool3'),
+('voorbeeldschool4');
 
 -- --------------------------------------------------------
 
@@ -195,8 +213,7 @@ ALTER TABLE `meme`
 -- Indexes for table `rollen`
 --
 ALTER TABLE `rollen`
-  ADD PRIMARY KEY (`userrole`),
-  ADD KEY `user-ID` (`user-ID`);
+  ADD PRIMARY KEY (`userrole`);
 
 --
 -- Indexes for table `school`
@@ -224,7 +241,7 @@ ALTER TABLE `user`
   ADD KEY `usermail` (`usermail`),
   ADD KEY `userrole` (`userrole`),
   ADD KEY `schoolnaam` (`schoolnaam`),
-  ADD KEY `is_verified` (`is_verified`);
+  ADD KEY `user_ibfk_2` (`is_verified`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -270,39 +287,32 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`);
+  ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `errors`
 --
 ALTER TABLE `errors`
-  ADD CONSTRAINT `errors_ibfk_1` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `errors_ibfk_2` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `errors_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`),
-  ADD CONSTRAINT `errors_ibfk_4` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`);
+  ADD CONSTRAINT `errors_ibfk_1` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `errors_ibfk_2` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `errors_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `errors_ibfk_4` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `meme`
 --
 ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`),
-  ADD CONSTRAINT `meme_ibfk_3` FOREIGN KEY (`school`) REFERENCES `school` (`schoolnaam`);
-
---
--- Constraints for table `rollen`
---
-ALTER TABLE `rollen`
-  ADD CONSTRAINT `rollen_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
+  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
 --
 ALTER TABLE `user`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`schoolnaam`) REFERENCES `school` (`schoolnaam`),
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`is_verified`) REFERENCES `emailverificatie` (`geverifieerd`),
-  ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`userrole`) REFERENCES `rollen` (`userrole`);
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`schoolnaam`) REFERENCES `school` (`schoolnaam`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`is_verified`) REFERENCES `emailverificatie` (`geverifieerd`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`userrole`) REFERENCES `rollen` (`userrole`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
