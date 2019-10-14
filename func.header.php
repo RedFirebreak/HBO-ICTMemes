@@ -52,10 +52,10 @@
 
         <ul class="navbar-nav">
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="/login.php" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
+            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="/login.php">Log in</a>
-              <a class="dropdown-item" href="/accountpage.php">AccountPage</a>
+            <a class="dropdown-item" href="/account/login.php">Log in</a>
+              <a class="dropdown-item" href="/account/">AccountPage</a>
               <a class="dropdown-item" href="/upload/">Upload</a>
               <a class="dropdown-item" href="#">Log-out</a>
             </div>
