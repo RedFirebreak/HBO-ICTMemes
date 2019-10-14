@@ -6,7 +6,7 @@
   <head>
     <title>HBO-ICTMemes</title>
     <?php
-      include "/func.header.php";
+      include "func.header.php";
     ?>
   </head>
 
@@ -21,7 +21,7 @@
     </div>
 
   <?php
-    include "/func.footer.php";
+    include "$websiteroot/func.footer.php";
   ?>
 
       </body>

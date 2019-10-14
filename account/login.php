@@ -14,7 +14,7 @@
   <head>
     <!-- Edit the pagename only -->
     <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('/func.header.php'); ?>
+    <?php require('../func.header.php'); ?>
   </head>
 
   <body>
@@ -44,6 +44,6 @@
   </body>
 
   <footer>
-    <?php require('/func.footer.php'); ?>
+    <?php require('../func.footer.php'); ?>
   </footer>
 </html>

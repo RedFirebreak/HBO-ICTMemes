@@ -41,7 +41,7 @@
     </div>
 
   <?php
-    include "func.footer.php";
+    include "$websiteroot/func.footer.php";
   ?>
 
       </body>
