@@ -1,7 +1,7 @@
 
     <?php
     // Specify the path to the configfile
-      include "src/config.php";
+      include "/src/config.php";
     ?>
 
     <meta charset="utf-8">

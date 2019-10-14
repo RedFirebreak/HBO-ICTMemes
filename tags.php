@@ -29,7 +29,7 @@
     </div>
 
   <?php
-    include "$websiteroot/func.footer.php";
+    include "func.footer.php";
   ?>
 
       </body>

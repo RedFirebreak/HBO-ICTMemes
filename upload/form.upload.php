@@ -1,4 +1,4 @@
-<!DOCTYPEhtml>
+
 <?php
     /*
         [DESCRIPTION]
@@ -10,20 +10,6 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - PAGENAME</title>
-    <?php require('header.php'); ?>
-  </head>
-
-  <body>
-
     <!-- Start coding here! :D -->
 
-  </body>
-
-  <footer>
-    <?php require('footer.php'); ?>
-  </footer>
-</html>
+<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
