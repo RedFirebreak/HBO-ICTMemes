@@ -3,7 +3,7 @@
   <head>
     <title>HBO-ICTMemes</title>
     <?php
-      include "func.header.php";
+      require "func.header.php";
     ?>
   </head>
 
@@ -18,7 +18,7 @@
     </div>
 
   <?php
-    include "func.footer.php";
+    require "func.footer.php";
   ?>
 
       </body>

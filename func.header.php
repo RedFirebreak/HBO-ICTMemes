@@ -56,6 +56,7 @@
             <a class="dropdown-item" href="/account/login.php">Log in</a>
               <a class="dropdown-item" href="/account/">AccountPage</a>
               <a class="dropdown-item" href="/upload/">Upload</a>
+              <a class="dropdown-item" href="/support.php">Support</a>
               <a class="dropdown-item" href="#">Log-out</a>
             </div>
           </li>

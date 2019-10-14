@@ -12,14 +12,15 @@
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-3">Tags</h1>
-        <p>Tagspage</p>
 
       </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>Stuff n' Things</h2>
+
+            <?php require "form.support.php"; ?>
+
             </div>
 
             <div class="col-md-6">
