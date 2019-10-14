@@ -1,28 +1,5 @@
 
     <?php
-    /*
-    //Check if the url is loaded from the main directory
-    if ($page == 'main' || $page == 'tags'  || $page == 'search' ) {
-      echo "we are in the main directory! ($page)";
-      include "src/config.php";
-    } else {
-      echo "nope not here 1";
-    }
-    // check if the url is loaded from the account folder
-    if ($page == '' || $page == '' || $page == '') {
-      include "../src/config.php";
-    } else {
-      echo "nope not here 2";
-    }
-
-        // check if the url is loaded from the account folder
-        if ($page == '' || $page == '' || $page == '') {
-          require "../src/config.php";
-        }
-
-
-    }
-    */
       require "src/config.php";
     ?>
 
