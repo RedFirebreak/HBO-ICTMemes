@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+//specify which page we are on. This is important for the config file
+  $page = "main";
+?>
+
 <html lang="en">
   <head>
     <title>HBO-ICTMemes</title>
