@@ -1,6 +1,8 @@
 
     <?php
     // Specify the path to the configfile
+    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    echo $actual_link;
       include "/src/config.php";
     ?>
 
