@@ -41,6 +41,7 @@
 
             <div class="col-md-6">
                 <h2>More Stuff n' Things</h2>
+                <h2><a href="/admin/">If admin</a></h2>
             </div>
         </div>
     </div>

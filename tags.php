@@ -3,7 +3,7 @@
   <head>
     <title>HBO-ICTMemes</title>
     <?php
-      include "$websiteroot/func.header.php";
+      include "func.header.php";
     ?>
   </head>
 
