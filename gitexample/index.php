@@ -56,7 +56,7 @@
       <div class="container">
         <h1 class="display-3">Github-Example</h1>
         <p>Git aint easy. But it can be! You just need a good example and some webpage to keep coming back to everytime you doubt yourself.</p>
-        <p>You can <b>clone a repository</b> by doing <code>git clone https://github.com/RedFirebreak/HBO-ICTMemes.git</code> Cloning is basically "copying" the current state of the project to your computer so you can work on it. </p>
+        <p>You can <b>clone a repository</b> by doing <code>git clone https://github.com/RedFirebreak/HBO-ICTMemes.git</code> Cloning is basically "copying" the current state of the project to your computer so you can work on it. <br> After cloning, make sure to <b>switch to the right branch</b> with the command: <code>git checkout develop</code></p>
         <p>You can download git <a href="https://git-scm.com/downloads">HERE</a>.<br>You can open a <b>command window</b> to <b>enter all these commands</b> by <b>Shift-Right-Clicking in the project directory and clicking "Open Powershell here"</b></p>
       
         <br>

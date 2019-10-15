@@ -3,7 +3,7 @@
   <head>
     <title>HBO-ICTMemes</title>
     <?php
-      include "header.php";
+      require "func.header.php";
     ?>
   </head>
 
@@ -11,15 +11,16 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Register here</h1>
-        <p>Register with your credentials here, <a href="/login.php">or log in</a>.</p>
+        <h1 class="display-3">Tags</h1>
 
       </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h2>Stuff n' Things</h2>
+
+            <?php require "form.support.php"; ?>
+
             </div>
 
             <div class="col-md-6">
@@ -29,7 +30,7 @@
     </div>
 
   <?php
-    include "footer.php";
+    require "func.footer.php";
   ?>
 
       </body>
