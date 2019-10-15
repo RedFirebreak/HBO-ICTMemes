@@ -26,7 +26,8 @@
 		<p>Select the tags for your meme:</p>
 		<select name="tags">
 			
-		</select>
+		</select><br><br>
+		<input type="submit" name="submit" value="submit">
 		</form>
 		<?php
 		/*handige manier om tags te selecteren is nog nodig
