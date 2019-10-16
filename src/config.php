@@ -1,4 +1,4 @@
 <?php
   //This file will be used for database connections and such.
-    This is stefan database connection
+  // Insert your database connection
 ?>
