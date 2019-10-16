@@ -4,7 +4,8 @@
   echo.
   echo ------------------------------------------
     cd "..\..\"
-    git pull
+     git checkout develop
+     git pull
   echo ------------------------------------------
   echo.
 pause

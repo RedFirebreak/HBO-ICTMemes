@@ -6,7 +6,7 @@
     git add .
     set /p push-name="Enter comment for your fork: "
     git commit -m "%push-name%"
-    git push origin
+    git push
   echo ------------------------------------------
   echo.
 pause
