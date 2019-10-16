@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 13, 2019 at 08:31 PM
+-- Generation Time: Oct 16, 2019 at 11:03 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -129,6 +129,7 @@ INSERT INTO `school` (`schoolnaam`) VALUES
 
 CREATE TABLE `support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
+  `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
