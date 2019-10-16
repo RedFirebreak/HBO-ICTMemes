@@ -2,15 +2,21 @@
   //This file will be used for database connections and such.
   // Insert your database connection
 
+      //For custom error handling, add this to your "failed" if statement:
+        //$errormessage = "";
+        //file_put_contents('/logs/log_db-fail'.date("j.n.Y_h:i:s").'.txt', $errormessage);
+
       // Configurations are stored in an array.
       $config = array();
 
       // Database configuration settings for MySQL instance
-      // ENTER YOUR DATACONNECTION HERE
-        $config['mysql']['hostname'] = "localhost"; // Default localhost
-        $config['mysql']['username'] = "root"; // is default root
-        $config['mysql']['password'] = ""; // only if you set a password
-        $config['mysql']['database'] = ""; // The databasename
+        $config['mysql']['hostname'] = "localhost";
+        $config['mysql']['username'] = "root";
+        $config['mysql']['password'] = "";
+        $config['mysql']['database'] = "hboictmemes";
+
+      // Log location
+      $config['logs'] = "/logs";
 
 // Better not touch anything down here, unless you know what you are doing.
         function databaseConnect() {
@@ -24,7 +30,11 @@
           // check connection
           if (mysqli_connect_errno()) {
             $errormessage = "Connect failed ". mysqli_connect_error();
-            die($errormessage);
+            echo "<h1>Yikes! It looks like the database connection failed.<br>";
+            echo "<p>The admins have been notified of this error. Please come back later!</p>";
+            echo "<br>";
+
+            file_put_contents('/logs/log_db-fail'.date("j.n.Y_h:i:s").'.txt', $errormessage);
             exit();
             }
         
