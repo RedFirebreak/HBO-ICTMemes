@@ -6,7 +6,7 @@
     git add .
     set /p push-name="Enter comment for your fork: "
     git commit -m "%push-name%"
-    git push upstream/develop
+    git push origin develop
   echo ------------------------------------------
   echo.
 pause
