@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 11:03 AM
+-- Generation Time: Oct 16, 2019 at 12:56 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -289,7 +289,8 @@ ALTER TABLE `comments`
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`);
 
 --
 -- Constraints for table `errors`
@@ -312,7 +313,6 @@ ALTER TABLE `meme`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`schoolnaam`) REFERENCES `school` (`schoolnaam`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`is_verified`) REFERENCES `emailverificatie` (`geverifieerd`) ON UPDATE CASCADE,
   ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`userrole`) REFERENCES `rollen` (`userrole`) ON UPDATE CASCADE;
 COMMIT;
 
