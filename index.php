@@ -26,6 +26,34 @@
             <br>
             <br>
             <br>
+
+            <?php
+            echo "<br>";
+            $sql = "SELECT tagnaam t FROM tags ORDER by 1;";
+            $result = $dbConnection->query($sql);
+            
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "Tag: " . $row["t"]. "<br>";
+                }
+            } else {
+                echo "0 results";
+            }
+            /*
+              $query = "SELECT tagnaam t FROM tags ORDER by 1;";
+              $result_set = mysqli_query($dbConnection, $query);
+              mysqli_free_result($result_set);
+
+              var_dump($result_set); 
+
+              while($record = mysqli_fetch_assoc($result_set)){
+                $tagnaam = $record['t'];
+                echo "<strong> Omschrijving: </strong> {$tagnaam},<strong><br/>";
+              }
+            */
+            ?>
+
         </div>
 
         <div class="col-md-2" style="background-color: #d3d3d3;border-radius: 25px;">

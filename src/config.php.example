@@ -1,0 +1,48 @@
+<?php
+  //This file will be used for database connections and such.
+  // Insert your database connection
+
+      //For custom error handling, add this to your "failed" if statement:
+        //$errormessage = "";
+        //file_put_contents('/logs/log_db-fail'.date("j.n.Y_h:i:s").'.txt', $errormessage);
+
+      // Configurations are stored in an array.
+      $config = array();
+
+      // Database configuration settings for MySQL instance
+        $config['mysql']['hostname'] = "localhost";
+        $config['mysql']['username'] = "root";
+        $config['mysql']['password'] = "";
+        $config['mysql']['database'] = "hboictmemes";
+
+      // Log location
+      $config['logs'] = "/logs";
+
+// Better not touch anything down here, unless you know what you are doing.
+        function databaseConnect() {
+          global $config;
+          //connect to database
+          $db_conn = mysqli_connect($config['mysql']['hostname'],
+          						              $config['mysql']['username'],
+                                    $config['mysql']['password'],
+                                    $config['mysql']['database']);      
+      
+          // check connection
+          if (mysqli_connect_errno()) {
+            $errormessage = "Connect failed ". mysqli_connect_error();
+            echo "<h1>Yikes! It looks like the database connection failed.<br>";
+            echo "<p>The admins have been notified of this error. Please come back later!</p>";
+            echo "<br>";
+
+            file_put_contents('/logs/log_db-fail'.date("j.n.Y_h:i:s").'.txt', $errormessage);
+            exit();
+            }
+        
+        //echo "connected";			
+        return $db_conn;
+	      }
+
+      function databaseDisconnect($db_conn) {
+        mysqli_close($db_conn);
+      }    
+?>

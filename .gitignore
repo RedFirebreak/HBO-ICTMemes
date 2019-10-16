@@ -1,0 +1,11 @@
+# Log files
+*.log
+
+# Pls upload no config
+.src/config.php
+src/config.php
+
+# Package Files #
+*.zip
+*.tar.gz
+*.rar

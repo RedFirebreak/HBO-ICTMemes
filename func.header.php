@@ -1,6 +1,10 @@
 
     <?php
       require "src/config.php";
+
+      //Check database connection:
+      $dbConnection = databaseConnect();
+
     ?>
 
     <meta charset="utf-8">
