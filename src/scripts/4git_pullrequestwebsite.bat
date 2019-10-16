@@ -7,7 +7,8 @@
     set /p push-name="Enter comment for the PullRequest: "
     git commit -m "%push-name%"
     git push
-    git request-pull origin/develop https://github.com/sjilderdaspam/HBO-ICTMemes.git
+    rem git request-pull origin/develop https://github.com/sjilderdaspam/HBO-ICTMemes.git
+    git request-pull origin/develop ./
   echo ------------------------------------------
   echo.
 pause
