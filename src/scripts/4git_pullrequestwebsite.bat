@@ -4,9 +4,10 @@
   echo ------------------------------------------
     cd "..\..\"
     git add .
-    set /p push-name="Enter comment for your fork: "
+    set /p push-name="Enter comment for the PullRequest: "
     git commit -m "%push-name%"
-    git push origin develop
+    git push
+    git request-pull origin/develop https://github.com/sjilderdaspam/HBO-ICTMemes.git
   echo ------------------------------------------
   echo.
 pause
