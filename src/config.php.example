@@ -1,4 +1,38 @@
 <?php
   //This file will be used for database connections and such.
-  Insert your database connection
+  // Insert your database connection
+
+      // Configurations are stored in an array.
+      $config = array();
+
+      // Database configuration settings for MySQL instance
+      // ENTER YOUR DATACONNECTION HERE
+        $config['mysql']['hostname'] = "localhost"; // Default localhost
+        $config['mysql']['username'] = "root"; // is default root
+        $config['mysql']['password'] = ""; // only if you set a password
+        $config['mysql']['database'] = ""; // The databasename
+
+// Better not touch anything down here, unless you know what you are doing.
+        function databaseConnect() {
+          global $config;
+          //connect to database
+          $db_conn = mysqli_connect($config['mysql']['hostname'],
+          						              $config['mysql']['username'],
+                                    $config['mysql']['password'],
+                                    $config['mysql']['database']);      
+      
+          // check connection
+          if (mysqli_connect_errno()) {
+            $errormessage = "Connect failed ". mysqli_connect_error();
+            die($errormessage);
+            exit();
+            }
+        
+        //echo "connected";			
+        return $db_conn;
+	      }
+
+      function databaseDisconnect($db_conn) {
+        mysqli_close($db_conn);
+      }    
 ?>
