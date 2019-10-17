@@ -87,12 +87,12 @@
                   <h3>Introduction</h3>
                   <p>So, you wanna get started on GIT? Awesome! We just need to install a few tools onto your system to get started. You have two options here.<p>
                   <ul>
-                    <li>Install GIT for commandline to push/pull and manage your git repository from powershell or cmd.
+                    <li><b>REQUIRED: </b>Install GIT for commandline to push/pull and manage your git repository from powershell or cmd.
                       <ul>
                         <li>Download git <a href="https://git-scm.com/downloads">HERE</a>.</li>
                         <li>You can open a <b>command window</b> to <b>enter all these commands</b> by <b>Shift-Right-Clicking in the project directory and clicking "Open Powershell here"</b></li>
                       </ul></li>
-                      <li>Installing GitHub Desktop to have a slightly more graphical solution.
+                      <li><b>RECOMMENDED: </b>Installing GitHub Desktop to have a slightly more graphical solution.
                       <ul>
                         <li>Download git desktop <a href="https://desktop.github.com/">HERE</a>.</li>
                         <li>You can install the application. But please wait with the actual setup of branches. Since we are going to fork the main branch first.</b></li>
@@ -190,13 +190,22 @@
                 <div class="card-header" id="headingThree">
                   <h2 class="mb-0">
                     <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                      Collapsible Group Item #3
+                      3. Setting an invisible "update" branch in your fork
                     </button>
                   </h2>
                 </div>
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
                   <div class="card-body">
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    <h4>Set-up fork updating</h4>
+                    <p> Now that we have done that, we can get started on adding something to your fork to make your life alot easier later on</p>
+                    <ol>
+                      <li>Open a terminal with shift-rightclick -> open powershell inside your project</li>
+                      <li>Copy and paste the following code
+                      <ul>
+                      <li><code>git remote add upstream git://github.com/RedFirebreak/HBO-ICTMemes.git</code>
+                      </ul></li>
+                      <li>Done, now there is an invisible branch on your local device to easily update later.</li>
+                    </ol>
                   </div>
                 </div>
               </div>
@@ -281,6 +290,7 @@
             <div id="collapse3-2" class="collapse" aria-labelledby="heading3-2" data-parent="#accordion3">
             <div class="card-body">
               <h2>Updating (git pull)</h2>
+                <p>NOTE: This will update it to your OWN GITHUB FORK. There is a chance that this might not be up to date. If you want the latest commits, run the "update fork" script first!</p>
                 <p>If you want to <b>pull all the changes/updates</b> that have been made to the repository you can easily <b>do the following:</b></p>
                 <code>
                 git pull
@@ -375,12 +385,9 @@
             <div id="collapse2-2" class="collapse" aria-labelledby="heading2-2" data-parent="#accordion2">
             <div class="card-body">
               <h2>Updating (git pull)</h2>
-                <p>If you want to <b>pull all the changes/updates</b> that have been made to the repository you can easily <b>do the following:</b></p>
-                <code>
-                git pull
-                </code>
-                <p><b> will pull and overwrite all non-changed files on your system.</b> If you changed a file that would have been pulled from the repository, you will get a merge conflict and the pull will fail.
-                You can fix this by deleting your changed files or push your updates to the repository</p>
+              <p>NOTE: This will update it to your OWN GITHUB FORK. There is a chance that this might not be up to date. If you want the latest commits, run the "update fork" script first!</p>
+              <p>You can update your repository by clicking "fetch origin" on the top bar.</p>
+                <img src="./img/gitdekstopfetchorigin.png" alt="fork">
               </div>
             </div>
           </div>
@@ -396,21 +403,14 @@
             <div id="collapse2-3" class="collapse" aria-labelledby="heading2-3" data-parent="#accordion2">
               <div class="card-body">
               <h2>Pushing your changes</h2>
-                <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.
-                    <b>To start a push, you must do the following:</b></p>
-                <p><b>Let git know you made changes</b></p>
-                <code>
-                git add .
-                </code>
-                <p><b>Giving a name to the files you want to push</b></p>
-                <code>
-                git commit -m "NAME"
-                </code>
-                <p><b>Pushing everything to github! Woop!</b></p>
-                <code>
-                git push origin BRANCHNAME
-                </code>
-                <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
+                <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.</p>
+
+                <p>On the down-left corner. Fill in the two forms and click the "commit to BRANCH" button</p>
+                <img src="./img/gitdekstopcommit.png" alt="fork">
+                <br>
+                <p>Next, click the push origin button</p>
+                <img src="./img/gitdekstoppushorigin.png" alt="fork">
+
               </div>
             </div>
           </div>
@@ -425,10 +425,7 @@
             <div id="collapse2-4" class="collapse" aria-labelledby="heading2-4" data-parent="#accordion2">
               <div class="card-body">
               <h2>Checking status</h2>
-                <p>You can check the status of your projects (and errors) by doing <b>the following command:</b></p>
-                <code>
-                git checkout BRANCHNAME
-                </code>
+                <p>Just open the application. Yea, its that easy lol.</p>
               </div>
             </div>
           </div>
@@ -444,22 +441,18 @@
             <div class="card-header" id="heading4-1">
               <h2 class="mb-0">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse4-1" aria-expanded="false" aria-controls="collapseOne">
-                  Switching branches
+                  Send a pull request
                 </button>
               </h2>
             </div>
             <div id="collapse4-1" class="collapse" aria-labelledby="heading4-1" data-parent="#accordion4">
             <div class="card-body">
-              <h2>Branch switching</h2>
-                <p>You can swap branches easily by doing <b>the following command:</b></p>
-                <code>
-                git checkout BRANCHNAME
-                </code>
-                <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
-                <p>To swap back to the "original" branch you can do the same command:</p>
-                <code>
-                git checkout master
-                </code>
+              <h2>Send a pull request</h2>
+                  <p>A pull request is used to merge your fork to the original repository. You NEED to do this in order for the main project to be updated. </p>
+                  <p><b>Instructions about this are in a word document located inside of the project at: </b></p>
+                  <code> /src/scripts/3git_updatewebsite.docx </code>
+                  <p><a href="https://develop.hbo-ictmemes.nl/src/scripts/3git_updatewebsite.docx">Or grab a copy :)</a></p>
+
               </div>
             </div>
           </div>
@@ -468,23 +461,35 @@
             <div class="card-header" id="heading4-2">
               <h2 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4-2" aria-expanded="false" aria-controls="collapseTwo">
-                  Updating (Git pull)
+                  Update your fork
                 </button>
               </h2>
             </div>
             <div id="collapse4-2" class="collapse" aria-labelledby="heading4-2" data-parent="#accordion4">
             <div class="card-body">
-              <h2>Updating (git pull)</h2>
-                <p>If you want to <b>pull all the changes/updates</b> that have been made to the repository you can easily <b>do the following:</b></p>
+              <h2>Updating your fork</h2>
+                <p>Well, we came this far. Lets update all the changes that have happened on the main branch to your fork. So we are all up to date again!></p>
+                <p>We have two options here.<p>
+                <ol>
+                  <li>Use the script<code>src/scripts/4git_updatefork.bat</code></li>
+                </ol>
+                <p>Or do it yourself by manually doing 3 command inside of your repository:<p>
                 <code>
-                git pull
+                git fetch upstream
                 </code>
-                <p><b> will pull and overwrite all non-changed files on your system.</b> If you changed a file that would have been pulled from the repository, you will get a merge conflict and the pull will fail.
-                You can fix this by deleting your changed files or push your updates to the repository</p>
+                <br>
+                <code>
+                git checkout develop
+                </code>
+                <br>
+                <code>
+                git merge upstream/develop
+                </code>
               </div>
             </div>
           </div>
-
+                
+                <!-- We dont need these... yet
           <div class="card">
             <div class="card-header" id="heading4-3">
               <h2 class="mb-0">
@@ -531,10 +536,10 @@
                 </code>
               </div>
             </div>
-          </div>
+          </div> -->
         </div> <!-- Close the cards -->
         </div> <!-- Close the div -->
-
+                  
       </div> <!-- Close the container -->
 
       <hr>

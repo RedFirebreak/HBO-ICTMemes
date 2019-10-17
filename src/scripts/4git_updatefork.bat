@@ -1,5 +1,5 @@
 @echo off  
-  echo Uploading/Pushing YOUR fork of HBO-ICTMemes. . .
+  echo Updating YOUR fork of HBO-ICTMemes. . .
   echo.
   echo ------------------------------------------
     cd "..\..\"
