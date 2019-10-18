@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 16, 2019 at 12:56 PM
+-- Generation Time: Oct 17, 2019 at 07:54 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -32,7 +32,8 @@ CREATE TABLE `comments` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL
+  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
+  `datum` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -52,17 +53,13 @@ CREATE TABLE `emailverificatie` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `errors`
+-- Table structure for table `error`
 --
 
-CREATE TABLE `errors` (
-  `flag-ID` int(10) UNSIGNED NOT NULL,
-  `meme-ID` int(10) UNSIGNED DEFAULT NULL,
-  `comment-ID` int(10) UNSIGNED DEFAULT NULL,
-  `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
-  `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL,
-  `errortype` varchar(10) COLLATE utf8_bin NOT NULL
+CREATE TABLE `error` (
+  `error-ID` int(10) UNSIGNED NOT NULL,
+  `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
+  `datum` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -78,8 +75,24 @@ CREATE TABLE `meme` (
   `datum` date NOT NULL,
   `tagnaam` varchar(20) COLLATE utf8_bin NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `school` varchar(50) COLLATE utf8_bin NOT NULL,
-  `upvote` smallint(5) UNSIGNED DEFAULT NULL
+  `school` varchar(50) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `report`
+--
+
+CREATE TABLE `report` (
+  `report-ID` int(10) UNSIGNED NOT NULL,
+  `meme-ID` int(10) UNSIGNED DEFAULT NULL,
+  `comment-ID` int(10) UNSIGNED DEFAULT NULL,
+  `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
+  `boef-ID` int(10) UNSIGNED DEFAULT NULL,
+  `datum` date NOT NULL,
+  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
+  `beschrijving` varchar(300) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -149,6 +162,18 @@ CREATE TABLE `tags` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `upvote`
+--
+
+CREATE TABLE `upvote` (
+  `upvote-ID` int(10) UNSIGNED NOT NULL,
+  `meme-ID` int(10) UNSIGNED NOT NULL,
+  `user-ID` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -189,14 +214,10 @@ ALTER TABLE `emailverificatie`
   ADD KEY `geverifieerd` (`geverifieerd`);
 
 --
--- Indexes for table `errors`
+-- Indexes for table `error`
 --
-ALTER TABLE `errors`
-  ADD PRIMARY KEY (`flag-ID`),
-  ADD KEY `meme-ID` (`meme-ID`),
-  ADD KEY `comment-ID` (`comment-ID`),
-  ADD KEY `snitch-ID` (`snitch-ID`),
-  ADD KEY `boef-ID` (`boef-ID`);
+ALTER TABLE `error`
+  ADD PRIMARY KEY (`error-ID`);
 
 --
 -- Indexes for table `meme`
@@ -209,6 +230,16 @@ ALTER TABLE `meme`
   ADD KEY `user-ID` (`user-ID`),
   ADD KEY `tagnaam` (`tagnaam`),
   ADD KEY `school` (`school`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report-ID`),
+  ADD KEY `meme-ID` (`meme-ID`),
+  ADD KEY `comment-ID` (`comment-ID`),
+  ADD KEY `snitch-ID` (`snitch-ID`),
+  ADD KEY `boef-ID` (`boef-ID`);
 
 --
 -- Indexes for table `rollen`
@@ -235,6 +266,14 @@ ALTER TABLE `tags`
   ADD PRIMARY KEY (`tagnaam`);
 
 --
+-- Indexes for table `upvote`
+--
+ALTER TABLE `upvote`
+  ADD PRIMARY KEY (`upvote-ID`),
+  ADD KEY `meme-ID` (`meme-ID`),
+  ADD KEY `user-ID` (`user-ID`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -255,6 +294,12 @@ ALTER TABLE `comments`
   MODIFY `comment-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `error`
+--
+ALTER TABLE `error`
+  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `meme`
 --
 ALTER TABLE `meme`
@@ -265,6 +310,12 @@ ALTER TABLE `meme`
 --
 ALTER TABLE `support`
   MODIFY `support-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `upvote`
+--
+ALTER TABLE `upvote`
+  MODIFY `upvote-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -293,20 +344,27 @@ ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`);
 
 --
--- Constraints for table `errors`
---
-ALTER TABLE `errors`
-  ADD CONSTRAINT `errors_ibfk_1` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `errors_ibfk_2` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `errors_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `errors_ibfk_4` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE;
-
---
 -- Constraints for table `meme`
 --
 ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
   ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `report`
+--
+ALTER TABLE `report`
+  ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `report_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `report_ibfk_4` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `upvote`
+--
+ALTER TABLE `upvote`
+  ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`),
+  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
 
 --
 -- Constraints for table `user`
