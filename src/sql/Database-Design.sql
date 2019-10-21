@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2019 at 07:54 PM
+-- Generation Time: Oct 21, 2019 at 09:29 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -21,6 +21,22 @@ SET time_zone = "+00:00";
 --
 -- Database: `hbo-ictmemes`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment-report`
+--
+
+CREATE TABLE `comment-report` (
+  `report-ID` int(10) UNSIGNED NOT NULL,
+  `comment-ID` int(10) UNSIGNED NOT NULL,
+  `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
+  `boef-ID` int(10) UNSIGNED DEFAULT NULL,
+  `datum` date NOT NULL,
+  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
+  `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
@@ -59,7 +75,8 @@ CREATE TABLE `emailverificatie` (
 CREATE TABLE `error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `datum` datetime NOT NULL
+  `datum` datetime NOT NULL,
+  `soort` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -81,18 +98,27 @@ CREATE TABLE `meme` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `report`
+-- Table structure for table `meme-report`
 --
 
-CREATE TABLE `report` (
+CREATE TABLE `meme-report` (
   `report-ID` int(10) UNSIGNED NOT NULL,
-  `meme-ID` int(10) UNSIGNED DEFAULT NULL,
-  `comment-ID` int(10) UNSIGNED DEFAULT NULL,
+  `meme-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `overtredingen`
+--
+
+CREATE TABLE `overtredingen` (
+  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -105,15 +131,6 @@ CREATE TABLE `rollen` (
   `userrole` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `rollen`
---
-
-INSERT INTO `rollen` (`userrole`) VALUES
-('admin'),
-('uber-admin'),
-('user');
-
 -- --------------------------------------------------------
 
 --
@@ -123,16 +140,6 @@ INSERT INTO `rollen` (`userrole`) VALUES
 CREATE TABLE `school` (
   `schoolnaam` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `school`
---
-
-INSERT INTO `school` (`schoolnaam`) VALUES
-('voorbeeldschool1'),
-('voorbeeldschool2'),
-('voorbeeldschool3'),
-('voorbeeldschool4');
 
 -- --------------------------------------------------------
 
@@ -197,6 +204,16 @@ CREATE TABLE `user` (
 --
 
 --
+-- Indexes for table `comment-report`
+--
+ALTER TABLE `comment-report`
+  ADD PRIMARY KEY (`report-ID`),
+  ADD KEY `comment-ID` (`comment-ID`),
+  ADD KEY `snitch-ID` (`snitch-ID`),
+  ADD KEY `boef-ID` (`boef-ID`),
+  ADD KEY `overtreding` (`overtreding`);
+
+--
 -- Indexes for table `comments`
 --
 ALTER TABLE `comments`
@@ -232,14 +249,20 @@ ALTER TABLE `meme`
   ADD KEY `school` (`school`);
 
 --
--- Indexes for table `report`
+-- Indexes for table `meme-report`
 --
-ALTER TABLE `report`
+ALTER TABLE `meme-report`
   ADD PRIMARY KEY (`report-ID`),
   ADD KEY `meme-ID` (`meme-ID`),
-  ADD KEY `comment-ID` (`comment-ID`),
   ADD KEY `snitch-ID` (`snitch-ID`),
-  ADD KEY `boef-ID` (`boef-ID`);
+  ADD KEY `boef-ID` (`boef-ID`),
+  ADD KEY `overtreding` (`overtreding`);
+
+--
+-- Indexes for table `overtredingen`
+--
+ALTER TABLE `overtredingen`
+  ADD PRIMARY KEY (`overtreding`);
 
 --
 -- Indexes for table `rollen`
@@ -288,6 +311,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `comment-report`
+--
+ALTER TABLE `comment-report`
+  MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
@@ -304,6 +333,12 @@ ALTER TABLE `error`
 --
 ALTER TABLE `meme`
   MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `meme-report`
+--
+ALTER TABLE `meme-report`
+  MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `support`
@@ -326,6 +361,15 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `comment-report`
+--
+ALTER TABLE `comment-report`
+  ADD CONSTRAINT `comment-report_ibfk_1` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `comment-report_ibfk_2` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `comment-report_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comment-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
 
 --
 -- Constraints for table `comments`
@@ -351,13 +395,13 @@ ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `report`
+-- Constraints for table `meme-report`
 --
-ALTER TABLE `report`
-  ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `report_ibfk_3` FOREIGN KEY (`comment-ID`) REFERENCES `comments` (`comment-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `report_ibfk_4` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE;
+ALTER TABLE `meme-report`
+  ADD CONSTRAINT `meme-report_ibfk_1` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `meme-report_ibfk_2` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `meme-report_ibfk_3` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `meme-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
 
 --
 -- Constraints for table `upvote`
