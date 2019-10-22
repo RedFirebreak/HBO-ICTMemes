@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2019 at 09:29 PM
+-- Generation Time: Oct 22, 2019 at 11:47 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -241,6 +241,7 @@ ALTER TABLE `error`
 --
 ALTER TABLE `meme`
   ADD PRIMARY KEY (`meme-ID`),
+  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
   ADD KEY `meme-titel` (`meme-titel`),
   ADD KEY `meme-titel_2` (`meme-titel`),
   ADD KEY `meme-titel_3` (`meme-titel`),
@@ -301,6 +302,8 @@ ALTER TABLE `upvote`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user-ID`),
+  ADD UNIQUE KEY `usermail_2` (`usermail`),
+  ADD UNIQUE KEY `naam` (`naam`),
   ADD KEY `usermail` (`usermail`),
   ADD KEY `userrole` (`userrole`),
   ADD KEY `schoolnaam` (`schoolnaam`),
