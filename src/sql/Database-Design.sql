@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2019 at 11:47 AM
+-- Generation Time: Oct 25, 2019 at 03:05 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -90,7 +90,7 @@ CREATE TABLE `meme` (
   `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
-  `tagnaam` varchar(20) COLLATE utf8_bin NOT NULL,
+  `tag-ID` int(11) NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
   `school` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -163,6 +163,7 @@ CREATE TABLE `support` (
 --
 
 CREATE TABLE `tags` (
+  `tag-ID` int(11) NOT NULL,
   `tagnaam` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -246,7 +247,7 @@ ALTER TABLE `meme`
   ADD KEY `meme-titel_2` (`meme-titel`),
   ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
-  ADD KEY `tagnaam` (`tagnaam`),
+  ADD KEY `tagnaam` (`tag-ID`),
   ADD KEY `school` (`school`);
 
 --
@@ -287,7 +288,8 @@ ALTER TABLE `support`
 -- Indexes for table `tags`
 --
 ALTER TABLE `tags`
-  ADD PRIMARY KEY (`tagnaam`);
+  ADD PRIMARY KEY (`tag-ID`),
+  ADD KEY `tagnaam` (`tagnaam`);
 
 --
 -- Indexes for table `upvote`
@@ -350,6 +352,12 @@ ALTER TABLE `support`
   MODIFY `support-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tags`
+--
+ALTER TABLE `tags`
+  MODIFY `tag-ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `upvote`
 --
 ALTER TABLE `upvote`
@@ -395,7 +403,8 @@ ALTER TABLE `emailverificatie`
 --
 ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `meme_ibfk_3` FOREIGN KEY (`school`) REFERENCES `school` (`schoolnaam`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `meme_ibfk_4` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `meme-report`
