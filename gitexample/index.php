@@ -54,15 +54,174 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Github-Example</h1>
-        <p>Git aint easy. But it can be! You just need a good example and some webpage to keep coming back to everytime you doubt yourself.</p>
-        <p>You can <b>clone a repository</b> by doing <code>git clone https://github.com/RedFirebreak/HBO-ICTMemes.git</code> Cloning is basically "copying" the current state of the project to your computer so you can work on it. <br> After cloning, make sure to <b>switch to the right branch</b> with the command: <code>git checkout develop</code></p>
-        <p>You can download git <a href="https://git-scm.com/downloads">HERE</a>.<br>You can open a <b>command window</b> to <b>enter all these commands</b> by <b>Shift-Right-Clicking in the project directory and clicking "Open Powershell here"</b></p>
-      
+
+        <h1 class="display-3">Github-HOWTWO</h1>
+        <p><small>Now with fork explanation!</small></p>   
+        <p>Git aint easy. But it can be! You just need a good example and some webpage to keep coming back to everytime you doubt yourself.</p> 
         <br>
         <div class="container">
       <!-- Example row of columns -->
           <div class="row">
+
+          <div class="row">
+            <div class="col-md-12">
+          <p>
+            <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Setting up? Installation instructions here!</a>
+          </p>
+
+              <!-- first element -->
+
+              <div class="collapse" id="multiCollapseExample1">
+                <div class="card card-body">
+                <div class="accordion" id="accordionExample"> <!-- Start the cards!-->
+              <div class="card">
+                <div class="card-header" id="headingOne">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                      1. Getting started
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div class="card-body">
+                  <h3>Introduction</h3>
+                  <p>So, you wanna get started on GIT? Awesome! We just need to install a few tools onto your system to get started. You have two options here.<p>
+                  <ul>
+                    <li><b>REQUIRED: </b>Install GIT for commandline to push/pull and manage your git repository from powershell or cmd.
+                      <ul>
+                        <li>Download git <a href="https://git-scm.com/downloads">HERE</a>.</li>
+                        <li>You can open a <b>command window</b> to <b>enter all these commands</b> by <b>Shift-Right-Clicking in the project directory and clicking "Open Powershell here"</b></li>
+                      </ul></li>
+                      <li><b>RECOMMENDED: </b>Installing GitHub Desktop to have a slightly more graphical solution.
+                      <ul>
+                        <li>Download git desktop <a href="https://desktop.github.com/">HERE</a>.</li>
+                        <li>You can install the application. But please wait with the actual setup of branches. Since we are going to fork the main branch first.</b></li>
+                      </ul></li>
+                  </ul>
+                  <p>FRIENDLY REMINDER:<br> You can open a <b>command window</b> to <b>enter all these commands</b> by <b>Shift-Right-Clicking in the project directory and clicking "Open Powershell here"</b></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card"> 
+                <div class="card-header" id="headingTwo">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      2. Forking and cloning the repository
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                  <div class="card-body">
+                  <h3>Fork/Clone</h3>
+                  <p>Alright! Lets make a fork off the main github repository. A fork is basically YOUR copy of the project, so you can "work in peace".</p>
+                  <ol>
+                    <li>Go to the main repository
+                      <ul>
+                        <li><a href="https://github.com/RedFirebreak/HBO-ICTMemes">Link to our main fork</a>.</li>
+                      </ul></li>
+                      <li>check the develop branch, then Click "fork" on the top-right
+                      <ul>
+                        <li><img src="./img/fork.png" alt="fork"></li>
+                      </ul></li>
+                      <li>Wait a second untill it is done copying.</li>
+                      <li>Now choose what you want to use to make a clone of this fork</li>
+                      </ol>
+
+
+                      <p> <!--- git or dekstopgit -->
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gitcommandline1" aria-expanded="false" aria-controls="gitcommandline1">
+                          Git Commandline
+                        </button>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#gitcommandline2" aria-expanded="false" aria-controls="gitcommandline2">
+                          Git Desktop
+                        </button>
+                        (please close one before you open another)
+                      </p>
+                      <div class="collapse" id="gitcommandline1">
+                        <div class="card card-body">
+                        <h4>Git-Commandline</h4>
+                          <p><b>Git for the commandline ey! Good choice. We are now gonna clone your copy, to your device so we can start working!</b></p>
+                          <ol>
+                            <li>Click the geen button "clone or download" and copy the link inside (ON YOUR COPY OF THE PROJECTPAGE)
+                              <ul>
+                                <li><img src="./img/cloneordownload.png" alt="fork"></li>
+                              </ul></li>
+
+                              <li>Go to a folder on your device, then <b>open a command-window where you want the project to be</b>. For me, I want it inside of my HTDOCS folder from XAMMP, but anywhere is fine.
+                              <ul>
+                                <li>You can open a command window by <b>SHIFT+RIGHTCLICKING in the directory. Then clicking "open powershell here"</b></li>
+                                <li><img src="./img/openpowershellhere.png" alt="fork"></li>
+                              </ul></li>
+
+                              <li>Enter the following command, then paste the link you just copied from the green button
+                              <ul>
+                                <li><code>git clone PASTEDLINK</code></li>
+                                <li><img src="./img/gitclone.png" alt="fork"></li>
+                              </ul></li>
+                            <li>We are done! You just copied your own fork of the project to a folder on your device. Good job!</li>
+                          </ol>
+                        </div>
+                      </div>
+
+                      <div class="collapse" id="gitcommandline2">
+                        <div class="card card-body">
+                        <h4>Git-Desktop</h4>
+                          <p><b>Git for the desktop ey! Good choice. I like being lazy too :). <br>We are now gonna clone your copy to your device so we can start working!</b></p>
+                          <ol>
+                            <li>Click the geen button "clone or download" on YOUR forked copy-page, then click "open in Desktop".
+                                  <ul>
+                                    <li><img src="./img/cloneordownload.png" alt="fork"></li>
+                                  </ul></li>
+                            <li>Git Desktop will now open and greet you. Change the local path to the spot where you the copy to be on your device
+                                  <ul>
+                                    <li><img src="./img/gitdekstop.png" alt="fork"></li>
+                                  </ul></li>
+                            <li>Done! Github Desktop has now made a copy of your own fork on your device.</li>
+                          </ol>                                
+                        </div>
+                      </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header" id="headingThree">
+                  <h2 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      3. Setting an invisible "update" branch in your fork
+                    </button>
+                  </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                  <div class="card-body">
+                    <h4>Set-up fork updating</h4>
+                    <p> Now that we have done that, we can get started on adding something to your fork to make your life alot easier later on</p>
+                    <ol>
+                      <li>Open a terminal with shift-rightclick -> open powershell inside your project</li>
+                      <li>Copy and paste the following code
+                      <ul>
+                      <li><code>git remote add upstream git://github.com/RedFirebreak/HBO-ICTMemes.git</code>
+                      </ul></li>
+                      <li>Done, now there is an invisible branch on your local device to easily update later.</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+          </div> <!-- The end of div class card -->
+
+                </div>
+              </div>
+
+
+
+            </div>
+          </div>
+
+
+            <!-- OLD
             <div class="col-md-6">
               <p><b>STARTED TO WORK?</b> Make sure to follow this first:</p>
               <ul>
@@ -71,6 +230,7 @@
                 <li>3. Done! Good luck on your work!</li>
               </ul>
             </div>
+
             <div class="col-md-6">
             <p><b>DONE WITH WORK?</b> Finish accordingly!</p>
               <ul>
@@ -79,6 +239,8 @@
                 <li>3. Double check if your work is pushed on <a href="https://github.com/RedFirebreak/HBO-ICTMemes">the Github</a> and discordbot.</li>
               </ul>
             </div>
+            -->
+
             </div>
           </div>
       </div>
@@ -88,49 +250,297 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
-            <h2>Updating (git pull)</h2>
-            <p>If you want to <b>pull all the changes/updates</b> that have been made to the repository you can easily <b>do the following:</b></p>
-            <code>
-            git pull
-            </code>
-            <p><b> will pull and overwrite all non-changed files on your system.</b> If you changed a file that would have been pulled from the repository, you will get a merge conflict and the pull will fail.
-  You can fix this by deleting your changed files or push your updates to the repository</p>
-        </div>
+
+        <h2>Git CommandLine</h2>
+
+        <div class="accordion" id="accordion3">
+
+          <div class="card">
+            <div class="card-header" id="heading3-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse3-1" aria-expanded="false" aria-controls="collapseOne">
+                  Switching branches
+                </button>
+              </h2>
+            </div>
+            <div id="collapse3-1" class="collapse" aria-labelledby="heading3-1" data-parent="#accordion3">
+            <div class="card-body">
+              <h2>Branch switching</h2>
+                <p>You can swap branches easily by doing <b>the following command:</b></p>
+                <code>
+                git checkout BRANCHNAME
+                </code>
+                <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
+                <p>To swap back to the "original" branch you can do the same command:</p>
+                <code>
+                git checkout master
+                </code>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="heading3-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3-2" aria-expanded="false" aria-controls="collapseTwo">
+                  Updating (Git pull)
+                </button>
+              </h2>
+            </div>
+            <div id="collapse3-2" class="collapse" aria-labelledby="heading3-2" data-parent="#accordion3">
+            <div class="card-body">
+              <h2>Updating (git pull)</h2>
+                <p>NOTE: This will update it to your OWN GITHUB FORK. There is a chance that this might not be up to date. If you want the latest commits, run the "update fork" script first!</p>
+                <p>If you want to <b>pull all the changes/updates</b> that have been made to the repository you can easily <b>do the following:</b></p>
+                <code>
+                git pull
+                </code>
+                <p><b> will pull and overwrite all non-changed files on your system.</b> If you changed a file that would have been pulled from the repository, you will get a merge conflict and the pull will fail.
+                You can fix this by deleting your changed files or push your updates to the repository</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="heading3-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3-3" aria-expanded="false" aria-controls="collapseThree">
+                  Merge/Commit
+                </button>
+              </h2>
+            </div>
+            <div id="collapse3-3" class="collapse" aria-labelledby="heading3-3" data-parent="#accordion3">
+              <div class="card-body">
+              <h2>Pushing your changes</h2>
+                <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.
+                    <b>To start a push, you must do the following:</b></p>
+                <p><b>Let git know you made changes</b></p>
+                <code>
+                git add .
+                </code>
+                <p><b>Giving a name to the files you want to push</b></p>
+                <code>
+                git commit -m "NAME"
+                </code>
+                <p><b>Pushing everything to github! Woop!</b></p>
+                <code>
+                git push origin BRANCHNAME
+                </code>
+                <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="heading3-4">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3-4" aria-expanded="false" aria-controls="collapseThree">
+                  Check current status
+                </button>
+              </h2>
+            </div>
+            <div id="collapse3-4" class="collapse" aria-labelledby="heading3-4" data-parent="#accordion3">
+              <div class="card-body">
+              <h2>Checking status</h2>
+                <p>You can check the status of your projects (and errors) by doing <b>the following command:</b></p>
+                <code>
+                git checkout BRANCHNAME
+                </code>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- Close the cards -->
+        </div> <!-- Close the div -->
 
         <div class="col-md-4">
-            <h2>Pushing your changes</h2>
-            <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.
-                <b>To start a push, you must do the following:</b></p>
-            <p><b>Let git know you made changes</b></p>
-            <code>
-            git add .
-            </code>
+        <h2>Git Desktop</h2>
 
-            <p><b>Giving a name to the files you want to push</b></p>
-            <code>
-            git commit -m "NAME"
-            </code>
+        <div class="accordion" id="accordion2">
 
-            <p><b>Pushing everything to github! Woop!</b></p>
-            <code>
-            git push origin BRANCHNAME
-            </code>
-            <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
-        </div>
+          <div class="card">
+            <div class="card-header" id="heading2-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse2-1" aria-expanded="false" aria-controls="collapseOne">
+                  Switching branches
+                </button>
+              </h2>
+            </div>
+            <div id="collapse2-1" class="collapse" aria-labelledby="heading2-1" data-parent="#accordion2">
+            <div class="card-body">
+              <h2>Branch switching</h2>
+                <p>You can swap branches by clicking "current branch" on the top bar</p>
+                <img src="./img/gitdekstopcheckbranch.png" alt="fork">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="heading2-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2-2" aria-expanded="false" aria-controls="collapseTwo">
+                  Updating (Git pull)
+                </button>
+              </h2>
+            </div>
+            <div id="collapse2-2" class="collapse" aria-labelledby="heading2-2" data-parent="#accordion2">
+            <div class="card-body">
+              <h2>Updating (git pull)</h2>
+              <p>NOTE: This will update it to your OWN GITHUB FORK. There is a chance that this might not be up to date. If you want the latest commits, run the "update fork" script first!</p>
+              <p>You can update your repository by clicking "fetch origin" on the top bar.</p>
+                <img src="./img/gitdekstopfetchorigin.png" alt="fork">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="heading2-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2-3" aria-expanded="false" aria-controls="collapseThree">
+                  Merge/Commit
+                </button>
+              </h2>
+            </div>
+            <div id="collapse2-3" class="collapse" aria-labelledby="heading2-3" data-parent="#accordion2">
+              <div class="card-body">
+              <h2>Pushing your changes</h2>
+                <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.</p>
+
+                <p>On the down-left corner. Fill in the two forms and click the "commit to BRANCH" button</p>
+                <img src="./img/gitdekstopcommit.png" alt="fork">
+                <br>
+                <p>Next, click the push origin button</p>
+                <img src="./img/gitdekstoppushorigin.png" alt="fork">
+
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="heading2-4">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2-4" aria-expanded="false" aria-controls="collapseThree">
+                  Check current status
+                </button>
+              </h2>
+            </div>
+            <div id="collapse2-4" class="collapse" aria-labelledby="heading2-4" data-parent="#accordion2">
+              <div class="card-body">
+              <h2>Checking status</h2>
+                <p>Just open the application. Yea, its that easy lol.</p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Close the cards -->
+        </div> <!-- Close the div -->
 
         <div class="col-md-4">
-            <h2>Branch switching</h2>
-            <p>You can swap branches easily by doing <b>the following command:</b></p>
-            <code>
-            git checkout BRANCHNAME
-            </code>
-            <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
-            <p>To swap back to the "original" branch you can do the same command:</p>
-            <code>
-            git checkout master
-            </code>
-        </div>
-      </div>
+        <h2>Other</h2>
+
+        <div class="accordion" id="accordion4">
+
+          <div class="card">
+            <div class="card-header" id="heading4-1">
+              <h2 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse4-1" aria-expanded="false" aria-controls="collapseOne">
+                  Send a pull request
+                </button>
+              </h2>
+            </div>
+            <div id="collapse4-1" class="collapse" aria-labelledby="heading4-1" data-parent="#accordion4">
+            <div class="card-body">
+              <h2>Send a pull request</h2>
+                  <p>A pull request is used to merge your fork to the original repository. You NEED to do this in order for the main project to be updated. </p>
+                  <p><b>Instructions about this are in a word document located inside of the project at: </b></p>
+                  <code> /src/scripts/3git_updatewebsite.docx </code>
+                  <p><a href="https://develop.hbo-ictmemes.nl/src/scripts/3git_updatewebsite.docx">Or grab a copy :)</a></p>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="heading4-2">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4-2" aria-expanded="false" aria-controls="collapseTwo">
+                  Update your fork
+                </button>
+              </h2>
+            </div>
+            <div id="collapse4-2" class="collapse" aria-labelledby="heading4-2" data-parent="#accordion4">
+            <div class="card-body">
+              <h2>Updating your fork</h2>
+                <p>Well, we came this far. Lets update all the changes that have happened on the main branch to your fork. So we are all up to date again!></p>
+                <p>We have two options here.<p>
+                <ol>
+                  <li>Use the script<code>src/scripts/4git_updatefork.bat</code></li>
+                </ol>
+                <p>Or do it yourself by manually doing 3 command inside of your repository:<p>
+                <code>
+                git fetch upstream
+                </code>
+                <br>
+                <code>
+                git checkout develop
+                </code>
+                <br>
+                <code>
+                git merge upstream/develop
+                </code>
+              </div>
+            </div>
+          </div>
+                
+                <!-- We dont need these... yet
+          <div class="card">
+            <div class="card-header" id="heading4-3">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4-3" aria-expanded="false" aria-controls="collapseThree">
+                  Merge/Commit
+                </button>
+              </h2>
+            </div>
+            <div id="collapse4-3" class="collapse" aria-labelledby="heading4-3" data-parent="#accordion4">
+              <div class="card-body">
+              <h2>Pushing your changes</h2>
+                <p>Have you made changes? <b>Are you proud of them? Awesome!</b> Time to push your progress to the repository and have those epic bragging rights you deserve for your awesome code.
+                    <b>To start a push, you must do the following:</b></p>
+                <p><b>Let git know you made changes</b></p>
+                <code>
+                git add .
+                </code>
+                <p><b>Giving a name to the files you want to push</b></p>
+                <code>
+                git commit -m "NAME"
+                </code>
+                <p><b>Pushing everything to github! Woop!</b></p>
+                <code>
+                git push origin BRANCHNAME
+                </code>
+                <p>Branchnames in our project are <b>MASTER</b> and <b>DEVELOP</b></p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header" id="heading4-4">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4-4" aria-expanded="false" aria-controls="collapseThree">
+                  Check current status
+                </button>
+              </h2>
+            </div>
+            <div id="collapse4-4" class="collapse" aria-labelledby="heading4-4" data-parent="#accordion4">
+              <div class="card-body">
+              <h2>Checking status</h2>
+                <p>You can check the status of your projects (and errors) by doing <b>the following command:</b></p>
+                <code>
+                git checkout BRANCHNAME
+                </code>
+              </div>
+            </div>
+          </div> -->
+        </div> <!-- Close the cards -->
+        </div> <!-- Close the div -->
+                  
+      </div> <!-- Close the container -->
 
       <hr>
 

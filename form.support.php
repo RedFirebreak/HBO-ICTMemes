@@ -10,21 +10,30 @@
 ?>
 
 <form action="/support.php" method="post">
-
-<p>Naam: <input type="text" name="firstname"><br></p>
-<p>E-mail: <input type="text" name="mail"></p>
-<p>Waarom wilt u contact opnemen:</p>
-<select name="onderwerp">
-  <option value="login">Log-in problemen</option>
-  <option value="upload">Upload problemen</option>
-  <option value="vraag">Vragen</option>
-  <option value="overig">Overig</option>
-</select>
-
-<p>Graag een korte beschrijving:</p>
-<textarea name="onderwerp" rows="10" cols="30">
-  
-</textarea>
-
-<p><input class="btn btn-primary" type="submit" value="Submit"></p>
+  <table>
+    <tr>
+      <td><p>Naam: * </p></td>
+      <td><input type="text" name="naam" required></td>
+    </tr>
+    <tr>
+      <td><p>E-mail: *</p></td>
+      <td><input type="text" name="mail" required></td>
+    </tr>
+    <tr>
+      <td><p>Waarom wilt u contact opnemen: </p></td>
+      <td><select name="onderwerp">
+          <option value="login">Log-in problemen</option>
+          <option value="upload">Upload problemen</option>
+          <option value="vraag">Vragen</option>
+          <option value="overig">Overig</option>
+        </select></td>
+    </tr>
+    <tr>
+      <td><p>Graag een korte beschrijving: * </p></td>
+      <td><textarea name="beschrijving" rows="4" cols="50" maxlength="500" required> </textarea></td>
+    </tr>
+    <tr>
+      <td><p><input class="btn btn-primary" type="submit" value="Submit"></p></td>
+    </tr>
+  <table>
 </form>
