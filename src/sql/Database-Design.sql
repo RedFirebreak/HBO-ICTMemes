@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2019 at 02:58 PM
+-- Generation Time: Oct 27, 2019 at 03:13 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -75,7 +75,7 @@ CREATE TABLE `emailverificatie` (
 CREATE TABLE `error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `datum` datetime NOT NULL,
+  `datum` datetime NOT NULL DEFAULT current_timestamp(),
   `soort` varchar(30) COLLATE utf8_bin NOT NULL,
   `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
