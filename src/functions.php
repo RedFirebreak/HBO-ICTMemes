@@ -1,6 +1,13 @@
 <?php
   //This file will be used for defining functions for later use :)
 
+    // Error handling for the site. We want everything to be logged :)
+    function CustomErrorHandling($errno, $errstr, $errfile, $errline) {
+      Customlog("SYSTEM-$errfile", "error", "[Line: $errline][$errno] $errstr");
+
+      // Uncomment this to allow onpage errors again
+      //echo "<b>Error:</b> [$errno] $errstr<br>[File: $errfile][Line: $errline]";
+    }
     
         /*
         Custom-logging
@@ -82,6 +89,9 @@
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','CRITICAL','$safeerror')";
                 $dbConnection->query($sql);
+
+            // Send an email to the main email! We need to fix this ASAP
+            error_log("$finalerrormessage",1, "error@hbo-ictmemes.nl","From: system@hbo-ictmemes.nl");
 
               break;
           default:
