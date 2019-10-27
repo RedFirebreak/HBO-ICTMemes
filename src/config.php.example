@@ -29,12 +29,26 @@
       
           // check connection
           if (mysqli_connect_errno()) {
-            $errormessage = "Connect failed ". mysqli_connect_error();
-            echo "<h1>Yikes! It looks like the database connection failed.<br>";
-            echo "<p>The admins have been notified of this error. Please come back later!</p>";
-            echo "<br>";
+            //Throw error (Cant save in database, cuz no connection.)
+            $errordate = date("j-n-Y"); 
+            $errortime = date("h:i:s");
+            $docname = basename(__FILE__);
+            $errormessage = "$errortime | $docname | FAILED DATABASE CONNECTION: ". mysqli_connect_error() . "\n";
 
-            file_put_contents('/logs/log_db-fail'.date("j.n.Y_h:i:s").'.txt', $errormessage);
+              // Write in the main logging file
+                $dbconnectionerrorfile = fopen("src/logs/{$errordate}_AllLogs.log", "a");
+                fwrite($dbconnectionerrorfile, $errormessage);
+                fclose($dbconnectionerrorfile);
+
+              // Write seperate file
+                $dbconnectionerrorfile = fopen("src/logs/filtered/{$errordate}_db-fail.log", "a");
+                fwrite($dbconnectionerrorfile, $errormessage);
+                fclose($dbconnectionerrorfile);
+
+              // Inform the user of the error
+              echo "<h1>Yikes! It looks like the database connection failed.<br>";
+              echo "<p>The admins have been notified of this error. Please come back later!</p>";
+              echo "<br>";
             exit();
             }
         
@@ -46,3 +60,4 @@
         mysqli_close($db_conn);
       }    
 ?>
+

@@ -1,5 +1,9 @@
-# Log files
+# Log files and log folder
 *.log
+src/logs/*.log
+.src/logs/*.log
+src/logs/individual/*.log
+.src/logs/individual/*.log
 
 # Pls upload no config
 .src/config.php

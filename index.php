@@ -40,18 +40,6 @@
             } else {
                 echo "0 results";
             }
-            /*
-              $query = "SELECT tagnaam t FROM tags ORDER by 1;";
-              $result_set = mysqli_query($dbConnection, $query);
-              mysqli_free_result($result_set);
-
-              var_dump($result_set); 
-
-              while($record = mysqli_fetch_assoc($result_set)){
-                $tagnaam = $record['t'];
-                echo "<strong> Omschrijving: </strong> {$tagnaam},<strong><br/>";
-              }
-            */
             ?>
 
         </div>

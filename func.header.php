@@ -1,10 +1,12 @@
 
     <?php
+      // Check for config
       require "src/config.php";
-
       //Check database connection:
       $dbConnection = databaseConnect();
 
+      // Include all important functions
+      require "src/functions.php";
     ?>
 
     <meta charset="utf-8">
