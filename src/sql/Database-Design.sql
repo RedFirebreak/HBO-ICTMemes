@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2019 at 03:13 PM
+-- Generation Time: Oct 27, 2019 at 06:18 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -33,7 +33,7 @@ CREATE TABLE `comment-report` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL,
+  `datum` date NOT NULL DEFAULT current_timestamp(),
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -49,7 +49,7 @@ CREATE TABLE `comments` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
-  `datum` datetime NOT NULL
+  `datum` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -90,7 +90,7 @@ CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL,
+  `datum` date NOT NULL DEFAULT current_timestamp(),
   `tag-ID` int(11) NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
   `school` varchar(50) COLLATE utf8_bin NOT NULL
@@ -107,7 +107,7 @@ CREATE TABLE `meme-report` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL,
+  `datum` date NOT NULL DEFAULT current_timestamp(),
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -161,10 +161,11 @@ CREATE TABLE `school` (
 
 CREATE TABLE `support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
-  `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `naam` varchar(20) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
-  `datum` date NOT NULL,
+  `datum` date NOT NULL DEFAULT current_timestamp(),
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

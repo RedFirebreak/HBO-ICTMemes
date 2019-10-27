@@ -1,0 +1,4 @@
+02:20:53 | FAILED CONNECTION: Access denied for user 'rot'@'localhost' (using password: NO)
+02:21:11 | FAILED DATABASE CONNECTION: Access denied for user 'rot'@'localhost' (using password: NO)
+02:24:01 | FAILED DATABASE CONNECTION: Access denied for user 'rot'@'localhost' (using password: NO)
+02:29:31 | FAILED DATABASE CONNECTION: Access denied for user 'rot'@'localhost' (using password: NO)
