@@ -7,6 +7,9 @@
 
       // Include all important functions
       require "src/functions.php";
+
+      //Set errors in the database and errorfile
+      set_error_handler("CustomErrorHandling");
     ?>
 
     <meta charset="utf-8">

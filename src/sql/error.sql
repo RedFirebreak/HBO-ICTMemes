@@ -42,10 +42,10 @@ CREATE TABLE if not exists`error` (
 
 INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 (0, 'Homepage', '2019-10-27 16:25:22', 'ERROR', 'Ahh shit here we go again'),
-(0, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
-(0, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
-(0, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
-(0, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
+(1, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
+(2, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
+(3, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
+(4, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

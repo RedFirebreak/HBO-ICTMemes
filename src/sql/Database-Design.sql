@@ -155,6 +155,7 @@ CREATE TABLE `support` (
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
+
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
