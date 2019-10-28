@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2019 at 06:18 PM
+-- Generation Time: Oct 28, 2019 at 02:07 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -33,7 +33,7 @@ CREATE TABLE `comment-report` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -49,7 +49,7 @@ CREATE TABLE `comments` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
-  `datum` datetime NOT NULL DEFAULT current_timestamp()
+  `datum` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -75,7 +75,7 @@ CREATE TABLE `emailverificatie` (
 CREATE TABLE `error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `datum` datetime NOT NULL DEFAULT current_timestamp(),
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `soort` varchar(30) COLLATE utf8_bin NOT NULL,
   `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -107,7 +107,7 @@ CREATE TABLE `meme-report` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -121,17 +121,6 @@ CREATE TABLE `meme-report` (
 CREATE TABLE `overtredingen` (
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `overtredingen`
---
-
-INSERT INTO `overtredingen` (`overtreding`) VALUES
-('dt-fout'),
-('racisme'),
-('slechte muzieksmaak'),
-('stom gezicht'),
-('verkeerde huidskleur');
 
 -- --------------------------------------------------------
 
@@ -165,7 +154,7 @@ CREATE TABLE `support` (
   `naam` varchar(20) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 

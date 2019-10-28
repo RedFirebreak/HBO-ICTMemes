@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `error`
 --
 
-CREATE TABLE `error` (
+CREATE TABLE if not exists`error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
   `datum` datetime NOT NULL DEFAULT current_timestamp(),
