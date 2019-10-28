@@ -18,7 +18,7 @@
 	
 	<body>
 		
-		<form action= "/reset.php" method="post">
+		<form action= "/account/reset.php" method="post">
 		<p>In order to regain acces to your account, please enter your e-mailadress down below.<br>
 		An e-mail will be sent that will contain a new password.
 		</p>

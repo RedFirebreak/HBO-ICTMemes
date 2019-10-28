@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `overtredingen`
 --
 
-CREATE TABLE `overtredingen` (
+CREATE TABLE if not exists`overtredingen` (
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
@@ -51,7 +51,7 @@ INSERT INTO `overtredingen` (`overtreding`) VALUES
 -- Indexes for table `overtredingen`
 --
 ALTER TABLE `overtredingen`
-  ADD PRIMARY KEY (`overtreding`);
+  ADD PRIMARY KEY if not exists (`overtreding`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

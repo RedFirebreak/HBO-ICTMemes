@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `meme`
 --
 
-CREATE TABLE `meme` (
+CREATE TABLE if not exists`meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
@@ -42,17 +42,17 @@ CREATE TABLE `meme` (
 -- Dumping data for table `meme`
 --
 
-INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `tagnaam`, `locatie`, `school`) VALUES
-(1, 'Memey-boi1', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool1'),
-(2, 'Memey-boi2', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool1'),
-(3, 'Memey-boi3', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool2'),
-(4, 'Memey-boi4', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool2'),
-(5, 'Memey-boi5', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool3'),
-(6, 'Memey-boi6', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool3'),
-(7, 'Memey-boi7', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool4'),
-(8, 'Memey-boi8', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool4'),
-(9, 'Memey-boi9', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool1'),
-(10, 'Memey-boi10', 5, '2019-10-24', 'Hanze', '/memestorage/oktober/', 'voorbeeldschool3');
+INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `tag-ID`, `locatie`, `school`) VALUES
+(1, 'Memey-boi1', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
+(2, 'Memey-boi2', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
+(3, 'Memey-boi3', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool2'),
+(4, 'Memey-boi4', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool2'),
+(5, 'Memey-boi5', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3'),
+(6, 'Memey-boi6', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3'),
+(7, 'Memey-boi7', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool4'),
+(8, 'Memey-boi8', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool4'),
+(9, 'Memey-boi9', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
+(10, 'Memey-boi10', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3');
 
 --
 -- Indexes for dumped tables
@@ -62,14 +62,14 @@ INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `tagnaam`, `loc
 -- Indexes for table `meme`
 --
 ALTER TABLE `meme`
-  ADD PRIMARY KEY (`meme-ID`),
-  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
-  ADD KEY `meme-titel` (`meme-titel`),
-  ADD KEY `meme-titel_2` (`meme-titel`),
-  ADD KEY `meme-titel_3` (`meme-titel`),
-  ADD KEY `user-ID` (`user-ID`),
-  ADD KEY `tagnaam` (`tagnaam`),
-  ADD KEY `school` (`school`);
+  ADD PRIMARY KEY if not exists(`meme-ID`),
+  ADD UNIQUE KEY if not exists`meme-titel_4` (`meme-titel`),
+  ADD KEY if not exists`meme-titel` (`meme-titel`),
+  ADD KEY if not exists`meme-titel_2` (`meme-titel`),
+  ADD KEY if not exists`meme-titel_3` (`meme-titel`),
+  ADD KEY if not exists`user-ID` (`user-ID`),
+  ADD KEY if not exists`tagnaam` (`tagnaam`),
+  ADD KEY if not exists`school` (`school`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -90,7 +90,7 @@ ALTER TABLE `meme`
 --
 ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tagnaam`) REFERENCES `tags` (`tagnaam`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

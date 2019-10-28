@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE if not exists`user` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `usermail` varchar(100) COLLATE utf8_bin NOT NULL,
   `naam` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -72,11 +72,11 @@ INSERT INTO `user` (`user-ID`, `usermail`, `naam`, `wachtwoord`, `vorig_wachtwoo
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`user-ID`),
-  ADD KEY `usermail` (`usermail`),
-  ADD KEY `userrole` (`userrole`),
-  ADD KEY `schoolnaam` (`schoolnaam`),
-  ADD KEY `user_ibfk_2` (`is_verified`);
+  ADD PRIMARY KEY if not exists(`user-ID`),
+  ADD KEY if not exists`usermail` (`usermail`),
+  ADD KEY if not exists`userrole` (`userrole`),
+  ADD KEY if not exists`schoolnaam` (`schoolnaam`),
+  ADD KEY if not exists`user_ibfk_2` (`is_verified`);
 
 --
 -- AUTO_INCREMENT for dumped tables
