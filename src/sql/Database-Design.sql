@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2019 at 02:07 PM
+-- Generation Time: Oct 28, 2019 at 02:14 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -90,7 +90,7 @@ CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `tag-ID` int(11) NOT NULL,
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
   `school` varchar(50) COLLATE utf8_bin NOT NULL
