@@ -33,7 +33,7 @@ CREATE TABLE `comment-report` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` date NOT NULL,
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
   `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -165,7 +165,7 @@ CREATE TABLE `support` (
   `naam` varchar(20) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
-  `datum` date NOT NULL DEFAULT current_timestamp(),
+  `datum` date NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
