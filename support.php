@@ -38,7 +38,7 @@
                   $safesupportbeschrijving = mysqli_real_escape_string($dbConnection, $supportbeschrijving);
 
                   //prepare the query
-                  $sql = "INSERT INTO `support`(`usermail`, `naam`, `onderwerp`, `inhoud`) VALUES ('$safesupportemail','$safesupportnaam','$safesupportonderwerp', '$safesupportbeschrijving')";
+                  $sql = "INSERT INTO `support`(`email`, `naam`, `onderwerp`, `inhoud`) VALUES ('$safesupportemail','$safesupportnaam','$safesupportonderwerp', '$safesupportbeschrijving')";
                   //peform query!
                   $querycheck = $dbConnection->query($sql);
                 
