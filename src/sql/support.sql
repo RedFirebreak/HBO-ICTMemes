@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Tabelstructuur voor tabel `support`
 --
 
-CREATE TABLE `support` (
+CREATE TABLE if not exists`support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
   `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
@@ -58,7 +58,7 @@ INSERT INTO `support` (`support-ID`, `usermail`, `onderwerp`, `inhoud`, `datum`,
 -- Indexen voor tabel `support`
 --
 ALTER TABLE `support`
-  ADD PRIMARY KEY (`support-ID`);
+  ADD PRIMARY KEY if not exists(`support-ID`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen

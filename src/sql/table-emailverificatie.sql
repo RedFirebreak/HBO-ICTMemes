@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `emailverificatie`
 --
 
-CREATE TABLE `emailverificatie` (
+CREATE TABLE if not exists`emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
@@ -65,10 +65,10 @@ INSERT INTO `emailverificatie` (`user-ID`, `usermail`, `verificatiecode`, `gever
 -- Indexes for table `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
-  ADD PRIMARY KEY (`user-ID`),
-  ADD KEY `usermail` (`usermail`),
-  ADD KEY `geverifieerd_door` (`geverifieerd_door`),
-  ADD KEY `geverifieerd` (`geverifieerd`);
+  ADD PRIMARY KEY if not exists(`user-ID`),
+  ADD KEY if not exists`usermail` (`usermail`),
+  ADD KEY if not exists`geverifieerd_door` (`geverifieerd_door`),
+  ADD KEY if not exists`geverifieerd` (`geverifieerd`);
 
 --
 -- Constraints for dumped tables
