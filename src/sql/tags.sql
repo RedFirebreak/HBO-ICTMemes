@@ -13,8 +13,8 @@
 
 
 -- Dumping database structure for hboictmemes
-CREATE DATABASE IF NOT EXISTS `hboictmemes` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `hboictmemes`;
+CREATE DATABASE IF NOT EXISTS `hbo-ictmemes` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hbo-ictmemes`;
 
 -- Dumping structure for table hboictmemes.tags
 CREATE TABLE IF NOT EXISTS `tags` (
