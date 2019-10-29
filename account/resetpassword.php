@@ -27,7 +27,7 @@
 		$safemail = mysqli_real_escape_string($dbconnection, $_POST['email']);
 		
 		//bestemming
-		$to = $safemail;
+		$to = $_POST['email'];
 		
 		//onderwerp
 		$subject = "Password recovery";

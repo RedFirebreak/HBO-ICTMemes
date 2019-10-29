@@ -31,7 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE if not exists`user` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `usermail` varchar(100) COLLATE utf8_bin NOT NULL,
-  `naam` varchar(30) COLLATE utf8_bin NOT NULL,
+  `username` varchar(30) COLLATE utf8_bin NOT NULL,
   `wachtwoord` varchar(200) COLLATE utf8_bin NOT NULL,
   `vorig_wachtwoord` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT NULL,
@@ -72,7 +72,7 @@ ALTER TABLE `user`
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`usermail`, `naam`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
+INSERT INTO `user` (`usermail`, `username`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
 ('coole.dude@mail.com', 'coole dude', 'hoihoi', '', '', 'voorbeeldschool4', '2019-10-10 14:00:00', 2, 'admin', 1, 0),
 ('username@email.com', 'username', 'Bl4ck4ndWhite', 'White4ndBl4ck', '', 'voorbeeldschool2', '2019-10-14 02:00:00', 1, 'admin', 1, 0),
 ('Administrator@mail.com', 'Administrator', 'St@rt123', 'Eind1098', '', 'voorbeeldschool1', '2019-10-16 05:00:00', 3, 'uber-admin', 0, 1),
