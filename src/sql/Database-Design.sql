@@ -60,7 +60,6 @@ CREATE TABLE `comments` (
 
 CREATE TABLE `emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
@@ -244,7 +243,6 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `emailverificatie`
   ADD PRIMARY KEY (`user-ID`),
-  ADD KEY `usermail` (`usermail`),
   ADD KEY `geverifieerd_door` (`geverifieerd_door`),
   ADD KEY `geverifieerd` (`geverifieerd`);
 
@@ -415,7 +413,6 @@ ALTER TABLE `comments`
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`);
 
 --
