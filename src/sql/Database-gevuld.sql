@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2019 at 01:13 PM
+-- Generation Time: Oct 29, 2019 at 08:02 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -207,6 +207,22 @@ INSERT INTO `overtredingen` (`overtreding`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `private-info`
+--
+
+CREATE TABLE `private-info` (
+  `user-ID` int(10) UNSIGNED NOT NULL,
+  `voornaam` varchar(20) COLLATE utf8_bin NOT NULL,
+  `achternaam` varchar(20) COLLATE utf8_bin NOT NULL,
+  `adres` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `postcode` varchar(7) COLLATE utf8_bin DEFAULT NULL,
+  `land` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `geboortedatum` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `rollen`
 --
 
@@ -319,7 +335,7 @@ CREATE TABLE `upvote` (
 CREATE TABLE `user` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `usermail` varchar(100) COLLATE utf8_bin NOT NULL,
-  `naam` varchar(30) COLLATE utf8_bin NOT NULL,
+  `username` varchar(30) COLLATE utf8_bin NOT NULL,
   `wachtwoord` varchar(200) COLLATE utf8_bin NOT NULL,
   `vorig_wachtwoord` varchar(200) COLLATE utf8_bin DEFAULT NULL,
   `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT NULL,
@@ -335,7 +351,7 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user-ID`, `usermail`, `naam`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
+INSERT INTO `user` (`user-ID`, `usermail`, `username`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
 (1, 'coole.dude@mail.com', 'coole dude', 'hoihoi', '', '', 'voorbeeldschool4', '2019-10-10 14:00:00', 2, 'admin', 1, 0),
 (2, 'username@email.com', 'username', 'Bl4ck4ndWhite', 'White4ndBl4ck', '', 'voorbeeldschool2', '2019-10-14 02:00:00', 1, 'admin', 1, 0),
 (3, 'Administrator@mail.com', 'Administrator', 'St@rt123', 'Eind1098', '', 'voorbeeldschool1', '2019-10-16 05:00:00', 3, 'uber-admin', 0, 1),
@@ -417,6 +433,12 @@ ALTER TABLE `meme-report`
 --
 ALTER TABLE `overtredingen`
   ADD PRIMARY KEY (`overtreding`);
+
+--
+-- Indexes for table `private-info`
+--
+ALTER TABLE `private-info`
+  ADD PRIMARY KEY (`user-ID`);
 
 --
 -- Indexes for table `rollen`
@@ -562,6 +584,12 @@ ALTER TABLE `meme-report`
   ADD CONSTRAINT `meme-report_ibfk_2` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `meme-report_ibfk_3` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `meme-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
+
+--
+-- Constraints for table `private-info`
+--
+ALTER TABLE `private-info`
+  ADD CONSTRAINT `private-info_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `upvote`
