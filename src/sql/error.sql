@@ -36,18 +36,33 @@ CREATE TABLE if not exists`error` (
   `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+ALTER TABLE `error`
+  ADD PRIMARY KEY if not exists (`error-ID`);
+COMMIT;
+
+--
+-- AUTO_INCREMENT voor geëxporteerde tabellen
+--
+
+--
+-- AUTO_INCREMENT voor een tabel `support`
+--
+ALTER TABLE `error`
+  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
 --
 -- Dumping data for table `error`
 --
 
-INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
-(0, 'Homepage', '2019-10-27 16:25:22', 'ERROR', 'Ahh shit here we go again'),
-(1, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
-(2, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
-(3, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
-(4, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
-COMMIT;
+INSERT INTO `error` (`locatie`, `datum`, `soort`, `bericht`) VALUES
+('Homepage', '2019-10-27 16:25:22', 'ERROR', 'Ahh shit here we go again'),
+('Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
+('Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
+('Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
+('Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
 
+COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

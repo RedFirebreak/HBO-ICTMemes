@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2019 at 04:07 PM
+-- Generation Time: Oct 29, 2019 at 08:00 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -25,33 +25,38 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `overtredingen`
+-- Table structure for table `private-info`
 --
 
-CREATE TABLE if not exists`overtredingen` (
-  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
+CREATE TABLE `private-info` (
+  `user-ID` int(10) UNSIGNED NOT NULL,
+  `voornaam` varchar(20) COLLATE utf8_bin NOT NULL,
+  `achternaam` varchar(20) COLLATE utf8_bin NOT NULL,
+  `adres` varchar(20) COLLATE utf8_bin DEFAULT NULL,
+  `postcode` varchar(7) COLLATE utf8_bin DEFAULT NULL,
+  `land` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `geboortedatum` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Dumping data for table `overtredingen`
---
-
-INSERT INTO `overtredingen` (`overtreding`) VALUES
-('dt-fout'),
-('racisme'),
-('slechte muzieksmaak'),
-('stom gezicht'),
-('verkeerde huidskleur');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `overtredingen`
+-- Indexes for table `private-info`
 --
-ALTER TABLE `overtredingen`
-  ADD PRIMARY KEY if not exists (`overtreding`);
+ALTER TABLE `private-info`
+  ADD PRIMARY KEY (`user-ID`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `private-info`
+--
+ALTER TABLE `private-info`
+  ADD CONSTRAINT `private-info_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

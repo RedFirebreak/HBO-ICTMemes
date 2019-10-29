@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2019 at 08:07 PM
+-- Generation Time: Oct 29, 2019 at 08:02 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -38,6 +38,16 @@ CREATE TABLE `comment-report` (
   `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `comment-report`
+--
+
+INSERT INTO `comment-report` (`report-ID`, `comment-ID`, `snitch-ID`, `boef-ID`, `datum`, `overtreding`, `beschrijving`) VALUES
+(5, 5, 4, 4, '2019-10-28 19:04:45', 'verkeerde huidskleur', 'lololol, casual racism'),
+(6, 7, 6, 7, '2019-10-28 19:04:45', 'racisme', 'kleuren zijn racistisch'),
+(7, 1, 1, 12, '2019-10-28 19:04:45', 'dt-fout', 'kut moet met een d'),
+(8, 2, 15, 13, '2019-10-28 19:04:45', 'stom gezicht', 'gewoon een stom gezicht');
+
 -- --------------------------------------------------------
 
 --
@@ -52,6 +62,19 @@ CREATE TABLE `comments` (
   `datum` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`comment-ID`, `meme-ID`, `user-ID`, `inhoud`, `datum`) VALUES
+(1, 4, 12, 'wat een kut meme', '2019-10-28 18:51:24'),
+(2, 4, 13, 'hou je bek crediteur', '2019-10-28 18:51:24'),
+(3, 4, 12, 'hou jij je bek debiteur', '2019-10-28 18:51:24'),
+(4, 7, 1, 'ohne musik wäre das leben ein irrtum', '2019-10-28 18:51:24'),
+(5, 8, 4, 'lol of zo', '2019-10-28 18:51:24'),
+(6, 9, 5, 'exampletext', '2019-10-28 18:51:24'),
+(7, 1, 7, 'mijn favoriete kleur is geel', '2019-10-28 18:51:24');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +87,27 @@ CREATE TABLE `emailverificatie` (
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `emailverificatie`
+--
+
+INSERT INTO `emailverificatie` (`user-ID`, `verificatiecode`, `geverifieerd`, `geverifieerd_door`) VALUES
+(1, 1234, 1, 5),
+(2, 2345, 1, 8),
+(3, 3456, 0, NULL),
+(4, 4567, 0, NULL),
+(5, 5678, 1, 9),
+(6, 6789, 1, 13),
+(7, 1122, 1, 12),
+(8, 1133, 0, NULL),
+(9, 2244, 1, 2),
+(10, 3355, 0, NULL),
+(11, 4466, 0, NULL),
+(12, 6688, 1, 1),
+(13, 8800, 1, 4),
+(14, 3355, 1, 4),
+(15, 5577, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -78,6 +122,17 @@ CREATE TABLE `error` (
   `soort` varchar(30) COLLATE utf8_bin NOT NULL,
   `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `error`
+--
+
+INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
+(1, 'Homepage', '2019-10-27 16:25:22', 'ERROR', 'Ahh shit here we go again'),
+(2, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
+(3, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
+(4, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
+(5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
 
 -- --------------------------------------------------------
 
@@ -94,6 +149,22 @@ CREATE TABLE `meme` (
   `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
   `school` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `meme`
+--
+
+INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `tag-ID`, `locatie`, `school`) VALUES
+(1, 'Memey-boi1', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
+(2, 'Memey-boi2', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
+(3, 'Memey-boi3', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool2'),
+(4, 'Memey-boi4', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool2'),
+(5, 'Memey-boi5', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3'),
+(6, 'Memey-boi6', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3'),
+(7, 'Memey-boi7', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool4'),
+(8, 'Memey-boi8', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool4'),
+(9, 'Memey-boi9', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
+(10, 'Memey-boi10', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3');
 
 -- --------------------------------------------------------
 
@@ -121,6 +192,17 @@ CREATE TABLE `overtredingen` (
   `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `overtredingen`
+--
+
+INSERT INTO `overtredingen` (`overtreding`) VALUES
+('dt-fout'),
+('racisme'),
+('slechte muzieksmaak'),
+('stom gezicht'),
+('verkeerde huidskleur');
+
 -- --------------------------------------------------------
 
 --
@@ -147,6 +229,15 @@ CREATE TABLE `rollen` (
   `userrole` varchar(20) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `rollen`
+--
+
+INSERT INTO `rollen` (`userrole`) VALUES
+('admin'),
+('uber-admin'),
+('user');
+
 -- --------------------------------------------------------
 
 --
@@ -156,6 +247,16 @@ CREATE TABLE `rollen` (
 CREATE TABLE `school` (
   `schoolnaam` varchar(50) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `school`
+--
+
+INSERT INTO `school` (`schoolnaam`) VALUES
+('voorbeeldschool1'),
+('voorbeeldschool2'),
+('voorbeeldschool3'),
+('voorbeeldschool4');
 
 -- --------------------------------------------------------
 
@@ -172,6 +273,19 @@ CREATE TABLE `support` (
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+--
+-- Dumping data for table `support`
+--
+
+INSERT INTO `support` (`support-ID`, `email`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
+(1, 'janwillem@hotmail.com', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
+(2, 'willemjan@hotmail.com', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
+(3, 'Basdeejay@hotmail.com', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
+(4, 'khalidwonder@st.hanze.nl', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
+(5, 'gigid\'agostino@st.windesheim.nl', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
+(6, 'alcazarvevo@discotheek.com', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
+(7, 'earhtwindfire@st.NHL.nl', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -182,6 +296,22 @@ CREATE TABLE `tags` (
   `tag-ID` int(10) UNSIGNED NOT NULL,
   `tagnaam` varchar(30) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`tag-ID`, `tagnaam`) VALUES
+(1, 'AdminPost'),
+(2, 'Dat-Boi'),
+(3, 'Funny'),
+(4, 'Halloween'),
+(5, 'Hanze'),
+(6, 'ICT'),
+(7, 'Schooladmin'),
+(8, 'Shitpost'),
+(9, 'Stenden'),
+(10, 'Windesheim');
 
 -- --------------------------------------------------------
 
@@ -215,6 +345,27 @@ CREATE TABLE `user` (
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `gebanned` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user-ID`, `usermail`, `username`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
+(1, 'coole.dude@mail.com', 'coole dude', 'hoihoi', '', '', 'voorbeeldschool4', '2019-10-10 14:00:00', 2, 'admin', 1, 0),
+(2, 'username@email.com', 'username', 'Bl4ck4ndWhite', 'White4ndBl4ck', '', 'voorbeeldschool2', '2019-10-14 02:00:00', 1, 'admin', 1, 0),
+(3, 'Administrator@mail.com', 'Administrator', 'St@rt123', 'Eind1098', '', 'voorbeeldschool1', '2019-10-16 05:00:00', 3, 'uber-admin', 0, 1),
+(4, 'alex@mail.com', 'alex', 'Alex', '', '', 'voorbeeldschool3', '2019-10-15 10:00:00', 10, 'user', 0, 1),
+(5, 'demo@mail.com', 'Demo', 'ThisIsNotAPassword', '', '', 'voorbeeldschool2', '2019-10-11 06:00:00', 13, 'user', 1, 0),
+(6, 'Pos@mail.com', 'Pos', 'P@ssword', '', '', 'voorbeeldschool4', '2019-10-16 03:00:00', 5, 'user', 1, 0),
+(7, 'Peter@mail.com', 'peterthepeter', 'P@ssWord345', '', '', 'voorbeeldschool1', '2019-10-09 15:00:00', 2, 'user', 1, 1),
+(8, 'thebeast@mail.com', 'The Beast', 'ComeAtMe', '', '', 'voorbeeldschool2', '2019-10-24 18:00:00', 6, 'user', 0, 0),
+(9, 'splosh@mail.com', 'slosh vitamins', 'EatDemVitamins', '', '', 'voorbeeldschool3', '2019-10-15 10:00:00', 9, 'uber-admin', 1, 1),
+(10, 'incredible@mail.com', 'incredible typewriter', 'TypeWriter567', '', '', 'voorbeeldschool2', '2019-10-17 16:00:00', 2, 'user', 0, 0),
+(11, 'mugwup@mail.com', 'mugwumpsystemize', 'beAMugWump4Life', 'IDontNeedNoPassword', '', 'voorbeeldschool2', '2019-10-18 04:00:00', 1, 'user', 0, 0),
+(12, 'crediteur@mail.com', 'crediteur', 'debiteur', '', '', 'voorbeeldschool2', '2019-10-17 07:00:00', 0, 'user', 1, 0),
+(13, 'debiteur@mail.com', 'debiteur', 'crediteur', 'crediteur<3', '', 'voorbeeldschool2', '2019-10-14 07:00:00', 0, 'user', 1, 0),
+(14, 'bobcattweed@mail.com', 'bobcattweed', 'BringTheweed', '', '', 'voorbeeldschool3', '2019-10-14 22:00:00', 0, 'admin', 1, 0),
+(15, 'egg@mail.com', 'eggisland', 'chickenChicken', 'CluckCluck', '', 'voorbeeldschool4', '0000-00-00 00:00:00', 1, 'user', 1, 0);
 
 --
 -- Indexes for dumped tables
@@ -337,7 +488,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `comment-report`
 --
 ALTER TABLE `comment-report`
-  MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `comments`

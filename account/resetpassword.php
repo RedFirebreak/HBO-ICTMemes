@@ -20,20 +20,34 @@
   <body>
 
     <!-- Start coding here! :D -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Reset your password</h1>
-
-      </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-              <p><?php require('form.reset.php'); ?></p>
-            </div>
-        </div>
-    </div>
-    
+	<?php
+	//Hier sturen we de password reset mail
+	
+	if (isset($_POST['email'])) {
+		$safemail = mysqli_real_escape_string($dbconnection, $_POST['email']);
+		
+		//bestemming
+		$to = $_POST['email'];
+		
+		//onderwerp
+		$subject = "Password recovery";
+		
+		//bericht
+		$sql = "select verificatiecode from emailverificatie where usermail=" . $safemail;
+		$result = $dbConnection->query($sql);
+		$vercode = $result->fetch_assoc();
+		$message = "Enter the following code in the website to reset your password: <br>" . $vercode['verificatiecode'];
+		
+		//verstuurder
+		$headers = "From: Reset@hbo-ictmemes.nl";
+		
+		
+		//versturen van bericht
+		mail($to, $subject, $message, headers);
+	}
+	?>
+	
+    <?php require('form.reset.php'); ?>
 
   </body>
 

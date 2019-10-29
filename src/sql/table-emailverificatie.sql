@@ -28,9 +28,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `emailverificatie`
 --
 
-CREATE TABLE `emailverificatie` (
+CREATE TABLE if not exists`emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `usermail` varchar(50) COLLATE utf8_bin NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
@@ -40,22 +39,22 @@ CREATE TABLE `emailverificatie` (
 -- Dumping data for table `emailverificatie`
 --
 
-INSERT INTO `emailverificatie` (`user-ID`, `usermail`, `verificatiecode`, `geverifieerd`, `geverifieerd_door`) VALUES
-(1, 'coole.dude@mail.com', 1234, 1, 5),
-(4, 'username@email.com', 2345, 1, 17),
-(5, 'Administrator@mail.com', 3456, 0, NULL),
-(6, 'alex@mail.com', 4567, 0, NULL),
-(7, 'demo@mail.com', 5678, 1, 9),
-(8, 'Pos@mail.com', 6789, 1, 17),
-(9, 'Peter@mail.com', 1122, 1, 12),
-(10, 'thebeast@mail.com', 1133, 0, NULL),
-(12, 'splosh@mail.com', 2244, 1, 17),
-(13, 'incredible@mail.com', 3355, 0, NULL),
-(14, 'mugwup@mail.com', 4466, 0, NULL),
-(15, 'crediteur@mail.com', 6688, 1, 1),
-(16, 'debiteur@mail.com', 8800, 1, 4),
-(17, 'bobcattweed@mail.com', 3355, 1, 4),
-(18, 'egg@mail.com', 5577, 1, 1);
+INSERT INTO `emailverificatie` (`user-ID`, `verificatiecode`, `geverifieerd`, `geverifieerd_door`) VALUES
+(1, 1234, 1, 5),
+(2, 2345, 1, 8),
+(3, 3456, 0, NULL),
+(4, 4567, 0, NULL),
+(5, 5678, 1, 9),
+(6, 6789, 1, 13),
+(7, 1122, 1, 12),
+(8, 1133, 0, NULL),
+(9, 2244, 1, 2),
+(10, 3355, 0, NULL),
+(11, 4466, 0, NULL),
+(12, 6688, 1, 1),
+(13, 8800, 1, 4),
+(14, 3355, 1, 4),
+(15, 5577, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -65,10 +64,9 @@ INSERT INTO `emailverificatie` (`user-ID`, `usermail`, `verificatiecode`, `gever
 -- Indexes for table `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
-  ADD PRIMARY KEY (`user-ID`),
-  ADD KEY `usermail` (`usermail`),
-  ADD KEY `geverifieerd_door` (`geverifieerd_door`),
-  ADD KEY `geverifieerd` (`geverifieerd`);
+  ADD PRIMARY KEY if not exists(`user-ID`),
+  ADD KEY if not exists`geverifieerd_door` (`geverifieerd_door`),
+  ADD KEY if not exists`geverifieerd` (`geverifieerd`);
 
 --
 -- Constraints for dumped tables
@@ -80,7 +78,6 @@ ALTER TABLE `emailverificatie`
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `emailverificatie_ibfk_3` FOREIGN KEY (`usermail`) REFERENCES `user` (`usermail`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`);
 COMMIT;
 
