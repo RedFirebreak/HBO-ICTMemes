@@ -17,47 +17,5 @@
 
       // Log location
       $config['logs'] = "/logs";
-
-// Better not touch anything down here, unless you know what you are doing.
-        function databaseConnect() {
-          global $config;
-          //connect to database
-          $db_conn = mysqli_connect($config['mysql']['hostname'],
-          						              $config['mysql']['username'],
-                                    $config['mysql']['password'],
-                                    $config['mysql']['database']);      
-      
-          // check connection
-          if (mysqli_connect_errno()) {
-            //Throw error (Cant save in database, cuz no connection.)
-            $errordate = date("j-n-Y"); 
-            $errortime = date("h:i:s");
-            $docname = basename(__FILE__);
-            $errormessage = "$errortime | $docname | FAILED DATABASE CONNECTION: ". mysqli_connect_error() . "\n";
-
-              // Write in the main logging file
-                $dbconnectionerrorfile = fopen("src/logs/{$errordate}_AllLogs.log", "a");
-                fwrite($dbconnectionerrorfile, $errormessage);
-                fclose($dbconnectionerrorfile);
-
-              // Write seperate file
-                $dbconnectionerrorfile = fopen("src/logs/filtered/{$errordate}_db-fail.log", "a");
-                fwrite($dbconnectionerrorfile, $errormessage);
-                fclose($dbconnectionerrorfile);
-
-              // Inform the user of the error
-              echo "<h1>Yikes! It looks like the database connection failed.<br>";
-              echo "<p>The admins have been notified of this error. Please come back later!</p>";
-              echo "<br>";
-            exit();
-            }
-        
-        //echo "connected";			
-        return $db_conn;
-	      }
-
-      function databaseDisconnect($db_conn) {
-        mysqli_close($db_conn);
-      }    
 ?>
 
