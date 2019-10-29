@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `comments`
 --
 
-CREATE TABLE `comments` (
+CREATE TABLE if not exists`comments` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
@@ -36,18 +36,6 @@ CREATE TABLE `comments` (
   `datum` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`comment-ID`, `meme-ID`, `user-ID`, `inhoud`, `datum`) VALUES
-(1, 4, 15, 'wat een kut meme', '2019-10-28 18:51:24'),
-(2, 4, 16, 'hou je bek crediteur', '2019-10-28 18:51:24'),
-(3, 4, 15, 'hou jij je bek debiteur', '2019-10-28 18:51:24'),
-(4, 7, 1, 'ohne musik wäre das leben ein irrtum', '2019-10-28 18:51:24'),
-(5, 8, 4, 'lol of zo', '2019-10-28 18:51:24'),
-(6, 9, 5, 'exampletext', '2019-10-28 18:51:24'),
-(7, 1, 7, 'mijn favoriete kleur is geel', '2019-10-28 18:51:24');
 
 --
 -- Indexes for dumped tables
@@ -69,7 +57,20 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `comment-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`meme-ID`, `user-ID`, `inhoud`, `datum`) VALUES
+(4, 12, 'wat een kut meme', '2019-10-28 18:51:24'),
+(4, 13, 'hou je bek crediteur', '2019-10-28 18:51:24'),
+(4, 12, 'hou jij je bek debiteur', '2019-10-28 18:51:24'),
+(7, 1, 'ohne musik wäre das leben ein irrtum', '2019-10-28 18:51:24'),
+(8, 4, 'lol of zo', '2019-10-28 18:51:24'),
+(9, 5, 'exampletext', '2019-10-28 18:51:24'),
+(1, 7, 'mijn favoriete kleur is geel', '2019-10-28 18:51:24');
 
 --
 -- Constraints for dumped tables

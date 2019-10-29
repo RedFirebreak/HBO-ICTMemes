@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `comment-report`
 --
 
-CREATE TABLE `comment-report` (
+CREATE TABLE if not exists `comment-report` (
   `report-ID` int(10) UNSIGNED NOT NULL,
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
@@ -38,15 +38,6 @@ CREATE TABLE `comment-report` (
   `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
---
--- Dumping data for table `comment-report`
---
-
-INSERT INTO `comment-report` (`report-ID`, `comment-ID`, `snitch-ID`, `boef-ID`, `datum`, `overtreding`, `beschrijving`) VALUES
-(1, 5, 18, 4, '2019-10-28 19:04:45', 'verkeerde huidskleur', 'lololol, casual racism'),
-(2, 7, 6, 7, '2019-10-28 19:04:45', 'racisme', 'kleuren zijn racistisch'),
-(3, 1, 1, 15, '2019-10-28 19:04:45', 'dt-fout', 'kut moet met een d'),
-(4, 2, 15, 16, '2019-10-28 19:04:45', 'stom gezicht', 'gewoon een stom gezicht');
 
 --
 -- Indexes for dumped tables
@@ -56,11 +47,11 @@ INSERT INTO `comment-report` (`report-ID`, `comment-ID`, `snitch-ID`, `boef-ID`,
 -- Indexes for table `comment-report`
 --
 ALTER TABLE `comment-report`
-  ADD PRIMARY KEY (`report-ID`),
-  ADD KEY `comment-ID` (`comment-ID`),
-  ADD KEY `snitch-ID` (`snitch-ID`),
-  ADD KEY `boef-ID` (`boef-ID`),
-  ADD KEY `overtreding` (`overtreding`);
+  ADD PRIMARY KEY if not exists(`report-ID`),
+  ADD KEY if not exists`comment-ID` (`comment-ID`),
+  ADD KEY if not exists`snitch-ID` (`snitch-ID`),
+  ADD KEY if not exists`boef-ID` (`boef-ID`),
+  ADD KEY if not exists`overtreding` (`overtreding`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -71,6 +62,16 @@ ALTER TABLE `comment-report`
 --
 ALTER TABLE `comment-report`
   MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Dumping data for table `comment-report`
+--
+
+INSERT INTO `comment-report` (`comment-ID`, `snitch-ID`, `boef-ID`, `datum`, `overtreding`, `beschrijving`) VALUES
+(5, 4, 4, '2019-10-28 19:04:45', 'verkeerde huidskleur', 'lololol, casual racism'),
+(7, 6, 7, '2019-10-28 19:04:45', 'racisme', 'kleuren zijn racistisch'),
+(1, 1, 12, '2019-10-28 19:04:45', 'dt-fout', 'kut moet met een d'),
+(2, 15, 13, '2019-10-28 19:04:45', 'stom gezicht', 'gewoon een stom gezicht');
 
 --
 -- Constraints for dumped tables
