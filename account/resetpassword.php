@@ -20,7 +20,20 @@
   <body>
 
     <!-- Start coding here! :D -->
-    <?php require('form.reset.php'); ?>
+    <div class="jumbotron">
+      <div class="container">
+        <h1 class="display-3">Reset your password</h1>
+
+      </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              <p><?php require('form.reset.php'); ?></p>
+            </div>
+        </div>
+    </div>
+    
 
   </body>
 

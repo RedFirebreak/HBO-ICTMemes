@@ -12,7 +12,7 @@
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-3">HBO-ICTMemes</h1>
-        <p>Welkom op HBO-ICTMemes.nl</p>
+        <p>Welkom op HBO-ICTMemes.nl <?php echo $LoggedinUsername ?></p>
 
       </div>
     </div>

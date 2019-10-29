@@ -2,11 +2,12 @@
 <?php
     /*
         [DESCRIPTION]
-        This file does (something).
+        This file does logging in and stuff
+        // https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database 
 
         [INFO]
         Author:     Stef
-        Date:       11-10-2019
+        Date:       29-10-2019
     */
 ?>
 
@@ -20,24 +21,32 @@
   <body>
 
     <!-- Start coding here! :D -->
-    <?php require('form.login.php'); ?>
+
     <div class="jumbotron">
       <div class="container">
-        <h1 class="display-3">Log in</h1>
-        <p>Enter your credentials here, <a href="/register.php">or register</a>.</p>
+        <h1 class="display-3">Log in</h1> 
 
       </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <h2><a href="register.php">register</a></h2>
-            <h2><a href="resetpassword.php">resetpassword</a></h2>
+            <h2>Voer hier je login-gegevens in</h2><br>
+              <?php 
+              
+              sendemailverification("RedFirebreak", "sjilderda@gmail.com");
+              
+              require('func.login.php'); 
+              ?>
+              <?php require('form.login.php'); ?>
             </div>
 
             <div class="col-md-6">
-                <h2>More Stuff n' Things</h2>
+              
+              <h2><a href="resetpassword.php">resetpassword</a></h2>
             </div>
+
+
         </div>
     </div>
     
