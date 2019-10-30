@@ -42,10 +42,6 @@
                   //peform query!
                   $results = mysqli_query($dbConnection, $sql);
                   //$querycheck = $dbConnection->query($sql);
-
-                  var_dump($sql);
-                  echo"<br>";
-                  var_dump($results);
                   //Check if the query was successfull
                   if(!$results)
                     { 
