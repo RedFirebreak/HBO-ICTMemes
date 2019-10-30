@@ -132,7 +132,7 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 (2, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
 (3, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
 (4, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
-(5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDN\'T HE');
+(5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDNT HE');
 
 -- --------------------------------------------------------
 
@@ -266,9 +266,10 @@ INSERT INTO `school` (`schoolnaam`) VALUES
 
 CREATE TABLE `support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) COLLATE utf8_general_ci NOT NULL,
-  `onderwerp` varchar(30) COLLATE utf8_general_ci NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `naam` varchar(50) COLLATE utf8_bin NOT NULL,
+  `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
+  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -165,9 +165,10 @@ CREATE TABLE `school` (
 
 CREATE TABLE `support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) COLLATE utf8_general_ci NOT NULL,
-  `onderwerp` varchar(30) COLLATE utf8_general_ci NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `naam` varchar(50) COLLATE utf8_bin NOT NULL,
+  `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
+  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

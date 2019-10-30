@@ -40,10 +40,10 @@
                   //prepare the query
                   $sql = "INSERT INTO `support`(`email`, `naam`, `onderwerp`, `inhoud`) VALUES ('$safesupportemail','$safesupportnaam','$safesupportonderwerp', '$safesupportbeschrijving')";
                   //peform query!
-                  $querycheck = $dbConnection->query($sql);
-                
+                  $results = mysqli_query($dbConnection, $sql);
+                  //$querycheck = $dbConnection->query($sql);
                   //Check if the query was successfull
-                  if($querycheck == false)
+                  if(!$results)
                     { 
                       // There was an error. log it!
                       Customlog("Support", "error", "A Support form couldn't be send: The query failed");

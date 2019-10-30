@@ -30,9 +30,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE if not exists`support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) COLLATE utf8_general_ci NOT NULL,
-  `onderwerp` varchar(30) COLLATE utf8_general_ci NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_general_ci NOT NULL,
+  `email` varchar(50) COLLATE utf8_bin NOT NULL,
+  `naam` varchar(50) COLLATE utf8_bin NOT NULL,
+  `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
+  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -62,14 +63,14 @@ ALTER TABLE `support`
 -- Gegevens worden geëxporteerd voor tabel `support`
 --
 
-INSERT INTO `support` (`email`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
-('janwillem@hotmail.com', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
-('willemjan@hotmail.com', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
-('Basdeejay@hotmail.com', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
-('khalidwonder@st.hanze.nl', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
-('gigid\'agostino@st.windesheim.nl', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
-('alcazarvevo@discotheek.com', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
-('earhtwindfire@st.NHL.nl', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
+INSERT INTO `support` (`email`,`naam`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
+('janwillem@hotmail.com',`Naam1`, 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
+('willemjan@hotmail.com',`Naam2`, 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
+('Basdeejay@hotmail.com',`Naam3`, 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
+('khalidwonder@st.hanze.nl',`Naam4`, 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
+('gigidagostino@st.windesheim.nl',`Nam5`, 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
+('alcazarvevo@discotheek.com',`man6`, 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
+('earhtwindfire@st.NHL.nl',`vrouw7`, 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
 
 COMMIT;
 

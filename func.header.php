@@ -2,14 +2,33 @@
     <?php
       // Check for config
       require "src/config.php";
-      //Check database connection:
-      $dbConnection = databaseConnect();
 
       // Include all important functions
       require "src/functions.php";
 
+      //Check database connection:
+      $dbConnection = databaseConnect();
+
       //Set errors in the database and errorfile
       set_error_handler("CustomErrorHandling");
+
+      session_start(); 
+
+
+      if (!isset($_SESSION['username'])) {
+        $_SESSION['notice'] = "You are not logged in";
+        $LoggedinUsername = "";
+      } else {
+        $LoggedinUsername = $_SESSION['username'];
+      }
+
+      // To logout from any location
+      if (isset($_GET['logout'])) {
+        session_destroy();
+        unset($_SESSION['username']);
+        
+        header('Refresh: 0; url=/');
+      }
     ?>
 
     <meta charset="utf-8">
@@ -23,6 +42,9 @@
 
     <!-- Custom styles for this template -->
     <link href="/src/css/jumbotron.css" rel="stylesheet">
+
+    <!-- Our custom css -->
+    <link href="/src/css/stylesheet.css" rel="stylesheet">    
 
     <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,7 +88,7 @@
               <a class="dropdown-item" href="/account/">AccountPage</a>
               <a class="dropdown-item" href="/upload/">Upload</a>
               <a class="dropdown-item" href="/support.php">Support</a>
-              <a class="dropdown-item" href="#">Log-out</a>
+              <a class="dropdown-item" style="color: red;" href="?logout='1'">Log-out</a>
             </div>
           </li>
         </ul>
