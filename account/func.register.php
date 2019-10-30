@@ -107,8 +107,7 @@ if (isset($_POST['reg_user'])) {
 
         //Create a session, The user will be logged in with this after a SUCCESSFULL register attempt
         $_SESSION['username'] = $username;
-        $_SESSION['email'] = $email;
-        $_SESSION['success'] = "true";
+        $_SESSION['success'] = "You are now logged in";
 
         //create an emailverification for the user
         sendemailverification($username, $email);
@@ -117,7 +116,7 @@ if (isset($_POST['reg_user'])) {
         echo "<div class='alert alert-success' role='alert'>";
         echo "Je account is geregistreerd! Je wordt doorgestuurd naar de homepagina.";
         echo "</div>";
-        header("Refresh:3; url=index.php");
+        header("Refresh:3; url=../index.php");
         return;
     }
            // Inform user
