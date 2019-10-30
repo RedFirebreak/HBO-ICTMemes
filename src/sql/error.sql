@@ -30,11 +30,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE if not exists`error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
+  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
   `datum` datetime NOT NULL DEFAULT current_timestamp(),
-  `soort` varchar(30) COLLATE utf8_bin NOT NULL,
-  `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `soort` varchar(30) COLLATE utf8_general_ci NOT NULL,
+  `bericht` varchar(1024) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 ALTER TABLE `error`
   ADD PRIMARY KEY if not exists (`error-ID`);

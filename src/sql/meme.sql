@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE if not exists`meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
+  `meme-titel` varchar(30) COLLATE utf8_general_ci NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `tag-ID` int(10) unsigned NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `school` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
+  `school` varchar(50) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 --
