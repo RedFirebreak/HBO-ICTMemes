@@ -33,9 +33,6 @@
             <div class="col-md-6">
             <h2>Voer hier je login-gegevens in</h2><br>
               <?php 
-              
-              sendemailverification("RedFirebreak", "sjilderda@gmail.com");
-              
               require('func.login.php'); 
               ?>
               <?php require('form.login.php'); ?>
