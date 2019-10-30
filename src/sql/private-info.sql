@@ -30,13 +30,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `private-info` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `voornaam` varchar(20) COLLATE utf8_bin NOT NULL,
-  `achternaam` varchar(20) COLLATE utf8_bin NOT NULL,
-  `adres` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `postcode` varchar(7) COLLATE utf8_bin DEFAULT NULL,
-  `land` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `voornaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `achternaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `adres` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+  `postcode` varchar(7) COLLATE utf8_general_ci DEFAULT NULL,
+  `land` varchar(30) COLLATE utf8_general_ci DEFAULT NULL,
   `geboortedatum` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Indexes for dumped tables

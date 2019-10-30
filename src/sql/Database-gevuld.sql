@@ -34,9 +34,9 @@ CREATE TABLE `comment-report` (
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
-  `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `beschrijving` varchar(300) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `comment-report`
@@ -58,9 +58,9 @@ CREATE TABLE `comments` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
+  `inhoud` varchar(500) COLLATE utf8_general_ci NOT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `comments`
@@ -86,7 +86,7 @@ CREATE TABLE `emailverificatie` (
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `emailverificatie`
@@ -117,11 +117,11 @@ INSERT INTO `emailverificatie` (`user-ID`, `verificatiecode`, `geverifieerd`, `g
 
 CREATE TABLE `error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
+  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
   `datum` datetime NOT NULL DEFAULT current_timestamp(),
-  `soort` varchar(30) COLLATE utf8_bin NOT NULL,
-  `bericht` varchar(1024) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `soort` varchar(30) COLLATE utf8_general_ci NOT NULL,
+  `bericht` varchar(1024) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `error`
@@ -142,13 +142,13 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` varchar(30) COLLATE utf8_bin NOT NULL,
+  `meme-titel` varchar(30) COLLATE utf8_general_ci NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `tag-ID` int(10) UNSIGNED NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_bin NOT NULL,
-  `school` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
+  `school` varchar(50) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `meme`
@@ -178,9 +178,9 @@ CREATE TABLE `meme-report` (
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
-  `beschrijving` varchar(300) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `beschrijving` varchar(300) COLLATE utf8_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -189,8 +189,8 @@ CREATE TABLE `meme-report` (
 --
 
 CREATE TABLE `overtredingen` (
-  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `overtredingen`
@@ -211,13 +211,13 @@ INSERT INTO `overtredingen` (`overtreding`) VALUES
 
 CREATE TABLE `private-info` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `voornaam` varchar(20) COLLATE utf8_bin NOT NULL,
-  `achternaam` varchar(20) COLLATE utf8_bin NOT NULL,
-  `adres` varchar(20) COLLATE utf8_bin DEFAULT NULL,
-  `postcode` varchar(7) COLLATE utf8_bin DEFAULT NULL,
-  `land` varchar(30) COLLATE utf8_bin DEFAULT NULL,
+  `voornaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `achternaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `adres` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
+  `postcode` varchar(7) COLLATE utf8_general_ci DEFAULT NULL,
+  `land` varchar(30) COLLATE utf8_general_ci DEFAULT NULL,
   `geboortedatum` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -226,8 +226,8 @@ CREATE TABLE `private-info` (
 --
 
 CREATE TABLE `rollen` (
-  `userrole` varchar(20) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `userrole` varchar(20) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `rollen`
@@ -245,8 +245,8 @@ INSERT INTO `rollen` (`userrole`) VALUES
 --
 
 CREATE TABLE `school` (
-  `schoolnaam` varchar(50) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `schoolnaam` varchar(50) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `school`
@@ -272,7 +272,7 @@ CREATE TABLE `support` (
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `support`
@@ -295,8 +295,8 @@ INSERT INTO `support` (`support-ID`, `email`, `onderwerp`, `inhoud`, `datum`, `o
 
 CREATE TABLE `tags` (
   `tag-ID` int(10) UNSIGNED NOT NULL,
-  `tagnaam` varchar(30) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `tagnaam` varchar(30) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `tags`
@@ -324,7 +324,7 @@ CREATE TABLE `upvote` (
   `upvote-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
 
@@ -334,18 +334,18 @@ CREATE TABLE `upvote` (
 
 CREATE TABLE `user` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `usermail` varchar(100) COLLATE utf8_bin NOT NULL,
-  `username` varchar(30) COLLATE utf8_bin NOT NULL,
-  `wachtwoord` varchar(200) COLLATE utf8_bin NOT NULL,
-  `vorig_wachtwoord` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT NULL,
-  `schoolnaam` varchar(50) COLLATE utf8_bin DEFAULT NULL,
+  `usermail` varchar(100) COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(30) COLLATE utf8_general_ci NOT NULL,
+  `wachtwoord` varchar(200) COLLATE utf8_general_ci NOT NULL,
+  `vorig_wachtwoord` varchar(200) COLLATE utf8_general_ci DEFAULT NULL,
+  `profile_picture` varchar(300) COLLATE utf8_general_ci DEFAULT NULL,
+  `schoolnaam` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,
-  `userrole` varchar(20) COLLATE utf8_bin NOT NULL,
+  `userrole` varchar(20) COLLATE utf8_general_ci NOT NULL,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `gebanned` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `user`

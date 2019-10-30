@@ -19,9 +19,9 @@ USE `hbo-ictmemes`;
 -- Dumping structure for table hboictmemes.tags
 CREATE TABLE IF NOT EXISTS `tags` (
   `tag-ID` int(10) UNSIGNED NOT NULL,
-  `tagnaam` varchar(30) COLLATE utf8_bin NOT NULL,
+  `tagnaam` varchar(30) COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`tag-ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 	
 	--
