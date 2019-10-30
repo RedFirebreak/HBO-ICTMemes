@@ -19,13 +19,23 @@
 
   <body>
 
-    <!-- Start coding here! :D -->
-
-    <?php require('func.emailverificatie.php'); ?>
+    <?php 
+      // Als "href="?emailverificatie='1' gezet is, wordt dit uitgevoerd.
+      // Emailverificatie
+      if (isset($_GET['emailverificatie'])) {
+        require('func.emailverificatie.php');
+      }
+    ?>
 
     <!-- OF de ander -->
 
-    <?php require('form.resetpassword.php'); ?>
+    <?php 
+      // Als "href="?resetpassword='1' gezet is, wordt dit uitgevoerd.
+      // ResetPassword
+      if (isset($_GET['resetpassword'])) {
+        require('form.resetpassword.php');
+      }
+    ?>
 
   </body>
 
