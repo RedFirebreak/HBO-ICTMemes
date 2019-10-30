@@ -21,9 +21,12 @@
       } else {
         $LoggedinUsername = $_SESSION['username'];
       }
+
+      // To logout from any location
       if (isset($_GET['logout'])) {
         session_destroy();
         unset($_SESSION['username']);
+        
         header('Refresh: 0; url=/');
       }
     ?>

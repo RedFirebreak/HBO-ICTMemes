@@ -1,5 +1,4 @@
   <?php
-     //https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database
     if (isset($_POST['username'])) {
       $username = mysqli_real_escape_string($dbConnection, $_POST['username']);
       $password = mysqli_real_escape_string($dbConnection, $_POST['password']);
