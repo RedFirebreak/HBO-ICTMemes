@@ -15,11 +15,23 @@
       session_start(); 
 
 
-      if (!isset($_SESSION['username'])) {
-        $_SESSION['notice'] = "You are not logged in";
-        $LoggedinUsername = "";
-      } else {
+      if ($_SESSION['loggedin'] == true) {
+        //Set variables
+        $Loggedin = $_SESSION['loggedin'];
+        $LoggedinID = $_SESSION['userid'];
+        $LoggedinUsermail = $_SESSION['usermail'];
         $LoggedinUsername = $_SESSION['username'];
+        $LoggedinUserrole = $_SESSION['userrole'];
+        $LoggedinVerified = $_SESSION['is_verified'];
+        $LoggedinGebanned = $_SESSION['banned'];
+      } else {
+        $_SESSION['notice'] = "You are not logged in";
+        $LoggedinID = "";
+        $LoggedinUsermail = "";
+        $LoggedinUsername = "";
+        $LoggedinUserrole = "";
+        $LoggedinVerified = "";
+        $LoggedinGebanned = "";
       }
 
       // To logout from any location
