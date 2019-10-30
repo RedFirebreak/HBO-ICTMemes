@@ -21,6 +21,23 @@
         */
     function Customlog ($docname, $type, $error) {
 
+      //Check if the function is called from the existing directories
+      $Searchin = getcwd();
+      $subdirectoryaccount = "account";
+      $subdirectoryadmin = "admin";
+      $subdirectorymeme = "meme";
+      $subdirectorysrc = "src";
+      $subdirectoryupload = "upload";
+      $subdirectoryverify = "verify";
+      
+      $logcation = "src/logs/";
+      if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/logs/";}
+      if( strpos( $Searchin, $subdirectoryadmin ) !== false) {$logcation = "../src/logs/";}
+      if( strpos( $Searchin, $subdirectorymeme ) !== false) {$logcation = "../src/logs/";}
+      if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/logs/";}
+      if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/logs/";}
+      if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/logs/";}
+
       //cause functions are "local". Import db connection and open it:
         //Check database connection:
         $dbConnection = databaseConnect();
@@ -40,11 +57,11 @@
             $finalerrormessage = "$checktime | $docname | LOG: $error \n";
 
               //Create/Write in file general error file.
-               $errorfile = fopen("src/logs/{$checkdate}_AllLogs.log", "a");
+               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
                fwrite($errorfile, $finalerrormessage);
                fclose($errorfile);  
               //Create/Write in file of today, fill the file and close it.
-                $errorfile = fopen("src/logs/filtered/{$checkdate}_NORMAL.log", "a");
+                $errorfile = fopen("$logcation/filtered/{$checkdate}_NORMAL.log", "a");
                 fwrite($errorfile, $finalerrormessage);
                 fclose($errorfile);
 
@@ -59,11 +76,11 @@
           $finalerrormessage = "$checktime | $docname | ERROR: $error\n";
            
               //Create/Write in file general error file.
-              $errorfile = fopen("src/logs/{$checkdate}_AllLogs.log", "a");
+              $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
              //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("src/logs/filtered/{$checkdate}_ERROR.log", "a");
+               $errorfile = fopen("$logcation/filtered/{$checkdate}_ERROR.log", "a");
                fwrite($errorfile, $finalerrormessage);
                fclose($errorfile);
 
@@ -78,11 +95,11 @@
           $finalerrormessage = "$checktime | $docname | CRITICAL: $safeerror\n";
 
             //Create/Write in file general error file.
-              $errorfile = fopen("src/logs/{$checkdate}_AllLogs.log", "a");
+              $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("src/logs/filtered/{$checkdate}_CRITICAL.log", "a");
+               $errorfile = fopen("$logcation/filtered/{$checkdate}_CRITICAL.log", "a");
                fwrite($errorfile, $finalerrormessage);
                fclose($errorfile);
                
@@ -100,11 +117,11 @@
           $finalerrormessage = "$checktime | $docname | DEFAULT: $safeerror\n";
 
               //Create/Write in file general error file.
-              $errorfile = fopen("src/logs/{$checkdate}_AllLogs.log", "a");
+              $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
              //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("src/logs/filtered/{$checkdate}_DEFAULT.log", "a");
+               $errorfile = fopen("$logcation/filtered/{$checkdate}_DEFAULT.log", "a");
                fwrite($errorfile, $finalerrormessage);
                fclose($errorfile);
 
@@ -114,6 +131,101 @@
               break;
         
       }
+      databaseDisconnect($dbConnection); // disconnect from database
       return;
     }
+
+    function databaseConnect() {
+      global $config;
+      //connect to database
+      $db_conn = mysqli_connect($config['mysql']['hostname'],
+                                $config['mysql']['username'],
+                                $config['mysql']['password'],
+                                $config['mysql']['database']);      
+  
+      // check connection
+      if (mysqli_connect_errno()) {
+        //Throw error (Cant save in database, cuz no connection.)
+        $errordate = date("j-n-Y"); 
+        $errortime = date("h:i:s");
+        $docname = basename(__FILE__);
+        $errormessage = "$errortime | $docname | FAILED DATABASE CONNECTION: ". mysqli_connect_error() . "\n";
+
+          // Write in the main logging file
+            $dbconnectionerrorfile = fopen("src/logs/{$errordate}_AllLogs.log", "a");
+            fwrite($dbconnectionerrorfile, $errormessage);
+            fclose($dbconnectionerrorfile);
+
+          // Write seperate file
+            $dbconnectionerrorfile = fopen("src/logs/filtered/{$errordate}_db-fail.log", "a");
+            fwrite($dbconnectionerrorfile, $errormessage);
+            fclose($dbconnectionerrorfile);
+
+          // Inform the user of the error
+          echo "<h1>Yikes! It looks like the database connection failed.<br>";
+          echo "<p>The admins have been notified of this error. Please come back later!</p>";
+          echo "<br>";
+        exit();
+        }
+    
+    //echo "connected";			
+    return $db_conn;
+    }
+
+  function databaseDisconnect($db_conn) {
+    mysqli_close($db_conn);
+  }
+
+  function randomNumber($length) {
+    $result = '';
+    for($i = 0; $i < $length; $i++) {
+        $result .= mt_rand(0, 9);
+    }
+    return $result;
+}
+
+  function sendemailverification($username, $email) {
+    Customlog("SendEmail", "log", "sendemailverification has been called. ($username - With $email)");
+    //cause functions are "local". Import db connection and open it:
+      //Check database connection:
+        $dbConnection = databaseConnect();
+
+    // Clean the input (can never be too sure)
+    $safeusername = mysqli_real_escape_string($dbConnection, $username);
+    $safeemail = mysqli_real_escape_string($dbConnection, $email);
+
+    //setup query
+    $query = "SELECT `USER-ID` FROM user WHERE username='$safeusername' AND usermail='$safeemail'";
+    //setup results
+    $results = mysqli_query($dbConnection, $query);
+    //setup rows
+    $row = mysqli_fetch_assoc($results);
+
+    //If all matches, we should now have a userID
+    $userid = $row['USER-ID'];
+
+    //Check if there's actually an ID
+    if (!$userid) {
+      // If no ID popped up, something went terribly wrong and the user should be notified
+      // Inform user that something went wrong
+        echo "<div class='alert alert-danger' role='alert'>";
+        echo "De email-verificatie kon je account helaas niet vinden. De administrators zijn op de hoogte van dit probleem.";
+        echo "</div>";
+      //Log the attempt, this is a critical event since no email-verification has been sent and the account will be useless.
+      Customlog("SendEmail", "critical", "sendemailverification failed to find the users ID. No email has been sent!! ($username - With $email)");
+      return;
+    }
+
+    // Create a random string
+    $verificationcode = randomNumber(8);
+
+    // Prepare the emailverification-code
+    $query = "INSERT IGNORE INTO emailverificatie (`user-ID`, verificatiecode) 
+              VALUES('$userid', '$verificationcode')";
+    mysqli_query($dbConnection, $query);
+
+    databaseDisconnect($dbConnection); // disconnect from database
+    return;
+  }
+  
 ?>

@@ -13,15 +13,23 @@
 
 
 -- Dumping database structure for hboictmemes
-CREATE DATABASE IF NOT EXISTS `hboictmemes` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `hboictmemes`;
+CREATE DATABASE IF NOT EXISTS `hbo-ictmemes` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `hbo-ictmemes`;
 
 -- Dumping structure for table hboictmemes.tags
 CREATE TABLE IF NOT EXISTS `tags` (
+  `tag-ID` int(10) UNSIGNED NOT NULL,
   `tagnaam` varchar(30) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`tagnaam`)
+  PRIMARY KEY (`tag-ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+	
+	--
+-- AUTO_INCREMENT voor een tabel `support`
+--
+ALTER TABLE `tags`
+  MODIFY `tag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
 -- Dumping data for table hboictmemes.tags: ~0 rows (approximately)
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
 INSERT IGNORE INTO `tags` (`tagnaam`) VALUES
