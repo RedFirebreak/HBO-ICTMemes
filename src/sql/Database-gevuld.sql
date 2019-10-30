@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2019 at 08:02 PM
+-- Generation Time: Oct 30, 2019 at 06:42 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hbo-ictmemes`
+-- Database: `hboictmemes`
 --
 
 -- --------------------------------------------------------
@@ -34,9 +34,9 @@ CREATE TABLE `comment-report` (
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL,
-  `beschrijving` varchar(300) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `overtreding` varchar(20) NOT NULL,
+  `beschrijving` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comment-report`
@@ -58,9 +58,9 @@ CREATE TABLE `comments` (
   `comment-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_general_ci NOT NULL,
+  `inhoud` varchar(500) NOT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `comments`
@@ -82,32 +82,34 @@ INSERT INTO `comments` (`comment-ID`, `meme-ID`, `user-ID`, `inhoud`, `datum`) V
 --
 
 CREATE TABLE `emailverificatie` (
+  `verificatie-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
+  `rowdatum` timestamp NOT NULL DEFAULT current_timestamp(),
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `emailverificatie`
 --
 
-INSERT INTO `emailverificatie` (`user-ID`, `verificatiecode`, `geverifieerd`, `geverifieerd_door`) VALUES
-(1, 1234, 1, 5),
-(2, 2345, 1, 8),
-(3, 3456, 0, NULL),
-(4, 4567, 0, NULL),
-(5, 5678, 1, 9),
-(6, 6789, 1, 13),
-(7, 1122, 1, 12),
-(8, 1133, 0, NULL),
-(9, 2244, 1, 2),
-(10, 3355, 0, NULL),
-(11, 4466, 0, NULL),
-(12, 6688, 1, 1),
-(13, 8800, 1, 4),
-(14, 3355, 1, 4),
-(15, 5577, 1, 1);
+INSERT INTO `emailverificatie` (`verificatie-ID`, `user-ID`, `verificatiecode`, `rowdatum`, `geverifieerd`, `geverifieerd_door`) VALUES
+(1, 1, 1234, '2019-10-30 17:40:37', 1, 5),
+(2, 2, 2345, '2019-10-30 17:40:37', 1, 8),
+(3, 3, 3456, '2019-10-30 17:40:37', 0, NULL),
+(4, 4, 4567, '2019-10-30 17:40:37', 0, NULL),
+(5, 5, 5678, '2019-10-30 17:40:37', 1, 9),
+(6, 6, 6789, '2019-10-30 17:40:37', 1, 13),
+(7, 7, 1122, '2019-10-30 17:40:37', 1, 12),
+(8, 8, 1133, '2019-10-30 17:40:37', 0, NULL),
+(9, 9, 2244, '2019-10-30 17:40:37', 1, 2),
+(10, 10, 3355, '2019-10-30 17:40:37', 0, NULL),
+(11, 11, 4466, '2019-10-30 17:40:37', 0, NULL),
+(12, 12, 6688, '2019-10-30 17:40:37', 1, 1),
+(13, 13, 8800, '2019-10-30 17:40:37', 1, 4),
+(14, 14, 3355, '2019-10-30 17:40:37', 1, 4),
+(15, 15, 5577, '2019-10-30 17:40:37', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -117,11 +119,11 @@ INSERT INTO `emailverificatie` (`user-ID`, `verificatiecode`, `geverifieerd`, `g
 
 CREATE TABLE `error` (
   `error-ID` int(10) UNSIGNED NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
+  `locatie` varchar(200) NOT NULL,
   `datum` datetime NOT NULL DEFAULT current_timestamp(),
-  `soort` varchar(30) COLLATE utf8_general_ci NOT NULL,
-  `bericht` varchar(1024) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `soort` varchar(30) NOT NULL,
+  `bericht` varchar(1024) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `error`
@@ -132,7 +134,9 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 (2, 'Homepage', '2019-10-27 16:29:47', 'ERROR', 'Why did this happen to meeee! I\'ve made my mistakaaaakes! Got nowhere to run! The night goes on! as im, fading away!'),
 (3, 'Homepage', '2019-10-27 16:30:18', 'CRITICAL', 'Somebody is singing songs in our error log >:('),
 (4, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
-(5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDNT HE');
+(5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDNT HE'),
+(6, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:23:54', 'ERROR', '[Line: 18][8] Undefined index: loggedin'),
+(7, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:45:01', 'ERROR', '[Line: 18][8] Undefined index: loggedin');
 
 -- --------------------------------------------------------
 
@@ -142,13 +146,13 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` varchar(30) COLLATE utf8_general_ci NOT NULL,
+  `meme-titel` varchar(30) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `tag-ID` int(10) UNSIGNED NOT NULL,
-  `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
-  `school` varchar(50) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `locatie` varchar(200) NOT NULL,
+  `school` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `meme`
@@ -178,9 +182,9 @@ CREATE TABLE `meme-report` (
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL,
-  `beschrijving` varchar(300) COLLATE utf8_general_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `overtreding` varchar(20) NOT NULL,
+  `beschrijving` varchar(300) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -189,8 +193,8 @@ CREATE TABLE `meme-report` (
 --
 
 CREATE TABLE `overtredingen` (
-  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `overtreding` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `overtredingen`
@@ -211,13 +215,13 @@ INSERT INTO `overtredingen` (`overtreding`) VALUES
 
 CREATE TABLE `private-info` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `voornaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
-  `achternaam` varchar(20) COLLATE utf8_general_ci NOT NULL,
-  `adres` varchar(20) COLLATE utf8_general_ci DEFAULT NULL,
-  `postcode` varchar(7) COLLATE utf8_general_ci DEFAULT NULL,
-  `land` varchar(30) COLLATE utf8_general_ci DEFAULT NULL,
+  `voornaam` varchar(20) NOT NULL,
+  `achternaam` varchar(20) NOT NULL,
+  `adres` varchar(20) DEFAULT NULL,
+  `postcode` varchar(7) DEFAULT NULL,
+  `land` varchar(30) DEFAULT NULL,
   `geboortedatum` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -226,8 +230,8 @@ CREATE TABLE `private-info` (
 --
 
 CREATE TABLE `rollen` (
-  `userrole` varchar(20) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `userrole` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `rollen`
@@ -245,8 +249,8 @@ INSERT INTO `rollen` (`userrole`) VALUES
 --
 
 CREATE TABLE `school` (
-  `schoolnaam` varchar(50) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `schoolnaam` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `school`
@@ -266,26 +270,26 @@ INSERT INTO `school` (`schoolnaam`) VALUES
 
 CREATE TABLE `support` (
   `support-ID` int(10) UNSIGNED NOT NULL,
-  `email` varchar(50) COLLATE utf8_bin NOT NULL,
-  `naam` varchar(50) COLLATE utf8_bin NOT NULL,
-  `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
-  `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `naam` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `onderwerp` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `inhoud` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `support`
 --
 
-INSERT INTO `support` (`support-ID`, `email`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
-(1, 'janwillem@hotmail.com', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
-(2, 'willemjan@hotmail.com', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
-(3, 'Basdeejay@hotmail.com', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
-(4, 'khalidwonder@st.hanze.nl', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
-(5, 'gigid\'agostino@st.windesheim.nl', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
-(6, 'alcazarvevo@discotheek.com', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
-(7, 'earhtwindfire@st.NHL.nl', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
+INSERT INTO `support` (`support-ID`, `email`, `naam`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
+(1, 'janwillem@hotmail.com', '', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
+(2, 'willemjan@hotmail.com', '', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
+(3, 'Basdeejay@hotmail.com', '', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
+(4, 'khalidwonder@st.hanze.nl', '', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
+(5, 'gigid\'agostino@st.windesheim.nl', '', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
+(6, 'alcazarvevo@discotheek.com', '', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
+(7, 'earhtwindfire@st.NHL.nl', '', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
 
 -- --------------------------------------------------------
 
@@ -295,8 +299,8 @@ INSERT INTO `support` (`support-ID`, `email`, `onderwerp`, `inhoud`, `datum`, `o
 
 CREATE TABLE `tags` (
   `tag-ID` int(10) UNSIGNED NOT NULL,
-  `tagnaam` varchar(30) COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `tagnaam` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tags`
@@ -324,7 +328,7 @@ CREATE TABLE `upvote` (
   `upvote-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `user-ID` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -334,18 +338,18 @@ CREATE TABLE `upvote` (
 
 CREATE TABLE `user` (
   `user-ID` int(10) UNSIGNED NOT NULL,
-  `usermail` varchar(100) COLLATE utf8_general_ci NOT NULL,
-  `username` varchar(30) COLLATE utf8_general_ci NOT NULL,
-  `wachtwoord` varchar(200) COLLATE utf8_general_ci NOT NULL,
-  `vorig_wachtwoord` varchar(200) COLLATE utf8_general_ci DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_general_ci DEFAULT NULL,
-  `schoolnaam` varchar(50) COLLATE utf8_general_ci DEFAULT NULL,
+  `usermail` varchar(100) NOT NULL,
+  `username` varchar(30) NOT NULL,
+  `wachtwoord` varchar(200) NOT NULL,
+  `vorig_wachtwoord` varchar(200) DEFAULT NULL,
+  `profile_picture` varchar(300) DEFAULT NULL,
+  `schoolnaam` varchar(50) DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,
-  `userrole` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `userrole` varchar(20) NOT NULL,
   `is_verified` tinyint(1) NOT NULL DEFAULT 0,
   `gebanned` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `user`
@@ -394,9 +398,10 @@ ALTER TABLE `comments`
 -- Indexes for table `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
-  ADD PRIMARY KEY (`user-ID`),
+  ADD PRIMARY KEY (`verificatie-ID`),
   ADD KEY `geverifieerd_door` (`geverifieerd_door`),
-  ADD KEY `geverifieerd` (`geverifieerd`);
+  ADD KEY `geverifieerd` (`geverifieerd`),
+  ADD KEY `user-ID` (`user-ID`);
 
 --
 -- Indexes for table `error`
@@ -498,10 +503,16 @@ ALTER TABLE `comments`
   MODIFY `comment-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `emailverificatie`
+--
+ALTER TABLE `emailverificatie`
+  MODIFY `verificatie-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
 -- AUTO_INCREMENT for table `error`
 --
 ALTER TABLE `error`
-  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `meme`
@@ -564,8 +575,8 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `emailverificatie_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE,
-  ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`);
+  ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`) ON DELETE CASCADE,
+  ADD CONSTRAINT `emailverificatie_ibfk_5` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `meme`

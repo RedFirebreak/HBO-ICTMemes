@@ -20,7 +20,14 @@
   <body>
 
     <!-- Start coding here! :D -->
-
+	
+	<?php
+		if (isset($_POST['meme'])) {
+			$safememe = mysql_real_escape_string($dbconnection, $_POST['meme']);
+			$safename = mysql_real_escape_string($dbconnection, $_POST['name'])
+		}
+	?>
+	
     <?php require('form.upload.php'); ?>
 
   </body>
