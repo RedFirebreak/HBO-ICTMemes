@@ -38,6 +38,12 @@
       if (isset($_GET['logout'])) {
         session_destroy();
         unset($_SESSION['username']);
+        unset($_SESSION['userid']);
+        unset($_SESSION['usermail']);
+        unset($_SESSION['username']);
+        unset($_SESSION['userrole']);
+        unset($_SESSION['is_verified']);
+        unset($_SESSION['banned']);
         
         header('Refresh: 0; url=/');
       }

@@ -31,6 +31,30 @@
 
         // Check if the query succeeded
           if (mysqli_num_rows($results) == 1) {
+
+            // Check of de user gebanned is
+            $banned= $row['gebanned'];
+            $verified= $row['is_verified'];
+
+            if ($banned == 1) {
+              echo "<div class='alert alert-danger' role='alert'>";
+              echo "Helaas, het ziet er naar uit dat je account gebanned is. Neem contact op det de support als je het hier niet mee eens bent.";
+              echo "</div>";
+              session_destroy();
+              return;
+            }
+
+            if ($verified == 0) {
+              $LoggedinUsermail = $row['usermail'];
+              $LoggedinUsername = $row['username'];
+              echo "<div class='alert alert-info' role='alert'>";
+              echo "Welkom! Het ziet er naar uit dat je email nog niet verifieerd is.<br>Geen code ontvangen?
+              <a href='login.php?sendverification=1&email=$LoggedinUsermail&username=$LoggedinUsername'>Klik hier om een nieuwe te ontvangen</a>";
+              echo "</div>";
+              session_destroy();
+              return;
+            }
+
           //Set it into session :)
             $_SESSION['loggedin'] = true;
             $_SESSION['userid'] = $row['user-id'];
@@ -48,6 +72,7 @@
             $LoggedinUserrole = $_SESSION['userrole'];
             $LoggedinVerified = $_SESSION['is_verified'];
             $LoggedinGebanned = $_SESSION['banned'];
+
 
           echo "<div class='alert alert-success' role='alert'>";
           echo "Success! Je bent nu ingelogd. Over 3 seconden wordt je doorgestuurd naar de homepagina.";
