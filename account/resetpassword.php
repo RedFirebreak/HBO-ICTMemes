@@ -24,6 +24,8 @@
 	//Hier sturen we de password reset mail
 	
 	if (isset($_POST['email'])) {
+		echo "klaar";
+		//data schoonmaken
 		$safemail = mysqli_real_escape_string($dbconnection, $_POST['email']);
 		
 		//bestemming
