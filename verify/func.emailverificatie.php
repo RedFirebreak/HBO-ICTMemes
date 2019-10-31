@@ -66,12 +66,27 @@
             $geverifieerd = $row4['geverifieerd'];
             
 
-            if ($geverifieerd) {
-                echo "<div class='alert alert-success' role='alert'>";
-                echo "Uw account is nu geverifieerd! Je wordt doorgestuurd naar de login pagina";
-                echo "</div>";
-                header("Refresh:3; url=../account/login.php");
-                return;
+            if ($geverifieerd) { // de emailverificatie row is nu geupdate naar "1" en kan geen tweede keer gebruikt worden
+                    // Update nu de user tabel
+                    $query4 = " UPDATE `user`
+                                SET is_verified='1' 
+                                WHERE `user-ID` ='$userID' AND is_verified='0' LIMIT 1;";
+                    $results4 = mysqli_query($dbConnection, $query4);
+
+                    // Kijk of de record is aangepast voor de user
+                    $query5 = "SELECT is_verified FROM user WHERE `user-ID` ='$userID' AND is_verified='1' LIMIT 1;";
+                    $results5 = mysqli_query($dbConnection, $query5);
+                    $row5 = mysqli_fetch_assoc($results5);
+
+                    $geverifieerd2 = $row4['geverifieerd'];
+
+                    if ($geverifieerd2) {
+                        echo "<div class='alert alert-success' role='alert'>";
+                        echo "Uw account is nu geverifieerd! Je wordt doorgestuurd naar de login pagina";
+                        echo "</div>";
+                        header("Refresh:3; url=../account/login.php");
+                    return;
+                }
             } else {
                 Customlog("Verify", "error", "De verificatie-quest kwam niet overeen voor $username.");
                 echo "<div class='alert alert-danger' role='alert'>";
