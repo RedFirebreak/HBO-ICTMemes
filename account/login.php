@@ -40,11 +40,7 @@
                 $username = mysqli_real_escape_string($dbConnection, $_GET['username']);
                 $email = mysqli_real_escape_string($dbConnection, $_GET['email']);
 
-                echo "<div class='alert alert-warning' role='alert'>";
-                echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
-                echo "</div>";
-
-                sendemailverification($username, $email);
+                sendemailverification($username, $email, "emailverificatie");
               }
               require('func.login.php'); 
               ?>
