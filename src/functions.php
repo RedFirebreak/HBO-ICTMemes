@@ -247,13 +247,12 @@
       
     // Prepare the rest for the email, Make link
       // Als dit een emailverificatie is
+      $subject = "";
       if ($safesoort = "emailverificatie") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
-        
         // Import the mail-template
           require("{$checkpath}templates/ConfirmEmailTemplate.php");
-
         // Set the subject
           $subject = "HBO-ICTMemes - Email verificatie";
         }
@@ -261,15 +260,11 @@
       if ($safesoort = "wachtwoordreset") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
-        
         // Import the mail-template
           require("{$checkpath}templates/PasswordResetTemplate.php");
         // Set the subject
           $subject = "HBO-ICTMemes - Wachtwoord Reset";
         }
-        if ($safesoort = "wachtwoordreset") {
-          $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
-      }
 
     // Prepare header
       $headers = "From: system@hbo-ictmemes.nl \r\n";
