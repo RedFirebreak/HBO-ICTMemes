@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 12:43 PM
+-- Generation Time: Oct 31, 2019 at 05:40 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -94,7 +94,7 @@ CREATE TABLE `meme` (
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `locatie` varchar(200) NOT NULL,
-  `school` varchar(50) NOT NULL
+  `school` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -349,8 +349,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user-ID`),
   ADD KEY `usermail` (`usermail`),
   ADD KEY `userrole` (`userrole`),
-  ADD KEY `schoolnaam` (`schoolnaam`),
-  ADD KEY `user_ibfk_2` (`is_verified`);
+  ADD KEY `schoolnaam` (`schoolnaam`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -447,7 +446,6 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`) ON DELETE CASCADE,
   ADD CONSTRAINT `emailverificatie_ibfk_5` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --

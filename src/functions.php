@@ -276,13 +276,25 @@
 
       if (isset($mail)) {
         // Send mail
-          mail($safeemail, $subject, $mail, $headers);
-          echo "<div class='alert alert-warning' role='alert'>";
-          echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
-          echo "</div>";
-          // We done!
-          databaseDisconnect($dbConnection); // disconnect from database
-          return;
+          $mailresult = mail($safeemail, $subject, $mail, $headers);
+          
+          if ($mailresult = 1) {
+            echo "<div class='alert alert-warning' role='alert'>";
+            echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
+            echo "</div>";
+            // We done!
+            databaseDisconnect($dbConnection); // disconnect from database
+            return;
+          } elseif($mailresult = 0) {
+            Customlog("SendEmail", "critical", "De email kon niet verstuurd worden, check of de mailserver het nog doet!($safeusername, $safeemail)");
+            echo "<div class='alert alert-warning' role='alert'>";
+            echo "De email kon niet verzonden worden. De administrators zijn op de hoogte gebracht.";
+            echo "</div>";
+            // We done!
+            databaseDisconnect($dbConnection); // disconnect from database
+            return;
+          }
+
       } else {
         echo "<div class='alert alert-danger' role='alert'>";
         echo "De email-verificatie aanvraag kon niet verwerkt worden. De administrators zijn op de hoogte van dit probleem.";

@@ -24,7 +24,22 @@
 		<p>Insert the name of your meme:</p>
 		<input type="text" name="name">
 		<p>Select the tags for your meme:</p>
-		<select name="tags">
+		
+		<?php
+			//tags ophalen
+			//query opstellen
+			$query = "select tagnaam from tags order by 1";
+			$result = $dbConnection->query($query);
+			/*<select name="tags">
+			{
+				echo "<option value={$record['tagnaam']}>{$record['tagnaam']}</option>";
+			}*/
+			while ($record = mysqli_fetch_assoc($result))
+			{
+				echo "<input type=checkbox name=tags value={$record['tagnaam']}> {$record['tagnaam']} <br>";
+			}
+			
+		?>
 			
 		</select><br><br>
 		<input type="submit" name="submit" value="submit">

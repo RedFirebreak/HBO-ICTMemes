@@ -55,8 +55,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY if not exists(`user-ID`),
   ADD KEY if not exists`usermail` (`usermail`),
   ADD KEY if not exists`userrole` (`userrole`),
-  ADD KEY if not exists`schoolnaam` (`schoolnaam`),
-  ADD KEY if not exists`user_ibfk_2` (`is_verified`);
+  ADD KEY if not exists`schoolnaam` (`schoolnaam`);
 
 --
 -- AUTO_INCREMENT for dumped tables

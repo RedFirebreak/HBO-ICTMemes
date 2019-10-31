@@ -27,9 +27,14 @@
 			$safememe = mysql_real_escape_string($dbconnection, $_POST['meme']);
 			$safename = mysql_real_escape_string($dbconnection, $_POST['name']);
 			
+			//school achterhalen
+			$sql = "Select schoolnaam from user where user-ID=" . $loggedinID;
+			$result = $dbConnection->query($sql);
+			$school = mysqli_fetch_assoc($result);
+			
 			//query maken
-			$sql = "INSERT INTO 'meme' ('meme-titel', 'user-ID', 'tag-ID', 'locatie', 'school')
-			Values ('$safename', '$loggedinID', '', '', '');";
+			$sql = "INSERT INTO 'meme' ('meme-titel', 'user-ID', 'locatie', 'school')
+			Values (" . $safename . ", " . $loggedinID . ", '', " . $school['schoolnaam'] . ");";
 			$result = $dbConnection->query($sql);
 			
 			//check query
