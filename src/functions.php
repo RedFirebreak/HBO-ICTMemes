@@ -248,8 +248,6 @@
     // Prepare the rest for the email, Make link
       // Als dit een emailverificatie is
       $subject = "";
-
-      var_dump($safesoort);
       if ($safesoort == "emailverificatie") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
