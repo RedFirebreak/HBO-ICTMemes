@@ -274,7 +274,7 @@
 
       if (isset($mail)) {
         // Send mail
-          echo mail($safeemail, $subject, $mail, $headers);
+          mail($safeemail, $subject, $mail, $headers);
           echo "<div class='alert alert-warning' role='alert'>";
           echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
           echo "</div>";
