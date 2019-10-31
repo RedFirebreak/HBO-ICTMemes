@@ -14,22 +14,44 @@
   <head>
     <!-- Edit the pagename only -->
     <title>HBO-Memes - PAGENAME</title>
-    <?php require('/func.header.php'); ?>
+    <?php require('../func.header.php'); ?>
   </head>
 
   <body>
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
 
-    <!-- Start coding here! :D -->
+      </div>
+    </div>
 
-    <?php require('func.emailverificatie.php'); ?>
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-12">
+          <?php 
+            // Als "href="?emailverificatie='1' gezet is, wordt dit uitgevoerd.
+            // Emailverificatie
+            if (isset($_GET['emailverificatie'])) {
+              require('func.emailverificatie.php');
+            }
+          ?>
 
-    <!-- OF de ander -->
+          <!-- OF de ander -->
 
-    <?php require('form.resetpassword.php'); ?>
-
+          <?php 
+            // Als "href="?resetpassword='1' gezet is, wordt dit uitgevoerd.
+            // ResetPassword
+            if (isset($_GET['resetpassword'])) {
+              require('form.resetpassword.php');
+            }
+          ?>
+        </div>
+      </div>
+    </div>
   </body>
 
   <footer>
-    <?php require('/func.footer.php'); ?>
+    <?php require('../func.footer.php'); ?>
   </footer>
 </html>

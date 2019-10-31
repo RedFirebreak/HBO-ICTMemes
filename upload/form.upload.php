@@ -18,9 +18,9 @@
 	
 	<body>
 		
-		<form action="/upload.php" method="post">
+		<form action="/hbo-ictmemes/upload/uploaded.php" method="post" enctype="multipart/form-data">
 		<p>Insert your meme here:</p>
-		<input type="text" name="meme">
+		<input type="file" name="fileToUpload" id="fileToUpload">
 		<p>Insert the name of your meme:</p>
 		<input type="text" name="name">
 		<p>Select the tags for your meme:</p>

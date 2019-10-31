@@ -34,9 +34,9 @@ CREATE TABLE if not exists `comment-report` (
   `snitch-ID` int(10) UNSIGNED DEFAULT NULL,
   `boef-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `overtreding` varchar(20) COLLATE utf8_bin NOT NULL,
-  `beschrijving` varchar(300) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `overtreding` varchar(20) COLLATE utf8_general_ci NOT NULL,
+  `beschrijving` varchar(300) COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 
 --

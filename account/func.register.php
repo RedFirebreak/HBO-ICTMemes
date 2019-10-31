@@ -110,13 +110,13 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['success'] = "You are now logged in";
 
         //create an emailverification for the user
-        sendemailverification($username, $email);
+        sendemailverification($username, $email, "emailverificatie");
 
         // Inform the user that their registration was successfull. Then redirect them after
         echo "<div class='alert alert-success' role='alert'>";
         echo "Je account is geregistreerd! Je wordt doorgestuurd naar de homepagina.";
         echo "</div>";
-        header("Refresh:3; url=../index.php");
+        header("Refresh:10; url=login.php");
         return;
     }
            // Inform user

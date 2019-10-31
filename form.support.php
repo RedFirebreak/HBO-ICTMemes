@@ -23,6 +23,7 @@
       <td><p>Waarom wilt u contact opnemen: </p></td>
       <td><select name="onderwerp">
           <option value="login">Log-in problemen</option>
+          <option value="login">Gebanned Account</option>
           <option value="upload">Upload problemen</option>
           <option value="vraag">Vragen</option>
           <option value="overig">Overig</option>

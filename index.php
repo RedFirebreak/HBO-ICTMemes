@@ -12,7 +12,27 @@
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-3">HBO-ICTMemes</h1>
-        <p>Welkom op HBO-ICTMemes.nl <?php echo $LoggedinUsername ?></p>
+        <p>Welkom op HBO-ICTMemes.nl
+        <?php 
+        echo "<br>";
+        // Boolean / true or false (if loggedin, do this)"
+        $Loggedin;
+
+        //Userinfo
+        echo "UserID: " .$LoggedinID . "<br>";
+        echo "Usermail: " .$LoggedinUsermail . "<br>";
+        echo "Username: " .$LoggedinUsername . "<br>";
+        echo "Userrole: " .$LoggedinUserrole . "<br>";
+        echo "Is verified: " .$LoggedinVerified . "<br>";
+        echo "Is banned: " .$LoggedinGebanned . "<br>";
+
+        if ($Loggedin) {
+          echo "Er is iemand ingelogd!";
+      } else {
+          echo "Er is niemand ingelogd";
+      }
+
+        ?></p>
 
       </div>
     </div>

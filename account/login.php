@@ -32,7 +32,16 @@
         <div class="row">
             <div class="col-md-6">
             <h2>Voer hier je login-gegevens in</h2><br>
-              <?php 
+            
+              <?php
+
+              // Als er een verification wordt aangevraagd, wordt die verzonden op deze manier
+              if (isset($_GET['sendverification'])){
+                $username = mysqli_real_escape_string($dbConnection, $_GET['username']);
+                $email = mysqli_real_escape_string($dbConnection, $_GET['email']);
+
+                sendemailverification($username, $email, "emailverificatie");
+              }
               require('func.login.php'); 
               ?>
               <?php require('form.login.php'); ?>

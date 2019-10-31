@@ -20,23 +20,8 @@
         - default (if something is filled in which is not supported)
         */
     function Customlog ($docname, $type, $error) {
-
-      //Check if the function is called from the existing directories
-      $Searchin = getcwd();
-      $subdirectoryaccount = "account";
-      $subdirectoryadmin = "admin";
-      $subdirectorymeme = "meme";
-      $subdirectorysrc = "src";
-      $subdirectoryupload = "upload";
-      $subdirectoryverify = "verify";
-      
-      $logcation = "src/logs/";
-      if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/logs/";}
-      if( strpos( $Searchin, $subdirectoryadmin ) !== false) {$logcation = "../src/logs/";}
-      if( strpos( $Searchin, $subdirectorymeme ) !== false) {$logcation = "../src/logs/";}
-      if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/logs/";}
-      if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/logs/";}
-      if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/logs/";}
+      $logcation  = checkpathtosrc();
+      $logcation  .= "logs/";
 
       //cause functions are "local". Import db connection and open it:
         //Check database connection:
@@ -183,9 +168,29 @@
     }
     return $result;
 }
+  function checkpathtosrc () {
+      //Check if the function is called from the existing directories
+      $Searchin = getcwd();
+      $subdirectoryaccount = "account";
+      $subdirectoryadmin = "admin";
+      $subdirectorymeme = "meme";
+      $subdirectorysrc = "src";
+      $subdirectoryupload = "upload";
+      $subdirectoryverify = "verify";
+      
+      $logcation = "src/";
+      if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/";}
+      if( strpos( $Searchin, $subdirectoryadmin ) !== false) {$logcation = "../src/";}
+      if( strpos( $Searchin, $subdirectorymeme ) !== false) {$logcation = "../src/";}
+      if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/";}
+      if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/";}
+      if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/";}
 
-  function sendemailverification($username, $email) {
-    Customlog("SendEmail", "log", "sendemailverification has been called. ($username - With $email)");
+      return $logcation;
+  }
+
+  function sendemailverification($username, $email, $soort) {
+    Customlog("SendEmail", "log", "sendemailverification($soort) has been called. ($username - With $email)");
     //cause functions are "local". Import db connection and open it:
       //Check database connection:
         $dbConnection = databaseConnect();
@@ -193,6 +198,7 @@
     // Clean the input (can never be too sure)
     $safeusername = mysqli_real_escape_string($dbConnection, $username);
     $safeemail = mysqli_real_escape_string($dbConnection, $email);
+    $safesoort = mysqli_real_escape_string($dbConnection, $soort);
 
     //setup query
     $query = "SELECT `USER-ID` FROM user WHERE username='$safeusername' AND usermail='$safeemail'";
@@ -216,16 +222,81 @@
       return;
     }
 
-    // Create a random string
+    // Create a random string of 8 numbers
     $verificationcode = randomNumber(8);
 
-    // Prepare the emailverification-code
-    $query = "INSERT IGNORE INTO emailverificatie (`user-ID`, verificatiecode) 
-              VALUES('$userid', '$verificationcode')";
-    mysqli_query($dbConnection, $query);
+    // Check if the value is allowed
+    if ($safesoort = "emailverificatie") {
+      $safesoort = "emailverificatie";
+    } elseif ($safesoort = "wachtwoordreset") {
+      $safesoort = "wachtwoordreset";
+    } else {
+      // Inform user that something went wrong
+            echo "<div class='alert alert-danger' role='alert'>";
+            echo "De email-verificatie aanvraag kon niet verwerkt worden. De administrators zijn op de hoogte van dit probleem.";
+            echo "</div>";
+          //Log the attempt, this is a critical event since no email-verification has been sent and the account will be useless.
+          Customlog("SendEmail", "error", "sendemailverification heeft een verkeerde soort gekregen ($soort)!! ($username - With $email)");
+          return;
+    }
+    // Save the emailverification-code
+      // Prepare the emailverification-code
+      $query = "INSERT IGNORE INTO emailverificatie (`user-ID`, verificatiecode) 
+      VALUES('$userid', '$verificationcode')";
+      mysqli_query($dbConnection, $query);
+      
+    // Prepare the rest for the email, Make link
+      // Als dit een emailverificatie is
+      if ($safesoort = "emailverificatie") {
+        $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
+        $checkpath = checkpathtosrc();
+        
+        // Import the mail-template
+          require("{$checkpath}templates/ConfirmEmailTemplate.php");
 
-    databaseDisconnect($dbConnection); // disconnect from database
+        // Set the subject
+          $subject = "HBO-ICTMemes - Email verificatie";
+        }
+      // Als dit een emailverificatie is
+      if ($safesoort = "wachtwoordreset") {
+        $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
+        $checkpath = checkpathtosrc();
+        
+        // Import the mail-template
+          require("{$checkpath}templates/PasswordResetTemplate.php");
+        // Set the subject
+          $subject = "HBO-ICTMemes - Wachtwoord Reset";
+        }
+        if ($safesoort = "wachtwoordreset") {
+          $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
+      }
+
+    // Prepare header
+      $headers = "From: system@hbo-ictmemes.nl \r\n";
+      $headers .= "Reply-To: system@hbo-ictmemes.nl \r\n";
+      $headers .= "MIME-Version: 1.0\r\n";
+      $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+
+      if (isset($mail)) {
+        // Send mail
+          echo mail($safeemail, $subject, $mail, $headers);
+          echo "<div class='alert alert-warning' role='alert'>";
+          echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
+          echo "</div>";
+          // We done!
+          databaseDisconnect($dbConnection); // disconnect from database
+          return;
+      } else {
+        echo "<div class='alert alert-danger' role='alert'>";
+        echo "De email-verificatie aanvraag kon niet verwerkt worden. De administrators zijn op de hoogte van dit probleem.";
+        echo "</div>";
+      }
+      // If something fails, catch it. Log it and close the function. The mail should be sent by now!
+      //Log the attempt, this is a critical event since no email-verification has been sent and the account will be useless.
+        Customlog("SendEmail", "error", "sendemailverification heeft de mail-template niet kunnen versturen ($soort)!! ($username - With $email)");
+      //
+      databaseDisconnect($dbConnection); // disconnect from database
     return;
-  }
+    }
   
 ?>
