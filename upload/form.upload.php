@@ -29,7 +29,7 @@
 			//tags ophalen
 			//query opstellen
 			$query = "select tagnaam from tags order by 1";
-			$result = mysqli_query($dbConnection, $query);
+			$result = $dbConnection->query($query);
 			/*<select name="tags">
 			{
 				echo "<option value={$record['tagnaam']}>{$record['tagnaam']}</option>";
