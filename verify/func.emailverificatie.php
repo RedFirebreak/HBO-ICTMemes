@@ -59,11 +59,12 @@
             $results3 = mysqli_query($dbConnection, $query3);
 
             // Kijk of de record is aangepast voor de user
-            $query2 = "SELECT `geverifieerd` FROM `emailverificatie` WHERE `user-ID` ='$userID' AND geverifieerd='1' AND `soort` = 'emailverificatie' ORDER BY rowdatum DESC LIMIT 1;";
-            $results2 = mysqli_query($dbConnection, $query2);
-            $row2 = mysqli_fetch_assoc($results2);
+            $query4 = "SELECT `geverifieerd` FROM `emailverificatie` WHERE `user-ID` ='$userID' AND geverifieerd='1' AND `soort` = 'emailverificatie' ORDER BY rowdatum DESC LIMIT 1;";
+            $results4 = mysqli_query($dbConnection, $query4);
+            $row4 = mysqli_fetch_assoc($results4);
 
-            $geverifieerd = $row2['geverifieerd'];
+            $geverifieerd = $row4['geverifieerd'];
+            
 
             if ($geverifieerd) {
                 echo "<div class='alert alert-success' role='alert'>";
