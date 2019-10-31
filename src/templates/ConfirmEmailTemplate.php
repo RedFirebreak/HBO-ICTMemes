@@ -48,13 +48,13 @@ $mail .="<h1 style='font-family:&quot;Helvetica Neue&quot;, Helvetica, Arial, &q
 $mail .="Verifiëer je email-adres</h1>";
 
 $mail .="<p style='font-weight:normal;padding:0;font-family:&quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;line-height:1.7;margin-bottom:1.3em;font-size:15px;color:#47505E'>";
-$mail .="Klik op de knop om je email te veriviëren.</p>";
+$mail .="Klik op de knop om je email te verifiëren.</p>";
 $mail .="<center><a href='$sitename' class='confirmation-url btn-primary' style='color:#1EA69A;word-wrap:break-word;font-family:&quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;text-decoration:none;background-color:#FF7F45;border:solid #FF7F45;line-height:2;max-width:100%;font-size:14px;padding:8px 40px 8px 40px;margin-top:30px;margin-bottom:30px;font-weight:bold;cursor:pointer;display:inline-block;border-radius:30px;margin-left:auto;margin-right:auto;text-align:center;color:#FFF !important'>";
 $mail .="Confirm Email</a></center>";
 
 $mail .="<p style='font-weight:normal;padding:0;font-family:&quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;line-height:1.7;margin-bottom:1.3em;font-size:15px;color:#47505E'>";
 $mail .="Deze mail niet gestuurd? Dan kan u deze mail als niet verzonden beschouwen.<br>";
-$mail .="Werkt de link niet? Kopieer de volgende link in uw browser: <a href='$sitename'>$sitename</a></p>";
+$mail .="Werkt de link niet? Kopieer de volgende link in uw browser:<br> <a href='$sitename'>$sitename</a></p>";
 $mail .="<p style='font-weight:normal;padding:0;font-family:&quot;Helvetica Neue&quot;, &quot;Helvetica&quot;, Helvetica, Arial, sans-serif;line-height:1.7;margin-bottom:1.3em;font-size:15px;color:#47505E'>";
 $mail .="Met vriendelijke groet,<br>";
 $mail .="Het HBO-ICTMemes team.</p>";
