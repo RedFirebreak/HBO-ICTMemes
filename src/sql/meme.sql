@@ -33,7 +33,6 @@ CREATE TABLE if not exists`meme` (
   `meme-titel` varchar(30) COLLATE utf8_general_ci NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
-  `tag-ID` int(10) unsigned NOT NULL,
   `locatie` varchar(200) COLLATE utf8_general_ci NOT NULL,
   `school` varchar(50) COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -53,7 +52,6 @@ ALTER TABLE `meme`
   ADD KEY if not exists`meme-titel_2` (`meme-titel`),
   ADD KEY if not exists`meme-titel_3` (`meme-titel`),
   ADD KEY if not exists`user-ID` (`user-ID`),
-  ADD KEY if not exists`tag-ID` (`tag-ID`),
   ADD KEY if not exists`school` (`school`);
 
 --
@@ -71,16 +69,16 @@ ALTER TABLE `meme`
 --
 
 INSERT INTO `meme` (`meme-titel`, `user-ID`, `datum`, `tag-ID`, `locatie`, `school`) VALUES
-('Memey-boi1', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
-('Memey-boi2', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
-('Memey-boi3', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool2'),
-('Memey-boi4', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool2'),
-('Memey-boi5', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3'),
-('Memey-boi6', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3'),
-('Memey-boi7', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool4'),
-('Memey-boi8', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool4'),
-('Memey-boi9', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool1'),
-('Memey-boi10', 5, '2019-10-24', '3', '/memestorage/oktober/', 'voorbeeldschool3');
+('Memey-boi1', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+('Memey-boi2', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+('Memey-boi3', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
+('Memey-boi4', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
+('Memey-boi5', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
+('Memey-boi6', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
+('Memey-boi7', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
+('Memey-boi8', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
+('Memey-boi9', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+('Memey-boi10', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3');
 
 
 --
