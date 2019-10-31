@@ -36,7 +36,7 @@
               <?php
 
               // Als er een verification wordt aangevraagd, wordt die verzonden op deze manier
-              if ($_GET['sendverification']){
+              if (isset($_GET['sendverification'])){
                 $username = mysqli_real_escape_string($dbConnection, $_GET['username']);
                 $email = mysqli_real_escape_string($dbConnection, $_GET['email']);
 

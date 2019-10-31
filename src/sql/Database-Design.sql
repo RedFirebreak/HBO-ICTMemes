@@ -63,6 +63,7 @@ CREATE TABLE `emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `rowdatum` timestamp NOT NULL DEFAULT current_timestamp(),
+  `soort` varchar(50) NOT NULL ,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

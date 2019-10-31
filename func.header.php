@@ -14,6 +14,10 @@
 
       session_start(); 
 
+      if (!isset($_SESSION['loggedin'])) {
+        $_SESSION['loggedin'] = false;
+      }
+
 
       if ($_SESSION['loggedin'] == true) {
         //Set variables
@@ -26,6 +30,7 @@
         $LoggedinGebanned = $_SESSION['banned'];
       } else {
         $_SESSION['notice'] = "You are not logged in";
+        $Loggedin = false;
         $LoggedinID = "";
         $LoggedinUsermail = "";
         $LoggedinUsername = "";
