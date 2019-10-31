@@ -248,7 +248,7 @@
     // Prepare the rest for the email, Make link
       // Als dit een emailverificatie is
       $subject = "";
-      if ($safesoort = "emailverificatie") {
+      if ($safesoort == "emailverificatie") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
         // Import the mail-template
@@ -257,7 +257,7 @@
           $subject = "HBO-ICTMemes - Email verificatie";
         }
       // Als dit een emailverificatie is
-      if ($safesoort = "wachtwoordreset") {
+      if ($safesoort == "wachtwoordreset") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
         // Import the mail-template
@@ -274,7 +274,7 @@
 
       if (isset($mail)) {
         // Send mail
-          echo mail($safeemail, $subject, $mail, $headers);
+          mail($safeemail, $subject, $mail, $headers);
           echo "<div class='alert alert-warning' role='alert'>";
           echo "Nieuwe email-verificatie verzonden! Volg de instructies op in de mail. Deze is 24 uur geldig.";
           echo "</div>";

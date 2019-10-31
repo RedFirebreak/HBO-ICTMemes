@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2019 at 06:42 PM
+-- Generation Time: Oct 31, 2019 at 01:00 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -86,7 +86,7 @@ CREATE TABLE `emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `rowdatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `soort` varchar(50) NOT NULL ,
+  `soort` varchar(50) NOT NULL,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -150,7 +150,6 @@ CREATE TABLE `meme` (
   `meme-titel` varchar(30) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
-  `tag-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) NOT NULL,
   `school` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -159,17 +158,17 @@ CREATE TABLE `meme` (
 -- Dumping data for table `meme`
 --
 
-INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `tag-ID`, `locatie`, `school`) VALUES
-(1, 'Memey-boi1', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
-(2, 'Memey-boi2', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
-(3, 'Memey-boi3', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool2'),
-(4, 'Memey-boi4', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool2'),
-(5, 'Memey-boi5', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3'),
-(6, 'Memey-boi6', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3'),
-(7, 'Memey-boi7', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool4'),
-(8, 'Memey-boi8', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool4'),
-(9, 'Memey-boi9', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool1'),
-(10, 'Memey-boi10', 5, '2019-10-24', 3, '/memestorage/oktober/', 'voorbeeldschool3');
+INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `locatie`, `school`) VALUES
+(1, 'Memey-boi1', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+(2, 'Memey-boi2', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+(3, 'Memey-boi3', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
+(4, 'Memey-boi4', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
+(5, 'Memey-boi5', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
+(6, 'Memey-boi6', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
+(7, 'Memey-boi7', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
+(8, 'Memey-boi8', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
+(9, 'Memey-boi9', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
+(10, 'Memey-boi10', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3');
 
 -- --------------------------------------------------------
 
@@ -186,6 +185,18 @@ CREATE TABLE `meme-report` (
   `overtreding` varchar(20) NOT NULL,
   `beschrijving` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `memetag`
+--
+
+CREATE TABLE `memetag` (
+  `memetag-ID` int(10) UNSIGNED NOT NULL,
+  `tag-ID` int(10) UNSIGNED NOT NULL,
+  `meme-ID` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -420,7 +431,6 @@ ALTER TABLE `meme`
   ADD KEY `meme-titel_2` (`meme-titel`),
   ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
-  ADD KEY `tag-ID` (`tag-ID`),
   ADD KEY `school` (`school`);
 
 --
@@ -432,6 +442,14 @@ ALTER TABLE `meme-report`
   ADD KEY `snitch-ID` (`snitch-ID`),
   ADD KEY `boef-ID` (`boef-ID`),
   ADD KEY `overtreding` (`overtreding`);
+
+--
+-- Indexes for table `memetag`
+--
+ALTER TABLE `memetag`
+  ADD PRIMARY KEY (`memetag-ID`),
+  ADD KEY `meme-ID` (`meme-ID`),
+  ADD KEY `memetag_ibfk_2` (`tag-ID`);
 
 --
 -- Indexes for table `overtredingen`
@@ -528,6 +546,12 @@ ALTER TABLE `meme-report`
   MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `memetag`
+--
+ALTER TABLE `memetag`
+  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `support`
 --
 ALTER TABLE `support`
@@ -583,8 +607,7 @@ ALTER TABLE `emailverificatie`
 -- Constraints for table `meme`
 --
 ALTER TABLE `meme`
-  ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
 
 --
 -- Constraints for table `meme-report`
@@ -594,6 +617,13 @@ ALTER TABLE `meme-report`
   ADD CONSTRAINT `meme-report_ibfk_2` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `meme-report_ibfk_3` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `meme-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
+
+--
+-- Constraints for table `memetag`
+--
+ALTER TABLE `memetag`
+  ADD CONSTRAINT `memetag_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `memetag_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `private-info`
