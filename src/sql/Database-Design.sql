@@ -94,7 +94,7 @@ CREATE TABLE `meme` (
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
   `locatie` varchar(200) NOT NULL,
-  `school` varchar(50) NOT NULL
+  `school` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
