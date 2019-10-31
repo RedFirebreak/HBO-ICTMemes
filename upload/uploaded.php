@@ -23,8 +23,21 @@
 	
 	<?php
 		if (isset($_POST['meme'])) {
+			//data schoonmaken
 			$safememe = mysql_real_escape_string($dbconnection, $_POST['meme']);
-			$safename = mysql_real_escape_string($dbconnection, $_POST['name'])
+			$safename = mysql_real_escape_string($dbconnection, $_POST['name']);
+			
+			//query maken
+			$sql = "INSERT INTO 'meme' ('meme-titel', 'user-ID', 'tag-ID', 'locatie', 'school')
+			Values ('$safename', '', '', '', '');"
+			$result = $dbConnection->query($sql);
+			
+			//check query
+			if (!$result) {
+				//errorlog
+				
+				
+			}
 		}
 	?>
 	
