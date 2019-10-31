@@ -8,6 +8,7 @@
         Author:     Stef
         Date:       11-10-2019
     */
+    var_dump($_GET)
 ?>
 
 <!--
@@ -20,7 +21,6 @@
     
     4. Komt de informatie overeen, verander het wachtwoord van de user met een tweede query
     5. Informeer de user 
-
     -->
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
