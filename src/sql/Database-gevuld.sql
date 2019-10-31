@@ -502,8 +502,7 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`user-ID`),
   ADD KEY `usermail` (`usermail`),
   ADD KEY `userrole` (`userrole`),
-  ADD KEY `schoolnaam` (`schoolnaam`),
-  ADD KEY `user_ibfk_2` (`is_verified`);
+  ADD KEY `schoolnaam` (`schoolnaam`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -600,7 +599,6 @@ ALTER TABLE `comments`
 --
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `emailverificatie_ibfk_4` FOREIGN KEY (`geverifieerd`) REFERENCES `user` (`is_verified`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `emailverificatie_ibfk_5` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
