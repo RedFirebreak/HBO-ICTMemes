@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 30, 2019 at 06:46 PM
+-- Generation Time: Oct 31, 2019 at 12:43 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -63,7 +63,7 @@ CREATE TABLE `emailverificatie` (
   `user-ID` int(10) UNSIGNED NOT NULL,
   `verificatiecode` int(10) UNSIGNED NOT NULL,
   `rowdatum` timestamp NOT NULL DEFAULT current_timestamp(),
-  `soort` varchar(50) NOT NULL ,
+  `soort` varchar(50) NOT NULL,
   `geverifieerd` tinyint(1) NOT NULL DEFAULT 0,
   `geverifieerd_door` int(10) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -93,7 +93,6 @@ CREATE TABLE `meme` (
   `meme-titel` varchar(30) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` date NOT NULL,
-  `tag-ID` int(10) UNSIGNED NOT NULL,
   `locatie` varchar(200) NOT NULL,
   `school` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -113,6 +112,18 @@ CREATE TABLE `meme-report` (
   `overtreding` varchar(20) NOT NULL,
   `beschrijving` varchar(300) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `memetag`
+--
+
+CREATE TABLE `memetag` (
+  `memetag-ID` int(10) UNSIGNED NOT NULL,
+  `tag-ID` int(10) UNSIGNED NOT NULL,
+  `meme-ID` int(10) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -267,7 +278,6 @@ ALTER TABLE `meme`
   ADD KEY `meme-titel_2` (`meme-titel`),
   ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
-  ADD KEY `tag-ID` (`tag-ID`),
   ADD KEY `school` (`school`);
 
 --
@@ -279,6 +289,14 @@ ALTER TABLE `meme-report`
   ADD KEY `snitch-ID` (`snitch-ID`),
   ADD KEY `boef-ID` (`boef-ID`),
   ADD KEY `overtreding` (`overtreding`);
+
+--
+-- Indexes for table `memetag`
+--
+ALTER TABLE `memetag`
+  ADD PRIMARY KEY (`memetag-ID`),
+  ADD KEY `memetag_ibfk_1` (`meme-ID`),
+  ADD KEY `memetag_ibfk_2` (`tag-ID`);
 
 --
 -- Indexes for table `overtredingen`
@@ -375,6 +393,12 @@ ALTER TABLE `meme-report`
   MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `memetag`
+--
+ALTER TABLE `memetag`
+  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `support`
 --
 ALTER TABLE `support`
@@ -430,8 +454,7 @@ ALTER TABLE `emailverificatie`
 -- Constraints for table `meme`
 --
 ALTER TABLE `meme`
-  ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`),
-  ADD CONSTRAINT `meme_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
 
 --
 -- Constraints for table `meme-report`
@@ -441,6 +464,13 @@ ALTER TABLE `meme-report`
   ADD CONSTRAINT `meme-report_ibfk_2` FOREIGN KEY (`snitch-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `meme-report_ibfk_3` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `meme-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
+
+--
+-- Constraints for table `memetag`
+--
+ALTER TABLE `memetag`
+  ADD CONSTRAINT `memetag_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `memetag_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `private-info`
