@@ -241,15 +241,17 @@
     }
     // Save the emailverification-code
       // Prepare the emailverification-code
-      $query = "INSERT IGNORE INTO emailverificatie (`user-ID`, verificatiecode) 
-      VALUES('$userid', '$verificationcode')";
+
+      // sla de verificatie op
+      $query = "INSERT INTO emailverificatie (`user-ID`, verificatiecode, soort ) 
+      VALUES('$userid', '$verificationcode', '$safesoort')";
       mysqli_query($dbConnection, $query);
       
     // Prepare the rest for the email, Make link
       // Als dit een emailverificatie is
       $subject = "";
       if ($safesoort == "emailverificatie") {
-        $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
+        $sitename = "https://www.hbo-ictmemes.nl/verify/?emailverificatie=true&username=$safeusername&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
         // Import the mail-template
           require("{$checkpath}templates/ConfirmEmailTemplate.php");
@@ -258,7 +260,7 @@
         }
       // Als dit een emailverificatie is
       if ($safesoort == "wachtwoordreset") {
-        $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&email=$safeusername;&mail=$safeemail&code=$verificationcode";
+        $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&username=$safeusername&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
         // Import the mail-template
           require("{$checkpath}templates/PasswordResetTemplate.php");
