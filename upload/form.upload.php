@@ -20,9 +20,9 @@
 		
 		<form action="/hbo-ictmemes/upload/uploaded.php" method="post" enctype="multipart/form-data">
 		<p>Insert your meme here:</p>
-		<input type="file" name="meme" id="meme">
+		<input type="file" name="meme" id="meme" value="choose a file" required>
 		<p>Insert the name of your meme:</p>
-		<input type="text" name="name">
+		<input type="text" name="name" required>
 		<p>Select the tags for your meme:</p>
 		
 		<?php
@@ -44,11 +44,7 @@
 		</select><br><br>
 		<input type="submit" name="submit" value="submit">
 		</form>
-		<?php
-		/*handige manier om tags te selecteren is nog nodig
-		ook belangrijk: niet vergeten te registreren van welke school de user komt
-		*/
-		?>
+		
 	</body>
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
