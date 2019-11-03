@@ -37,6 +37,7 @@ header {
   width: 100%;
   top: 0;
   left: 0;
+  transition: top 0.8s !important;
   background-color: #33414a;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -50,7 +51,6 @@ header {
   backface-visibility: hidden;
   -webkit-transition: -webkit-transform 0.3s;
   -moz-transition: -moz-transform 0.3s;
-  transition: transform 0.3s;
 }
 header.nav-is-visible {
   -webkit-transform: translateX(-260px);

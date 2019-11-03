@@ -22,8 +22,22 @@
             <p>Vul het formulier hiernaast in en wij nemen zo spoedig mogelijk contact met u op.</p>
           </div>
             <div class="col-md-6">
-              <?php
+              <?php               
                 if(isset($_POST['naam'])) {
+                  // First check if recaptcha was valid
+                  if(isset($_POST['g-recaptcha-response'])){
+                    $captcha=$_POST['g-recaptcha-response'];
+                    $recaptcha = recaptchaverwerk($captcha);
+                  }
+                    if (!$recaptcha){
+                      echo "<div class='alert alert-danger' role='alert'>";
+                      echo "Recaptcha is niet ingevuld, niet correct of is verlopen. Probeer het nog eens.";
+                      echo "</div>";
+                      require "form.support.php";
+                      return;
+                    }
+                //captcha check done!
+
                   //naam is set, so the form is filled. Lets go!
                   //setting variables
                   $supportnaam = $_POST['naam'];

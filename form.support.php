@@ -33,6 +33,11 @@
       <td><p>Graag een korte beschrijving: * </p></td>
       <td><textarea name="beschrijving" rows="4" cols="50" maxlength="500" required> </textarea></td>
     </tr>
+
+    <tr>
+      <td><?php echo recaptchaform ();?></td>
+    </tr>
+    
     <tr>
       <td><p><input class="btn btn-primary" type="submit" value="Submit"></p></td>
     </tr>

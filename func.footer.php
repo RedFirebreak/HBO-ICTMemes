@@ -2,6 +2,7 @@
         <div class="container">
             <hr>  
             <p>&copy; HBO-ICTMemes</p>
+            
         </div>
     </footer>
 </main>  <!-- end ALL content here. Please make sure to not add anything after this -->

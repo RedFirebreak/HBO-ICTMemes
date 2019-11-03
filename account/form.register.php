@@ -49,7 +49,7 @@
   	  <p>Confirm password<br>
   	  <input type="password" name="password_2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></p>
 
-
+      <?php echo recaptchaform ();?>
   	  <button type="submit" class="btn btn-primary" name="reg_user">Register</button>
 
   	<p>

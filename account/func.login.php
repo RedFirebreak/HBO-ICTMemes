@@ -1,4 +1,20 @@
   <?php
+  // First check if recaptcha was valid
+  if(isset($_POST['g-recaptcha-response'])){
+    $captcha=$_POST['g-recaptcha-response'];
+    $recaptcha = recaptchaverwerk($captcha);
+  } else {
+    // Well, captcha wasn't entered so the form wasn't touched. Stop the rest!
+    return;
+  }
+    if (!$recaptcha){
+      echo "<div class='alert alert-danger' role='alert'>";
+      echo "Recaptcha is niet ingevuld, niet correct of is verlopen. Probeer het nog eens.";
+      echo "</div>";
+      return;
+    }
+//captcha check done!
+
     if (isset($_POST['username'])) {
       $username = mysqli_real_escape_string($dbConnection, $_POST['username']);
       $password = mysqli_real_escape_string($dbConnection, $_POST['password']);

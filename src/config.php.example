@@ -17,5 +17,8 @@
 
       // Log location
       $config['logs'] = "/logs";
+
+      // The key from google for recaptcha
+      $config['recaptchakey'] = "SEE GROUP DISCORD FOR OUR TEST-KEY";
 ?>
 

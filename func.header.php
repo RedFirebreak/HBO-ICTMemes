@@ -63,6 +63,9 @@
       <!-- Bootstrap core CSS -->
       <link href="/src/css/bootstrap.min.css" rel="stylesheet">
 
+      <!-- Recaptcha -->
+      <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+      
       <!-- Custom styles for this template -->
       <link href="/src/css/jumbotron.css" rel="stylesheet">
 
@@ -73,11 +76,8 @@
 	<link rel="stylesheet" href="/src/css/menu.css"> <!-- Resource style -->
 	<script src="/src/js/modernizr.js"></script> <!-- Modernizr -->
 
-	<header>
+	<header id="navbar">
 		<div class="cd-logo"><a href="/"><img src="/src/img/cd-logo.svg" alt="Logo"></a></div>
-
-
-
           <?php
           if ($Loggedin) {
             // Show the menu for logged in people
@@ -127,6 +127,18 @@
           ?>
 
 	</header>
+  <script>
+    var prevScrollpos = window.pageYOffset;
+    window.onscroll = function() {
+    var currentScrollPos = window.pageYOffset;
+      if (prevScrollpos > currentScrollPos) {
+        document.getElementById("navbar").style.top = "0";
+      } else {
+        document.getElementById("navbar").style.top = "-70px";
+      }
+      prevScrollpos = currentScrollPos;
+    }
+</script>
 	<!-- main content starts here -->
 	<main class="cd-main-content">
 		
