@@ -19,6 +19,17 @@
 
   <body>
 
+  <?php
+  if ($LoggedinUserrole == "admin") {
+    echo "<li><a href='/admin/'>Admin</a></li>";
+  }
+
+  if ($LoggedinUserrole == "uber-admin") {
+     echo "<li><a href='/admin/'>Admin</a></li>";
+  }
+  
+  ?>
+
     <!-- Start coding here! :D -->
     <?php require('func.schooladmin.php'); ?>
     <?php require('func.users.php'); ?>

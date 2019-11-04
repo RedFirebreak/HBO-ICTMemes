@@ -94,6 +94,15 @@
                   echo "<li><a href='/account/'>Account</a></li>";
                   echo "<li><a href='/upload/'>Upload</a></li>";
                   echo "<li><a href='/support.php'>Support</a></li>";
+                  
+                  if ($LoggedinUserrole == "admin") {
+                    echo "<li><a href='/admin/'>Admin</a></li>";
+                  }
+
+                  if ($LoggedinUserrole == "uber-admin") {
+                    echo "<li><a href='/admin/'>Admin</a></li>";
+                  }                  
+                    
                   echo "<li><a style='color: red;' href='?logout=1'>Log-uit</a></li>";
                   echo "<li><a href='#'  class='placeholder'>Placeholder</a></li>";
                 echo "</ul>";
