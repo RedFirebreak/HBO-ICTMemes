@@ -38,6 +38,36 @@
                     }
                 //captcha check done!
 
+                  // Check for empty stuff
+                  if(empty($_POST['naam'])) {
+                    echo "<div class='alert alert-danger' role='alert'>";
+                    echo "Naam is niet ingevuld, probeer het nog eens";
+                    echo "</div>";
+                    require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
+                    return;
+                  }
+                  if(empty($_POST['mail'])) {
+                    echo "<div class='alert alert-danger' role='alert'>";
+                    echo "Mail is niet ingevuld, probeer het nog eens.";
+                    echo "</div>";
+                    require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
+                    return;
+                  }
+                  if(empty($_POST['onderwerp'])) {
+                    echo "<div class='alert alert-danger' role='alert'>";
+                    echo "Onderwerp is niet ingevuld, probeer het nog eens.";
+                    echo "</div>";
+                    require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
+                    return;
+                  }
+                  if(empty($_POST['beschrijving'])) {
+                    echo "<div class='alert alert-danger' role='alert'>";
+                    echo "Beschrijving is niet ingevuld, probeer het nog eens.";
+                    echo "</div>";
+                    require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
+                    return;
+                  }
+
                   //naam is set, so the form is filled. Lets go!
                   //setting variables
                   $supportnaam = $_POST['naam'];
