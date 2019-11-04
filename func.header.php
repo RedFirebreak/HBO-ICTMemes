@@ -116,6 +116,7 @@
               echo "<li class='go-back'><a href='#0'>Menu</a></li>";
               echo "<li><a href='/account/login.php'>Log-in</a></li>";
               echo "<li><a href='/account/register.php'>Registreren</a></li>";
+              echo "<li><a href='/support.php'>Support</a></li>";
               echo "<li><a href='#'  class='placeholder'>Placeholder</a></li>";
             echo "</ul>";
             echo "</li>";
