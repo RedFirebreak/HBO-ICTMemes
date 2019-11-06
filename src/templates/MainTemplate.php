@@ -14,7 +14,7 @@
   <head>
     <!-- Edit the pagename only -->
     <title>HBO-Memes - PAGENAME</title>
-    <?php require('header.php'); ?>
+    <?php require('func.header.php'); ?>
   </head>
 
   <body>
@@ -24,6 +24,6 @@
   </body>
 
   <footer>
-    <?php require('footer.php'); ?>
+    <?php require('func.footer.php'); ?>
   </footer>
 </html>

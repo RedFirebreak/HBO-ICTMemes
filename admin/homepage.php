@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -21,9 +20,8 @@
           exit;
         }
 ?>
-
 <h1 class="page-header">
-            Users
+            School admins
             <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
           </h1>
 
@@ -94,5 +92,3 @@
       </div><!--/row-->
 	</div>
 </div><!--/.container-->
-
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
