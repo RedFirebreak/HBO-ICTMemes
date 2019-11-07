@@ -9,17 +9,6 @@ Primary style
   box-sizing: border-box;
 }
 
-html {
-  font-size: 62.5%;
-}
-
-body {
-  font-size: 1.6rem;
-  font-family: "PT Sans", sans-serif;
-  color: #33414a;
-  background-color: #f2f2f2;
-}
-
 a {
   color: #7e4d7e;
   text-decoration: none;
@@ -479,7 +468,6 @@ header::before {
   z-index: 2;
   min-height: 100vh;
   padding-top: 50px;
-  background-color: #f2f2f2;
   -webkit-transition: -webkit-transform 0.3s;
   -moz-transition: -moz-transform 0.3s;
   transition: transform 0.3s;

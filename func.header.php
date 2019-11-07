@@ -72,6 +72,9 @@
       <!-- Our custom css -->
       <link href="/src/css/stylesheet.css" rel="stylesheet">
 
+      <!-- Fontawesome! -->
+      <script src="https://kit.fontawesome.com/03fd3b0aa1.js" crossorigin="anonymous"></script>
+
       <!-- NewMenu --> 
 	<link rel="stylesheet" href="/src/css/menu.css"> <!-- Resource style -->
 	<script src="/src/js/modernizr.js"></script> <!-- Modernizr -->

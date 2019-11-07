@@ -39,63 +39,99 @@
 
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-9">
+              <!-- Meme- cards -->
+              <div class="row memecards">
+                <!-- Load the meme - part -->
+                <div class="col-md-8 divmemeimage">
+                  <h3><b>So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing.</b></h3>
+                  <hr>
+                  <img src="https://cdn.discordapp.com/attachments/625662396127772672/639604401715019786/aC4HFF4_d.jpg" class="memeimage rounded mx-auto d-block" alt="...">
+                </div>
+                <!-- Load the extra info part -->
+                <div class="col-md-4 divmemeinfo">
+                 <div class="row">
+                    <div class="col-md-4">
+                      <img class="rounded img-thumbnail user-thumbnail" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
+                    </div>
+                    <div class="col-md-8">
+                      <p style="word-wrap:break-word">RedFirebreakRedFirebreakRedFirebreakRedFirebreakkk <br>Joined: 07-11-2019 <br>Admin</p>
+                    </div>
+                      <div class="col-md-12">
+                        <hr>
+                          <p style="margin: 1px 0;"><b>Top Comment:</b></p>
+                          <p class="oneline" style="font-size: 1rem; margin: 1px 0;">u/RedFirebreakRedFirebreakRedFirebreakRedFirebreakkk</p>
+                          <p class="top-comment" style="font-size: 1.4rem;">Look at this autograph, everytime I see it makes me laugh.</p>
+                        <hr>
+                      </div>
+                  </div>
+                  <!-- Voting part -->
+                  <div class="row text-center d-flex align-items-end">
+                    <div class="col-md-6">
+                      <span><i class="fas fa-chevron-up fa-2x"></i></span>
+                    </div>
+                    <div class="col-md-6">
+                      <span><i class="center fas fa-chevron-down fa-2x"></i></span>
+                    </div>
+                   </div>
+                </div>
+              </div>
+              <!-- End meme card -->
 
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut risus est. Praesent tempus, elit at volutpat placerat, eros massa condimentum lectus, vel tempor velit tortor vel nulla. Nam in tincidunt elit. In eu dolor a lectus condimentum faucibus vel in felis. Nunc laoreet massa sollicitudin lacus mollis, vitae egestas ex dignissim. Vestibulum egestas sapien sodales erat feugiat, id vulputate nunc eleifend. Etiam pharetra nibh in erat lacinia, et gravida ante porttitor. Phasellus finibus ac enim id pharetra. Integer vehicula non ligula mollis pharetra. Nunc pretium non tortor nec dapibus.
-          Ut pretium sem ut tortor consectetur, sed efficitur dui aliquam. Maecenas auctor euismod nulla, eu aliquam turpis vestibulum sed. Nam ac tortor urna. In sed nisi ut ex mollis gravida sed sit amet turpis. Vivamus mi libero, fringilla in elit non, commodo interdum nulla. Quisque leo mi, luctus ut diam ut, tincidunt efficitur nunc. Suspendisse et lectus consequat, aliquam ex quis, interdum diam. Aliquam in quam at nisi blandit lacinia vitae a tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-          
-        </div>
+              <!-- Meme- cards -->
+              <div class="row memecards">
+                <!-- Load the meme - part -->
+                <div class="col-md-8 divmemeimage">
+                  <h3><b>So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing.</b></h3>
+                  <hr>
+                  <img src="https://cdn.discordapp.com/attachments/625662396127772672/641698928588488715/15730633406175835870646951465086.jpg" class="memeimage rounded mx-auto d-block" alt="...">
+                </div>
+                <!-- Load the extra info part -->
+                <div class="col-md-4 divmemeinfo">
+                 <div class="row">
+                    <div class="col-md-4">
+                      <img class="rounded img-thumbnail user-thumbnail" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
+                    </div>
+                    <div class="col-md-8">
+                      <p style="word-wrap:break-word">RedFirebreak<br>Joined: 07-12-2019 <br>Admin</p>
+                    </div>
+                      <div class="col-md-12">
+                        <hr>
+                          <p style="margin: 1px 0;"><b>Top Comment:</b></p>
+                          <p class="oneline" style="font-size: 1rem; margin: 1px 0;">u/RedFirebreak</p>
+                          <p class="top-comment" style="font-size: 1.4rem;">Lol, this meme is so fuckin funny.</p>
+                        <hr>
+                      </div>
+                  </div>
+                  <!-- Voting part -->
+                  <div class="row text-center d-flex align-items-end">
+                    <div class="col-md-6">
+                      <span><i class="fas fa-chevron-up fa-2x"></i></span>
+                    </div>
+                    <div class="col-md-6">
+                      <span><i class="center fas fa-chevron-down fa-2x"></i></span>
+                    </div>
+                   </div>
+                </div>
+              </div>
+              <!-- End meme card -->
 
-        <div class="col-md-3">
-          <div class="sticky-top" style="top: 82px;">
-              <h1>Sticky-Info</h1>
-              <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have actually done stuff!</p>
-          </div> 
-        </div>
-
-    </div>
-      <!-- Example row of columns 
-      <div class="row">
-        <div class="col-md-6">
-            <h2>Memes here!</h2>
-            <p>"Insert epic meme image"</p>
-            <br>
-            <br>
-            <br>
-
-
-
-        </div>
-
-        <div class="col-md-2" style="background-color: #d3d3d3;border-radius: 25px;">
-            <h2>Meme info</h2>
-            <p>Info about the meme will be displayed here</p>
-        </div>
-
-        <div class="col-md-3">
-            <h2>Sticky-Info</h2>
-            <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have actually done stuff!</p>
+            </div>
+            <div class="col-md-3">
+              <div class="sticky-top" style="top: 82px;">
+                <h1>Sticky-Info</h1>
+                <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have actually done stuff!</p>
+              </div> 
+            </div>
+          </div>
         </div>
       </div>
-    </div> -->
+    </div>
 
+    <div class="text-center">
+</div>
   <?php
     require "func.footer.php";
   ?>

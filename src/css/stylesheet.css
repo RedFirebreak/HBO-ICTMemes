@@ -21,3 +21,56 @@
      content: "✖";
   }
 /* REGISTER FORM END*/
+
+/* Site css */
+
+html {
+   font-size: 62.5%;
+ }
+ 
+ body {
+   font-size: 1.6rem;
+   font-family: "PT Sans", sans-serif;
+   color: #FFF;
+   background-color: #101417;
+ }
+
+ .memecards {
+   background-color: #455766;
+   border-style: 2px solid #1c2329;
+   border-radius: 25px;
+   padding: 20px;
+   margin-bottom: 3px;
+ }
+
+ .divmemeimage {
+   border-right: 2px solid #1c2329;
+ }
+ .memeimage {
+   width: 100%;
+   min-width : 200px;
+   min-height : 200px;
+   max-height: 500px
+ }
+
+ .user-thumbnail {
+   max-width: 75px;
+   max-height: 75px;
+ }
+ .oneline {
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
+ }
+ .top-comment {
+   display: block; /* or inline-block */
+   text-overflow: ellipsis;
+   word-wrap: break-word;
+   overflow: hidden;
+   max-height: 3.6em;
+   line-height: 1.8em;
+ }
+ .divmemeinfo {
+   background-color: #455766;
+ }
+/* End site css */
