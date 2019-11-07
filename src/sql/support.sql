@@ -33,6 +33,7 @@ CREATE TABLE if not exists`support` (
   `email` varchar(50) COLLATE utf8_bin NOT NULL,
   `naam` varchar(50) COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) COLLATE utf8_bin NOT NULL,
+  `school` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0

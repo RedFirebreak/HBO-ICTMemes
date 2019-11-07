@@ -18,7 +18,7 @@
   </head>
 
   <body>
-    <?php require('form.upload.php'); ?>
+    
     
     <!-- Start coding here! :D -->
     <div class="jumbotron">
@@ -30,12 +30,8 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-                <h2>Stuff n' Things</h2>
-            </div>
-
-            <div class="col-md-6">
-                <h2>More Stuff n' Things</h2>
+            <div class="col-md-12">
+            <?php require('form.upload.php'); ?>
             </div>
         </div>
     </div>

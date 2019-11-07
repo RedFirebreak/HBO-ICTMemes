@@ -182,6 +182,7 @@ CREATE TABLE `support` (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `naam` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `school` varchar(30) COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
@@ -222,7 +223,7 @@ CREATE TABLE `user` (
   `username` varchar(30) NOT NULL,
   `wachtwoord` varchar(200) NOT NULL,
   `vorig_wachtwoord` varchar(200) DEFAULT NULL,
-  `profile_picture` varchar(300) DEFAULT NULL,
+  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
   `schoolnaam` varchar(50) DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,

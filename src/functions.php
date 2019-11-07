@@ -34,12 +34,14 @@
         // Make the error database-safe
         $safeerror = mysqli_real_escape_string($dbConnection, $error);
 
+        // Log the ip of remote user
+        $ip = $_SERVER['REMOTE_ADDR'];
 
       switch ($type) {
           case "log":
           //This means the error is a normal log message. We should be notified, but nothing really "breaking" is going on here.
           //Format it nicely
-            $finalerrormessage = "$checktime | $docname | LOG: $error \n";
+            $finalerrormessage = "$checktime | $ip | $docname | LOG: $error \n";
 
               //Create/Write in file general error file.
                $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
@@ -58,7 +60,7 @@
           case "error":
           //This is an error, we should probably fix this!
           //Format it nicely
-          $finalerrormessage = "$checktime | $docname | ERROR: $error\n";
+          $finalerrormessage = "$checktime | $ip | $docname | ERROR: $error\n";
            
               //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
@@ -77,7 +79,7 @@
           case "critical":
           //This is a CRITICAL error, THIS HAS PRIORITY!
           //Format it nicely
-          $finalerrormessage = "$checktime | $docname | CRITICAL: $safeerror\n";
+          $finalerrormessage = "$checktime | $ip | $docname | CRITICAL: $safeerror\n";
 
             //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
@@ -99,7 +101,7 @@
           default:
           //If you need it to be logged somewhere, but you did not properly specify it. This default should catch it
           //Format it nicely
-          $finalerrormessage = "$checktime | $docname | DEFAULT: $safeerror\n";
+          $finalerrormessage = "$checktime | $ip | $docname | DEFAULT: $safeerror\n";
 
               //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
@@ -307,5 +309,52 @@
       databaseDisconnect($dbConnection); // disconnect from database
     return;
     }
+
+    function recaptchaform () {
+      // Get key from config
+      $config  = checkpathtosrc();
+      $config .= "config.php";
+      require "$config";
+      $key = $config['recaptchakey'];
+
+      $recaptchadiv = "<div class='g-recaptcha' data-sitekey='$key'></div>";
+
+      return $recaptchadiv;
+    }
   
+    function recaptchaverwerk ($captcha) {
+      // Get secret key from config
+      $config  = checkpathtosrc();
+      $config .= "config.php";
+      require "$config";
+
+      $returnarray=array("correct" => 100, "Apple" => 200, "Banana" => 300, "Cherry" => 400);
+
+      //check if captcha was filled
+      if(!$captcha){
+        return false;
+      }
+      $secretKey = $config['recaptchakeysecret'];
+      $ip = $_SERVER['REMOTE_ADDR'];
+      // post request to server
+      $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+      $response = file_get_contents($url);
+      $responseKeys = json_decode($response,true);
+      
+      // should return JSON with success as true
+      if($responseKeys["success"]) {
+              return true;
+      } else {
+              // decode the error
+              $cwd = getcwd();
+              $ip = $_SERVER['REMOTE_ADDR'];
+              $captchaerror = "";
+              foreach($responseKeys["error-codes"] as $result) {
+                $captchaerror .= "$result, ";
+              }
+              Customlog("captcha-{$cwd}", "log", "Someone failed at a captcha - $captchaerror");
+              return false;
+      }
+// the actual checking of the mail
+    }
 ?>

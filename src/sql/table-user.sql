@@ -34,7 +34,7 @@ CREATE TABLE if not exists`user` (
   `username` varchar(30) COLLATE utf8_bin NOT NULL,
   `wachtwoord` varchar(200) COLLATE utf8_bin NOT NULL,
   `vorig_wachtwoord` varchar(200) COLLATE utf8_bin DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT NULL,
+  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
   `schoolnaam` varchar(50) COLLATE utf8_bin DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,

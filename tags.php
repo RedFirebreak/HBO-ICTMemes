@@ -18,13 +18,26 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h2>Stuff n' Things</h2>
+                <p>
+                  <?php
+                    echo "<br>";
+                    $sql = "SELECT tagnaam t FROM tags ORDER by 1;";
+                    $result = $dbConnection->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            echo "Tag: " . $row["t"]. "<br>";
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+                  ?>
+                </p>
             </div>
 
-            <div class="col-md-6">
-                <h2>More Stuff n' Things</h2>
-            </div>
         </div>
     </div>
 
