@@ -29,9 +29,29 @@
           <option value="overig">Overig</option>
         </select></td>
     </tr>
+    <td><p>Selecteer uw school</p></td>
+    <td><select name="school">
+      <option value='geen'>Geen</option>
+      
+        <?php
+            // Query voor alle schoolnamen, en vervolgens ze in een dropdown zetten
+            $sql = "SELECT schoolnaam s FROM school ORDER by 1;";
+            $result = $dbConnection->query($sql);
+
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row["s"]. "'>" . $row["s"] . "</option>";
+                }
+            } else {
+                echo "0 results";
+            }
+            ?>
+        </select><td>
+
     <tr>
       <td><p>Graag een korte beschrijving: * </p></td>
-      <td><textarea name="beschrijving" rows="4" cols="50" maxlength="500" required> </textarea></td>
+      <td><textarea name="beschrijving" rows="4" cols="22" maxlength="500" required> </textarea></td>
     </tr>
 
     <tr>

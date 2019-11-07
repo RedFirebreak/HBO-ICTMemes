@@ -41,7 +41,7 @@
       if (mysqli_num_rows($results) == 1) {
 
         // Get all important info from the user
-        $query = "SELECT `user-id`, `usermail`, `username`, `userrole`, `is_verified`, `gebanned` FROM user WHERE username='$username'";
+        $query = "SELECT `user-id`, `usermail`, `username`, `userrole`, `is_verified`, `gebanned`, `schoolnaam` FROM user WHERE username='$username'";
         $results = mysqli_query($dbConnection, $query);
         $row = mysqli_fetch_assoc($results);
 
@@ -79,6 +79,7 @@
             $_SESSION['userrole'] = $row['userrole'];
             $_SESSION['is_verified'] = $row['is_verified'];
             $_SESSION['banned'] = $row['gebanned'];
+            $_SESSION['schoolnaam'] = $row['schoolnaam'];
 
           //Set variables, this will also be done in the header
             $Loggedin = $_SESSION['loggedin'];
@@ -88,7 +89,20 @@
             $LoggedinUserrole = $_SESSION['userrole'];
             $LoggedinVerified = $_SESSION['is_verified'];
             $LoggedinGebanned = $_SESSION['banned'];
+            $LoggedinSchool = $_SESSION['schoolnaam'];
 
+            //Update laatste login
+            $query = "UPDATE `user` SET `laatste_login`=CURRENT_TIMESTAMP WHERE `user-ID`=$LoggedinID";
+            $results = mysqli_query($dbConnection, $query);
+            if (!$results) {
+              Customlog("login", "error", "Laatste login kon niet worden geupdate voor $username (UserID: $LoggedinID)");
+            }
+            // Zet aantal foute logins op 0
+            $query = "UPDATE `user` SET `aantal_foute_logins`='0' WHERE username='$username'";
+            $results = mysqli_query($dbConnection, $query);
+            if (!$results) {
+              Customlog("login", "error", "aantal_foute_logins kon niet naar 0 worden gezet voor $username (UserID: $LoggedinID)");
+            }
 
           echo "<div class='alert alert-success' role='alert'>";
           echo "Success! Je bent nu ingelogd. Over 3 seconden wordt je doorgestuurd naar de homepagina.";
@@ -105,9 +119,30 @@
         }
       } else {
         $_SESSION['loggedin'] = false;
-        echo "<div class='alert alert-danger' role='alert'>";
-        echo "Username of password combinatie niet correct. Probeer het opnieuw.";
-        echo "</div>";
+
+        //Update laatste login
+          // Check of de username goed was
+          $query = "SELECT count(*) aantal FROM user WHERE username='$username'";
+          $results = mysqli_query($dbConnection, $query);
+          $row = mysqli_fetch_assoc($results);
+          
+          $accountmatch = $row['aantal'];
+          if ($accountmatch == 1) {
+            // als de username goed was, update de "foute pogingen"
+            $query = "SELECT aantal_foute_logins fout FROM user WHERE username='$username'";
+            $results = mysqli_query($dbConnection, $query);
+            $row = mysqli_fetch_assoc($results);
+            $aantalfoutepogingen = $row['fout'];
+            if ($results) {
+              $aantalfoutepogingen++;
+              $query = "UPDATE `user` SET `aantal_foute_logins`='$aantalfoutepogingen' WHERE username='$username'";
+              $results = mysqli_query($dbConnection, $query);
+            }
+          }
+          echo "<div class='alert alert-danger' role='alert'>";
+          echo "Username of password combinatie niet correct. Probeer het opnieuw.";
+          echo "</div>";
+
         return;
       }
     }

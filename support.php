@@ -67,6 +67,13 @@
                     require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
                     return;
                   }
+                  if(empty($_POST['school'])) {
+                    echo "<div class='alert alert-danger' role='alert'>";
+                    echo "School is niet ingevuld, probeer het nog eens.";
+                    echo "</div>";
+                    require "form.support.php"; // Laat de form opnieuw zien voor een tweede poging
+                    return;
+                  }
 
                   //naam is set, so the form is filled. Lets go!
                   //setting variables
@@ -74,15 +81,17 @@
                   $supportemail = $_POST['mail'];
                   $supportonderwerp = $_POST['onderwerp'];
                   $supportbeschrijving = $_POST['beschrijving'];
+                  $supportschool= $_POST['school'];
 
                   //Clean the user input
                   $safesupportnaam = mysqli_real_escape_string($dbConnection, $supportnaam);
                   $safesupportemail = mysqli_real_escape_string($dbConnection, $supportemail);
                   $safesupportonderwerp = mysqli_real_escape_string($dbConnection, $supportonderwerp);
                   $safesupportbeschrijving = mysqli_real_escape_string($dbConnection, $supportbeschrijving);
+                  $safesupportschool = mysqli_real_escape_string($dbConnection, $supportschool);
 
                   //prepare the query
-                  $sql = "INSERT INTO `support`(`email`, `naam`, `onderwerp`, `inhoud`) VALUES ('$safesupportemail','$safesupportnaam','$safesupportonderwerp', '$safesupportbeschrijving')";
+                  $sql = "INSERT INTO `support`(`email`, `naam`, `onderwerp`, `inhoud`, `datum`, `school`) VALUES ('$safesupportemail','$safesupportnaam','$safesupportonderwerp', '$safesupportbeschrijving',CURRENT_TIMESTAMP,'$safesupportschool')";
                   //peform query!
                   $results = mysqli_query($dbConnection, $sql);
                   //$querycheck = $dbConnection->query($sql);

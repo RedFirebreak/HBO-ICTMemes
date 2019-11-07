@@ -12,8 +12,6 @@
       //Set errors in the database and errorfile
       set_error_handler("CustomErrorHandling");
 
-      session_start(); 
-
       if (!isset($_SESSION['loggedin'])) {
         $_SESSION['loggedin'] = false;
       }
