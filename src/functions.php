@@ -21,7 +21,7 @@
         */
     function Customlog ($docname, $type, $error) {
       $logcation  = checkpathtosrc();
-      $logcation  .= "logs/";
+      $logcation  .= "logs";
 
       //cause functions are "local". Import db connection and open it:
         //Check database connection:
@@ -174,7 +174,7 @@
       //Check if the function is called from the existing directories
       $Searchin = getcwd();
 
-      if( strpos( $Searchin, 'hboictmemes' ) !== false) {
+      if( strpos( $Searchin, 'hbo-ictmemes.nl' ) !== false) {
         $subdirectoryaccount = "/account";
         $subdirectoryadmin = "/admin";
         $subdirectorymeme = "/meme";
