@@ -18,11 +18,11 @@
 	
 	<body>
 		
-		<form action="/hbo-ictmemes/upload/uploaded.php" method="post" enctype="multipart/form-data">
+		<form action="/upload/" method="post" enctype="multipart/form-data">
 		<p>Insert your meme here:</p>
-		<input type="file" name="meme" id="meme" value="choose a file" required>
+		<input type="file" name="meme" id="meme" value="choose a file" >
 		<p>Insert the name of your meme:</p>
-		<input type="text" name="name" required>
+		<input type="text" name="name" id="name">
 		<p>Select the tags for your meme:</p>
 		
 		<?php
@@ -30,10 +30,6 @@
 				//query opstellen
 				$query = "select tagnaam from tags order by 1";
 				$result = $dbConnection->query($query);
-				/*<select name="tags">
-				{
-					echo "<option value={$record['tagnaam']}>{$record['tagnaam']}</option>";
-				}*/
 				while ($record = mysqli_fetch_assoc($result))
 				{
 					echo "<input type=checkbox name=tags[] value={$record['tagnaam']}> {$record['tagnaam']} <br>";
@@ -42,6 +38,7 @@
 		?>
 			
 		</select><br><br>
+		<?php echo recaptchaform ();?>
 		<input type="submit" name="submit" value="submit">
 		</form>
 		

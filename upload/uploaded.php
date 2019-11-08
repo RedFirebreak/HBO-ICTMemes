@@ -9,26 +9,30 @@
         Date:       11-10-2019
     */
 ?>
-
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - PAGENAME</title>
-    <?php require('../func.header.php'); ?>
-  </head>
-
-  <body>
-
     <!-- Start coding here! :D -->
-	<?php require('form.upload.php'); ?>
 	
 	<?php
 		echo "<br>";
+		// First check if recaptcha was valid
+		  if(isset($_POST['g-recaptcha-response'])){
+			$captcha=$_POST['g-recaptcha-response'];
+			$recaptcha = recaptchaverwerk($captcha);
+		  } else {
+			// Well, captcha wasn't entered so the form wasn't touched. Stop the rest!
+			return;
+		  }
+			if (!$recaptcha){
+			  echo "<div class='alert alert-danger' role='alert'>";
+			  echo "Recaptcha is niet ingevuld, niet correct of is verlopen. Probeer het nog eens.";
+			  echo "</div>";
+			  return;
+			}
+		//captcha check done!
 		//check of alle data er is
-		if (isset($_FILES['meme']) && isset($_POST['name']) && isset($_POST['tags'])) {
+		if (!empty($_FILES['meme']) && isset($_FILES['meme']) && !empty($_POST['name'])&& isset($_POST['name']) && isset($_POST['tags'])) {
 			
 			//data schoonmaken
-				//$safememe = mysqli_real_escape_string($dbConnection, $_FILES['meme']);
+				$safememe = mysqli_real_escape_string($dbConnection, $_FILES['meme']);
 				$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
 			
 			//school achterhalen
@@ -38,18 +42,19 @@
 			
 			//query(s) maken
 				$sql = "INSERT INTO 'meme' ('meme-titel', 'user-ID', 'locatie', 'school') Values 
-				(" . $safename . ", " . $LoggedinID . ", '/memestorage/".date("Y")."/".date("n")."', " . $school['schoolnaam'] . ");";
+				('" . $safename . "', '" . $LoggedinID . "', '/memestorage/".date("Y")."/".date("n")."', '" . $school['schoolnaam'] . "');";
 				$result = $dbConnection->query($sql);
 				
 				//tags nog weer apart
 					//meme-ID achterhalen
-						$sql = "Select `meme-ID` from meme where `meme-titel`='Memey-boi1'";// . $safename;
+						$sql = "Select `meme-ID` from meme where `meme-titel`=`" . $safename . "`";
 						$result = $dbConnection->query($sql);
 						$memeID = mysqli_fetch_assoc($result);
 					
 					//tags inserten
 					$query = "select tagnaam from tags order by 1";
 					$result = $dbConnection->query($query);
+					$sql = "";
 					while ($record = $result->fetch_assoc())
 					{
 						if (in_array($record['tagnaam'], $_POST['tags'])){
@@ -70,22 +75,20 @@
 					echo "<div class='alert alert-success' role='alert'>
 					Thank you! Your meme has been uploaded! </div>";
 				}
-			
+					var_dump($_FILES['meme']);
 			//meme uploaden
-				$target_dir = "HBO-ICTmemes/memestorage/".date("Y")."/".date("n")."/";
+				$target_dir = "../memestorage/".date("Y")."/".date("n")."/";
 				$target_file = $target_dir . basename($_FILES["meme"]["name"]);
 				$uploadOk = 1;
 				$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 				// Check if image file is an actual image or fake image
-					if(isset($_POST["submit"])) {
-						$check = getimagesize($_FILES["meme"]);
-						if($check !== false) {
-							echo "File is an image - " . $check["mime"] . ".";
-							$uploadOk = 1;
-						} else {
-							echo "File is not an image.";
-							$uploadOk = 0;
-						}
+					$check = getimagesize($_FILES["meme"]["tmp_name"]);
+					if($check !== false) {
+						echo "File is an image - " . $check["mime"] . ".";
+						$uploadOk = 1;
+					} else {
+						echo "File is not an image.";
+						$uploadOk = 0;
 					}
 				// Check if file already exists
 					if (file_exists($target_file)) {
@@ -93,7 +96,7 @@
 						$uploadOk = 0;
 					}
 				// Check file size
-					if ($_FILES["meme"]["size"] > 500000) {
+					if ($_FILES["meme"]["size"] > 2000000) {
 						echo "Sorry, your file is too large.";
 						$uploadOk = 0;
 					}
@@ -108,7 +111,7 @@
 						echo "Sorry, your file was not uploaded.";
 				// if everything is ok, try to upload file
 					} else {
-						if (move_uploaded_file($_FILES["meme"], $target_file)) {
+						if (move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
 							echo "The file ". basename( $_FILES["meme"]["name"]). " has been uploaded.";
 						} else {
 							echo "Sorry, there was an error uploading your file.";
@@ -119,25 +122,25 @@
 		else {
 			$datamis = "";
 			
-			if (!isset($_FILES['meme'])) {
-				$datamis .= "You must choose a meme to upload. <br>";
+			if (empty($_FILES['meme'])) {
+				echo "<div class='alert alert-danger' role='alert'>";
+				echo "Er is geen meme geselecteerd. Probeer het nog eens.";
+				echo "</div>";
+				return;
 			}
-			if (!isset($_POST['name'])) {
-				$datamis .= "You must choose a name for your meme. <br>";
+			if (empty($_POST['name'])) {
+				echo "<div class='alert alert-danger' role='alert'>";
+				echo "Er is geen naam ingevuld. Probeer het nog eens.";
+				echo "</div>";
+				return;
 			}
 			if (!isset($_POST['tags'])) {
-				$datamis .= "You must choose at least one tag. <br>";
-			}
-			if (isset($_POST['submit'])) {
-				echo $datamis;
+				echo "<div class='alert alert-danger' role='alert'>";
+				echo "Er zijn geen tags geselecteerd. Probeer het nog eens.";
+				echo "</div>";
+				return;
 			}
 		}
+		echo "<br><br>";
+		//var_dump($_FILES['meme']);
 	?>
-	
-
-  </body>
-
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
