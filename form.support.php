@@ -47,12 +47,10 @@
     
       <p>Graag een korte beschrijving: * </p>
       <textarea name="beschrijving" rows="4" cols="22" maxlength="500" required> </textarea>
-    
-      <?php echo recaptchaform ();?>
-
+      <br>
       <input class="btn btn-primary" type="submit" value="Submit">
     
-    
+      <?php echo recaptchaform();?>
 
   <table>
 </form>

@@ -328,8 +328,6 @@
       $config .= "config.php";
       require "$config";
 
-      $returnarray=array("correct" => 100, "Apple" => 200, "Banana" => 300, "Cherry" => 400);
-
       //check if captcha was filled
       if(!$captcha){
         return false;
