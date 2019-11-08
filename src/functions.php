@@ -173,12 +173,12 @@
   function checkpathtosrc () {
       //Check if the function is called from the existing directories
       $Searchin = getcwd();
-      $subdirectoryaccount = "account";
-      $subdirectoryadmin = "admin";
-      $subdirectorymeme = "meme";
-      $subdirectorysrc = "src";
-      $subdirectoryupload = "upload";
-      $subdirectoryverify = "verify";
+      $subdirectoryaccount = "/account";
+      $subdirectoryadmin = "/admin";
+      $subdirectorymeme = "/meme";
+      $subdirectorysrc = "/src";
+      $subdirectoryupload = "/upload";
+      $subdirectoryverify = "/verify";
       
       $logcation = 'src/';
       if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/";}
@@ -187,8 +187,6 @@
       if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/";}
-      echo $logcation;
-      echo "<br>" . getcwd();
       return $logcation;
   }
 
