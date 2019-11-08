@@ -12,16 +12,13 @@
     <div class="jumbotron">
       <div class="container">
         <h1 class="display-3">Support</h1>
+        <p>Vul het formulier hiernaast in en wij nemen zo spoedig mogelijk contact met u op.</p>
 
       </div>
     </div>
     <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <h2>Problemen? Vragen?</h2>
-            <p>Vul het formulier hiernaast in en wij nemen zo spoedig mogelijk contact met u op.</p>
-          </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
               <?php               
                 if(isset($_POST['naam'])) {
                   // First check if recaptcha was valid

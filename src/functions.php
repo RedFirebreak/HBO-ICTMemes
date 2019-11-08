@@ -260,7 +260,7 @@
         // Set the subject
           $subject = "HBO-ICTMemes - Email verificatie";
         }
-      // Als dit een emailverificatie is
+      // Als dit een wachtwoordreset is
       if ($safesoort == "wachtwoordreset") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&username=$safeusername&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();

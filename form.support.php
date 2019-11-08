@@ -10,27 +10,23 @@
 ?>
 
 <form action="/support.php" method="post">
-  <table>
-    <tr>
-      <td><p>Naam: * </p></td>
-      <td><input type="text" name="naam" required></td>
-    </tr>
-    <tr>
-      <td><p>E-mail: *</p></td>
-      <td><input type="text" name="mail" required></td>
-    </tr>
-    <tr>
-      <td><p>Waarom wilt u contact opnemen: </p></td>
-      <td><select name="onderwerp">
+      <p>Naam: * </p>
+      <input type="text" name="naam" required>  
+    
+      <p>E-mail: *</p>
+      <input type="text" name="mail" required>
+    
+      <p>Waarom wilt u contact opnemen: </p>
+      <select name="onderwerp">
           <option value="login">Log-in problemen</option>
           <option value="login">Gebanned Account</option>
           <option value="upload">Upload problemen</option>
           <option value="vraag">Vragen</option>
           <option value="overig">Overig</option>
-        </select></td>
-    </tr>
-    <td><p>Selecteer uw school</p></td>
-    <td><select name="school">
+        </select>
+    
+    <p>Selecteer uw school</p>
+    <select name="school">
       <option value='geen'>Geen</option>
       
         <?php
@@ -47,19 +43,16 @@
                 echo "0 results";
             }
             ?>
-        </select><td>
-
-    <tr>
-      <td><p>Graag een korte beschrijving: * </p></td>
-      <td><textarea name="beschrijving" rows="4" cols="22" maxlength="500" required> </textarea></td>
-    </tr>
-
-    <tr>
-      <td><?php echo recaptchaform ();?></td>
-    </tr>
+        </select>
     
-    <tr>
-      <td><p><input class="btn btn-primary" type="submit" value="Submit"></p></td>
-    </tr>
+      <p>Graag een korte beschrijving: * </p>
+      <textarea name="beschrijving" rows="4" cols="22" maxlength="500" required> </textarea>
+    
+      <?php echo recaptchaform ();?>
+
+      <input class="btn btn-primary" type="submit" value="Submit">
+    
+    
+
   <table>
 </form>
