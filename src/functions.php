@@ -188,6 +188,7 @@
       if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/";}
       echo $logcation;
+      echo "<br>" . getcwd();
       return $logcation;
   }
 
