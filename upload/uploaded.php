@@ -32,22 +32,23 @@
 		if (!empty($_FILES['meme']) && isset($_FILES['meme']) && !empty($_POST['name'])&& isset($_POST['name']) && isset($_POST['tags'])) {
 			
 			//data schoonmaken
-				$safememe = mysqli_real_escape_string($dbConnection, $_FILES['meme']);
 				$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
 			
 			//school achterhalen
-				$sql = "Select schoolnaam from user where `user-ID`=5 order by 1"; //. $LoggedinID;
+				$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
 				$result = $dbConnection->query($sql);
 				$school = mysqli_fetch_assoc($result);
+			var_dump ($school);
 			
 			//query(s) maken
-				$sql = "INSERT INTO 'meme' ('meme-titel', 'user-ID', 'locatie', 'school') Values 
-				('" . $safename . "', '" . $LoggedinID . "', '/memestorage/".date("Y")."/".date("n")."', '" . $school['schoolnaam'] . "');";
+				$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
+				('" . $safename . "', '12', '/memestorage/".date("Y")."/".date("n")."', '" . $school['schoolnaam'] . "');";
 				$result = $dbConnection->query($sql);
-				
+				echo "<br>";
+				var_dump($result);
 				//tags nog weer apart
 					//meme-ID achterhalen
-						$sql = "Select `meme-ID` from meme where `meme-titel`=`" . $safename . "`";
+						$sql = "Select `meme-ID` from meme where `meme-titel`='Memey-boi1';"; //. $safename . "';";
 						$result = $dbConnection->query($sql);
 						$memeID = mysqli_fetch_assoc($result);
 					
@@ -58,8 +59,8 @@
 					while ($record = $result->fetch_assoc())
 					{
 						if (in_array($record['tagnaam'], $_POST['tags'])){
-							$sql .= "INSERT INTO 'memetag' ('meme-ID', 'tag-ID')
-							Values (".$memeID['meme-ID'].", ".$record['tagnaam'].");";
+							$sql .= "INSERT INTO memetag (`meme-ID`, `tag-ID`)
+							Values ('".$memeID['meme-ID']."', '".$record['tagnaam']."');";
 						}
 					}
 					
