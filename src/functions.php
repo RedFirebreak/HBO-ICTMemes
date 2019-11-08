@@ -180,14 +180,14 @@
       $subdirectoryupload = "upload";
       $subdirectoryverify = "verify";
       
-      $logcation = "src/";
+      $logcation = 'src/';
       if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryadmin ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectorymeme ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/";}
-
+      echo $logcation;
       return $logcation;
   }
 
