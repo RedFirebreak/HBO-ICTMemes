@@ -31,6 +31,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+			<?php require('uploaded.php'); ?>
             <?php require('form.upload.php'); ?>
             </div>
         </div>
