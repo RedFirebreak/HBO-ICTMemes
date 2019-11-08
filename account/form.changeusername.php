@@ -8,37 +8,36 @@
         Date:       11-10-2019
     */
 
-	$username = $_POST['username'];
-	$newusername = $_POST['newusername'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+	$username = mysqli_real_escape_string(dbConnection, $_POST["username"]);
+	$newusername = mysqli_real_escape_string(dbConnection, $_POST["newusername"]);
+	$email = mysqli_real_escape_string(dbConnection, $_POST["email"]);
+	$password = mysqli_real_escape_string(dbConnection, $_POST["password"])
 	
 	$sql = "UPDATE user SET naam = '$newusername' WHERE usermail= '$email'"; //sql query voor updaten username
 	$sql2 = "SELECT wachtwoord from user WHERE user-id = '$loggedinID'";
-    $result = $dbConnection->query($sql);
-	$result2 = $dbConnection->query($sql2);
+    $result = mysqli_query($dbConnection,$sql);
+	$result2 = mysqli_query($dbConnection,$sql2);
 	
 	if ($Loggedin) {
 		if ($password == $result2) {
 			$result;
-			echo "your username has been updated to: $newusername <br>";
-			echo "A confirmation email will be sent to your mail, when confirmed, this change will be 'permanent'. <br>";
+			echo "De gebruikersnaam is veranderd naar: $newusername <br>";
 		}
 		else {
-			echo "Your password does not seem to match your profile.";
+			echo "Het ingevulde wachtwoord is niet correct.";
 		}
 	} 	
 	else {
-		echo "Nobody is logged in, please log in before trying to change a username";
+		echo "Log eerst in, voor er gebruik kan worden gemaakt van deze functie";
 	}
       
 ?>
 
 <form id="update" method="post">
-			current username: <input type="text" name="username"><br>
-			New username: <input type="text" name="newusername"><br>
-			email: <input type="text" name="email"><br>
-			password: <input type="text" name="password"><br>
+			Huidige gebruikersnaam: <input type="text" name="username"><br>
+			Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
+			Email: <input type="text" name="email"><br>
+			Wachtwoord: <input type="text" name="password"><br>
 			
 			<button type="submit" value="Submit">Submit</button>
 			<button type="reset" value="Reset">Reset</button>
