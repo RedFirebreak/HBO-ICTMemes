@@ -173,12 +173,22 @@
   function checkpathtosrc () {
       //Check if the function is called from the existing directories
       $Searchin = getcwd();
-      $subdirectoryaccount = "/account";
-      $subdirectoryadmin = "/admin";
-      $subdirectorymeme = "/meme";
-      $subdirectorysrc = "/src";
-      $subdirectoryupload = "/upload";
-      $subdirectoryverify = "/verify";
+
+      if( strpos( $Searchin, 'hboictmemes' ) !== false) {
+        $subdirectoryaccount = "/account";
+        $subdirectoryadmin = "/admin";
+        $subdirectorymeme = "/meme";
+        $subdirectorysrc = "/src";
+        $subdirectoryupload = "/upload";
+        $subdirectoryverify = "/verify";
+      } else {
+        $subdirectoryaccount = "account";
+        $subdirectoryadmin = "admin";
+        $subdirectorymeme = "meme";
+        $subdirectorysrc = "src";
+        $subdirectoryupload = "upload";
+        $subdirectoryverify = "verify";
+      }
       
       $logcation = 'src/';
       if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/";}
