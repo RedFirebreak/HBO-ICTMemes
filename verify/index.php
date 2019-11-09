@@ -63,10 +63,18 @@
 			
 			//checken of de data er is
 			if (isset($_POST['newpassword']) && !empty($_POST['newpassword']) && isset($_POST['newpasswordcheck']) && !empty($_POST['newpasswordcheck'])) {
-				$safepass = mysql_real_escape_string($_POST['newpassword']);
+				$safepassword = mysql_real_escape_string($_POST['newpassword']);
 				$safepasscheck = mysql_real_escape_string($_POST['newpasswordcheck']);
-				if {$safepass = $safepasscheck) {
-					
+				//checken of de wachtwoorden goed zijn ingevuld
+				if ($safepass = $safepasscheck) {
+					//checken of de user-ID en verificatiecode overeenkomen
+					$sql = "select verificatiecode from emailverificatie where `user-ID`={$_GET['username']};"
+					$result = $dbConnection->query($sql);
+					$vercode = mysqli_fetch_assoc($result);
+					if ($vercode['verificatiecode']=$_GET['code']) {
+						$sql = "insert into user (`wachtwoord`) values ('{$safepassword}');";
+						echo "Succes! Het wachtwoord is veranderd.";
+					}
 				}
 				else {
 					echo "Zorg ervoor dat de inhoud van beide vakken met elkaar overeenkomt";
