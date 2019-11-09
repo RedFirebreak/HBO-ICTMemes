@@ -31,24 +31,38 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
+              <h4>Aantal scholen</h4>
+              <span class="text-muted">
+				  <?php 
+					$query = "select count(schoolnaam) from school";
+					$result = $dbConnection->query($query);
+					$whatevz = mysqli_fetch_assoc($result);
+					echo $whatevz['count(schoolnaam)'];
+				  ?>
+				  </span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder text-center">
+              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+              <h4>Aantal admins</h4>
+              <span class="text-muted">
+			      <?php 
+					$query = "select count(username) from user where userrole in ('admin', 'uber-admin');";
+					$result = $dbConnection->query($query);
+					$whatevz = mysqli_fetch_assoc($result);
+					echo $whatevz['count(username)'];
+				  ?>
+			  </span>
+            </div>
+            <!--<div class="col-xs-6 col-sm-3 placeholder text-center">
+              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+              <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
+              <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
+            </div>-->
           </div>
           
           <hr>
@@ -56,38 +70,23 @@
           <h2 class="sub-header">Here's a table</h2>
           <div class="table-responsive">
             <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
-              </tbody>
+                  <?php
+				  $query = "select schoolnaam from school order by 1";
+				  $result = $dbConnection->query($query);
+				  while ($record = mysqli_fetch_assoc($result))
+				  {
+					echo "<tr><th>".$record['schoolnaam']."</th>";
+					$sql = "select * from user where userrole in ('admin', 'uber-admin') and schoolnaam in ('".$record['schoolnaam']."');";
+					$dinges = $dbConnection->query($sql);
+					while ($dinkus = mysqli_fetch_assoc($dinges))
+					{
+						//echo "<td>".$dinkus['user-ID']."</td>
+						echo "<td>".$dinkus['username']."</td>";
+						//<td>".$dinkus['userrole']."</td>";
+					}
+					echo "</tr>";
+				  }
+                  ?>
             </table>
           </div>
 

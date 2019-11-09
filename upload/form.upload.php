@@ -19,11 +19,11 @@
 	<body>
 		
 		<form action="/upload/" method="post" enctype="multipart/form-data">
-		<p>Insert your meme here:</p>
+		<p>Selecteer hier je meme:</p>
 		<input type="file" name="meme" id="meme" value="choose a file" >
-		<p>Insert the name of your meme:</p>
+		<p>Voer een naam voor de meme in:</p>
 		<input type="text" name="name" id="name">
-		<p>Select the tags for your meme:</p>
+		<p>Selecteer de tags voor je meme:</p>
 		
 		<?php
 			//tags ophalen
@@ -39,7 +39,7 @@
 			
 		</select><br><br>
 		<?php echo recaptchaform ();?>
-		<input type="submit" name="submit" value="submit">
+		<input type="submit" name="submit" value="Opsturen">
 		</form>
 		
 	</body>

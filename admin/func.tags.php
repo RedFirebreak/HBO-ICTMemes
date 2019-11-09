@@ -30,23 +30,15 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Aantal tags</h4>
+              <span class="text-muted">
+				<?php 
+				  $query = "select count(tagnaam) from tags";
+				  $result = $dbConnection->query($query);
+				  $whatevz = mysqli_fetch_assoc($result);
+				  echo $whatevz['count(tagnaam)'];
+				?>
+			  </span>
             </div>
           </div>
           
@@ -56,36 +48,17 @@
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
+                <?php
+				$query = "select * from tags order by 1";
+				$result = $dbConnection->query($query);
+				while ($record = mysqli_fetch_assoc($result))
+				{
+					echo "<tr>
+					<td>".$record['tag-ID']."</td>
+					<td>".$record['tagnaam']."</td>
+					</tr>";
+				}
+				?>
               </tbody>
             </table>
           </div>
