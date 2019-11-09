@@ -30,24 +30,41 @@
           <div class="row placeholders">
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
+              <h4>Aantal memes</h4>
+              <span class="text-muted">
+			      <?php 
+					$query = "select count(`meme-ID`) from meme";
+					$result = $dbConnection->query($query);
+					$whatevz = mysqli_fetch_assoc($result);
+					echo $whatevz['count(`meme-ID`)'];
+				  ?>
+			  </span>
             </div>
+            <?php
+				$query = "select schoolnaam from school order by 1";
+				$result = $dbConnection->query($query);
+				while ($record = mysqli_fetch_assoc($result))
+				{
+				  echo "<div class='col-xs-6 col-sm-3 placeholder text-center'>
+					<!-- <img src='#' class='center-block img-responsive img-circle' alt='Generic placeholder thumbnail'>  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+					<h4>Aantal ".$record['schoolnaam']."-memes</h4>
+					<span class='text-muted'>";
+					   
+						$sql = "select count(`meme-ID`) from meme where school in ('{$record['schoolnaam']}');";
+						$dinges = $dbConnection->query($sql);
+						$whatevz = mysqli_fetch_assoc($dinges);
+						echo $whatevz['count(`meme-ID`)'];
+					  
+					echo "</span>
+					</div>";
+				}
+			?>
+			<!--
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
+              <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Label</h4>
-              <span class="text-muted">Something else</span>
-            </div>
+            </div>-->
           </div>
           
           <hr>
@@ -57,35 +74,30 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
+                  <th>meme-ID</th>
+                  <th>meme-titel</th>
+                  <th>user-ID</th>
+                  <th>datum</th>
+                  <th>locatie</th>
+				  <th>school</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                <tr>
-                  <td>1,002</td>
-                  <td>amet</td>
-                  <td>consectetur</td>
-                  <td>adipiscing</td>
-                  <td>elit</td>
-                </tr>
-                <tr>
-                  <td>1,003</td>
-                  <td>Integer</td>
-                  <td>nec</td>
-                  <td>odio</td>
-                  <td>Praesent</td>
-                </tr>
+                <?php
+					$query = "select * from meme order by 1";
+					$result = $dbConnection->query($query);
+					while ($record = mysqli_fetch_assoc($result))
+					{
+						echo "<tr>
+						<td>".$record['meme-ID']."</td>
+						<td>".$record['meme-titel']."</td>
+						<td>".$record['user-ID']."</td>
+						<td>".$record['datum']."</td>
+						<td>".$record['locatie']."</td>
+						<td>".$record['school']."</td>
+						</tr>";
+					}
+					?>
               </tbody>
             </table>
           </div>
