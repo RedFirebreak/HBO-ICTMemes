@@ -1,5 +1,4 @@
-
-    <?php
+<?php
       // Check for config
       require "src/config.php";
 
@@ -56,35 +55,35 @@
         header('Refresh: 0; url=/');
       }
     ?>
-  <html lang="en" class="no-js">
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <link rel="icon" href="favicon.ico">
+<html lang="en" class="no-js">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="favicon.ico">
 
-      <!-- Bootstrap core CSS -->
-      <link href="/src/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap core CSS -->
+<link href="/src/css/bootstrap.min.css" rel="stylesheet">
 
-      <!-- Recaptcha -->
-      <script src='https://www.google.com/recaptcha/api.js' async defer></script>
-      
-      <!-- Custom styles for this template -->
-      <link href="/src/css/jumbotron.css" rel="stylesheet">
+<!-- Recaptcha -->
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
 
-      <!-- Our custom css -->
-      <link href="/src/css/stylesheet.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="/src/css/jumbotron.css" rel="stylesheet">
 
-      <!-- Fontawesome! -->
-      <script src="https://kit.fontawesome.com/03fd3b0aa1.js" crossorigin="anonymous"></script>
+<!-- Our custom css -->
+<link href="/src/css/stylesheet.css" rel="stylesheet">
 
-      <!-- NewMenu --> 
-	<link rel="stylesheet" href="/src/css/menu.css"> <!-- Resource style -->
-	<script src="/src/js/modernizr.js"></script> <!-- Modernizr -->
+<!-- Fontawesome! -->
+<script src="https://kit.fontawesome.com/03fd3b0aa1.js" crossorigin="anonymous"></script>
 
-	<header id="navbar">
-		<div class="cd-logo"><a href="/"><img src="/src/img/cd-logo.svg" alt="Logo"></a></div>
-          <?php
+<!-- NewMenu -->
+<link rel="stylesheet" href="/src/css/menu.css"> <!-- Resource style -->
+<script src="/src/js/modernizr.js"></script> <!-- Modernizr -->
+
+<header id="navbar">
+    <div class="cd-logo"><a href="/"><img src="/src/img/cd-logo.svg" alt="Logo"></a></div>
+    <?php
           if ($Loggedin) {
             // Show the menu for logged in people
                 echo "<nav class='cd-main-nav-wrapper'>";
@@ -123,8 +122,6 @@
             echo "<nav class='cd-main-nav-wrapper'>";
             echo "<ul class='cd-main-nav'>";
               echo "<li><a href='/'>Homepage</a></li>";
-              echo "<li><a href='/upload/'>Upload</a></li>";
-              echo "<li><a href='/tags.php'>Tags</a></li>";
                 echo "<li>";
                 echo "<a href='#0' class='cd-subnav-trigger'><span>Account</span></a>";
                 echo "<ul>";
@@ -142,19 +139,18 @@
           }
           ?>
 
-	</header>
-  <script>
-    var prevScrollpos = window.pageYOffset;
-    window.onscroll = function() {
+</header>
+<script>
+var prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
     var currentScrollPos = window.pageYOffset;
-      if (prevScrollpos > currentScrollPos) {
+    if (prevScrollpos > currentScrollPos) {
         document.getElementById("navbar").style.top = "0";
-      } else {
+    } else {
         document.getElementById("navbar").style.top = "-70px";
-      }
-      prevScrollpos = currentScrollPos;
     }
+    prevScrollpos = currentScrollPos;
+}
 </script>
-	<!-- main content starts here -->
-	<main class="cd-main-content">
-		
+<!-- main content starts here -->
+<main class="cd-main-content">

@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -22,16 +21,16 @@
         }
 ?>
 
-          <h1 class="page-header">
-            Users
-            <p class="lead">Alle users in de database</p>
-            </h1>          
+<h1 class="page-header">
+    Users
+    <p class="lead">Alle users in de database</p>
+</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal users</h4>
-              <?php
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal users</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
@@ -45,11 +44,11 @@
                   $aantal = $aantalrow['aantal'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Unverified</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Unverified</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0 AND schoolnaam='$LoggedinSchool'";
@@ -62,11 +61,11 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Verified</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Verified</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1 AND schoolnaam='$LoggedinSchool'";
@@ -79,11 +78,11 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Banned</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Banned</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
@@ -96,14 +95,14 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
-            </div>
-          </div>
-          
-          <hr>
+    </div>
+</div>
 
-          <!-- <h2 class="sub-header">Here's a table</h2> -->
-          <div class="table-responsive">
-          <table id="usertable" class="table table-striped table-bordered" style="width:100%">
+<hr>
+
+<!-- <h2 class="sub-header">Here's a table</h2> -->
+<div class="table-responsive">
+    <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>User-ID</th>
@@ -117,7 +116,7 @@
             </tr>
         </thead>
         <tbody>
-        <?php
+            <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
           $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
@@ -158,10 +157,10 @@
             } else {
                echo "0 results";
             }
-        ?>    
+        ?>
         </tbody>
         <tfoot>
-        <tr>
+            <tr>
                 <th>User-ID</th>
                 <th>Usermail</th>
                 <th>Username</th>
@@ -173,17 +172,19 @@
             </tr>
         </tfoot>
     </table>
-          </div>
+</div>
 
-          
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
+
+</div>
+<!--/row-->
+</div>
+</div>
+<!--/.container-->
 
 <script>
-$(document).ready(function () {
-$('#usertable').DataTable();
-$('.dataTables_length').addClass('bs-select');
+$(document).ready(function() {
+    $('#usertable').DataTable();
+    $('.dataTables_length').addClass('bs-select');
 });
 </script>
 

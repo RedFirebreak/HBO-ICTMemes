@@ -22,10 +22,45 @@
   }
 /* REGISTER FORM END*/
 
+/* TAGS */
+#myInput {
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+#myUL li a:hover:not(.header) {
+  background-color: #eee;
+}
+/* END TAGS */
+
 /* Site css */
 
 html {
    font-size: 62.5%;
+ }
+
+ .btn {
+  font-size: 1.6rem;
  }
  
  body {
@@ -50,7 +85,7 @@ html {
    width: 100%;
    min-width : 200px;
    min-height : 200px;
-   max-height: 500px
+   max-height: 750px
  }
 
  .user-thumbnail {
@@ -70,7 +105,17 @@ html {
    max-height: 3.6em;
    line-height: 1.8em;
  }
+
+ .memecomment{
+  word-wrap: break-word;
+ }
+
  .divmemeinfo {
    background-color: #455766;
+ }
+
+ .memepageimage {
+  overflow: hidden;
+  max-width: 100%;
  }
 /* End site css */

@@ -1,140 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>HBO-ICTMemes</title>
     <?php
       require "func.header.php";
     ?>
-  </head>
+</head>
 
-    <body>
+<body>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">HBO-ICTMemes</h1>
-        <p>Welkom op HBO-ICTMemes 
-        <?php 
-        echo "<br>";
-        // Boolean / true or false (if loggedin, do this)"
-        $Loggedin;
-
-        //Userinfo
-        echo "UserID: " .$LoggedinID . "<br>";
-        echo "Usermail: " .$LoggedinUsermail . "<br>";
-        echo "Username: " .$LoggedinUsername . "<br>";
-        echo "Userrole: " .$LoggedinUserrole . "<br>";
-        echo "Is verified: " .$LoggedinVerified . "<br>";
-        echo "Is banned: " .$LoggedinGebanned . "<br>";
-
-        if ($Loggedin) {
-          echo "Er is iemand ingelogd!";
-      } else {
-          echo "Er is niemand ingelogd";
-      }
-
+        <div class="container">
+            <h1 class="display-3">HBO-ICTMemes</h1>
+            <p>Welkom op HBO-ICTMemes
+                <?php 
+          if ($LoggedinUserrole == "uber-admin") {
+            echo "<br>Hallo uber-admin! Je kunt alle memes zien van alle scholen.";
+          }
         ?></p>
 
-      </div>
+        </div>
     </div>
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="row">
-            <div class="col-md-9">
-              <!-- Meme- cards -->
-              <div class="row memecards">
-                <!-- Load the meme - part -->
-                <div class="col-md-8 divmemeimage">
-                  <h3><b>So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing.</b></h3>
-                  <hr>
-                  <img src="https://cdn.discordapp.com/attachments/625662396127772672/639604401715019786/aC4HFF4_d.jpg" class="memeimage rounded mx-auto d-block" alt="...">
-                </div>
-                <!-- Load the extra info part -->
-                <div class="col-md-4 divmemeinfo">
-                 <div class="row">
-                    <div class="col-md-4">
-                      <img class="rounded img-thumbnail user-thumbnail" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
-                    </div>
-                    <div class="col-md-8">
-                      <p style="word-wrap:break-word">RedFirebreakRedFirebreakRedFirebreakRedFirebreakkk <br>Joined: 07-11-2019 <br>Admin</p>
-                    </div>
-                      <div class="col-md-12">
-                        <hr>
-                          <p style="margin: 1px 0;"><b>Top Comment:</b></p>
-                          <p class="oneline" style="font-size: 1rem; margin: 1px 0;">u/RedFirebreakRedFirebreakRedFirebreakRedFirebreakkk</p>
-                          <p class="top-comment" style="font-size: 1.4rem;">Look at this autograph, everytime I see it makes me laugh.</p>
-                        <hr>
-                      </div>
-                  </div>
-                  <!-- Voting part -->
-                  <div class="row text-center d-flex align-items-end">
-                    <div class="col-md-6">
-                      <span><i class="fas fa-chevron-up fa-2x"></i></span>
-                    </div>
-                    <div class="col-md-6">
-                      <span><i class="center fas fa-chevron-down fa-2x"></i></span>
-                    </div>
-                   </div>
-                </div>
-              </div>
-              <!-- End meme card -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-9">
 
-              <!-- Meme- cards -->
-              <div class="row memecards">
-                <!-- Load the meme - part -->
-                <div class="col-md-8 divmemeimage">
-                  <h3><b>So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing. So this is just a generic picture I thought of sharing.</b></h3>
-                  <hr>
-                  <img src="https://cdn.discordapp.com/attachments/625662396127772672/641698928588488715/15730633406175835870646951465086.jpg" class="memeimage rounded mx-auto d-block" alt="...">
-                </div>
-                <!-- Load the extra info part -->
-                <div class="col-md-4 divmemeinfo">
-                 <div class="row">
-                    <div class="col-md-4">
-                      <img class="rounded img-thumbnail user-thumbnail" alt="Bootstrap Image Preview" src="https://www.layoutit.com/img/sports-q-c-140-140-3.jpg"/>
-                    </div>
-                    <div class="col-md-8">
-                      <p style="word-wrap:break-word">RedFirebreak<br>Joined: 07-12-2019 <br>Admin</p>
-                    </div>
-                      <div class="col-md-12">
-                        <hr>
-                          <p style="margin: 1px 0;"><b>Top Comment:</b></p>
-                          <p class="oneline" style="font-size: 1rem; margin: 1px 0;">u/RedFirebreak</p>
-                          <p class="top-comment" style="font-size: 1.4rem;">Lol, this meme is so fuckin funny.</p>
-                        <hr>
-                      </div>
-                  </div>
-                  <!-- Voting part -->
-                  <div class="row text-center d-flex align-items-end">
-                    <div class="col-md-6">
-                      <span><i class="fas fa-chevron-up fa-2x"></i></span>
-                    </div>
-                    <div class="col-md-6">
-                      <span><i class="center fas fa-chevron-down fa-2x"></i></span>
-                    </div>
-                   </div>
-                </div>
-              </div>
-              <!-- End meme card -->
+                        <?php
+                  // make query based on logged in userschool
+                  if ($LoggedinUserrole == "uber-admin") {
+                    $sql = "SELECT * FROM meme ORDER by `meme-ID` DESC;";
+                  } else {
+                    $sql = "SELECT * FROM meme WHERE `school`='$LoggedinSchool' ORDER by `meme-ID` DESC;";
+                  }
+    
+                  $result = $dbConnection->query($sql);
+                  
+                  if ($result->num_rows > 0) { // This will also happen if the user is not logged in.
+                      // output data of each row
+                      while($row = $result->fetch_assoc()) {
+                          $memelocation = "."; // to make pathing variable from the homepage
+                          $memeid  = $row["meme-ID"];
+                          $memetitle  = $row["meme-titel"];
+                          $memeuser  = $row["user-ID"];
+                          $memedate  = $row["datum"];
+                          $memelocation  .= $row["locatie"]; 
+                          $memeschool  = $row["school"];
 
+                          $query = "SELECT username, profile_picture, userrole, schoolnaam FROM user WHERE `user-ID`='$memeuser'";
+                          $results = mysqli_query($dbConnection, $query);
+                          $row2 = mysqli_fetch_assoc($results);
+                          
+                          $memeusername = $row2["username"];
+                          $memeuserpic = $row2["profile_picture"];
+                          $memeuserrole = $row2["userrole"];
+                          $memeuserschool = $row2["schoolnaam"];
+
+                        ?>
+                        <!-- Meme- cards -->
+                        <div class="row memecards">
+                            <!-- Load the meme - part -->
+                            <div class="col-md-8 divmemeimage">
+                                <h3><b><?php echo $memetitle?></b></h3>
+                                <hr>
+                                <?php
+                                    if (file_exists($memelocation)) {
+                                      echo "<a href='/meme/?id=$memeid'><img src='$memelocation'class='memeimage rounded mx-auto d-block' alt='...'></a>";
+                                  } else {
+                                      echo "<div class='alert alert-danger' role='alert'>";
+                                      echo "De afbeelding kon helaas niet gevonden worden.</div>";
+                                      Customlog("Home-memeimage", "error", "The homepage found an image that does not exist!(ID: $memeid, location: $memelocation, user: $memeuser, Date: $memedate )");
+                                  }
+
+                                    ?>
+                            </div>
+
+                            <!-- Load the extra info part -->
+                            <div class="col-md-4 divmemeinfo">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
+                                            src="<?php echo $memeuserpic?>" />
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p style="word-wrap:break-word">
+                                            <?php
+                                  // Echo userinfo of the meme
+                                  echo $memeusername . '<br>';
+                                  if ($memeuserrole == 'admin') {echo "Admin <br>";}
+                                  if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
+                                  echo $memeuserschool . '<br>';
+                                  echo "Posted: " . $memedate;
+                                ?>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="d-none d-md-block">
+                                            <!-- Hide on smaller devices -->
+                                            <hr>
+                                            <p style="margin: 1px 0;"><b>Top Comment:</b></p>
+
+                                            <?php
+                                      // Check if someone commented
+                                      $query = "SELECT * FROM comments WHERE `meme-ID`= '$memeid' ORDER by `datum` ASC LIMIT 1";
+                                      $results = mysqli_query($dbConnection, $query);
+                                      $row2 = mysqli_fetch_assoc($results);
+
+                                      if (empty($row2)) {
+                                        echo "<p class='top-comment' style='font-size: 1.4rem;'>Niemand heeft een comment geplaatst. Wees de eerste!</p>";
+                                      } else {
+                                        // Someone commented, get their userinfo
+                                        $topcommentuser = $row2['user-ID'];
+                                        $topcommentinhoud =$row2['inhoud'];
+                                        $querytopcomment = "SELECT username FROM user WHERE `user-ID`='$topcommentuser'";
+                                        $resultstopcomment = mysqli_query($dbConnection, $querytopcomment);
+                                        $rowtopcomment = mysqli_fetch_assoc($resultstopcomment);
+                                        $topcommentusername = $rowtopcomment['username'];
+                                      
+                                        echo "<p class='oneline' style='font-size: 1.2rem; margin: 1px 0;'>$topcommentusername:</p>";
+                                        echo "<p class='top-comment' style='font-size: 1.4rem;''>". htmlspecialchars($topcommentinhoud) ."</p>";
+                                      }
+                                      ?>
+
+                                        </div>
+
+                                        <a class="btn btn-primary" style="color:#FFF;"
+                                            href="/meme/?id=<?php echo $memeid?>">Comments</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End meme card -->
+
+                        <?php
+                      }
+                  } else {
+                      ?>
+                        <p>
+                            Welkom! Wij zijn HBO-ICTMemes. Ons doel is om zo veel mogelijk memes aan te bieden aan
+                            studenten, voor studenten. <br>
+                            <b>Om ons grote aanbod aan memes te kunnen zien moet er ingelogd worden.</b>
+                        </p>
+
+
+                        <?php
+                  }
+                ?>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="sticky-top" style="top: 82px;">
+                            <h1>Sticky-Info</h1>
+                            <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have
+                                actually done stuff!</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-3">
-              <div class="sticky-top" style="top: 82px;">
-                <h1>Sticky-Info</h1>
-                <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have actually done stuff!</p>
-              </div> 
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 
     <div class="text-center">
-</div>
-  <?php
+    </div>
+    <?php
     require "func.footer.php";
   ?>
 
-      </body>
+</body>
+
 </html>

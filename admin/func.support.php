@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -22,16 +21,16 @@
         }
 ?>
 
-          <h1 class="page-header">
-            Support
-            <p class="lead">Alle suport aanvragen</p>
-            </h1>          
+<h1 class="page-header">
+    Support
+    <p class="lead">Alle suport aanvragen</p>
+</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal aanvragen</h4>
-              <?php
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal aanvragen</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM support WHERE school='$LoggedinSchool' OR school='geen'";
@@ -46,11 +45,11 @@
                   $aantal = $aantalrow['aantal'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal opgelost</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal opgelost</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=1 AND school='$LoggedinSchool' OR opgelost=1 AND school='geen'";
@@ -65,11 +64,11 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal openstaand</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal openstaand</h4>
+        <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=0 AND school='$LoggedinSchool' OR opgelost=0 AND school='geen'";
@@ -84,11 +83,11 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal in de afgelopen maand</h4>
-              <?php
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal in de afgelopen maand</h4>
+        <?php
                 // Set the query
                   $thismonth = date("Y-m-d");
                   $lastmonth = date("Y-m-d", strtotime("-1 months"));
@@ -105,14 +104,14 @@
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
-            </div>
-          </div>
-          
-          <hr>
+    </div>
+</div>
 
-          <!-- <h2 class="sub-header">Here's a table</h2> -->
-          <div class="table-responsive">
-          <table id="usertable" class="table table-striped table-bordered" style="width:100%">
+<hr>
+
+<!-- <h2 class="sub-header">Here's a table</h2> -->
+<div class="table-responsive">
+    <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Support-ID</th>
@@ -126,7 +125,7 @@
             </tr>
         </thead>
         <tbody>
-        <?php
+            <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
           $query = "SELECT * FROM support WHERE school='$LoggedinSchool' OR school='geen'";
@@ -162,7 +161,7 @@
             } else {
                echo "0 results";
             }
-        ?>    
+        ?>
         </tbody>
         <tfoot>
             <tr>
@@ -177,17 +176,19 @@
             </tr>
         </tfoot>
     </table>
-          </div>
+</div>
 
-          
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
+
+</div>
+<!--/row-->
+</div>
+</div>
+<!--/.container-->
 
 <script>
-$(document).ready(function () {
-$('#usertable').DataTable();
-$('.dataTables_length').addClass('bs-select');
+$(document).ready(function() {
+    $('#usertable').DataTable();
+    $('.dataTables_length').addClass('bs-select');
 });
 </script>
 

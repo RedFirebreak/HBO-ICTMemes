@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,45 +10,47 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-    <!-- Start coding here! :D -->
-    <?php require('func.accountpooll.php'); ?>
-    <?php require('func.accountinfo.php'); ?>
+    <body>
 
-    <!-- If own account -->
-    <?php require('func.management.php'); ?>
+        <!-- Start coding here! :D -->
+        <?php require('func.accountpooll.php'); ?>
+        <?php require('func.accountinfo.php'); ?>
 
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Accountpage</h1>
-        <p>Display account stuff here</p>
+        <!-- If own account -->
+        <?php require('func.management.php'); ?>
 
-      </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Stuff n' Things</h2>
-            </div>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Accountpage</h1>
+                <p>Display account stuff here</p>
 
-            <div class="col-md-6">
-                <h2>More Stuff n' Things</h2>
-                <h2><a href="/admin/">If admin</a></h2>
             </div>
         </div>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Stuff n' Things</h2>
+                </div>
 
-  </body>
+                <div class="col-md-6">
+                    <h2>More Stuff n' Things</h2>
+                    <h2><a href="/admin/">If admin</a></h2>
+                </div>
+            </div>
+        </div>
 
-  <footer>
-    <?php require("../func.footer.php"); ?>
-  </footer>
-</html>
+    </body>
+
+    <footer>
+        <?php require("../func.footer.php"); ?>
+    </footer>
+
+    </html>
