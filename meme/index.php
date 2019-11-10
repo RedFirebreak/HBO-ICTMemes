@@ -42,7 +42,8 @@
                           $memetitle  = $row["meme-titel"];
                           $memeuser  = $row["user-ID"];
                           $memedate  = $row["datum"];
-                          $memelocation  = $row["locatie"];
+                          $memelocation = "..";
+                          $memelocation  .= $row["locatie"];
                           $memeschool  = $row["school"];
 
                           $query = "SELECT username, profile_picture, userrole, schoolnaam FROM user WHERE `user-ID`='$memeuser'";
@@ -55,29 +56,29 @@
                           $memeuserschool = $row2["schoolnaam"];
                         }
                           ?>
-
                           <!-- Meme- cards -->
                           <div class="row memecards">
                             <!-- Load the meme - part -->
                             <div class="col-md-12">
                               <h3><b><?php echo $memetitle?></b></h3>
                               <hr>
-                              <a href="/meme/?id=<?php echo $memeid?>">
-                                <img src="<?php echo $memelocation?>" class="rounded mx-auto d-block" alt="...">
+                              <?php
+                                    if (file_exists($memelocation)) {
+                                      echo "<a href='/meme/?id=$memeid'><img src='$memelocation'class='memepageimage rounded mx-auto d-block' alt='...'></a>";
+                                  } else {
+                                      echo "<div class='alert alert-danger' role='alert'>";
+                                      echo "De afbeelding kon helaas niet gevonden worden.</div>";
+                                      Customlog("Home-memeimage", "error", "The homepage found an image that does not exist!(ID: $memeid, location: $memelocation, user: $memeuser, Date: $memedate )");
+                                  }
+                                    ?>
                                 <br>
-                              </a>
-                            
-
                             <!-- Load the extra info part -->
-
                             <div class="row">
                               <div class="col-md-12">
                                       <hr>
                                         <p style="margin: 1px 0;"><b>Comments:<br><br></b></p>
-
                                         <?php
                                         // Check if someone commented
-
                                         $sql = "SELECT * FROM comments WHERE `meme-ID`= '$memeid' ORDER by `datum` ASC";
                                         $result = $dbConnection->query($sql);
                                         
@@ -140,7 +141,7 @@
                       <?php
                       
                       // Echo userinfo of the meme
-                        echo $memeusername . '<br>';
+                        echo "Gebruiker: " .$memeusername . '<br>';
                         if ($memeuserrole == 'admin') {echo "Admin <br>";}
                         if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
                         echo $memeuserschool . '<br>';

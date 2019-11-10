@@ -58,7 +58,7 @@
 
                             // Prepare the mysql and execute it
                             $query = "INSERT INTO comments (`meme-id`, `user-id`, `inhoud`) 
-                                      VALUES('$cleanmemeid', '$cleanuserid', '$cleancomment')";
+                                    VALUES('$cleanmemeid', '$cleanuserid', '$cleancomment')";
                                 mysqli_query($dbConnection, $query);
                             
                                 header("Location: /meme/?id=$cleanmemeid");
