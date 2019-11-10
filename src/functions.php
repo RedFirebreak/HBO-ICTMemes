@@ -43,10 +43,10 @@
           //Format it nicely
             $finalerrormessage = "$checktime | $ip | $docname | LOG: $error \n";
 
-              //Create/Write in file general error file.
-               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);  
+            //Create/Write in file general error file.
+              $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);  
               //Create/Write in file of today, fill the file and close it.
                 $errorfile = fopen("$logcation/filtered/{$checkdate}_NORMAL.log", "a");
                 fwrite($errorfile, $finalerrormessage);
@@ -60,16 +60,15 @@
           case "error":
           //This is an error, we should probably fix this!
           //Format it nicely
-          $finalerrormessage = "$checktime | $ip | $docname | ERROR: $error\n";
-           
-              //Create/Write in file general error file.
+            $finalerrormessage = "$checktime | $ip | $docname | ERROR: $error\n";
+            //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
-             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_ERROR.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
+            //Create/Write in file of today, fill the file and close it.
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_ERROR.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
 
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','ERROR','$safeerror')";
@@ -86,31 +85,27 @@
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_CRITICAL.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
-               
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_CRITICAL.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','CRITICAL','$safeerror')";
                 $dbConnection->query($sql);
-
             // Send an email to the main email! We need to fix this ASAP
             error_log("$finalerrormessage",1, "error@hbo-ictmemes.nl","From: system@hbo-ictmemes.nl");
-
               break;
           default:
           //If you need it to be logged somewhere, but you did not properly specify it. This default should catch it
           //Format it nicely
           $finalerrormessage = "$checktime | $ip | $docname | DEFAULT: $safeerror\n";
-
-              //Create/Write in file general error file.
+            //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
-             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_DEFAULT.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
+            //Create/Write in file of today, fill the file and close it.
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_DEFAULT.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
 
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','DEFAULT','$safeerror')";

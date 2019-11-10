@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -10,13 +9,13 @@
     */
 ?>
 
-    <!-- Start coding here! :D -->
+<!-- Start coding here! :D -->
 
-    <?php require('form.changepassword.php'); ?>
-    <?php require('form.changepersonal.php'); ?>
-    <?php require('form.changeusername.php'); ?>
+<?php require('form.changepassword.php'); ?>
+<?php require('form.changepersonal.php'); ?>
+<?php require('form.changeusername.php'); ?>
 
-    <!-- If user is admin -->
-    <?php require('func.isadmin.php'); ?>
+<!-- If user is admin -->
+<?php require('func.isadmin.php'); ?>
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

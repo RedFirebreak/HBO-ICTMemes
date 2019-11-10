@@ -105,6 +105,11 @@ html {
    max-height: 3.6em;
    line-height: 1.8em;
  }
+
+ .memecomment{
+  word-wrap: break-word;
+ }
+
  .divmemeinfo {
    background-color: #455766;
  }

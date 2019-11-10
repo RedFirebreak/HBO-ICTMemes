@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -24,53 +23,53 @@
 ?>
 
 <h1 class="page-header">
-            School admins
-            <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
-          </h1>
+    School admins
+    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
+</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal scholen</h4>
-              <span class="text-muted">
-				  <?php 
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal scholen</h4>
+        <span class="text-muted">
+            <?php 
 					$query = "select count(schoolnaam) from school";
 					$result = $dbConnection->query($query);
 					$whatevz = mysqli_fetch_assoc($result);
 					echo $whatevz['count(schoolnaam)'];
 				  ?>
-				  </span>
-            </div>
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal admins</h4>
-              <span class="text-muted">
-			      <?php 
+        </span>
+    </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal admins</h4>
+        <span class="text-muted">
+            <?php 
 					$query = "select count(username) from user where userrole in ('admin', 'uber-admin');";
 					$result = $dbConnection->query($query);
 					$whatevz = mysqli_fetch_assoc($result);
 					echo $whatevz['count(username)'];
 				  ?>
-			  </span>
-            </div>
-            <!--<div class="col-xs-6 col-sm-3 placeholder text-center">
+        </span>
+    </div>
+    <!--<div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <!--<h4>Label</h4>
+    <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <!--<h4>Label</h4>
+    <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>-->
-          </div>
-          
-          <hr>
+</div>
 
-          <h2 class="sub-header">Here's a table</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-                  <?php
+<hr>
+
+<h2 class="sub-header">Here's a table</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <?php
 				  $query = "select schoolnaam from school order by 1";
 				  $result = $dbConnection->query($query);
 				  while ($record = mysqli_fetch_assoc($result))
@@ -87,12 +86,14 @@
 					echo "</tr>";
 				  }
                   ?>
-            </table>
-          </div>
+    </table>
+</div>
 
-          
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
+
+</div>
+<!--/row-->
+</div>
+</div>
+<!--/.container-->
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

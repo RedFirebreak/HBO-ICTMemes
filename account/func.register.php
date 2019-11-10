@@ -84,9 +84,9 @@ if (isset($_POST['reg_user'])) {
   $result = mysqli_query($dbConnection, $sql);
   $row = mysqli_fetch_assoc($result);
 
-   // Convert the output to lowercase to compare the outputs 
-   $querylowercaseusername = strtolower($row['username']);
-   $querylowercaseemail = strtolower($row['usermail']);
+  // Convert the output to lowercase to compare the outputs 
+  $querylowercaseusername = strtolower($row['username']);
+  $querylowercaseemail = strtolower($row['usermail']);
 
         // Check if username is taken
         if ($querylowercaseusername === $lowercaseusername) {
@@ -135,13 +135,13 @@ if (isset($_POST['reg_user'])) {
         header("Refresh:10; url=login.php");
         return;
     }
-           // Inform user
-           echo "<div class='alert alert-danger' role='alert'>";
-           echo "Er was een error! De administrators zijn op de hoogte gebracht";
-           echo "</div>";
-         // Log the error
-           Customlog("Register", "log", "Someone filled in a form and produced an error that isn't catched?!. If there are any common errors, they have been logged below. ($username, $email, $school)");
-           Customlog("Register", "error", "DUMP: mysql:" . mysqli_error($dbConnection) ."|Queryname: $querylowercaseusername Inputname: $lowercaseusername|Querymail: $querylowercaseemail Inputname: $lowercaseemail|  " );
-       return;   
+        // Inform user
+          echo "<div class='alert alert-danger' role='alert'>";
+          echo "Er was een error! De administrators zijn op de hoogte gebracht";
+          echo "</div>";
+        // Log the error
+          Customlog("Register", "log", "Someone filled in a form and produced an error that isn't catched?!. If there are any common errors, they have been logged below. ($username, $email, $school)");
+          Customlog("Register", "error", "DUMP: mysql:" . mysqli_error($dbConnection) ."|Queryname: $querylowercaseusername Inputname: $lowercaseusername|Querymail: $querylowercaseemail Inputname: $lowercaseemail|  " );
+      return;   
 }
 ?>

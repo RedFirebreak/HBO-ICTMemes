@@ -4,7 +4,7 @@
 <head>
     <title>HBO-ICTMemes</title>
     <?php
-      require "func.header.php";
+    require "func.header.php";
     ?>
 </head>
 
@@ -20,7 +20,7 @@
             <div class="col-md-12">
                 <?php
             if ($Loggedin) {
-              ?>
+            ?>
                 <h2>Alle tags</h2>
                 <input type="text" id="myInput" onkeyup="searchtags()" placeholder="Zoek voor tags..."
                     title="Typ een tag-naam!">
@@ -33,13 +33,13 @@
                     if ($result->num_rows > 0) {
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
-                          $tag = $row["t"];
+                        $tag = $row["t"];
                             echo "<li><a href='#'>$tag</a></li>";
                         }
                     } else {
                         echo "0 results";
                     }
-                  ?>
+                ?>
                 </ul>
                 <script>
                 function searchtags() {
@@ -61,9 +61,9 @@
                 </script>
                 <?php
             } else {
-              echo "<div class='alert alert-danger' role='alert'>";
-              echo "Je moet ingelogd zijn om deze pagina te kunnen bekijken.";
-              echo "</div>";
+                echo "<div class='alert alert-danger' role='alert'>";
+                echo "Je moet ingelogd zijn om deze pagina te kunnen bekijken.";
+                echo "</div>";
             }
             ?>
             </div>
@@ -71,7 +71,7 @@
     </div>
     <?php
     require "func.footer.php";
-  ?>
+    ?>
 </body>
 
 </html>

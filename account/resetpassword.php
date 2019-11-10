@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,17 +10,18 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-    <!-- Start coding here! :D -->
-	<?php
+    <body>
+
+        <!-- Start coding here! :D -->
+        <?php
 	//Hier sturen we de password reset mail
 	
 	if (isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['username']) && !empty($_POST['username'])) {
@@ -36,12 +37,13 @@
 		}
 	}
 	?>
-	
-    <?php require('form.reset.php'); ?>
 
-  </body>
+        <?php require('form.reset.php'); ?>
 
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    </body>
+
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>

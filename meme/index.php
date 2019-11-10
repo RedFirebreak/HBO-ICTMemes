@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,25 +10,27 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-          <?php
-          if($Loggedin) {
-            ?>
+    <body>
+        <div class="container">
             <div class="row">
-              <div class="col-md-9">
+                <div class="col-md-12">
 
-                  <?php
+                <?php
+                if(!empty($_GET)){
+                    if($Loggedin) {
+                    ?>
+                    <div class="row">
+                        <div class="col-md-9">
+
+                            <?php
                     // make query based on logged in userschool
                     $cleanid= mysqli_real_escape_string($dbConnection, $_GET['id']);
 
@@ -56,13 +58,13 @@
                           $memeuserschool = $row2["schoolnaam"];
                         }
                           ?>
-                          <!-- Meme- cards -->
-                          <div class="row memecards">
-                            <!-- Load the meme - part -->
-                            <div class="col-md-12">
-                              <h3><b><?php echo $memetitle?></b></h3>
-                              <hr>
-                              <?php
+                            <!-- Meme- cards -->
+                            <div class="row memecards">
+                                <!-- Load the meme - part -->
+                                <div class="col-md-12">
+                                    <h3><b><?php echo $memetitle?></b></h3>
+                                    <hr>
+                                    <?php
                                     if (file_exists($memelocation)) {
                                       echo "<a href='/meme/?id=$memeid'><img src='$memelocation'class='memepageimage rounded mx-auto d-block' alt='...'></a>";
                                   } else {
@@ -71,13 +73,13 @@
                                       Customlog("Home-memeimage", "error", "The homepage found an image that does not exist!(ID: $memeid, location: $memelocation, user: $memeuser, Date: $memedate )");
                                   }
                                     ?>
-                                <br>
-                            <!-- Load the extra info part -->
-                            <div class="row">
-                              <div class="col-md-12">
-                                      <hr>
-                                        <p style="margin: 1px 0;"><b>Comments:<br><br></b></p>
-                                        <?php
+                                    <br>
+                                    <!-- Load the extra info part -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr>
+                                            <p style="margin: 1px 0;"><b>Comments:<br><br></b></p>
+                                            <?php
                                         // Check if someone commented
                                         $sql = "SELECT * FROM comments WHERE `meme-ID`= '$memeid' ORDER by `datum` ASC";
                                         $result = $dbConnection->query($sql);
@@ -103,42 +105,44 @@
                                               echo"</div>";
                                               echo"<div class='col-md-10'>";
                                               echo"<b>$commentusername</b>";
-                                              echo "<p class='top-comment' style='font-size: 1.4rem;''>". htmlspecialchars($commentinhoud) ."</p>";
+                                              echo "<p class='memecomment' style='font-size: 1.4rem;''>". htmlspecialchars($commentinhoud) ."</p>";
                                               echo"</div>";
                                               echo"</div>";
                                               echo "<hr>";
 
                                             }
                                         } else {
-                                            echo "<p class='top-comment' style='font-size: 1.4rem;'>Niemand heeft een comment geplaatst. Wees de eerste!</p>";
+                                            echo "<p class='memecomment' style='font-size: 1.4rem;'>Niemand heeft een comment geplaatst. Wees de eerste!</p>";
                                           }
                                         }
                                         ?>
+                                        </div>
                                     </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <!-- End meme card -->
-                          <div class="row memecards">
-                              <div class="col-md-12">
-                                <form action="func.sendcomment.php" method="post">
-                                  Laat een bericht achter!:<br>
-                                  <input style="background-color: #2b3640; color: white; width: 100%;" type="text" name="comment" required><br><br>
-                                  <input type="hidden" name="memeid" value="<?php echo "$cleanid"?>" required>
-                                  <input type="hidden" name="userid" value="<?php echo "$LoggedinID"?>" required>
-                                  <input class="btn btn-primary" type="submit" value="Submit">
-                                </form>
-                              </div>
-                          </div>
+                                </div>
+                            </div>
+                            <!-- End meme card -->
+                            <div class="row memecards">
+                                <div class="col-md-12">
+                                    <form action="func.sendcomment.php" method="post">
+                                        Laat een bericht achter!:<br>
+                                        <input style="background-color: #2b3640; color: white; width: 100%;" type="text"
+                                            name="comment" rows="3" maxlength="500" required><br><br>
+                                        <input type="hidden" name="memeid" value="<?php echo "$cleanid"?>" required>
+                                        <input type="hidden" name="userid" value="<?php echo "$LoggedinID"?>" required>
+                                        <input class="btn btn-primary" type="submit" value="Submit">
+                                    </form>
+                                </div>
+                            </div>
 
 
-              </div>
-              <div class="col-md-3">
-                <div class="sticky-top" style="top: 82px;">
-                  <h1>User-info</h1>
-                  <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>"/>
-                  <p style="word-wrap:break-word">
-                      <?php
+                        </div>
+                        <div class="col-md-3">
+                            <div class="sticky-top" style="top: 82px;">
+                                <h1>User-info</h1>
+                                <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
+                                    src="<?php echo $memeuserpic?>" />
+                                <p style="word-wrap:break-word">
+                                    <?php
                       
                       // Echo userinfo of the meme
                         echo "Gebruiker: " .$memeusername . '<br>';
@@ -147,23 +151,30 @@
                         echo $memeuserschool . '<br>';
                         echo "Posted: " . $memedate;
                       ?>
-                    </p>
-                </div> 
-              </div>
-            </div>
-            <?php
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
               } else {
               //Nobody is logged in.
               echo "<div class='alert alert-danger' role='alert'>";
               echo "Je moet ingelogd zijn om deze pagina te kunnen bekijken.";
               echo "</div>";
             }
+        } else {
+            // No get request
+            echo "<div class='alert alert-danger' role='alert'>";
+            echo "Directe toegang is niet toegestaan.";
+            echo "</div>";
+        }
             ?>
-          </div>
+                </div>
+            </div>
         </div>
-      </div>
     </body>
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>

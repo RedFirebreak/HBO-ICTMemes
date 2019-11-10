@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,18 +10,19 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - PAGENAME</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
-  <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <?php
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - PAGENAME</title>
+        <?php require('../func.header.php'); ?>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <?php
                     if (!empty($_POST)){
 
                         // Data validation
@@ -56,6 +57,14 @@
                                 exit;
                             }
 
+                            $amountcomment = strlen($cleancomment);
+                            if ($amountcomment >= 500) {
+                                echo "<div class='alert alert-danger' role='alert'>";
+                                echo "Je comment kan niet langer zijn dan 500 tekens. Probeer het nog eens.";
+                                echo "</div>";
+                                exit;
+                            }
+
                             // Prepare the mysql and execute it
                             $query = "INSERT INTO comments (`meme-id`, `user-id`, `inhoud`) 
                                     VALUES('$cleanmemeid', '$cleanuserid', '$cleancomment')";
@@ -70,12 +79,13 @@
                         echo "</div>";
                     }
                 ?>
+                </div>
             </div>
         </div>
-    </div>
-  </body>
+    </body>
 
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>
