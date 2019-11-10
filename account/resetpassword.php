@@ -28,8 +28,8 @@
 		
 		echo "klaar";
 		//data schoonmaken
-		$safemail = mysqli_real_escape_string($dbconnection, $_POST['email']);
-		$safeusername = mysqli_real_escape_string($dbconnection, $_POST['username']);
+		$safemail = mysqli_real_escape_string($dbConnection, $_POST['email']);
+		$safeusername = mysqli_real_escape_string($dbConnection, $_POST['username']);
 		$sql = "select usermail from user where usermail = '{$_POST['email']}';";
 		$result = $dbConnection->query($sql);
 		if ($result) {

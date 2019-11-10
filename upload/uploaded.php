@@ -35,7 +35,19 @@
 				
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
-				
+					
+				//meme-naam checken
+					$query = "select `meme-titel` from meme order by 1";
+					$result = $dbConnection->query($query);
+					while ($record = $result->fetch_assoc())
+					{
+						if ($safename == $record['meme-titel']){
+							echo "<div class='alert alert-danger' role='alert'>
+							Er bestaat al een meme met deze naam.</div>";
+							return;
+						}
+					}
+					
 				//school achterhalen
 					$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
 					$result = $dbConnection->query($sql);
@@ -45,9 +57,8 @@
 				//query(s) maken
 					$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
 					('" . $safename . "', '12', '/storage/meme/".date("Y")."/".date("n")."', '". $school ."');";
-					$result = $dbConnection->query($sql);
-					echo "<br>";
-					var_dump($result);
+					$memeins = $dbConnection->query($sql);
+					var_dump($memeins);
 					//tags nog weer apart
 						//meme-ID achterhalen
 							$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
@@ -57,74 +68,75 @@
 						//tags inserten
 						$query = "select `tag-ID`, tagnaam from tags order by 1";
 						$result = $dbConnection->query($query);
-						$sql = "";
 						while ($record = $result->fetch_assoc())
 						{
 							if (in_array($record['tagnaam'], $_POST['tags'])){
-								$sql .= "INSERT INTO memetag (`meme-ID`, `tag-ID`)
+								$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
 								Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
+								$dinges = $dbConnection->query($sql);
 							}
 						}
-						$result = $dbConnection->query($sql);
-						echo "<br>";
-						var_dump($sql);
-						echo "<br>";
-						var_dump($result);
-						echo "<br>";
 					
 				//check query
-					if (!$result) {
+					if (!$result || !$memeins || !$dinges) {
 						customlog("uploaded", "error", "An upload form couldn't be sent: the query failed.");
 						
 						echo "<div class='alert alert-danger' role='alert'>
 						Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
 						</div>";
 					} else {
-						echo "<div class='alert alert-success' role='alert'>
-						Dank je! Je meme is geupload3! </div>";
+						
+						//meme uploaden
+						$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
+						$target_file = $target_dir . basename($_FILES["meme"]["name"]);
+						$uploadOk = 1;
+						$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+						// Check if image file is an actual image or fake image
+							$check = getimagesize($_FILES["meme"]["tmp_name"]);
+							if($check !== false) {
+								$uploadOk = 1;
+							} else {
+								echo "<div class='alert alert-danger' role='alert'>
+									 Er was een fout bij het uploaden van de meme. Probeer het later nog eens.
+									 </div><br>";
+								$uploadOk = 0;
+							}
+						// Check if file already exists
+							if (file_exists($target_file)) {
+								echo "<div class='alert alert-danger' role='alert'>
+								Sorry, je meme bestaat al.</div><br>";
+								$uploadOk = 0;
+							}
+						// Check file size
+							if ($_FILES["meme"]["size"] > 2000000) {
+								echo "<div class='alert alert-danger' role='alert'>
+								Sorry, je file is te groot.</div><br>";
+								$uploadOk = 0;
+							}
+						// Allow certain file formats
+							if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+							&& $imageFileType != "gif" ) {
+								echo "<div class='alert alert-danger' role='alert'>
+								Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.</div><br>";
+								$uploadOk = 0;
+							}
+						// Check if $uploadOk is set to 0 by an error
+							if ($uploadOk == 0) {
+								echo "<div class='alert alert-danger' role='alert'>
+								Sorry, je meme was niet geupload.</div>";
+						// if everything is ok, try to upload file
+							} else {
+								if (move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
+									echo "<div class='alert alert-succes' role='alert'>
+									Dank je! Je meme is geupload.</div>";
+								} else {
+									echo "<div class='alert alert-danger' role='alert'>
+									Er was een probleem bij het uploaden van de meme.</div>";
+								}
+							}
 					}
 						var_dump($_FILES['meme']);
-				//meme uploaden
-					$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
-					$target_file = $target_dir . basename($_FILES["meme"]["name"]);
-					$uploadOk = 1;
-					$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-					// Check if image file is an actual image or fake image
-						$check = getimagesize($_FILES["meme"]["tmp_name"]);
-						if($check !== false) {
-							echo "File is een afbeelding - " . $check["mime"] . ".";
-							$uploadOk = 1;
-						} else {
-							echo "File is geen afbeelding.";
-							$uploadOk = 0;
-						}
-					// Check if file already exists
-						if (file_exists($target_file)) {
-							echo "Sorry, je meme bestaat al.";
-							$uploadOk = 0;
-						}
-					// Check file size
-						if ($_FILES["meme"]["size"] > 2000000) {
-							echo "Sorry, je file is te groot.";
-							$uploadOk = 0;
-						}
-					// Allow certain file formats
-						if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-						&& $imageFileType != "gif" ) {
-							echo "Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.";
-							$uploadOk = 0;
-						}
-					// Check if $uploadOk is set to 0 by an error
-						if ($uploadOk == 0) {
-							echo "Sorry, je meme was niet geupload.";
-					// if everything is ok, try to upload file
-						} else {
-							if (move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
-								echo "Je meme is geupload";
-							} else {
-								echo "Er was een probleem bij het uploaden van de meme.";
-							}
-						}
+				
 			}
 			//check welke data er mist
 			else {
@@ -149,8 +161,6 @@
 					return;
 				}
 			}
-			echo "<br><br>";
-			//var_dump($_FILES['meme']);
 		/*}
 		else {
 			echo "<div class='alert alert-danger' role='alert'>";

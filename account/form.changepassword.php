@@ -14,7 +14,7 @@ $dbpassword = mysqli_query($dbConnection, $sql3);
 if ($loggedin) {
 	if ($password == $dbpassword) {
 		if ($newpassword != $newpassword2) {
-			echo "De twee getypte wachtwoorden komen niet overeen, probeer opnieuw"
+			echo "De twee getypte wachtwoorden komen niet overeen, probeer opnieuw";
 		}
 		else {
   		$result; //verander password in het nieuwe password
@@ -27,7 +27,7 @@ if ($loggedin) {
 	}
 }
 else {
-	echo 'Log eerst in, voor gebruik kan worden gemaakt van deze functie'
+ 	echo 'Log eerst in, voor gebruik kan worden gemaakt van deze functie';
 }
 
 
