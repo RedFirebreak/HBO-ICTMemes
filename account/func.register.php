@@ -115,8 +115,8 @@ if (isset($_POST['reg_user'])) {
         //register user if there are no errors in the form
         $password = md5($password_1);//encrypt the password before saving in the database. Usefull :)
 
-        $query = "INSERT INTO user (username, usermail, wachtwoord, userrole, schoolnaam) 
-                VALUES('$username', '$lowercaseemail', '$password', 'user', '$school')";
+        $query = "INSERT INTO user (username, usermail, wachtwoord, userrole, schoolnaam, profile_picture) 
+                VALUES('$username', '$lowercaseemail', '$password', 'user', '$school','/storage/profilepictures/default.png')";
         mysqli_query($dbConnection, $query);
 
         Customlog("Register", "log", "New User created! ($username - With $email)");

@@ -27,6 +27,10 @@
 html {
    font-size: 62.5%;
  }
+
+ .btn {
+  font-size: 1.6rem;
+ }
  
  body {
    font-size: 1.6rem;
@@ -50,7 +54,7 @@ html {
    width: 100%;
    min-width : 200px;
    min-height : 200px;
-   max-height: 500px
+   max-height: 750px
  }
 
  .user-thumbnail {
