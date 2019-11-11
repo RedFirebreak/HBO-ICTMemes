@@ -36,44 +36,7 @@
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
 					
-				//school achterhalen
-					$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
-					$result = $dbConnection->query($sql);
-					$school = mysqli_fetch_assoc($result)['schoolnaam'];
-				var_dump ($school);
 				
-				//query(s) maken
-					$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
-					('" . $safename . "', '12', '/storage/meme/".date("Y")."/".date("n")."', '". $school ."');";
-					$memeins = $dbConnection->query($sql);
-					var_dump($memeins);
-					if ($memeins) {
-						//tags nog weer apart
-							//meme-ID achterhalen
-								$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
-								$result = $dbConnection->query($sql);
-								$memeID = mysqli_fetch_assoc($result);
-							
-							//tags inserten
-							$query = "select `tag-ID`, tagnaam from tags order by 1";
-							$result = $dbConnection->query($query);
-							while ($record = $result->fetch_assoc())
-							{
-								if (in_array($record['tagnaam'], $_POST['tags'])){
-									$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-									Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
-									$dinges = $dbConnection->query($sql);
-								}
-							}
-					}
-				//check query
-					if (!$result || !$memeins || !$dinges) {
-						customlog("uploaded", "error", "An upload form couldn't be sent: the query failed.");
-						
-						echo "<div class='alert alert-danger' role='alert'>
-						Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
-						</div>";
-					} else {
 						
 						//meme uploaden
 						$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
@@ -93,20 +56,20 @@
 						// Check if file already exists
 							if (file_exists($target_file)) {
 								echo "<div class='alert alert-danger' role='alert'>
-								Sorry, je meme bestaat al.</div><br>";
+								Je meme bestaat al.</div><br>";
 								$uploadOk = 0;
 							}
 						// Check file size
 							if ($_FILES["meme"]["size"] > 2000000) {
 								echo "<div class='alert alert-danger' role='alert'>
-								Sorry, je file is te groot.</div><br>";
+								Je meme is te groot.</div><br>";
 								$uploadOk = 0;
 							}
 						// Allow certain file formats
 							if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 							&& $imageFileType != "gif" ) {
 								echo "<div class='alert alert-danger' role='alert'>
-								Sorry, alleen JPG, JPEG, PNG & GIF files zijn toegestaan.</div><br>";
+								Alleen JPG, JPEG, PNG & GIF files zijn toegestaan.</div><br>";
 								$uploadOk = 0;
 							}
 						// Check if $uploadOk is set to 0 by an error
@@ -115,16 +78,54 @@
 								Sorry, je meme was niet geupload.</div>";
 						// if everything is ok, try to upload file
 							} else {
-								if (move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
-									echo "<div class='alert alert-success' role='alert'>
-									Dank je! Je meme is geupload.</div>";
-								} else {
+								if (!move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
 									echo "<div class='alert alert-danger' role='alert'>
 									Er was een probleem bij het uploaden van de meme.</div>";
-								}
+								} else {
+				//~~~~~~~~~~~~~~~~hier wordt de sql gedaan.~~~~~~~~~~~~~~~~~~
+									
+									//school achterhalen
+										$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
+										$result = $dbConnection->query($sql);
+										$school = mysqli_fetch_assoc($result)['schoolnaam'];
+									
+									//query(s) maken
+										$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
+										('" . $safename . "', '12', '/storage/meme/".date("Y")."/".date("n")."', '". $school ."');";
+										$memeins = $dbConnection->query($sql);
+										if ($memeins) {
+											//tags nog weer apart
+												//meme-ID achterhalen
+													$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
+													$result = $dbConnection->query($sql);
+													$memeID = mysqli_fetch_assoc($result);
+												
+												//tags inserten
+												$query = "select `tag-ID`, tagnaam from tags order by 1";
+												$result = $dbConnection->query($query);
+												while ($record = $result->fetch_assoc())
+												{
+													if (in_array($record['tagnaam'], $_POST['tags'])){
+														$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
+														Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
+														$dinges = $dbConnection->query($sql);
+													}
+												}
+										}
+									//check query
+										if (!$result || !$memeins || !$dinges) {
+											customlog("uploaded", "error", "An upload form couldn't be sent: the query failed.");
+											
+											echo "<div class='alert alert-danger' role='alert'>
+											Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
+											</div>";
+										} else {
+											echo "<div class='alert alert-success' role='alert'>
+											Dank je! Je meme is geupload.
+											</div>";
+										}
 							}
 					}
-						var_dump($_FILES['meme']);
 				
 			}
 			//check welke data er mist
