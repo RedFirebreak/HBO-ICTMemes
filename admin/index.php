@@ -132,7 +132,11 @@ require ("func.adminheader.php");
                     <li><a href="?page=schooladmins">Scholen en Schooladmins</a></li>
                     <li><a href="?page=memes">Memes</a></li>
                     <li><a href="?page=tags">Tags</a></li>
-                    <li><a href="?page=support">Support</a></li>
+                    <li><a href="?page=votes">Upvote/Downvotes</a></li>
+                    <li><a href="?page=reported">Geraporteerde memes/comments</a></li>
+                    <li><a href="?page=comments">Comments</a></li>
+                    <li><a href="?page=verification">Emailverificatie</a></li>
+                    <li><a href="?page=errors">Errors</a></li>
                 </ul>
             </div>
             <!--/span-->
@@ -163,6 +167,22 @@ require ("func.adminheader.php");
               case 'support':
                   require("func.support.php");
                   break;
+              case 'votes':
+                  require("func.votes.php");
+                  break;
+              case 'reported':
+                  require("func.reported.php");
+                  break;
+              case 'comments':
+                  require("func.comments.php");
+                  break;
+              case 'verification':
+                  require("func.verification.php");
+                  break;
+              case 'error':
+                  require("func.error.php");
+                  break;
+
             }
           } else {
             require("homepage.php");

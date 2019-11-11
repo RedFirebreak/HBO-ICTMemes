@@ -35,14 +35,25 @@
 				
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
-					
-				
-						
+
 						//meme uploaden
 						$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
-						$target_file = $target_dir . basename($_FILES["meme"]["name"]);
+						$sql_dir = "/storage/meme/".date("Y")."/".date("n")."/";
+
+						//Predict ID and Rename the file
+							// Get the latest ID. Do ++ and name the image that.
+							$sql = "SELECT `meme-id` FROM meme ORDER BY datum DESC LIMIT 1";
+							$result = mysqli_query($dbConnection, $sql);
+							$row = mysqli_fetch_assoc($result);
+							$memeID = $row['meme-id'];
+							$memeID++; 
+
+						$target_file = $target_dir ."ID{$memeID}_". basename($_FILES["meme"]["name"]);
+						$sql_file = $sql_dir ."ID{$memeID}_". basename($_FILES["meme"]["name"]); 
+
 						$uploadOk = 1;
 						$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
 						// Check if image file is an actual image or fake image
 							$check = getimagesize($_FILES["meme"]["tmp_name"]);
 							if($check !== false) {
@@ -53,12 +64,13 @@
 									 </div><br>";
 								$uploadOk = 0;
 							}
-						// Check if file already exists
+						/* Check if file already exists
 							if (file_exists($target_file)) {
 								echo "<div class='alert alert-danger' role='alert'>
 								Je meme bestaat al.</div><br>";
 								$uploadOk = 0;
 							}
+						*/
 						// Check file size
 							if ($_FILES["meme"]["size"] > 2000000) {
 								echo "<div class='alert alert-danger' role='alert'>
@@ -78,7 +90,7 @@
 								Sorry, je meme was niet geupload.</div>";
 						// if everything is ok, try to upload file
 							} else {
-								if (!move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
+								if (!move_uploaded_file($_FILES["meme"]["tmp_name"], $target_dir . "ID{$memeID}_". basename($_FILES["meme"]["name"]))) {
 									echo "<div class='alert alert-danger' role='alert'>
 									Er was een probleem bij het uploaden van de meme.</div>";
 								} else {
@@ -88,17 +100,16 @@
 										$sql = "Select schoolnaam from user where `user-ID`='". $LoggedinID ."';";
 										$result = $dbConnection->query($sql);
 										$school = mysqli_fetch_assoc($result)['schoolnaam'];
-									
 									//query(s) maken
 										$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
-										('" . $safename . "', '". $LoggedinID . "', '/storage/meme/".date("Y")."/".date("n")."/".basename($_FILES["meme"]["name"])."', '". $school ."');";
+										('$safename', '$LoggedinID', '$sql_file', '$school');";
 										$memeins = $dbConnection->query($sql);
 										if ($memeins) {
 											//tags nog weer apart
 												//meme-ID achterhalen
 													$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
 													$result = $dbConnection->query($sql);
-													$memeID = mysqli_fetch_assoc($result);
+													//$memeID = mysqli_fetch_assoc($result);
 												
 												//tags inserten
 												$query = "select `tag-ID`, tagnaam from tags order by 1";
@@ -107,7 +118,7 @@
 												{
 													if (in_array($record['tagnaam'], $_POST['tags'])){
 														$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-														Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
+														Values ('".$memeID."', '".$record['tag-ID']."');";
 														$dinges = $dbConnection->query($sql);
 													}
 												}

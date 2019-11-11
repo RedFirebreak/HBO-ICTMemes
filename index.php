@@ -95,7 +95,7 @@
                                   echo "Posted: " . $memedate;
                                 ?>
                                     </div>
-                                    <div class="col-md-12">
+                                    <div style="min-height: 200px;"class="col-md-12">
                                         <div class="d-none d-md-block">
                                             <!-- Hide on smaller devices -->
                                             <hr>
@@ -163,8 +163,8 @@
                                                     <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
                                                     <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                                     <?php
-                                                      $sqlovertredingen = "SELECT * FROM overtreding ORDER by overtreding ASC;";
-                                                      $resultovertredingen = mysqli_query($conn, $sqlovertredingen);
+                                                      $sqlovertredingen = "SELECT * FROM overtredingen ORDER by overtreding ASC;";
+                                                      $resultovertredingen = mysqli_query($dbConnection, $sqlovertredingen);
                                                       
                                                       if (mysqli_num_rows($resultovertredingen) > 0) {
                                                           // output data of each row
@@ -181,11 +181,8 @@
                                                   <div class="col-auto my-1">
                                                     <div class="custom-control custom-checkbox mr-sm-2">
                                                       <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                                      <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                                                      <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
                                                     </div>
-                                                  </div>
-                                                  <div class="col-auto my-1">
-                                                    <button type="submit" class="btn btn-primary">Submit</button>
                                                   </div>
                                                 </div>
                                               
