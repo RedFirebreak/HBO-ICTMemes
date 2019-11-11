@@ -59,24 +59,25 @@
 					('" . $safename . "', '12', '/storage/meme/".date("Y")."/".date("n")."', '". $school ."');";
 					$memeins = $dbConnection->query($sql);
 					var_dump($memeins);
-					//tags nog weer apart
-						//meme-ID achterhalen
-							$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
-							$result = $dbConnection->query($sql);
-							$memeID = mysqli_fetch_assoc($result);
-						
-						//tags inserten
-						$query = "select `tag-ID`, tagnaam from tags order by 1";
-						$result = $dbConnection->query($query);
-						while ($record = $result->fetch_assoc())
-						{
-							if (in_array($record['tagnaam'], $_POST['tags'])){
-								$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-								Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
-								$dinges = $dbConnection->query($sql);
+					if ($memeins) {
+						//tags nog weer apart
+							//meme-ID achterhalen
+								$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
+								$result = $dbConnection->query($sql);
+								$memeID = mysqli_fetch_assoc($result);
+							
+							//tags inserten
+							$query = "select `tag-ID`, tagnaam from tags order by 1";
+							$result = $dbConnection->query($query);
+							while ($record = $result->fetch_assoc())
+							{
+								if (in_array($record['tagnaam'], $_POST['tags'])){
+									$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
+									Values ('".$memeID['meme-ID']."', '".$record['tag-ID']."');";
+									$dinges = $dbConnection->query($sql);
+								}
 							}
-						}
-					
+					}
 				//check query
 					if (!$result || !$memeins || !$dinges) {
 						customlog("uploaded", "error", "An upload form couldn't be sent: the query failed.");
@@ -127,7 +128,7 @@
 						// if everything is ok, try to upload file
 							} else {
 								if (move_uploaded_file($_FILES["meme"]["tmp_name"], $target_file)) {
-									echo "<div class='alert alert-succes' role='alert'>
+									echo "<div class='alert alert-success' role='alert'>
 									Dank je! Je meme is geupload.</div>";
 								} else {
 									echo "<div class='alert alert-danger' role='alert'>
