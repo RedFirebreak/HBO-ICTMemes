@@ -22,13 +22,11 @@
     -->
 	<?php
 	if (empty($_POST)) {
-
-	
 	$username = mysqli_real_escape_string($dbConnection, $_GET['username']);
-	$email = mysqli_real_escape_string($dbConnection, $_GET['email']);
+	$mail = mysqli_real_escape_string($dbConnection, $_GET['mail']);
 	$code = mysqli_real_escape_string($dbConnection, $_GET['code']);
 
-	$formlink = "/verify/?wachtwoordreset=true&username=$username&mail=$email&code=$code";
+	$formlink = "/verify/?wachtwoordreset=true&username=$username&mail=$mail&code=$code";
 	?>
 
 
@@ -78,8 +76,8 @@
 			$result = $dbConnection->query($sql);
 			$row = mysqli_fetch_assoc($result);
 			$userID = $row['user-ID'];
-
-			$sql = "select `verificatiecode`, `rowdatum` from emailverificatie where `user-ID`='".$userID."' order by rowdatum DESC limit 1;";
+			
+			$sql = "select `verificatiecode`, `rowdatum` from emailverificatie where `user-ID`='".$userID."' AND geverifieerd= 0 order by rowdatum DESC limit 1";
 			$result = $dbConnection->query($sql);
 			$row2 = mysqli_fetch_assoc($result);
 			$vercode = $row2['verificatiecode'];
