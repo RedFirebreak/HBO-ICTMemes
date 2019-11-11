@@ -68,6 +68,8 @@
 	if (isset($_POST['newpassword']) && !empty($_POST['newpassword']) && isset($_POST['newpasswordcheck']) && !empty($_POST['newpasswordcheck'])) {
 		$safepassword = mysqli_real_escape_string($dbConnection, $_POST['newpassword']);
 		$safepasscheck = mysqli_real_escape_string($dbConnection, $_POST['newpasswordcheck']);
+		$code = mysqli_real_escape_string($dbConnection, $_GET['code']);
+
 		//checken of de wachtwoorden goed zijn ingevuld
 		if ($safepass = $safepasscheck) {
 			//checken of de user-ID en verificatiecode overeenkomen
@@ -83,8 +85,6 @@
 			$vercode = $row2['verificatiecode'];
 			$rowdate = $row2['rowdatum'];
 			if (strtotime('-1 day') < strtotime($rowdate)) {
-				echo $code. '<br>';
-				echo $vercode . '<br>';
 				if ($vercode==$code) {
 					$sql3 = "insert into user (`wachtwoord`) values ('{$safepassword}');";
 					$result = $dbConnection->query($sql3);
