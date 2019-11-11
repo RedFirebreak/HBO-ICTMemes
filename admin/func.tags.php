@@ -43,9 +43,9 @@
 
 <hr>
 
-<h2 class="sub-header">Here's a table</h2>
+<h2 class="sub-header">De tag-tabel</h2>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table id="tagtable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <?php
 				$query = "select * from tags order by 1";
