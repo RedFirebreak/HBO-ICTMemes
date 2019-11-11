@@ -21,7 +21,6 @@
     5. Informeer de user 
     -->
 
-<body>
 	<form action="/verify/index.php" method="post">
 		<p>Password<br>
 			<input type="password" id="newpassword" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
@@ -40,7 +39,6 @@
 		<?php echo recaptchaform ();?>
 		<button type="submit" class="btn btn-primary" name="reset_password">Change Password</button>
 	</form>
-</body>
 
 <?php
 	// First check if recaptcha was valid
@@ -77,10 +75,10 @@
 		else {
 			echo "Zorg ervoor dat de inhoud van beide vakken met elkaar overeenkomt";
 		}
-		}
-		else {
-			echo "Zorg ervoor dat je beide vakken invult";
-		}
+	}
+	else {
+		echo "Zorg ervoor dat je beide vakken invult";
+	}
 		
 ?>
 
