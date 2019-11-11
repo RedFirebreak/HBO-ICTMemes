@@ -73,16 +73,24 @@
 		//checken of de wachtwoorden goed zijn ingevuld
 		if ($safepass = $safepasscheck) {
 			//checken of de user-ID en verificatiecode overeenkomen
-			$sql = "select `user-ID` from user where `username`='{$_GET['username']}';";
+			$username = $_GET['username'];
+			$sql = "select `user-ID` from user where `username`='$username';";
 			$result = $dbConnection->query($sql);
-			$userID = mysqli_fetch_assoc($result);
+			$row = mysqli_fetch_assoc($result);
+			$userID = $row['user-ID'];
+
 			$sql = "select `verificatiecode`, `rowdatum` from emailverificatie where `user-ID`='".$userID."' order by rowdatum DESC limit 1;";
 			$result = $dbConnection->query($sql);
-			$vercode = mysqli_fetch_assoc($result);
-			if (strtotime('-1 day') < strtotime($vercode['rowdatum']) {
-				if ($vercode['verificatiecode']==$_GET['code']) {
-					$sql = "insert into user (`wachtwoord`) values ('{$safepassword}');";
-					echo "Succes! Het wachtwoord is veranderd.";
+			$row2 = mysqli_fetch_assoc($result);
+			$vercode = $row2['verificatiecode'];
+			$rowdate = $row2['rowdatum'];
+			if (strtotime('-1 day') < strtotime($rowdate)) {
+				if ($vercode==$code) {
+					$sql3 = "insert into user (`wachtwoord`) values ('{$safepassword}');";
+					$result = $dbConnection->query($sql3);
+					echo "<div class='alert alert-success' role='alert'>";
+					echo "Je wachtwoord is veranderd!";
+					echo "</div>";
 				} else {
 					Customlog("Verify", "error", "Iemand met de juiste email / username heeft een verkeerde code ingevuld.");
 					echo "<div class='alert alert-danger' role='alert'>";
