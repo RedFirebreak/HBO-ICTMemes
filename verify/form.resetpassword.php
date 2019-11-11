@@ -81,10 +81,10 @@
 			$result = $dbConnection->query($sql);
 			$row2 = mysqli_fetch_assoc($result);
 			$vercode = $row2['verificatiecode'];
-			var_dump($row2);
-			var_dump($vercode);
 			$rowdate = $row2['rowdatum'];
 			if (strtotime('-1 day') < strtotime($rowdate)) {
+				echo $code. '</br>';
+				echo $vercode . '</br>';
 				if ($vercode==$code) {
 					$sql3 = "insert into user (`wachtwoord`) values ('{$safepassword}');";
 					$result = $dbConnection->query($sql3);
