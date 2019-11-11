@@ -7,6 +7,7 @@
         Author:     Janine
         Date:       11-10-2019
     */
+	
 if (!empty($_POST['changepersonal'])){
 	$voor = mysqli_real_escape_string($dbConnection, $_POST["voor"]);
 	$achter = mysqli_real_escape_string($dbConnection, $_POST["achter"]);
@@ -16,40 +17,50 @@ if (!empty($_POST['changepersonal'])){
 	$datum = mysqli_real_escape_string($dbConnection, $_POST["datum"]);
 	$email = mysqli_real_escape_string($dbConnection, $_POST["email"]);
 	$wachtwoord = mysqli_real_escape_string($dbConnection, $_POST["wachtwoord"]);
+	$passwordencrypted = md5($wachtwoord);
 	
 	if ($Loggedin){
 		if (isset($_POST["submit"])){
-			if (isset($voor)){
-				$sql_voor = "UPDATE `private-info` SET voornaam = '$voor' WHERE user-ID = '$LoggedinID'";
-				$result_voor = mysqli_query($dbConnection, $sql_voor);
-			}
-			if (isset($achter)){
-				$sql_achter = "UPDATE `private-info` SET achternaam = '$achter' WHERE user-ID = '$LoggedinID'";
-				$result_achter = mysqli_query($dbConnection, $sql_achter);
-			}
-			if (isset($adres)){
-				$sql_adres = "UPDATE `private-info` SET adres = '$adres' WHERE user-ID = '$LoggedinID'";
-				$result_adres = mysqli_query($dbConnection, $sql_adres);
-			}
-			if (isset($postcode)){
-				$sql_postcode = "UPDATE `private-info` SET postcode = '$postcode' WHERE user-ID = '$LoggedinID'";
-				$result_postcode = $mysqli_query($dbConnection, $sql_postcode);
-			}
-			if (isset($land)){
-				$sql_land = "UPDATE `private-info` SET land = '$land' WHERE user-ID = '$LoggedinID'";
-				$result_land = mysqli_query($dbConnection, $sql_land);
-			}
-			if (isset($datum)){
-				$sql_datum = "UPDATE `private-info` SET datum = '$datum' WHERE user-ID = '$LoggedinID'";
-				$result_datum = mysqli_query($dbConnection, $sql_datum);
-			}
-			if (isset($wachtwoord)){
-				$passwordencrypted = md5($wachtwoord); // encrypt the password before inserting - STEFAN ADDED
-				$sql_wachtwoord = "SELECT `wachtwoord` FROM `user` WHERE usermail = '$email'";
+				$sql_wachtwoord = "SELECT `wachtwoord` FROM `user` WHERE `user-ID`= $LoggedinID";
 				$result_wachtwoord = mysqli_query($dbConnection, $sql_wachtwoord);
+				$row = mysqli_fetch_assoc($result_wachtwoord);
+				$dbwachtwoord = $row['wachtwoord'];
+				
+			if ($passwordencrypted != $dbwachtwoord) {
+					$temperror = "Het wachtwoord is niet correct";
 			}
-			if (empty($wachtwoord)){
-				echo "Er is geen wachtwoord ingevuld";
+			
+			else {
+				if ($voor){
+					$sql_voor = "UPDATE `private-info` SET voornaam = '$voor' WHERE `user-ID` = '$LoggedinID'";
+					$result_voor = mysqli_query($dbConnection, $sql_voor);
+					$tempsuccess = "De gegevens zijn geüpdated";
+				}
+				if ($achter){
+					$sql_achter = "UPDATE `private-info` SET achternaam = '$achter' WHERE `user-ID` = '$LoggedinID'";
+					$result_achter = mysqli_query($dbConnection, $sql_achter);
+					$tempsuccess = "De gegevens zijn geüpdated";
+				}
+				if ($adres){
+					$sql_adres = "UPDATE `private-info` SET adres = '$adres' WHERE `user-ID` = '$LoggedinID'";
+					$result_adres = mysqli_query($dbConnection, $sql_adres);
+					$tempsuccess = "De gegevens zijn geüpdated";
+				}
+				if ($postcode){
+					$sql_postcode = "UPDATE `private-info` SET postcode = '$postcode' WHERE `user-ID` = '$LoggedinID'";
+					$result_postcode = mysqli_query($dbConnection, $sql_postcode);
+					$tempsuccess = "De gegevens zijn geüpdated";
+				}
+				if ($land){
+					$sql_land = "UPDATE `private-info` SET land = '$land' WHERE `user-ID` = '$LoggedinID'";
+					$result_land = mysqli_query($dbConnection, $sql_land);
+					$tempsuccess =  "De gegevens zijn geüpdated";
+				}
+				if ($datum){
+					$sql_datum = "UPDATE `private-info` SET geboortedatum = '$datum' WHERE `user-ID` = '$LoggedinID'";
+					$result_datum = mysqli_query($dbConnection, $sql_datum);
+					$tempsuccess =  "De gegevens zijn geüpdated";
+				}	
 			}
 		}
 	}
@@ -59,17 +70,17 @@ if (!empty($_POST['changepersonal'])){
 }
 ?>
 <form action="/account/" id="update" method="post">
-	<form action="/account/" id="update" method="post">
 	Voornaam: <input type="text" name="voor"><br>
-	<input type="hidden" name="changeusername" value="true">
+	<input type="hidden" name="changepersonal" value="true">
 	Achternaam: <input type="text" name="achter"><br>
     Adres: <input type="text" name="adres"><br>
     Postcode: <input type="text" name="postcode"><br>
-    Land: <input type="text" name="Land"><br>
+    Land: <input type="text" name="land"><br>
     Geboortedatum: <input type="date" name="datum"><br>
+	Wachtwoord: <input type="password" name="wachtwoord"><br>
 	
 	
-    <button type="submit" value="Submit">Submit</button>
+    <button type="submit" value="Submit" name="submit">Submit</button>
     <button type="reset" value="Reset">Reset</button>
 </form>
 <br> <br>
