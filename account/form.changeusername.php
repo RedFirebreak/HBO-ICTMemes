@@ -12,34 +12,36 @@ if (!empty($_POST['changeusername'])){
 	$newusername = mysqli_real_escape_string($dbConnection, $_POST["newusername"]);
 	$email = mysqli_real_escape_string($dbConnection, $_POST["email"]);
 	$password = mysqli_real_escape_string($dbConnection, $_POST["password"]);
+	$passwordencrypted = md5($password);
 	
-	$sql_name = "SELECT naam FROM user WHERE user-id = '$LoggedinID' ";
-	$sql = "UPDATE user SET naam = '$newusername' WHERE usermail= '$email'"; //sql query voor updaten username
-	$sql2 = "SELECT wachtwoord from user WHERE user-id = '$LoggedinID'";
-    $result = mysqli_query($dbConnection,$sql);
-	$result2 = mysqli_query($dbConnection,$sql2);
-	$result_name = mysqli_query($dbConnection, $sql_name);
+	$sql_name = "SELECT username FROM user WHERE `user-id` = '$LoggedinID' ";
+	$sql = "UPDATE user SET naam = '$newusername' WHERE `user-id`= $LoggedinID'"; //sql query voor updaten username
+	$sql2 = "SELECT wachtwoord from user WHERE `user-id` = '$LoggedinID'";
 	
 	if ($Loggedin) {
-			if ($username != $result_name) {
-				echo "de username is niet correct, vul deze opnieuw in";
-			}
-			if ($passwordencrypted != $result2) {
-				echo "Het ingevulde wachtwoord is niet correct.";
+		$result_name = mysqli_query($dbConnection,$sql_name);
+		$row = mysqli_fetch_assoc($result_name);
+		$dbusername = $row['username'];
+		
+		$result_password = mysqli_query($dbConnection,$sql_2);
+		$row = mysqli_fetch_assoc($result_password);
+		$dbpassword = $row['wachtwoord'];
+		
+			if ($username != $dbusername or $passwordencrypted != $dbpassword) {
+				$temperror = "de username of wachtwoord is niet correct, vul deze opnieuw in";
 			}
 			else {
-				$result;
-				echo "De gebruikersnaam is veranderd naar: $newusername <br>";
+				$result_newname = mysqli_query($dbConnection,$sql);
+				$tempsuccess = "De gebruikersnaam is veranderd naar: $newname <br>";
 			}
 	}
 		
 	else {
-		echo "Log eerst in, voor er gebruik kan worden gemaakt van deze functie";
+		$temperror = "Log eerst in, voor er gebruik kan worden gemaakt van deze functie";
 	}
 }  
    
 ?>
-
 <form action="/account/" id="update" method="post">
     Huidige gebruikersnaam: <input type="text" name="username"><br>
     Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
