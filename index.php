@@ -82,8 +82,7 @@
                             <div class="col-md-4 divmemeinfo">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
-                                            src="<?php echo $memeuserpic?>" />
+                                        <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>" />
                                     </div>
                                     <div class="col-md-8">
                                         <p style="word-wrap:break-word">
@@ -118,9 +117,11 @@
                                         $resultstopcomment = mysqli_query($dbConnection, $querytopcomment);
                                         $rowtopcomment = mysqli_fetch_assoc($resultstopcomment);
                                         $topcommentusername = $rowtopcomment['username'];
+
+                                        $topcommentinhoud = htmlspecialchars($topcommentinhoud);
                                       
                                         echo "<p class='oneline' style='font-size: 1.2rem; margin: 1px 0;'>$topcommentusername:</p>";
-                                        echo "<p class='top-comment' style='font-size: 1.4rem;''>". htmlspecialchars($topcommentinhoud) ."</p>";
+                                        echo "<p class='top-comment' style='font-size: 1.4rem;''>$topcommentinhoud</p>";
                                       }
                                       ?>
 
@@ -128,6 +129,38 @@
 
                                         <a class="btn btn-primary" style="color:#FFF;"
                                             href="/meme/?id=<?php echo $memeid?>">Comments</a>
+                                    </div>
+
+                                    <div class="memereport col-md-12 text-center">
+                                      <hr>
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                          <a style="color: #FFF" href="##"><i class="fas fa-chevron-up"></i></a>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                          <a style="color: #FFF" href="##"><i class="fas fa-chevron-down"></i></a>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                          <a style="color: #FFF" href="#"><i id="myBtn" class="fas fa-dumpster"></i></a>
+                                          </div>
+
+                                          <!-- Trigger/Open The Modal -->
+                                        <button id="myBtn">Open Modal</button>
+
+                                        <!-- The Modal -->
+                                        <div id="myModal" class="modal">
+
+                                          <!-- Modal content -->
+                                          <div class="modal-content">
+                                            <span class="close">&times;</span>
+                                            <p>Some text in the Modal..</p>
+                                          </div>
+
+                                        </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>

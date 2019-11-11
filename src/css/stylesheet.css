@@ -119,6 +119,12 @@ html {
   max-width: 100%;
  }
 
+ .memereport {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+ }
+
  .memeaccountimage {
   top: 25px;
   min-width: 100px;

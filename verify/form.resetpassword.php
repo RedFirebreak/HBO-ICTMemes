@@ -20,8 +20,19 @@
     4. Komt de informatie overeen, verander het wachtwoord van de user met een tweede query
     5. Informeer de user 
     -->
+	<?php
+	if (empty($_POST)) {
 
-	<form action="/verify/index.php" method="post">
+	
+	$username = mysqli_real_escape_string($dbConnection, $_GET['username']);
+	$email = mysqli_real_escape_string($dbConnection, $_GET['email']);
+	$code = mysqli_real_escape_string($dbConnection, $_GET['code']);
+
+	$formlink = "/verify/?wachtwoordreset=true&username=$username&mail=$email&code=$code";
+	?>
+
+
+	<form action="<?php echo $formlink ?>" method="post">
 		<p>Password<br>
 			<input type="password" id="newpassword" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
 				required></p>
@@ -31,16 +42,14 @@
 			<p id="number" class="invalid">A <b>number</b></p>
 			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
 		</div>
-
-
 		<p>Confirm password<br>
 			<input type="password" name="newpasswordcheck" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></p>
-
 		<?php echo recaptchaform ();?>
 		<button type="submit" class="btn btn-primary" name="reset_password">Change Password</button>
 	</form>
 
 <?php
+} // end isset form
 	// First check if recaptcha was valid
 		if(isset($_POST['g-recaptcha-response'])){
 			$captcha=$_POST['g-recaptcha-response'];
@@ -51,7 +60,7 @@
 		}
 		if (!$recaptcha){
 			echo "<div class='alert alert-danger' role='alert'>";
-			echo "Recaptcha is niet ingevuld, niet correct of is verlopen. Probeer het nog eens.";
+			echo "Recaptcha is niet ingevuld, niet correct of is verlopen. Klik opnieuw op de knop in de mail.";
 			echo "</div>";
 			return;
 		}
@@ -59,12 +68,12 @@
 			
 	//checken of de data er is
 	if (isset($_POST['newpassword']) && !empty($_POST['newpassword']) && isset($_POST['newpasswordcheck']) && !empty($_POST['newpasswordcheck'])) {
-		$safepassword = mysql_real_escape_string($_POST['newpassword']);
-		$safepasscheck = mysql_real_escape_string($_POST['newpasswordcheck']);
+		$safepassword = mysqli_real_escape_string($dbConnection, $_POST['newpassword']);
+		$safepasscheck = mysqli_real_escape_string($dbConnection, $_POST['newpasswordcheck']);
 		//checken of de wachtwoorden goed zijn ingevuld
 		if ($safepass = $safepasscheck) {
 			//checken of de user-ID en verificatiecode overeenkomen
-			$sql = "select verificatiecode from emailverificatie where `user-ID`={$_GET['username']};"
+			$sql = "select verificatiecode from emailverificatie where `user-ID`={$_GET['username']};";
 			$result = $dbConnection->query($sql);
 			$vercode = mysqli_fetch_assoc($result);
 			if ($vercode['verificatiecode']=$_GET['code']) {
