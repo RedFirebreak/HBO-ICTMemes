@@ -68,6 +68,7 @@
 	if (isset($_POST['newpassword']) && !empty($_POST['newpassword']) && isset($_POST['newpasswordcheck']) && !empty($_POST['newpasswordcheck'])) {
 		$safepassword = mysqli_real_escape_string($dbConnection, $_POST['newpassword']);
 		$safepasscheck = mysqli_real_escape_string($dbConnection, $_POST['newpasswordcheck']);
+		$encryptedpassword = md5($safepassword);
 		$code = mysqli_real_escape_string($dbConnection, $_GET['code']);
 
 		//checken of de wachtwoorden goed zijn ingevuld
@@ -86,8 +87,17 @@
 			$rowdate = $row2['rowdatum'];
 			if (strtotime('-1 day') < strtotime($rowdate)) {
 				if ($vercode==$code) {
-					$sql3 = "insert into user (`wachtwoord`) values ('{$safepassword}');";
+					$sql3 = "	UPDATE `user` 
+								SET wachtwoord='$encryptedpassword'
+								WHERE `user-ID` ='$userID'";
 					$result = $dbConnection->query($sql3);
+
+					// Update emailverification form
+					$query3 = " UPDATE `emailverificatie`
+								SET geverifieerd='1' 
+								WHERE `user-ID` ='$userID' AND geverifieerd='0' AND soort = 'emailverificatie' ORDER BY rowdatum DESC LIMIT 1;";
+					$results3 = mysqli_query($dbConnection, $query3);
+					
 					echo "<div class='alert alert-success' role='alert'>";
 					echo "Je wachtwoord is veranderd!";
 					echo "</div>";
