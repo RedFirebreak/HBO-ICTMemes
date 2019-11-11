@@ -55,7 +55,7 @@ if (!empty($_POST['changepassword'])){
         <input type="password" name="newpassword2">
 		<input type="hidden" name="changepassword" value="true">
         <br>
-        <input type="submit" name="submit">
+        <button type="submit" value="Submit">Submit</button>
     </form>
 	<br> <br>
 </body>

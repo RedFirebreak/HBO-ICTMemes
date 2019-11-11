@@ -12,8 +12,8 @@
 <!-- Start coding here! :D -->
 
 <?php require('form.changepassword.php'); ?>
-<?php require('form.changepersonal.php'); ?>
 <?php require('form.changeusername.php'); ?>
+<?php require('form.changepersonal.php'); ?>
 
 <!-- If user is admin -->
 <?php require('func.isadmin.php'); ?>
