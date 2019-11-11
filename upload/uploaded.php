@@ -14,7 +14,7 @@
 	<?php
 		echo "<br>";
 		//is er wel een user ingelogd?
-		//if ($loggedin) {
+		if ($loggedin) {
 			// First check if recaptcha was valid
 			  if(isset($_POST['g-recaptcha-response'])){
 				$captcha=$_POST['g-recaptcha-response'];
@@ -151,10 +151,10 @@
 					return;
 				}
 			}
-		/*}
+		}
 		else {
 			echo "<div class='alert alert-danger' role='alert'>";
 			echo "Je moet ingelogd zijn voordat je memes kan uploaden.";
 			echo "</div>";
-		}*/
+		}
 	?>
