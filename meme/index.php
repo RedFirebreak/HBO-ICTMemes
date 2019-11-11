@@ -105,6 +105,8 @@
                                               echo"</div>";
                                               echo"<div class='col-md-10'>";
                                               echo"<b>$commentusername</b>";
+                                              if ($memeuserrole == 'admin') {echo "Admin <br>";}
+                                              if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
                                               echo "<p class='memecomment' style='font-size: 1.4rem;''>". htmlspecialchars($commentinhoud) ."</p>";
                                               echo"</div>";
                                               echo"</div>";

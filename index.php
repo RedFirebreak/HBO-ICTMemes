@@ -157,11 +157,15 @@
                                               </div>
                                               <div class="modal-body">
 
-                                              <form>
                                                 <div class="form-row align-items-center">
                                                   <div class="col-auto my-1">
                                                     <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                    <p>Let op! Hiermee kan je een meme rapporteren voor verschillende rededenen. Niet de bedoeling? Klik dan op "sluiten"</p>
+                                                    <h3>Meme: <?php echo $memetitle?></h3>
+                                                    <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
+                                                    
+                                                    <form action="/report.php" method="post">
+                                                    <select name="overtreding" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                                                     <?php
                                                       $sqlovertredingen = "SELECT * FROM overtredingen ORDER by overtreding ASC;";
                                                       $resultovertredingen = mysqli_query($dbConnection, $sqlovertredingen);
@@ -175,22 +179,28 @@
                                                       } else {
                                                           echo "0 results";
                                                       }
+
+                                                      
+
                                                     ?>
                                                     </select>
-                                                  </div>
-                                                  <div class="col-auto my-1">
-                                                    <div class="custom-control custom-checkbox mr-sm-2">
-                                                      <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                                      <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
-                                                    </div>
+                                                    <br><br>
+
+                                                    <label class="custom-control-label" for="customControlAutosizing">Toevoeging</label>
+                                                    <input type="text" name="Toevoeging" required>
+                                                    <?php echo recaptchaform ();?>
+                                                    <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
+                                                    <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
+                                                    <input type="hidden" name="meme" value="true" required>
+
                                                   </div>
                                                 </div>
                                               
 
                                               </div>
                                               <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-danger">Rapporteer</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                                <button type="submit" class="btn btn-danger">Rapporteer</button>
                                                 </form>
                                               </div>
                                             </div>

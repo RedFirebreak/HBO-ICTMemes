@@ -64,6 +64,23 @@
                         </div>
                     </div>
                 </div>
+                <div class="card">
+                    <div class="card-header" id="heading3-4">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapse3-4" aria-expanded="false" aria-controls="collapseThree">
+                                Verander Username
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapse3-4" class="collapse" aria-labelledby="heading3-4" data-parent="#accordion4">
+                        <div class="card-body">
+                            <p><b>Vul de onderstaande info in om je profielfoto te veranderen</b></p>
+                            <br>
+                            <?php require('form.changeprofpic.php'); ?>
+                        </div>
+                    </div>
+                </div>
                 <?php
                 if (!empty($temperror)) {
                     echo "<div class='alert alert-danger' role='alert'>";
