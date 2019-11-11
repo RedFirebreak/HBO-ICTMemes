@@ -14,7 +14,7 @@
 	<?php
 		echo "<br>";
 		//is er wel een user ingelogd?
-		//if ($loggedin) {
+		if ($LoggedinID) {
 			// First check if recaptcha was valid
 			  if(isset($_POST['g-recaptcha-response'])){
 				$captcha=$_POST['g-recaptcha-response'];
@@ -85,13 +85,13 @@
 				//~~~~~~~~~~~~~~~~hier wordt de sql gedaan.~~~~~~~~~~~~~~~~~~
 									
 									//school achterhalen
-										$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
+										$sql = "Select schoolnaam from user where `user-ID`='". $LoggedinID ."';";
 										$result = $dbConnection->query($sql);
 										$school = mysqli_fetch_assoc($result)['schoolnaam'];
 									
 									//query(s) maken
 										$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
-										('" . $safename . "', '12', '/storage/meme/".date("Y")."/".date("n")."', '". $school ."');";
+										('" . $safename . "', '". $LoggedinID . "', '/storage/meme/".date("Y")."/".date("n")."/".basename($_FILES["meme"]["name"])."', '". $school ."');";
 										$memeins = $dbConnection->query($sql);
 										if ($memeins) {
 											//tags nog weer apart
@@ -151,10 +151,10 @@
 					return;
 				}
 			}
-		/*}
+		}
 		else {
 			echo "<div class='alert alert-danger' role='alert'>";
 			echo "Je moet ingelogd zijn voordat je memes kan uploaden.";
 			echo "</div>";
-		}*/
+		}
 	?>

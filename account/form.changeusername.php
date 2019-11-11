@@ -8,10 +8,10 @@
         Date:       11-10-2019
     */
 if (!empty($_POST['changeusername'])){
-	$username = mysqli_real_escape_string(dbConnection, $_POST["username"]);
-	$newusername = mysqli_real_escape_string(dbConnection, $_POST["newusername"]);
-	$email = mysqli_real_escape_string(dbConnection, $_POST["email"]);
-	$password = mysqli_real_escape_string(dbConnection, $_POST["password"]);
+	$username = mysqli_real_escape_string($dbConnection, $_POST["username"]);
+	$newusername = mysqli_real_escape_string($dbConnection, $_POST["newusername"]);
+	$email = mysqli_real_escape_string($dbConnection, $_POST["email"]);
+	$password = mysqli_real_escape_string($dbConnection, $_POST["password"]);
 	
 	$sql_name = "SELECT naam FROM user WHERE user-id = '$LoggedinID' ";
 	$sql = "UPDATE user SET naam = '$newusername' WHERE usermail= '$email'"; //sql query voor updaten username
@@ -40,7 +40,7 @@ if (!empty($_POST['changeusername'])){
    
 ?>
 
-<form id="update" method="post">
+<form action="/account/" id="update" method="post">
     Huidige gebruikersnaam: <input type="text" name="username"><br>
     Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
     Email: <input type="text" name="email"><br>
