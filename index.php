@@ -143,22 +143,63 @@
                                           </div>
 
                                           <div class="col-md-4">
-                                          <a style="color: #FFF" href="#"><i id="myBtn" class="fas fa-dumpster"></i></a>
+                                          <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal" class="fas fa-dumpster"></i>
                                           </div>
 
-                                          <!-- Trigger/Open The Modal -->
-                                        <button id="myBtn">Open Modal</button>
+                                          <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h3 class="modal-title" id="<?php echo $memeid ?>ModalLabel">Rapporteer meme: <?php echo $memetitle?></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
 
-                                        <!-- The Modal -->
-                                        <div id="myModal" class="modal">
+                                              <form>
+                                                <div class="form-row align-items-center">
+                                                  <div class="col-auto my-1">
+                                                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                    <?php
+                                                      $sqlovertredingen = "SELECT * FROM overtreding ORDER by overtreding ASC;";
+                                                      $resultovertredingen = mysqli_query($conn, $sqlovertredingen);
+                                                      
+                                                      if (mysqli_num_rows($resultovertredingen) > 0) {
+                                                          // output data of each row
+                                                          while($rowovertredingen = mysqli_fetch_assoc($resultovertredingen)) {
+                                                            $overtreding = $rowovertredingen["overtreding"];
+                                                            echo "<option value='$overtreding'>$overtreding</option>";
+                                                          }
+                                                      } else {
+                                                          echo "0 results";
+                                                      }
+                                                    ?>
+                                                    </select>
+                                                  </div>
+                                                  <div class="col-auto my-1">
+                                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                                      <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                                      <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-auto my-1">
+                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                  </div>
+                                                </div>
+                                              
 
-                                          <!-- Modal content -->
-                                          <div class="modal-content">
-                                            <span class="close">&times;</span>
-                                            <p>Some text in the Modal..</p>
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-danger">Rapporteer</button>
+                                                </form>
+                                              </div>
+                                            </div>
                                           </div>
-
                                         </div>
+
 
                                         </div>
                                     </div>

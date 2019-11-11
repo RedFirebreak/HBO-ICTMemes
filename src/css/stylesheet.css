@@ -53,6 +53,15 @@
 }
 /* END TAGS */
 
+/* MODAL CSS */
+.modal-backdrop{
+  z-index: 1;
+}
+
+.modal {
+  color: #000;
+}
+
 /* Site css */
 
 html {
