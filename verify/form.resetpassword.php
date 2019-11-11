@@ -73,12 +73,28 @@
 		//checken of de wachtwoorden goed zijn ingevuld
 		if ($safepass = $safepasscheck) {
 			//checken of de user-ID en verificatiecode overeenkomen
-			$sql = "select verificatiecode from emailverificatie where `user-ID`={$_GET['username']};";
+			$sql = "select `user-ID` from user where `username`='{$_GET['username']}';";
+			$result = $dbConnection->query($sql);
+			$userID = mysqli_fetch_assoc($result);
+			$sql = "select `verificatiecode`, `rowdatum` from emailverificatie where `user-ID`='".$userID."' order by rowdatum DESC limit 1;";
 			$result = $dbConnection->query($sql);
 			$vercode = mysqli_fetch_assoc($result);
-			if ($vercode['verificatiecode']=$_GET['code']) {
-				$sql = "insert into user (`wachtwoord`) values ('{$safepassword}');";
-				echo "Succes! Het wachtwoord is veranderd.";
+			if (strtotime('-1 day') < strtotime($vercode['rowdatum']) {
+				if ($vercode['verificatiecode']==$_GET['code']) {
+					$sql = "insert into user (`wachtwoord`) values ('{$safepassword}');";
+					echo "Succes! Het wachtwoord is veranderd.";
+				} else {
+					Customlog("Verify", "error", "Iemand met de juiste email / username heeft een verkeerde code ingevuld.");
+					echo "<div class='alert alert-danger' role='alert'>";
+					echo "De code komt niet overeen. De administrators zijn op de hoogte gebracht.";
+					echo "</div>";
+					return;
+				}
+			} else { // als de code ouder is dan 1 dag
+				echo "<div class='alert alert-info' role='alert'>";
+				echo "De verificatiecode is verlopen of al gebruikt voor een verificatie. Is je account nog niet geverifieerd? <a href='login.php?sendverification=1&email=$mail&username=$username'>Klik hier om een nieuwe te ontvangen</a>.";
+				echo "</div>";
+				return;
 			}
 		}
 		else {
