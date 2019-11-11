@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -23,24 +22,24 @@
 ?>
 
 <h1 class="page-header">
-            Memes
-            <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
-          </h1>
+    Memes
+    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
+</h1>
 
-          <div class="row placeholders">
-            <div class="col-xs-6 col-sm-3 placeholder text-center">
-              <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <h4>Aantal memes</h4>
-              <span class="text-muted">
-			      <?php 
+<div class="row placeholders">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
+        <h4>Aantal memes</h4>
+        <span class="text-muted">
+            <?php 
 					$query = "select count(`meme-ID`) from meme";
 					$result = $dbConnection->query($query);
 					$whatevz = mysqli_fetch_assoc($result);
 					echo $whatevz['count(`meme-ID`)'];
 				  ?>
-			  </span>
-            </div>
-            <?php
+        </span>
+    </div>
+    <?php
 				$query = "select schoolnaam from school order by 1";
 				$result = $dbConnection->query($query);
 				while ($record = mysqli_fetch_assoc($result))
@@ -59,31 +58,31 @@
 					</div>";
 				}
 			?>
-			<!--
+    <!--
             <div class="col-xs-6 col-sm-3 placeholder text-center">
               <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-              <!--<h4>Label</h4>
+    <!--<h4>Label</h4>
               <span class="text-muted">Something else</span>
             </div>-->
-          </div>
-          
-          <hr>
+</div>
 
-          <h2 class="sub-header">Here's a table</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>meme-ID</th>
-                  <th>meme-titel</th>
-                  <th>user-ID</th>
-                  <th>datum</th>
-                  <th>locatie</th>
-				  <th>school</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
+<hr>
+
+<h2 class="sub-header">Here's a table</h2>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>meme-ID</th>
+                <th>meme-titel</th>
+                <th>user-ID</th>
+                <th>datum</th>
+                <th>locatie</th>
+                <th>school</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
 					$query = "select * from meme order by 1";
 					$result = $dbConnection->query($query);
 					while ($record = mysqli_fetch_assoc($result))
@@ -98,13 +97,15 @@
 						</tr>";
 					}
 					?>
-              </tbody>
-            </table>
-          </div>
+        </tbody>
+    </table>
+</div>
 
-          
-      </div><!--/row-->
-	</div>
-</div><!--/.container-->
+
+</div>
+<!--/row-->
+</div>
+</div>
+<!--/.container-->
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

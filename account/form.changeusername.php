@@ -34,12 +34,12 @@
 ?>
 
 <form id="update" method="post">
-			Huidige gebruikersnaam: <input type="text" name="username"><br>
-			Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
-			Email: <input type="text" name="email"><br>
-			Wachtwoord: <input type="text" name="password"><br>
-			
-			<button type="submit" value="Submit">Submit</button>
-			<button type="reset" value="Reset">Reset</button>
-		</form>
+    Huidige gebruikersnaam: <input type="text" name="username"><br>
+    Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
+    Email: <input type="text" name="email"><br>
+    Wachtwoord: <input type="text" name="password"><br>
+
+    <button type="submit" value="Submit">Submit</button>
+    <button type="reset" value="Reset">Reset</button>
+</form>
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

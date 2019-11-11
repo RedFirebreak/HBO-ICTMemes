@@ -1,5 +1,4 @@
-
-    <?php
+<?php
       // Check for config
       require "../src/config.php";
 

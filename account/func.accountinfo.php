@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -26,13 +25,13 @@
 
 ?>
 
-    <!-- Start coding here! :D -->
-	<img src=/storage/profielfoto/default.png alt="Profile Picture" "max-height:75px;width:130px;">
-	gebruikersnaam:	<?php echo $username_info ?>
-	voornaam: <?php echo $voornaam_info?>
-	achternaam: <?php echo $achternaam_info ?>
-	adres: <?php echo $adres_info ?>
-	postcode: <?php echo $postcode_info ?>
-	geboortedatum: <?php echo $datum_info ?>
-	land van herkomst: <?php echo $land_info ?>
+<!-- Start coding here! :D -->
+<img src=/storage/profielfoto/default.png alt="Profile Picture" "max-height:75px;width:130px;">
+gebruikersnaam: <?php echo $username_info ?>
+voornaam: <?php echo $voornaam_info?>
+achternaam: <?php echo $achternaam_info ?>
+adres: <?php echo $adres_info ?>
+postcode: <?php echo $postcode_info ?>
+geboortedatum: <?php echo $datum_info ?>
+land van herkomst: <?php echo $land_info ?>
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

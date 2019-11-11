@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,26 +10,27 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - PAGENAME</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - PAGENAME</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-      </div>
-    </div>
+    <body>
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron">
+            <div class="container">
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-12">
-          <?php 
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col-md-12">
+                    <?php 
             // Als "href="?emailverificatie='1' gezet is, wordt dit uitgevoerd.
             // Emailverificatie
             if (isset($_GET['emailverificatie'])) {
@@ -37,9 +38,9 @@
             }
           ?>
 
-          <!-- OF de ander -->
+                    <!-- OF de ander -->
 
-          <?php 
+                    <?php 
             // Als "href="?resetpassword='1' gezet is, wordt dit uitgevoerd.
             // ResetPassword
             if (isset($_GET['resetpassword'])) {
@@ -83,12 +84,13 @@
 				echo "Zorg ervoor dat je beide vakken invult";
 			}
           ?>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </body>
+    </body>
 
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>
