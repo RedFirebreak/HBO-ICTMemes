@@ -8,14 +8,14 @@
         Date:       11-10-2019
     */
 if (!empty($_POST['changepersonal'])){
-	$voor = mysqli_real_escape_string(dbConnection, $_POST["voor"]);
-	$achter = mysqli_real_escape_string(dbConnection, $_POST["achter"]);
-	$adres = mysqli_real_escape_string(dbConnection, $_POST["adres"]);
-	$postcode = mysqli_real_escape_string(dbConnection, $_POST["postcode"]);
-	$land = mysqli_real_escape_string(dbConnection, $_POST["land"]);
-	$datum = mysqli_real_escape_string(dbConnection, $_POST["datum"]);
-	$email = mysqli_real_escape_string(dbConnection, $_POST["email"]);
-	$wachtwoord = mysqli_real_escape_string(dbConnection, $_POST["wachtwoord"]);
+	$voor = mysqli_real_escape_string($dbConnection, $_POST["voor"]);
+	$achter = mysqli_real_escape_string($dbConnection, $_POST["achter"]);
+	$adres = mysqli_real_escape_string($dbConnection, $_POST["adres"]);
+	$postcode = mysqli_real_escape_string($dbConnection, $_POST["postcode"]);
+	$land = mysqli_real_escape_string($dbConnection, $_POST["land"]);
+	$datum = mysqli_real_escape_string($dbConnection, $_POST["datum"]);
+	$email = mysqli_real_escape_string($dbConnection, $_POST["email"]);
+	$wachtwoord = mysqli_real_escape_string($dbConnection, $_POST["wachtwoord"]);
 	
 	if ($Loggedin){
 		if (isset($_POST["submit"])){
@@ -59,7 +59,7 @@ if (!empty($_POST['changepersonal'])){
 }
 ?>
 
-<form id="change" method="post">
+<form action="/account/" id="change" method="post">
     email: <input type="text" name="email"><br>
     wachtwoord: <input type="password" name="wachtwoord"><br>
 	<input type="hidden" name="changepersonal" value="true">

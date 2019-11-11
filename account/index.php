@@ -73,6 +73,7 @@
                         echo $memeuserschool . '<br>';
 
                         if($LoggedinID == $caughtuserid) {
+
                             require('func.management.php');
                             ?>
                         <?php
