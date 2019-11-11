@@ -95,7 +95,7 @@
 					// Update emailverification form
 					$query3 = " UPDATE `emailverificatie`
 								SET geverifieerd='1' 
-								WHERE `user-ID` ='$userID' AND geverifieerd='0' AND soort = 'emailverificatie' ORDER BY rowdatum DESC LIMIT 1;";
+								WHERE `user-ID` ='$userID' AND geverifieerd='0' AND soort = 'wachtwoordreset' ORDER BY rowdatum DESC LIMIT 1;";
 					$results3 = mysqli_query($dbConnection, $query3);
 					
 					echo "<div class='alert alert-success' role='alert'>";
