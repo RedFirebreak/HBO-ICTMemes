@@ -81,8 +81,8 @@
 			$result = $dbConnection->query($sql);
 			$row2 = mysqli_fetch_assoc($result);
 			$vercode = $row2['verificatiecode'];
-			var_dump($row2)
-			var_dump($vercode)
+			var_dump($row2);
+			var_dump($vercode);
 			$rowdate = $row2['rowdatum'];
 			if (strtotime('-1 day') < strtotime($rowdate)) {
 				if ($vercode==$code) {
