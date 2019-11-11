@@ -58,21 +58,19 @@ if (!empty($_POST['changepersonal'])){
 	}
 }
 ?>
-
-<form action="/account/" id="change" method="post">
-    email: <input type="text" name="email"><br>
-    wachtwoord: <input type="password" name="wachtwoord"><br>
-	<input type="hidden" name="changepersonal" value="true">
-    Voornaam: <input type="text" name="voor"><br>
-    Achternaam: <input type="text" name="achter"><br>
+<form action="/account/" id="update" method="post">
+	<form action="/account/" id="update" method="post">
+	Voornaam: <input type="text" name="voor"><br>
+	<input type="hidden" name="changeusername" value="true">
+	Achternaam: <input type="text" name="achter"><br>
     Adres: <input type="text" name="adres"><br>
     Postcode: <input type="text" name="postcode"><br>
     Land: <input type="text" name="Land"><br>
     Geboortedatum: <input type="date" name="datum"><br>
-
+	
+	
     <button type="submit" value="Submit">Submit</button>
     <button type="reset" value="Reset">Reset</button>
 </form>
 <br> <br>
-
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

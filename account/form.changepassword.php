@@ -37,9 +37,9 @@ if (!empty($_POST['changepassword'])){
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
 <title>change password</title>
 </head>
-
 <body>
-    <form action="/account/" id="changepassword" method="post">
+<form action="/account/" id="update" method="post">
+      <form id="changepassword" method="post">
         Huidig wachtwoord:<br>
         <input type="password" name="oldpassword">
         <br>
@@ -50,7 +50,8 @@ if (!empty($_POST['changepassword'])){
         <input type="password" name="newpassword2">
 		<input type="hidden" name="changepassword" value="true">
         <br>
-        <input type="submit" name="submit">
+        <button type="submit" value="Submit">Submit</button>
     </form>
-	<br> <br>
+</form>
+<br> <br>
 </body>
