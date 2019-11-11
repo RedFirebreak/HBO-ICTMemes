@@ -19,7 +19,7 @@
 	<body>
 		
 		<form action="/upload/" method="post" enctype="multipart/form-data">
-		<p>Selecteer hier je meme:</p>
+		<p>Selecteer hier je meme (max. grootte is 2 MB):</p>
 		<input type="file" name="meme" id="meme" value="choose a file" >
 		<p>Voer een naam voor de meme in:</p>
 		<input type="text" name="name" id="name">
