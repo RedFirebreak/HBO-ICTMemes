@@ -26,13 +26,21 @@
     <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
 </h1>
 
+<?php 
+	
+?>
 <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal memes</h4>
         <span class="text-muted">
             <?php 
-					$query = "select count(`meme-ID`) from meme";
+					if ($LoggedinUserrole == 'uber-admin'){
+						$query = "select count(`meme-ID`) from meme";
+					}
+					else {
+						$query = "select count(`meme-ID`) from meme where school = '$LoggedinSchool'";
+					}
 					$result = $dbConnection->query($query);
 					$whatevz = mysqli_fetch_assoc($result);
 					echo $whatevz['count(`meme-ID`)'];
@@ -40,6 +48,7 @@
         </span>
     </div>
     <?php
+			if ($LoggedinUserrole == 'uber-admin'){
 				$query = "select schoolnaam from school order by 1";
 				$result = $dbConnection->query($query);
 				while ($record = mysqli_fetch_assoc($result))
@@ -57,6 +66,7 @@
 					echo "</span>
 					</div>";
 				}
+			}
 			?>
     <!--
             <div class="col-xs-6 col-sm-3 placeholder text-center">
@@ -68,9 +78,9 @@
 
 <hr>
 
-<h2 class="sub-header">Here's a table</h2>
+<h2 class="sub-header">De meme-tabel</h2>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table id="memetable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>meme-ID</th>
@@ -83,7 +93,12 @@
         </thead>
         <tbody>
             <?php
-					$query = "select * from meme order by 1";
+					if ($LoggedinUserrole == 'uber-admin'){
+						$query = "select * from meme order by 1";
+					}
+					if ($LoggedinUserrole == 'admin'){
+						$query = "select * from meme where `school` in ('$LoggedinSchool') order by 1 ";
+					}
 					$result = $dbConnection->query($query);
 					while ($record = mysqli_fetch_assoc($result))
 					{
