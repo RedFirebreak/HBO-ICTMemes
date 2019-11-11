@@ -231,24 +231,7 @@
     // Create a random string of 8 numbers
     $verificationcode = randomNumber(8);
 
-    // Check if the value is allowed
-    if ($safesoort = "emailverificatie") {
-      $safesoort = "emailverificatie";
-    } elseif ($safesoort = "wachtwoordreset") {
-      $safesoort = "wachtwoordreset";
-    } else {
-      // Inform user that something went wrong
-            echo "<div class='alert alert-danger' role='alert'>";
-            echo "De email-verificatie aanvraag kon niet verwerkt worden. De administrators zijn op de hoogte van dit probleem.";
-            echo "</div>";
-          //Log the attempt, this is a critical event since no email-verification has been sent and the account will be useless.
-          Customlog("SendEmail", "error", "sendemailverification heeft een verkeerde soort gekregen ($soort)!! ($username - With $email)");
-          return;
-    }
     // Save the emailverification-code
-      // Prepare the emailverification-code
-
-      // sla de verificatie op
       $query = "INSERT INTO emailverificatie (`user-ID`, verificatiecode, soort ) 
       VALUES('$userid', '$verificationcode', '$safesoort')";
       mysqli_query($dbConnection, $query);
