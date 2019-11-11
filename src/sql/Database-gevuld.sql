@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 08 nov 2019 om 20:57
+-- Gegenereerd op: 11 nov 2019 om 10:14
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.3.11
 
@@ -110,7 +110,8 @@ INSERT INTO `emailverificatie` (`verificatie-ID`, `user-ID`, `verificatiecode`, 
 (12, 12, 6688, '2019-10-30 17:40:37', 'wachtwoordreset', 1, 1),
 (13, 13, 8800, '2019-10-30 17:40:37', 'emailverificatie', 1, 4),
 (14, 14, 3355, '2019-10-30 17:40:37', 'emailverificatie', 1, 4),
-(15, 15, 5577, '2019-10-30 17:40:37', 'emailverificatie', 1, 1);
+(15, 15, 5577, '2019-10-30 17:40:37', 'emailverificatie', 1, 1),
+(16, 16, 6182740, '2019-11-11 09:02:56', 'emailverificatie', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -139,7 +140,42 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 (6, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:23:54', 'ERROR', '[Line: 18][8] Undefined index: loggedin'),
 (7, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:45:01', 'ERROR', '[Line: 18][8] Undefined index: loggedin'),
 (8, 'SYSTEM-C:xampphtdocsuploaduploaded.php', '2019-11-08 20:16:43', 'ERROR', '[Line: 35][2] mysqli_real_escape_string() expects parameter 2 to be string, array given'),
-(9, 'SYSTEM-C:xampphtdocsuploaduploaded.php', '2019-11-08 20:16:43', 'ERROR', '[Line: 52][2] mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given');
+(9, 'SYSTEM-C:xampphtdocsuploaduploaded.php', '2019-11-08 20:16:43', 'ERROR', '[Line: 52][2] mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given'),
+(10, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:02:16', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(11, 'SYSTEM-C:xampphtdocssrcfunctions.php', '2019-11-11 10:02:57', 'ERROR', '[Line: 285][2] mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()'),
+(12, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:08', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(13, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:39', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(14, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:58', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(15, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(16, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(17, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(18, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(19, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(20, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(21, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(22, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(23, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(24, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(25, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(26, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(27, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(28, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(29, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(30, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(31, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(32, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(33, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(34, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(35, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(36, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(37, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(38, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(39, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(40, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(41, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(42, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(43, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(44, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )');
 
 -- --------------------------------------------------------
 
@@ -170,8 +206,7 @@ INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `locatie`, `sch
 (7, 'Memey-boi7', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
 (8, 'Memey-boi8', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
 (9, 'Memey-boi9', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool1'),
-(10, 'Memey-boi10', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3'),
-(15, 'dew', 12, '0000-00-00 00:00:00', '/memestorage/2019/11', 'voorbeeldschool2');
+(10, 'Memey-boi10', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3');
 
 -- --------------------------------------------------------
 
@@ -288,7 +323,7 @@ CREATE TABLE `support` (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `naam` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `school` varchar(30) COLLATE utf8_bin NOT NULL,
+  `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
@@ -298,14 +333,14 @@ CREATE TABLE `support` (
 -- Gegevens worden geëxporteerd voor tabel `support`
 --
 
-INSERT INTO `support` (`support-ID`, `email`, `naam`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
-(1, 'janwillem@hotmail.com', '', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
-(2, 'willemjan@hotmail.com', '', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
-(3, 'Basdeejay@hotmail.com', '', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
-(4, 'khalidwonder@st.hanze.nl', '', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
-(5, 'gigid\'agostino@st.windesheim.nl', '', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
-(6, 'alcazarvevo@discotheek.com', '', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
-(7, 'earhtwindfire@st.NHL.nl', '', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
+INSERT INTO `support` (`support-ID`, `email`, `naam`, `onderwerp`, `school`, `inhoud`, `datum`, `opgelost`) VALUES
+(1, 'janwillem@hotmail.com', '', 'login probleem', '', 'ik kan niet inloggen ', '2019-10-15', 0),
+(2, 'willemjan@hotmail.com', '', 'niet registreren', '', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
+(3, 'Basdeejay@hotmail.com', '', 'meme submut', '', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
+(4, 'khalidwonder@st.hanze.nl', '', 'henk de tank-meme', '', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
+(5, 'gigid\'agostino@st.windesheim.nl', '', 'geen account', '', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
+(6, 'alcazarvevo@discotheek.com', '', 'video', '', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
+(7, 'earhtwindfire@st.NHL.nl', '', 'tags', '', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
 
 -- --------------------------------------------------------
 
@@ -358,7 +393,7 @@ CREATE TABLE `user` (
   `username` varchar(30) NOT NULL,
   `wachtwoord` varchar(200) NOT NULL,
   `vorig_wachtwoord` varchar(200) DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
+  `profile_picture` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
   `schoolnaam` varchar(50) DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,
@@ -386,7 +421,8 @@ INSERT INTO `user` (`user-ID`, `usermail`, `username`, `wachtwoord`, `vorig_wach
 (12, 'crediteur@mail.com', 'crediteur', 'debiteur', '', '', 'voorbeeldschool2', '2019-10-17 07:00:00', 0, 'user', 1, 0),
 (13, 'debiteur@mail.com', 'debiteur', 'crediteur', 'crediteur<3', '', 'voorbeeldschool2', '2019-10-14 07:00:00', 0, 'user', 1, 0),
 (14, 'bobcattweed@mail.com', 'bobcattweed', 'BringTheweed', '', '', 'voorbeeldschool3', '2019-10-14 22:00:00', 0, 'admin', 1, 0),
-(15, 'egg@mail.com', 'eggisland', 'chickenChicken', 'CluckCluck', '', 'voorbeeldschool4', '0000-00-00 00:00:00', 1, 'user', 1, 0);
+(15, 'egg@mail.com', 'eggisland', 'chickenChicken', 'CluckCluck', '', 'voorbeeldschool4', '0000-00-00 00:00:00', 1, 'user', 1, 0),
+(16, 'tombeugels@hotmail.com', 'tom', '0f141392f18c390695b0db24f1995523', NULL, '/storage/profilepictures/default.png', 'voorbeeldschool1', '2019-11-11 10:03:58', 0, 'uber-admin', 1, 0);
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -430,10 +466,6 @@ ALTER TABLE `error`
 --
 ALTER TABLE `meme`
   ADD PRIMARY KEY (`meme-ID`),
-  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
-  ADD KEY `meme-titel` (`meme-titel`),
-  ADD KEY `meme-titel_2` (`meme-titel`),
-  ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
   ADD KEY `school` (`school`);
 
@@ -528,19 +560,19 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT voor een tabel `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
-  MODIFY `verificatie-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `verificatie-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT voor een tabel `error`
 --
 ALTER TABLE `error`
-  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT voor een tabel `meme`
 --
 ALTER TABLE `meme`
-  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT voor een tabel `meme-report`
@@ -552,7 +584,7 @@ ALTER TABLE `meme-report`
 -- AUTO_INCREMENT voor een tabel `memetag`
 --
 ALTER TABLE `memetag`
-  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT voor een tabel `support`
@@ -576,7 +608,7 @@ ALTER TABLE `upvote`
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
