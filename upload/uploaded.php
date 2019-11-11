@@ -36,18 +36,6 @@
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
 					
-				//meme-naam checken
-					$query = "select `meme-titel` from meme order by 1";
-					$result = $dbConnection->query($query);
-					while ($record = $result->fetch_assoc())
-					{
-						if ($safename == $record['meme-titel']){
-							echo "<div class='alert alert-danger' role='alert'>
-							Er bestaat al een meme met deze naam.</div>";
-							return;
-						}
-					}
-					
 				//school achterhalen
 					$sql = "Select schoolnaam from user where `user-ID`='5';"; //. $LoggedinID;
 					$result = $dbConnection->query($sql);

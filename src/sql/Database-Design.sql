@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 08 nov 2019 om 21:01
+-- Gegenereerd op: 11 nov 2019 om 10:17
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.3.11
 
@@ -90,7 +90,7 @@ CREATE TABLE `error` (
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` varchar(30) NOT NULL,
+  `meme-titel` int(30) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `locatie` varchar(200) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE `support` (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `naam` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `school` varchar(30) COLLATE utf8_bin NOT NULL,
+  `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
@@ -223,7 +223,7 @@ CREATE TABLE `user` (
   `username` varchar(30) NOT NULL,
   `wachtwoord` varchar(200) NOT NULL,
   `vorig_wachtwoord` varchar(200) DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
+  `profile_picture` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
   `schoolnaam` varchar(50) DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,
@@ -274,10 +274,6 @@ ALTER TABLE `error`
 --
 ALTER TABLE `meme`
   ADD PRIMARY KEY (`meme-ID`),
-  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
-  ADD KEY `meme-titel` (`meme-titel`),
-  ADD KEY `meme-titel_2` (`meme-titel`),
-  ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
   ADD KEY `school` (`school`);
 

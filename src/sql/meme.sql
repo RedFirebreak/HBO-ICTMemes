@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 08 nov 2019 om 20:55
+-- Gegenereerd op: 11 nov 2019 om 10:13
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.3.11
 
@@ -51,8 +51,7 @@ INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `locatie`, `sch
 (7, 'Memey-boi7', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
 (8, 'Memey-boi8', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
 (9, 'Memey-boi9', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool1'),
-(10, 'Memey-boi10', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3'),
-(15, 'dew', 12, '0000-00-00 00:00:00', '/memestorage/2019/11', 'voorbeeldschool2');
+(10, 'Memey-boi10', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -63,10 +62,6 @@ INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `locatie`, `sch
 --
 ALTER TABLE `meme`
   ADD PRIMARY KEY (`meme-ID`),
-  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
-  ADD KEY `meme-titel` (`meme-titel`),
-  ADD KEY `meme-titel_2` (`meme-titel`),
-  ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
   ADD KEY `school` (`school`);
 
@@ -78,7 +73,7 @@ ALTER TABLE `meme`
 -- AUTO_INCREMENT voor een tabel `meme`
 --
 ALTER TABLE `meme`
-  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Beperkingen voor geëxporteerde tabellen
