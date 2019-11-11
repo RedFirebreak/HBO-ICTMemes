@@ -8,19 +8,7 @@
         Date:       11-10-2019
     */
 ?>
-
-<!--
-    1. laat de user een nieuw wachtwoord invoeren (kan je kopieren uit registratie. Roep mij(Stefan) als dat niet lukt
-    2. Submit de form VIA POST , naar dezelfde pagina (/verify/index.php)
-    2. clean de user-input van de POST
-
-    3. Maak een eerste query, die kijkt of de user-id en verificatiecode in de mail overeencomen
-      -- De verificatiecode zal in de GET staan(dus niet POST van de form), en kan dus aangeroepen worden met $_GET['verificatiecode'] ofzoiets
-    
-    4. Komt de informatie overeen, verander het wachtwoord van de user met een tweede query
-    5. Informeer de user 
-    -->
-	<?php
+<?php
 	if (empty($_POST)) {
 	$username = mysqli_real_escape_string($dbConnection, $_GET['username']);
 	$mail = mysqli_real_escape_string($dbConnection, $_GET['mail']);
@@ -30,21 +18,21 @@
 	?>
 
 
-	<form action="<?php echo $formlink ?>" method="post">
-		<p>Password<br>
-			<input type="password" id="newpassword" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-				required></p>
-		<div class="col-md-6" id="message">
-			<p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-			<p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-			<p id="number" class="invalid">A <b>number</b></p>
-			<p id="length" class="invalid">Minimum <b>8 characters</b></p>
-		</div>
-		<p>Confirm password<br>
-			<input type="password" name="newpasswordcheck" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></p>
-		<?php echo recaptchaform ();?>
-		<button type="submit" class="btn btn-primary" name="reset_password">Change Password</button>
-	</form>
+<form action="<?php echo $formlink ?>" method="post">
+    <p>Password<br>
+        <input type="password" id="newpassword" name="newpassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            required></p>
+    <div class="col-md-6" id="message">
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+    </div>
+    <p>Confirm password<br>
+        <input type="password" name="newpasswordcheck" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></p>
+    <?php echo recaptchaform ();?>
+    <button type="submit" class="btn btn-primary" name="reset_password">Change Password</button>
+</form>
 
 <?php
 } // end isset form
@@ -99,8 +87,10 @@
 					$results3 = mysqli_query($dbConnection, $query3);
 					
 					echo "<div class='alert alert-success' role='alert'>";
-					echo "Je wachtwoord is veranderd!";
+					echo "Je wachtwoord is veranderd! Je wordt doorgestuurd";
 					echo "</div>";
+					header('Refresh: 5; URL=/account/login.php');
+					return;
 				} else {
 					Customlog("Verify", "error", "Iemand met de juiste email / username heeft een verkeerde code ingevuld.");
 					echo "<div class='alert alert-danger' role='alert'>";
@@ -116,13 +106,14 @@
 			}
 		}
 		else {
+			echo "<div class='alert alert-info' role='alert'>";
 			echo "Zorg ervoor dat de inhoud van beide vakken met elkaar overeenkomt";
+			echo "</div>";
 		}
 	}
 	else {
+		echo "<div class='alert alert-info' role='alert'>";
 		echo "Zorg ervoor dat je beide vakken invult";
+		echo "</div>";
 	}
-		
 ?>
-
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
