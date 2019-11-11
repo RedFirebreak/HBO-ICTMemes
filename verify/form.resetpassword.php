@@ -83,8 +83,8 @@
 			$vercode = $row2['verificatiecode'];
 			$rowdate = $row2['rowdatum'];
 			if (strtotime('-1 day') < strtotime($rowdate)) {
-				echo $code. '</br>';
-				echo $vercode . '</br>';
+				echo $code. '<br>';
+				echo $vercode . '<br>';
 				if ($vercode==$code) {
 					$sql3 = "insert into user (`wachtwoord`) values ('{$safepassword}');";
 					$result = $dbConnection->query($sql3);
