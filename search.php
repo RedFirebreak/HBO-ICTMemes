@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <title>HBO-ICTMemes</title>
     <?php
       require "func.header.php";
     ?>
-  </head>
+</head>
 
-    <body>
+<body>
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Search</h1>
-        <?php
+        <div class="container">
+            <h1 class="display-3">Search</h1>
+            <?php
         if (!empty($_POST['search'])) {
           $search = mysqli_real_escape_string($dbConnection, $_POST['search']);
         } else {
@@ -136,13 +137,13 @@
         }
         ?>
 
-      </div>
+        </div>
     </div>
 
-  <?php
+    <?php
     require "func.footer.php";
   ?>
 
-      </body>
-</html>
+</body>
 
+</html>
