@@ -33,7 +33,7 @@
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal FROM support WHERE school='$LoggedinSchool' OR school='geen'";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM support WHERE school='$LoggedinSchool' OR school=''";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM support";
@@ -52,7 +52,7 @@
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=1 AND school='$LoggedinSchool' OR opgelost=1 AND school='geen'";
+                    $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=1 AND school='$LoggedinSchool' OR opgelost=1 AND school=''";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
                     $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=1";
@@ -71,7 +71,7 @@
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=0 AND school='$LoggedinSchool' OR opgelost=0 AND school='geen'";
+                    $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=0 AND school='$LoggedinSchool' OR opgelost=0 AND school=''";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
                     $aantalquery = "SELECT count(*) amount FROM support WHERE opgelost=0";
@@ -93,7 +93,7 @@
                   $lastmonth = date("Y-m-d", strtotime("-1 months"));
 
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `support` WHERE datum BETWEEN '$lastmonth' AND '$thismonth' AND school='$LoggedinSchool' OR datum BETWEEN '$lastmonth' AND '$thismonth' AND school='geen'";
+                    $aantalquery = "SELECT count(*) amount FROM `support` WHERE datum BETWEEN '$lastmonth' AND '$thismonth' AND school='$LoggedinSchool' OR datum BETWEEN '$lastmonth' AND '$thismonth' AND school=''";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
                     $aantalquery = "SELECT count(*) amount FROM `support` WHERE datum BETWEEN '$lastmonth' AND '$thismonth'";
@@ -128,7 +128,7 @@
             <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM support WHERE school='$LoggedinSchool' OR school='geen'";
+          $query = "SELECT * FROM support WHERE school='$LoggedinSchool' OR school=''";
         }
         if ($LoggedinUserrole == 'uber-admin') {
           $query = "SELECT * FROM support";
