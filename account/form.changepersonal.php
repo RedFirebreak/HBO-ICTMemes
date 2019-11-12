@@ -28,34 +28,42 @@ if (!empty($_POST['changepersonal'])){
 				
 			if ($passwordencrypted != $dbwachtwoord) {
 					$temperror = "Het wachtwoord is niet correct";
-			}
-			
+			}	
+				
 			else {
+				$sql_id = "INSERT INTO `private-info` (`user-ID`) VALUES ($LoggedinID)";
+				$result_id = mysqli_query($dbConnection, $sql_id);
+				
 				if ($voor){
 					$sql_voor = "UPDATE `private-info` SET voornaam = '$voor' WHERE `user-ID` = '$LoggedinID'";
 					$result_voor = mysqli_query($dbConnection, $sql_voor);
 					$tempsuccess = "De gegevens zijn geüpdated";
 				}
+					
 				if ($achter){
 					$sql_achter = "UPDATE `private-info` SET achternaam = '$achter' WHERE `user-ID` = '$LoggedinID'";
 					$result_achter = mysqli_query($dbConnection, $sql_achter);
 					$tempsuccess = "De gegevens zijn geüpdated";
 				}
+					
 				if ($adres){
 					$sql_adres = "UPDATE `private-info` SET adres = '$adres' WHERE `user-ID` = '$LoggedinID'";
 					$result_adres = mysqli_query($dbConnection, $sql_adres);
 					$tempsuccess = "De gegevens zijn geüpdated";
 				}
+					
 				if ($postcode){
 					$sql_postcode = "UPDATE `private-info` SET postcode = '$postcode' WHERE `user-ID` = '$LoggedinID'";
 					$result_postcode = mysqli_query($dbConnection, $sql_postcode);
 					$tempsuccess = "De gegevens zijn geüpdated";
 				}
+					
 				if ($land){
 					$sql_land = "UPDATE `private-info` SET land = '$land' WHERE `user-ID` = '$LoggedinID'";
 					$result_land = mysqli_query($dbConnection, $sql_land);
 					$tempsuccess =  "De gegevens zijn geüpdated";
 				}
+					
 				if ($datum){
 					$sql_datum = "UPDATE `private-info` SET geboortedatum = '$datum' WHERE `user-ID` = '$LoggedinID'";
 					$result_datum = mysqli_query($dbConnection, $sql_datum);

@@ -147,6 +147,34 @@
 <!--/row-->
 </div>
 </div>
+<?php 
+if (!empty($_POST['addtag'])){
+	$newtag = mysqli_real_escape_string($dbConnection, $_POST["tag"]);
+	
+	if ($Loggedin) {
+		if (isset($_POST["submit"])){
+		$sql = "SELECT `tag-id` FROM tags";
+		$result = mysqli_query($dbConnection, $sql);
+		$row = mysqli_fetch_assoc($result);
+		$tagID = $row['tag-id'];
+		$tagID++; 	
+		
+		$addtag = "INSERT INTO tags (`tag-ID`, `tagnaam`) VALUES ($tagID,$newtag)";
+		
+		$insert = mysqli_query($dbConnection, $addtag);
+		}
+	}
+}
+
+
+?>
+
+
+<form action="func.tags.php" id="update" method="post">
+Voeg een tag aan de website:<input type="text" value="tag" name="tag"><br>
+<input type="hidden" name="addtag" value="true">
+<button type="submit" value="submit" name="submit">submit</button>
+</form>
 <!--/.container-->
 <!-- Popper.JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
