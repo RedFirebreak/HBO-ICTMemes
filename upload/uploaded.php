@@ -7,7 +7,7 @@
         [INFO]
         Author:     Stef
         Date:       11-10-2019
-    */
+	*/
 ?>
     <!-- Start coding here! :D -->
 	
@@ -35,6 +35,7 @@
 				
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
+					$safetag = mysqli_real_escape_string($dbConnection, $_POST['tags']);
 
 						//meme uploaden
 						$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
@@ -110,6 +111,11 @@
 												$memeID;
 												
 												//tags inserten
+												$sqltagmeme = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
+														Values ('$memeID', '$safetag');";
+												$inserttag = mysqli_query($dbConnection, $sqltagmeme);
+												
+												/* For multiple tags, not supported yet
 												$query = "SELECT `tag-ID`, tagnaam from tags order by 1";
 												$result = $dbConnection->query($query);
 												while ($record = $result->fetch_assoc())
@@ -120,6 +126,7 @@
 														$dinges = $dbConnection->query($sql);
 													}
 												}
+												*/
 										}
 									//check query
 									if (!$result) {
@@ -135,7 +142,7 @@
 										Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
 										</div>";
 									}
-									if (!$dinges) {
+									if (!$inserttag) {
 										customlog("uploaded", "error", "Tags query failed the query failed.");
 											
 										echo "<div class='alert alert-danger' role='alert'>
@@ -143,8 +150,9 @@
 										</div>";
 									} else {
 										echo "<div class='alert alert-success' role='alert'>
-										Dank je! Je meme is geupload.
+										Dank je! Je meme is geupload. Je wordt doorgestuurd naar je meme.
 										</div>";
+										header("Refresh: 3; URL=/meme/?id=$memeID");
 									}
 							}
 					}

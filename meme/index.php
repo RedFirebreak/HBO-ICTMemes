@@ -73,8 +73,194 @@
                                       Customlog("Home-memeimage", "error", "The homepage found an image that does not exist!(ID: $memeid, location: $memelocation, user: $memeuser, Date: $memedate )");
                                   }
                                     ?>
-                                    <br>
-                                    <p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p>
+                                    <!-- voting part -->
+                                    <div class="col-md-12 text-center">
+                                    <script type="text/javascript"> // Upvote!
+                                        $(document).ready(function(){
+                                          $("#<?php echo $memeid ?>upvote").click(function(){
+
+                                            if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) {
+                                              //alert('hi')
+                                                  } else {
+                                            // Calculate a new value, if the div has class
+                                            $('#<?php echo $memeid ?>upvotespan').html(parseInt($('#<?php echo $memeid ?>upvotespan').html(), 10)+1)
+
+                                            if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) { // Only -1 if it has been downvoted
+                                            $("#<?php echo $memeid ?>downvotespan").text($("#<?php echo $memeid ?>downvotespan").text()-1);
+                                            }
+                                            // Change colors 
+                                            $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
+                                            $( '#<?php echo $memeid ?>downvote' ).removeClass( 'downvote' );
+
+                                                  
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/voting.php',
+                                                    data: { 
+                                                        'memeid': '<?php echo $memeid ?>', 
+                                                        'user': '<?php echo $LoggedinID ?>',
+                                                        'soort': 'upvote' 
+                                                    },
+                                                    success: function(data) {
+                                                        //alert(data);
+                                                    }
+                                                });
+                                                  }
+
+
+                                      });
+                                    });
+                                    </script>
+                                    <script type="text/javascript"> // Downvote!
+                                        $(document).ready(function(){
+                                          $("#<?php echo $memeid ?>downvote").click(function(){
+
+                                            if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) {
+                                              //alert('hi')
+                                                  } else {
+                                            // Calculate a new value, if the div has class
+                                            $('#<?php echo $memeid ?>downvotespan').html(parseInt($('#<?php echo $memeid ?>downvotespan').html(), 10)+1)
+                                            if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) { // Only -1 if it has been upvoted
+                                            $("#<?php echo $memeid ?>upvotespan").text($("#<?php echo $memeid ?>upvotespan").text()-1);
+                                            }
+                                            // Change colors
+                                            $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
+                                            $( '#<?php echo $memeid ?>upvote' ).removeClass( 'upvote' );
+
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/voting.php',
+                                                    data: { 
+                                                        'memeid': '<?php echo $memeid ?>', 
+                                                        'user': '<?php echo $LoggedinID ?>',
+                                                        'soort': 'downvote' 
+                                                    },
+                                                    success: function(data) {
+                                                        //alert(data);
+                                                    }
+                                                });
+                                              }
+                                      });
+                                    });
+                                    </script>
+                                    <hr>
+                                      <div class="row">
+                                        <?php
+                                        // Check if the user voted on the post previously, 
+                                        $hasvoted = "SELECT soort FROM upvote WHERE `meme-id`='$memeid' AND `user-id`='$LoggedinID' LIMIT 1";
+                                        $votedresult = mysqli_query($dbConnection, $hasvoted);
+                                        $ifvoted = mysqli_fetch_assoc($votedresult);
+                                        if ($ifvoted) {
+                                          $voteresult = $ifvoted['soort'];
+                                          switch ($voteresult) {
+                                            case 'upvote':
+                                                ?>
+                                                  <script type="text/javascript"> // Upvote!
+                                                      $(document).ready(function(){
+                                                          $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
+                                                      });
+                                                  </script>
+                                                <?php
+                                                break;
+                                            case 'downvote':
+                                              ?>
+                                              <script type="text/javascript"> // Downvote!
+                                                  $(document).ready(function(){
+                                                      $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
+                                                  });
+                                              </script>
+                                            <?php
+                                            break;
+                                        }
+                                      }
+
+                                        // also get the total amount of upvotes/downvotes
+                                        $sqlamountupvote = "SELECT count(*) amount FROM upvote WHERE `meme-id`='$memeid' and `soort`='upvote'";
+                                        $amountupvoteresult = mysqli_query($dbConnection, $sqlamountupvote);
+                                        $amountupvote = mysqli_fetch_assoc($amountupvoteresult);
+                                        $amountupvote = $amountupvote['amount'];
+
+                                        $sqlamountdownvote = "SELECT count(*) amount FROM upvote WHERE `meme-id`='$memeid' and `soort`='downvote'";
+                                        $amountdownvoteresult = mysqli_query($dbConnection, $sqlamountdownvote);
+                                        $amountdownvote = mysqli_fetch_assoc($amountdownvoteresult);
+                                        $amountdownvote = $amountdownvote['amount'];
+                                        ?>
+
+
+                                        <div class="col-md-4">
+                                        <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span id="<?php echo $memeid ?>upvotespan" class="badge"><?php echo $amountupvote ?></span></i>
+                                        
+                                        </div>
+
+                                        <div class="col-md-4">
+                                        <i id="<?php echo $memeid ?>downvote" class="fas fa-chevron-down"><span id="<?php echo $memeid ?>downvotespan" class="badge"><?php echo $amountdownvote ?></span></i>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                        <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal" class="fas fa-dumpster"></i>
+                                        </div>
+
+                                        <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h3 class="modal-title" id="<?php echo $memeid ?>ModalLabel">Rapporteer meme: <?php echo $memetitle?></h3>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                              </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                              <div class="form-row align-items-center">
+                                                <div class="col-auto my-1">
+                                                  <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                                  <p>Let op! Hiermee kan je een meme rapporteren voor verschillende rededenen. Niet de bedoeling? Klik dan op "sluiten"</p>
+                                                  <h3>Meme: <?php echo $memetitle?></h3>
+                                                  <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
+                                                  
+                                                  <form action="/report.php" method="post">
+                                                  <select name="overtreding" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                  <?php
+                                                    $sqlovertredingen = "SELECT * FROM overtredingen ORDER by overtreding ASC;";
+                                                    $resultovertredingen = mysqli_query($dbConnection, $sqlovertredingen);
+                                                    
+                                                    if (mysqli_num_rows($resultovertredingen) > 0) {
+                                                        // output data of each row
+                                                        while($rowovertredingen = mysqli_fetch_assoc($resultovertredingen)) {
+                                                          $overtreding = $rowovertredingen["overtreding"];
+                                                          echo "<option value='$overtreding'>$overtreding</option>";
+                                                        }
+                                                    } else {
+                                                        echo "0 results";
+                                                    }
+
+                                                    
+
+                                                  ?>
+                                                  </select>
+                                                  <br><br>
+
+                                                  <label class="custom-control-label" for="customControlAutosizing">Toevoeging</label>
+                                                  <input type="text" name="Toevoeging" required>
+                                                  <?php echo recaptchaform ();?>
+                                                  <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
+                                                  <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
+                                                  <input type="hidden" name="meme" value="true" required>
+                                                  <input type="hidden" name="comment" value="false" required>
+                                                </div>
+                                              </div>
+                                          
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                              <button type="submit" class="btn btn-danger">Rapporteer</button>
+                                              </form>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
                                     <!-- Load the extra info part -->
                                     <div class="row">
                                         <div class="col-md-12">

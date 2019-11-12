@@ -95,6 +95,21 @@
                                   echo "Posted: " . $memedate;
                                 ?>
                                     </div>
+                                      <div class="col-md-12">
+                                        <?php
+                                        // Get tagnaam to display
+                                        $querytagnaam = "SELECT t.tagnaam tag
+                                                          from tags t
+                                                          join memetag mt on t.`tag-ID`= mt.`tag-ID`
+                                                          where mt.`meme-id`='$memeid'";
+                                        $resultstagnaam = mysqli_query($dbConnection, $querytagnaam);
+                                        $rowtagnaam = mysqli_fetch_assoc($resultstagnaam);
+                                        $rowtagnaam = $rowtagnaam['tag'];
+                                        echo "<h4>Tag: $rowtagnaam</h4"
+                                        ?>
+                                      </div>
+                                    </div>
+
                                     <div style="min-height: 200px;"class="col-md-12">
                                         <div class="d-none d-md-block">
                                             <!-- Hide on smaller devices -->
