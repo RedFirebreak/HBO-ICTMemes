@@ -69,7 +69,7 @@
                         <h2 class="mb-0">
                             <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
                                 data-target="#collapse3-4" aria-expanded="false" aria-controls="collapseThree">
-                                Verander Username
+                                Verander profielfoto
                             </button>
                         </h2>
                     </div>
