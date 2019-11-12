@@ -22,22 +22,17 @@
 ?>
 
 <h1 class="page-header">
-    Users
+    Errors
     <p class="lead">Alle users in de database</p>
 </h1>
 
 <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Aantal users</h4>
+        <h4>Aantal errors</h4>
         <?php
                 // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal from user";
-                  }
+                  $aantalquery = "SELECT COUNT(*) aantal from error";
 
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
@@ -47,53 +42,26 @@
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Unverified</h4>
+        <h4>Aantal soort: ERROR</h4>
         <?php
                 // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0";
-                  }
+                  $aantalquery = "SELECT count(*) amount FROM `error` WHERE soort='ERROR'";
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
+	<div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Verified</h4>
+        <h4>Aantal soort: CRITICAL</h4>
         <?php
                 // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1";
-                  }
+                  $aantalquery = "SELECT count(*) amount FROM `error` WHERE soort='CRITICAL'";
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Banned</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
     </div>
 </div>
@@ -105,25 +73,17 @@
     <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Error-ID</th>
+                <th>Locatie</th>
+                <th>Datum</th>
+                <th>Soort</th>
+                <th>Bericht</th>
             </tr>
         </thead>
         <tbody>
             <?php
         // Set the query
-        if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
-        }
-        if ($LoggedinUserrole == 'uber-admin') {
-          $query = "SELECT * FROM user";
-        }
+          $query = "SELECT * FROM error";
 
         // Peform the query and save it in $row
         $result = mysqli_query($dbConnection, $query);
@@ -132,26 +92,11 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["user-ID"]. "</td>";
-                echo "<td>" . $row["usermail"]. "</td>";
-                echo "<td>" . $row["username"]. "</td>";
-                echo "<td>" . $row["schoolnaam"]. "</td>";
-                echo "<td>" . $row["laatste_login"]. "</td>";
-                echo "<td>" . $row["userrole"]. "</td>";
-                
-                // Verwerk de uitput van verified in "ja of nee"
-                if ($row["is_verified"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                // Verwerk de uitput van gebanned in "ja of nee"
-                if ($row["gebanned"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                
+                echo "<td>" . $row["error-ID"]. "</td>";
+                echo "<td>" . $row["locatie"]. "</td>";
+                echo "<td>" . $row["datum"]. "</td>";
+                echo "<td>" . $row["soort"]. "</td>";
+                echo "<td>" . $row["bericht"]. "</td>";
                 echo "</tr>";
                }
             } else {
@@ -161,14 +106,11 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Error-ID</th>
+                <th>Locatie</th>
+                <th>Datum</th>
+                <th>Soort</th>
+                <th>Bericht</th>
             </tr>
         </tfoot>
     </table>

@@ -22,78 +22,50 @@
 ?>
 
 <h1 class="page-header">
-    Users
+    Upvote/Downvotes
     <p class="lead">Alle users in de database</p>
 </h1>
 
 <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Aantal users</h4>
+        <h4>Aantal upvotes</h4>
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM upvote 
+					inner join meme on upvote.`meme-ID`=meme.`meme-ID`
+					WHERE soort='upvote' and meme.`school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal from user";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM upvote WHERE soort='upvote'";
                   }
 
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
                   $aantal = $aantalrow['aantal'];
+				  if (empty($aantal)) {$aantal="0";}
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Unverified</h4>
+        <h4>Aantal downvotes</h4>
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0 AND schoolnaam='$LoggedinSchool'";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM upvote 
+					inner join meme on upvote.`meme-ID`=meme.`meme-ID`
+					WHERE soort='downvote' and meme.`school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0";
+                    $aantalquery = "SELECT count(*) aantal FROM upvote WHERE soort='downvote'";
                   }
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
+                  $aantal = $aantalrow['aantal'];
+				  if (empty($aantal)) {$aantal="0";}
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Verified</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Banned</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
     </div>
 </div>
@@ -105,24 +77,23 @@
     <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>Upvote-ID</th>
+                <th>Meme-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Soort</th>
             </tr>
         </thead>
         <tbody>
             <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
+          $query = "Select `upvote-ID`, upvote.`meme-ID`, upvote.`user-ID`, `soort`
+					from upvote
+					inner join meme on upvote.`meme-ID`=meme.`meme-ID`
+					where meme.`school`='$LoggedinSchool'";
         }
         if ($LoggedinUserrole == 'uber-admin') {
-          $query = "SELECT * FROM user";
+          $query = "SELECT * FROM upvote";
         }
 
         // Peform the query and save it in $row
@@ -132,26 +103,10 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
+                echo "<td>" . $row["upvote-ID"]. "</td>";
+                echo "<td>" . $row["meme-ID"]. "</td>";
                 echo "<td>" . $row["user-ID"]. "</td>";
-                echo "<td>" . $row["usermail"]. "</td>";
-                echo "<td>" . $row["username"]. "</td>";
-                echo "<td>" . $row["schoolnaam"]. "</td>";
-                echo "<td>" . $row["laatste_login"]. "</td>";
-                echo "<td>" . $row["userrole"]. "</td>";
-                
-                // Verwerk de uitput van verified in "ja of nee"
-                if ($row["is_verified"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                // Verwerk de uitput van gebanned in "ja of nee"
-                if ($row["gebanned"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                
+                echo "<td>" . $row["soort"]. "</td>";
                 echo "</tr>";
                }
             } else {
@@ -161,14 +116,10 @@
         </tbody>
         <tfoot>
             <tr>
+                <th>Upvote-ID</th>
+                <th>Meme-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Soort</th>
             </tr>
         </tfoot>
     </table>

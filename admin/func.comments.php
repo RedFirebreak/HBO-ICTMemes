@@ -22,78 +22,29 @@
 ?>
 
 <h1 class="page-header">
-    Users
+    Comments
     <p class="lead">Alle users in de database</p>
 </h1>
 
 <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Aantal users</h4>
+        <h4>Aantal comments</h4>
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM comments 
+					inner join meme on comments.`meme-ID`=meme.`meme-ID`
+					WHERE meme.`school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal from user";
+                    $aantalquery = "SELECT COUNT(*) aantal from comments";
                   }
 
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
                   $aantal = $aantalrow['aantal'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Unverified</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Verified</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Banned</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
     </div>
 </div>
