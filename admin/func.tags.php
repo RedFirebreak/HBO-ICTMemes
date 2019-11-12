@@ -89,9 +89,9 @@ if (!empty($_POST['addtag'])){
 
 ?>
 
-<p> Klik op onderstaande button om een tag toe te voegen aan de website </p>
+
 <form action="func.tags.php" id="update" method="post">
-<button type="text" value="tag" name="tag">tag toevoegen</button>
+Voeg een tag aan de website:<input type="text" value="tag" name="tag"><br>
 <input type="hidden" name="addtag" value="true">
 <button type="submit" value="submit" name="submit">submit</button>
 </form>
