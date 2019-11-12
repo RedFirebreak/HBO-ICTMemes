@@ -34,7 +34,7 @@
                         // output data of each row
                         while($row = $result->fetch_assoc()) {
                         $tag = $row["t"];
-                            echo "<li><a href='#'>$tag</a></li>";
+                            echo "<li><a href='/search.php?search=$tag'>$tag</a></li>";
                         }
                     } else {
                         echo "0 results";
