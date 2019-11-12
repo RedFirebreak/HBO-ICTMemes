@@ -132,6 +132,7 @@ require ("func.adminheader.php");
                     <li><a href="?page=schooladmins">Scholen en Schooladmins</a></li>
                     <li><a href="?page=memes">Memes</a></li>
                     <li><a href="?page=tags">Tags</a></li>
+					<li><a href="?page=support">Support</a></li>
                     <li><a href="?page=votes">Upvote/Downvotes</a></li>
                     <li><a href="?page=reported">Gerapporteerde memes/comments</a></li>
                     <li><a href="?page=comments">Comments</a></li>
