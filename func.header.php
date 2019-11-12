@@ -133,11 +133,8 @@
             echo "<ul class='cd-main-nav'>";
               echo "<li><a href='/'>Homepage</a></li>";
 
-              echo "<a href='#0' class='cd-nav-trigger'><span></span></a>";
-              echo "<form class='form-inline my-2 my-lg-0'>";
-              echo "<input class='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>";
-              echo "<button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>";
-              echo "</form>";
+              echo "<li><form action='/search.php' method='post'><input style='font-size: 1.1em;' name='search' class='searchbar' type='search' placeholder='Search' aria-label='Search'></li>";
+              echo "<li><button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button></li></form>";
 
                 echo "<li>";
                 echo "<a href='#0' class='cd-subnav-trigger'><span>Account</span></a>";
