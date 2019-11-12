@@ -107,18 +107,16 @@
 										if ($memeins) {
 											//tags nog weer apart
 												//meme-ID achterhalen
-													$sql = "Select `meme-ID` from meme where `meme-titel`='" . $safename . "';";
-													$result = $dbConnection->query($sql);
-													//$memeID = mysqli_fetch_assoc($result);
+												$memeID;
 												
 												//tags inserten
-												$query = "select `tag-ID`, tagnaam from tags order by 1";
+												$query = "SELECT `tag-ID`, tagnaam from tags order by 1";
 												$result = $dbConnection->query($query);
 												while ($record = $result->fetch_assoc())
 												{
 													if (in_array($record['tagnaam'], $_POST['tags'])){
 														$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-														Values ('".$memeID."', '".$record['tag-ID']."');";
+														Values ('$memeID', '".$record['tag-ID']."');";
 														$dinges = $dbConnection->query($sql);
 													}
 												}

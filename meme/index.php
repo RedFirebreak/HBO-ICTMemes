@@ -74,6 +74,7 @@
                                   }
                                     ?>
                                     <br>
+                                    <p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p><p>Yeet</p>
                                     <!-- Load the extra info part -->
                                     <div class="row">
                                         <div class="col-md-12">

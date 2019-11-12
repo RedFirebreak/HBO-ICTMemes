@@ -11,7 +11,7 @@
 	
 if (!empty($_POST['changeprofpic'])){
 	$password = $_POST["password"];
-	$passwordencrypted = md5($password)
+	$passwordencrypted = md5($password);
 	
 	$sqlPW = "SELECT wachtwoord from user WHERE `user-id` = '$LoggedinID'";
 	

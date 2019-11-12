@@ -109,11 +109,3 @@
         return;
     }
 ?>
-<h1>Welkom!
-    <br>
-    <br>
-
-    <br>
-    <br>
-    HI
-    <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
