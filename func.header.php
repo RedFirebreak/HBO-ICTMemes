@@ -62,6 +62,9 @@
 <meta name="author" content="">
 <link rel="icon" href="favicon.ico">
 
+<!-- Jquery -->
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+
 <!-- Bootstrap core CSS -->
 <link href="/src/css/bootstrap.min.css" rel="stylesheet">
 

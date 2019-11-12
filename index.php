@@ -132,14 +132,127 @@
                                     </div>
 
                                     <div class="memereport col-md-12 text-center">
+                                    
+                                      <p></p>
+                                      <script type="text/javascript"> // Upvote!
+                                          $(document).ready(function(){
+                                            $("#<?php echo $memeid ?>upvote").click(function(){
+
+                                              if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) {
+                                                //alert('hi')
+                                                    } else {
+                                              // Calculate a new value, if the div has class
+                                              $('#<?php echo $memeid ?>upvotespan').html(parseInt($('#<?php echo $memeid ?>upvotespan').html(), 10)+1)
+
+                                              if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) { // Only -1 if it has been downvoted
+                                              $("#<?php echo $memeid ?>downvotespan").text($("#<?php echo $memeid ?>downvotespan").text()-1);
+                                              }
+                                              // Change colors 
+                                              $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
+                                              $( '#<?php echo $memeid ?>downvote' ).removeClass( 'downvote' );
+
+                                                    
+                                                  $.ajax({
+                                                      type: 'POST',
+                                                      url: '/voting.php',
+                                                      data: { 
+                                                          'memeid': '<?php echo $memeid ?>', 
+                                                          'user': '<?php echo $LoggedinID ?>',
+                                                          'soort': 'upvote' 
+                                                      },
+                                                      success: function(data) {
+                                                          //alert(data);
+                                                      }
+                                                  });
+                                                    }
+
+
+                                        });
+                                      });
+                                      </script>
+                                      <script type="text/javascript"> // Downvote!
+                                          $(document).ready(function(){
+                                            $("#<?php echo $memeid ?>downvote").click(function(){
+
+                                              if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) {
+                                                //alert('hi')
+                                                    } else {
+                                              // Calculate a new value, if the div has class
+                                              $('#<?php echo $memeid ?>downvotespan').html(parseInt($('#<?php echo $memeid ?>downvotespan').html(), 10)+1)
+                                              if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) { // Only -1 if it has been upvoted
+                                              $("#<?php echo $memeid ?>upvotespan").text($("#<?php echo $memeid ?>upvotespan").text()-1);
+                                              }
+                                              // Change colors
+                                              $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
+                                              $( '#<?php echo $memeid ?>upvote' ).removeClass( 'upvote' );
+
+                                                  $.ajax({
+                                                      type: 'POST',
+                                                      url: '/voting.php',
+                                                      data: { 
+                                                          'memeid': '<?php echo $memeid ?>', 
+                                                          'user': '<?php echo $LoggedinID ?>',
+                                                          'soort': 'downvote' 
+                                                      },
+                                                      success: function(data) {
+                                                          //alert(data);
+                                                      }
+                                                  });
+                                                }
+                                        });
+                                      });
+                                      </script>
                                       <hr>
                                         <div class="row">
+                                          <?php
+                                          // Check if the user voted on the post previously, 
+                                          $hasvoted = "SELECT soort FROM upvote WHERE `meme-id`='$memeid' AND `user-id`='$LoggedinID' LIMIT 1";
+                                          $votedresult = mysqli_query($dbConnection, $hasvoted);
+                                          $ifvoted = mysqli_fetch_assoc($votedresult);
+                                          if ($ifvoted) {
+                                            $voteresult = $ifvoted['soort'];
+                                            switch ($voteresult) {
+                                              case 'upvote':
+                                                  ?>
+                                                    <script type="text/javascript"> // Upvote!
+                                                        $(document).ready(function(){
+                                                            $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
+                                                        });
+                                                    </script>
+                                                  <?php
+                                                  break;
+                                              case 'downvote':
+                                                ?>
+                                                <script type="text/javascript"> // Downvote!
+                                                    $(document).ready(function(){
+                                                        $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
+                                                    });
+                                                </script>
+                                              <?php
+                                              break;
+                                          }
+                                        }
+
+                                          // also get the total amount of upvotes/downvotes
+                                          $sqlamountupvote = "SELECT count(*) amount FROM upvote WHERE `meme-id`='$memeid' and `soort`='upvote'";
+                                          $amountupvoteresult = mysqli_query($dbConnection, $sqlamountupvote);
+                                          $amountupvote = mysqli_fetch_assoc($amountupvoteresult);
+                                          $amountupvote = $amountupvote['amount'];
+
+                                          $sqlamountdownvote = "SELECT count(*) amount FROM upvote WHERE `meme-id`='$memeid' and `soort`='downvote'";
+                                          $amountdownvoteresult = mysqli_query($dbConnection, $sqlamountdownvote);
+                                          $amountdownvote = mysqli_fetch_assoc($amountdownvoteresult);
+                                          $amountdownvote = $amountdownvote['amount'];
+                                          ?>
+
+
                                           <div class="col-md-4">
-                                          <a style="color: #FFF" href="##"><i class="fas fa-chevron-up"></i></a>
+                                          <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span id="<?php echo $memeid ?>upvotespan" class="badge"><?php echo $amountupvote ?></span></i>
+                                          
                                           </div>
 
                                           <div class="col-md-4">
-                                          <a style="color: #FFF" href="##"><i class="fas fa-chevron-down"></i></a>
+                                          <i id="<?php echo $memeid ?>downvote" class="fas fa-chevron-down"><span id="<?php echo $memeid ?>downvotespan" class="badge"><?php echo $amountdownvote ?></span></i>
                                           </div>
 
                                           <div class="col-md-4">
@@ -192,11 +305,10 @@
                                                     <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
                                                     <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
                                                     <input type="hidden" name="meme" value="true" required>
-
+                                                    <input type="hidden" name="comment" value="false" required>
                                                   </div>
                                                 </div>
-                                              
-
+                                            
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>

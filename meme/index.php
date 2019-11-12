@@ -90,6 +90,7 @@
 
                                               $commentinhoud = $row['inhoud'];
                                               $commentuser = $row['user-ID'];
+                                              $commentid = $row['comment-ID'];
 
                                               // Get username and userpiclocation
                                               $query = "SELECT username, profile_picture FROM user WHERE `user-ID`='$commentuser'";
@@ -104,14 +105,89 @@
                                               echo"<img alt='userpic' src='$commentpfpic' class='rounded img-thumbnail user-thumbnail' />";
                                               echo"</div>";
                                               echo"<div class='col-md-10'>";
-                                              echo"<b>$commentusername</b>";
-                                              if ($memeuserrole == 'admin') {echo "Admin <br>";}
-                                              if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
+                                              echo"<b>$commentusername </b>";
+                                              if ($memeuserrole == 'admin') {echo " (Admin) <br>";}
+                                              if ($memeuserrole == 'uber-admin') {echo "(Hoofd-Admin) <br>";}
                                               echo "<p class='memecomment' style='font-size: 1.4rem;''>". htmlspecialchars($commentinhoud) ."</p>";
-                                              echo"</div>";
-                                              echo"</div>";
-                                              echo "<hr>";
 
+                                              ?>
+
+                                        <div class="memereport col-md-12 text-center">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                          </div>
+                                          <div class="col-md-3">
+                                          <i data-toggle="modal" data-target="#<?php echo $commentid ?>Modal" class="fas fa-dumpster"></i>
+                                          </div>
+
+                                          <div class="modal fade" id="<?php echo $commentid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $commentid ?>ModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                              <div class="modal-header">
+                                                <h3 class="modal-title" id="<?php echo $commentid ?>ModalLabel">Rapporteer comment: <?php echo $commentinhoud?></h3>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                                </button>
+                                              </div>
+                                              <div class="modal-body">
+
+                                                <div class="form-row align-items-center">
+                                                  <div class="col-auto my-1">
+                                                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                                    <p>Let op! Hiermee kan je een comment reporten voor verschillende rededenen. Niet de bedoeling? Klik dan op "sluiten"</p>
+                                                    <h3>Comment: <?php echo $commentinhoud?></h3>
+                                                    <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
+                                                    
+                                                    <form action="/report.php" method="post">
+                                                    <select name="overtreding" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                                    <?php
+                                                      $sqlovertredingen = "SELECT * FROM overtredingen ORDER by overtreding ASC;";
+                                                      $resultovertredingen = mysqli_query($dbConnection, $sqlovertredingen);
+                                                      
+                                                      if (mysqli_num_rows($resultovertredingen) > 0) {
+                                                          // output data of each row
+                                                          while($rowovertredingen = mysqli_fetch_assoc($resultovertredingen)) {
+                                                            $overtreding = $rowovertredingen["overtreding"];
+                                                            echo "<option value='$overtreding'>$overtreding</option>";
+                                                          }
+                                                      } else {
+                                                          echo "0 results";
+                                                      }
+                                                    ?>
+                                                    </select>
+                                                    <br><br>
+
+                                                    <label class="custom-control-label" for="customControlAutosizing">Toevoeging</label>
+                                                    <input type="text" name="Toevoeging" required>
+                                                    <?php echo recaptchaform ();?>
+                                                    <input type="hidden" name="commentid" value="<?php echo $commentid ?>" required>
+                                                    <input type="hidden" name="memeid" value=<?php echo $memeid ?> required>
+                                                    <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
+                                                    <input type="hidden" name="comment" value="true" required>
+                                                    <input type="hidden" name="meme" value="false" required>
+
+                                                  </div>
+                                                </div>
+                                              
+
+                                              </div>
+                                              <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                                                <button type="submit" class="btn btn-danger">Rapporteer</button>
+                                                </form>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+
+
+                                        </div>
+                                        </div>
+
+                                        <?php
+                                            echo"</div>";
+                                            echo"</div>";
+                                            echo "<hr>";
                                             }
                                         } else {
                                             echo "<p class='memecomment' style='font-size: 1.4rem;'>Niemand heeft een comment geplaatst. Wees de eerste!</p>";
