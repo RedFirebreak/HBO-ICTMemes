@@ -23,7 +23,6 @@
 
 <h1 class="page-header">
     Tags
-    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
 </h1>
 
 <div class="row placeholders">

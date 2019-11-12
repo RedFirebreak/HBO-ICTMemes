@@ -23,7 +23,6 @@
 
 <h1 class="page-header">
     Memes
-    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
 </h1>
 
 <?php 
