@@ -122,6 +122,8 @@
                 <th>Inhoud</th>
                 <th>Datum</th>
                 <th>Opgelost</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -141,6 +143,12 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
+
+                $supportid = $row["support-ID"];
+
+                $modalid = $row["support-ID"];
+                $modaltitle = $row["email"];
+
                 echo "<td>" . $row["support-ID"]. "</td>";
                 echo "<td>" . $row["email"]. "</td>";
                 echo "<td>" . $row["naam"]. "</td>";
@@ -156,6 +164,93 @@
                   echo "<td>Nee</td>";
                 }
                 
+
+                ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal" class="fas fa-pencil-alt"></i></td>
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete en edit modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel">
+                                Edit <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens wijzigen.</p>
+                                    <form action="/admin/?page=editrow" method="post">
+
+                                        Opgelost:<br>
+                                        <select name="newopgelost" required>
+                                            <option value="nee">Nee</option>
+                                            <option value="ja">ja</option>
+                                        </select><br>
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven wijzigen.<br>
+
+                                        <input type="hidden" name="soort" value="support" required>
+                                        <input type="hidden" name="supportid" value="<?php echo $supportid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="support" required>
+                                        <input type="hidden" name="supportid" value="<?php echo $supportid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+
+
                 echo "</tr>";
                }
             } else {
@@ -173,6 +268,8 @@
                 <th>Inhoud</th>
                 <th>Datum</th>
                 <th>Opgelost</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>

@@ -113,6 +113,8 @@
                 <th>Userrol</th>
                 <th>Verified</th>
                 <th>Banned</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -131,6 +133,15 @@
           if ($result->num_rows > 0) {
             // output data of each row
               while($row = $result->fetch_assoc()) {
+                $userid = $row["user-ID"];
+                $usermail = $row["usermail"];
+                $username =  $row["username"];
+                $schoolnaam = $row["schoolnaam"];
+                $verified = $row["is_verified"];
+                $banned = $row["gebanned"];
+
+                $modalid = $row["user-ID"];
+                $modaltitle = $row["username"];
                 echo "<tr>";
                 echo "<td>" . $row["user-ID"]. "</td>";
                 echo "<td>" . $row["usermail"]. "</td>";
@@ -151,7 +162,104 @@
                 } else{
                   echo "<td>Nee</td>";
                 }
-                
+                ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal" class="fas fa-pencil-alt"></i></td>
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete en edit modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel">
+                                Edit <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens wijzigen.</p>
+                                    <form action="/admin/?page=editrow" method="post">
+
+                                        Usermail:<br>
+                                        <input type="text" name="newusermail" value="<?php echo $usermail ?>"
+                                            required><br>
+                                        Username:<br>
+                                        <input type="text" name="newusername" value="<?php echo $username ?>"
+                                            required><br>
+                                        Schoolnaam:<br>
+                                        <input type="text" name="newschool" value="<?php echo $schoolnaam ?>"
+                                            required><br>
+                                        Verified:<br>
+                                        <select name="newverified" required>
+                                            <option value="ja">Ja</option>
+                                            <option value="nee">Nee</option>
+                                        </select><br>
+                                        Banned:<br>
+                                        <select name="newbanned" required>
+                                            <option value="nee">Nee</option>
+                                            <option value="ja">ja</option>
+                                        </select><br>
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven wijzigen.<br>
+
+                                        <input type="hidden" name="soort" value="users" required>
+                                        <input type="hidden" name="userid" value="<?php echo $userid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="users" required>
+                                        <input type="hidden" name="userid" value="<?php echo $userid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
                 echo "</tr>";
                }
             } else {
@@ -169,6 +277,8 @@
                 <th>Userrol</th>
                 <th>Verified</th>
                 <th>Banned</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>

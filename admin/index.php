@@ -72,15 +72,22 @@ require ("func.adminheader.php");
     <title>HBO-ICTMemes Adminpanel</title>
 
     <!-- Datatables, Jquery, bootstrap -->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.css" />
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.js">
+    </script>
 
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/stylesheet.css">
 
     <!-- Font Awesome JS -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
+    </script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
+    </script>
 </head>
 
 <body>
@@ -105,7 +112,8 @@ require ("func.adminheader.php");
                     </ul>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Overzichten</a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                        class="dropdown-toggle">Overzichten</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li><a href="?page=users">Users</a></li>
                         <li><a href="?page=schooladmins">Scholen en Schooladmins</a></li>
@@ -141,7 +149,9 @@ require ("func.adminheader.php");
                         <i class="fas fa-align-left"></i>
                         <span>Toggle Sidebar</span>
                     </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
 
@@ -161,9 +171,9 @@ require ("func.adminheader.php");
 
             <!-- Start the content here! -->
             <div class="container-fluid">
-	            <div class="row">
-		            <div class="col-md-12">
-                    <?php // Check welke pagina naar voren moet komen
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php // Check welke pagina naar voren moet komen
                         if (!empty($_GET)) {
                             switch ($_GET['page']) {
                             case 'users':
@@ -196,31 +206,36 @@ require ("func.adminheader.php");
                             case 'error':
                                 require("func.error.php");
                                 break;
+                            case 'deleterow':
+                                require("database.deleterow.php");
+                                break;
+                            case 'editrow':
+                                require("database.editrow.php");
+                                break;
 
                             }
                         } else {
                             require("homepage.php");
                         }
                     ?>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        
-        
             <!-- End content -->
         </div>
     </div>
 
     <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+    </script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
         });
+    });
     </script>
 </body>
 

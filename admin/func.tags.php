@@ -59,79 +59,100 @@
 				$result = $dbConnection->query($query);
 				while ($record = mysqli_fetch_assoc($result))
 				{
-					echo "<tr>
-					<td>".$record['tag-ID']."</td>
-                    <td>".$record['tagnaam']."</td>"
+                    $tagid = $record['tag-ID'];
+                    $tagnaam = $record['tagnaam'];
+                    $modalid = $tagid;
+                    $modaltitle = $tagnaam;
+
+					echo "<td>$tagid</td>";
+                    echo "<td>$tagnaam</td>";
                     ?>
-                    <!--<td><i data-toggle="modal" data-target="#exampleModal" class='fas fa-pencil-alt'></i></td>
-                    <td><i data-toggle="modal" data-target="#exampleModal" class='fas fa-dumpster-fire'></i></td>-->
-                    
-                    <td><i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal"class="fas fa-pencil-alt"></i></td>
-                    <td><i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal"class="fas fa-dumpster-fire"></i></td>
-                    </tr>
 
-                    <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1"
-                                            role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h3 class="modal-title" id="<?php echo $memeid ?>ModalLabel">
-                                                            Rapporteer meme: <?php echo $memetitle?></h3>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal" class="fas fa-pencil-alt"></i></td>
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
 
-                                                        <div class="form-row align-items-center">
-                                                            <div class="col-auto my-1">
-                                                                <p>Let op! Hiermee kan je een meme rapporteren voor
-                                                                    verschillende rededenen. Niet de bedoeling? Klik dan
-                                                                    op "sluiten"</p>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-dismiss="modal">Sluiten</button>
-                                                        <button type="submit" class="btn btn-danger">Rapporteer</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                    <div class="modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+            <!-- Geef elke row zijn eigen delete en edit modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Modal title</h5>
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel">
+                                Edit <?php echo $modaltitle?></h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                                <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p>Modal body text goes here.</p>
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens wijzigen.</p>
+                                    <form action="/admin/?page=editrow" method="post">
+
+                                        Nieuwe tagnaam:<br>
+                                        <input type="text" name="newtagname" value="<?php echo $tagnaam ?>"
+                                            required><br>
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven wijzigen.<br>
+
+                                        <input type="hidden" name="soort" value="tags" required>
+                                        <input type="hidden" name="tagid" value="<?php echo $tagid ?>" required>
+
+                                </div>
+                            </div>
+
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
                         </div>
                     </div>
-                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
 
-                    <?php
-                    
-                    
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="tags" required>
+                                        <input type="hidden" name="tagid" value="<?php echo $tagid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
 				}
 				?>
-            </tbody>
+        </tbody>
         <tfoot>
-        <tr>
+            <tr>
                 <th>Tag-ID</th>
                 <th>Tagnaam</th>
                 <th>Edit</th>
@@ -164,29 +185,21 @@ if (!empty($_POST['addtag'])){
 		}
 	}
 }
-
-
 ?>
-
-
 <form action="func.tags.php" id="update" method="post">
-Voeg een tag aan de website:<input type="text" value="tag" name="tag"><br>
-<input type="hidden" name="addtag" value="true">
-<button type="submit" value="submit" name="submit">submit</button>
+    Voeg een tag aan de website:<input type="text" value="tag" name="tag"><br>
+    <input type="hidden" name="addtag" value="true">
+    <button type="submit" value="submit" name="submit">submit</button>
 </form>
+
 <!--/.container-->
 <!-- Popper.JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+    integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+</script>
 <script>
 $(document).ready(function() {
     $('#usertable').DataTable();
     $('.dataTables_length').addClass('bs-select');
 });
 </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-    </script>

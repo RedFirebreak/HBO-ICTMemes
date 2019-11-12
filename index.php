@@ -167,7 +167,7 @@
 
                                                 if ($('#<?php echo $memeid ?>downvote').hasClass(
                                                         "downvote"
-                                                        )) { // Only -1 if it has been downvoted
+                                                    )) { // Only -1 if it has been downvoted
                                                     $("#<?php echo $memeid ?>downvotespan").text($(
                                                             "#<?php echo $memeid ?>downvotespan")
                                                         .text() - 1);
@@ -202,7 +202,7 @@
                                         $("#<?php echo $memeid ?>downvote").click(function() {
 
                                             if ($('#<?php echo $memeid ?>downvote').hasClass(
-                                                "downvote")) {
+                                                    "downvote")) {
                                                 //alert('hi')
                                             } else {
                                                 // Calculate a new value, if the div has class
@@ -210,14 +210,14 @@
                                                         '#<?php echo $memeid ?>downvotespan')
                                                     .html(), 10) + 1)
                                                 if ($('#<?php echo $memeid ?>upvote').hasClass(
-                                                    "upvote")) { // Only -1 if it has been upvoted
+                                                        "upvote")) { // Only -1 if it has been upvoted
                                                     $("#<?php echo $memeid ?>upvotespan").text($(
                                                             "#<?php echo $memeid ?>upvotespan")
                                                         .text() - 1);
                                                 }
                                                 // Change colors
                                                 $('#<?php echo $memeid ?>downvote').addClass(
-                                                'downvote');
+                                                    'downvote');
                                                 $('#<?php echo $memeid ?>upvote').removeClass('upvote');
 
                                                 $.ajax({
@@ -300,6 +300,7 @@
                                                 class="fas fa-dumpster"></i>
                                         </div>
 
+                                        <!-- Geef elke meme een eigen modal om te reported -->
                                         <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1"
                                             role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel"
                                             aria-hidden="true">

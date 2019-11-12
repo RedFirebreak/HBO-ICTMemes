@@ -28,7 +28,7 @@
 
 <div class="row placeholders">
     <?php if ($LoggedinUserrole == 'uber-admin') { ?>
-	<div class="col-xs-6 col-sm-3 placeholder text-center">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal scholen</h4>
         <span class="text-muted">
@@ -40,7 +40,7 @@
 				  ?>
         </span>
     </div>
-	<?php } ?>
+    <?php } ?>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal admins</h4>
@@ -74,29 +74,48 @@
 
 <h2 class="sub-header">De admin-tabel</h2>
 <div class="table-responsive">
-    <table id="admintable" class="table table-striped table-bordered" style="width:100%">
-        <?php
-				  if ($LoggedinUserrole == 'admin') {
-					$query = "select schoolnaam from school where schoolnaam='$LoggedinSchool' order by 1";
-				  }
-				  if ($LoggedinUserrole == 'uber-admin') {
-					$query = "select schoolnaam from school order by 1";
-				  }
+    <table id="usertable" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Schoolnaam</th>
+                <th>Gebruikersnaam</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            if ($LoggedinUserrole == 'admin') {
+            $query = "select schoolnaam from school where schoolnaam='$LoggedinSchool' order by 1";
+            }
+            if ($LoggedinUserrole == 'uber-admin') {
+            $query = "select schoolnaam from school order by 1";
+            }
+
 				  $result = $dbConnection->query($query);
 				  while ($record = mysqli_fetch_assoc($result))
 				  {
-					echo "<tr><th>".$record['schoolnaam']."</th>";
-					$sql = "select * from user where userrole in ('admin', 'uber-admin') and schoolnaam in ('".$record['schoolnaam']."');";
-					$dinges = $dbConnection->query($sql);
-					while ($dinkus = mysqli_fetch_assoc($dinges))
-					{
-						//echo "<td>".$dinkus['user-ID']."</td>
-						echo "<td>".$dinkus['username']."</td>";
-						//<td>".$dinkus['userrole']."</td>";
-					}
+            echo "<tr><th>".$record['schoolnaam']."</th>";
+            $sql = "select * from user where userrole in ('admin', 'uber-admin') and schoolnaam in ('".$record['schoolnaam']."');";
+            $dinges = $dbConnection->query($sql);
+            if ($dinges->num_rows > 0) {
+              // output data of each row
+              while ($dinkus = mysqli_fetch_assoc($dinges))
+              {
+                echo "<td>".$dinkus['username']."</td>";
+                
+              }
+          } else {
+            echo "<td>  </td>";
+          }
 					echo "</tr>";
 				  }
                   ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Schoolnaam</th>
+                <th>Gebruikersnaam</th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -106,5 +125,9 @@
 </div>
 </div>
 <!--/.container-->
-
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
+<script>
+$(document).ready(function() {
+    $('#usertable').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
+</script>

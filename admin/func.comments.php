@@ -34,8 +34,8 @@
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM comments 
-					inner join meme on comments.`meme-ID`=meme.`meme-ID`
-					WHERE meme.`school`='$LoggedinSchool'";
+                                    inner join meme on comments.`meme-ID`=meme.`meme-ID`
+                                    WHERE meme.`school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
                     $aantalquery = "SELECT COUNT(*) aantal from comments";
@@ -61,6 +61,7 @@
                 <th>User-ID</th>
                 <th>inhoud</th>
                 <th>datum</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -82,11 +83,59 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-				echo "<td>" . $row['comment-ID'] . "</td>";
-				echo "<td>" . $row['meme-ID'] . "</td>";
-				echo "<td>" . $row['user-ID'] . "</td>";
-				echo "<td>" . $row['inhoud'] . "</td>";
-				echo "<td>" . $row['datum'] . "</td>";
+                echo "<td>" . $row['comment-ID'] . "</td>";
+                echo "<td>" . $row['meme-ID'] . "</td>";
+                echo "<td>" . $row['user-ID'] . "</td>";
+                echo "<td>" . $row['inhoud'] . "</td>";
+                echo "<td>" . $row['datum'] . "</td>";
+        
+                $modalid = $row['comment-ID'];
+                $modaltitle = $row["upvote-ID"];
+                $commentid = $row['comment-ID'];
+
+                ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="comments" required>
+                                        <input type="hidden" name="commentid" value="<?php echo $commentid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+
 				echo "<tr>";
               }
             } else {
@@ -101,6 +150,7 @@
                 <th>User-ID</th>
                 <th>inhoud</th>
                 <th>datum</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>
@@ -119,5 +169,3 @@ $(document).ready(function() {
     $('.dataTables_length').addClass('bs-select');
 });
 </script>
-
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
