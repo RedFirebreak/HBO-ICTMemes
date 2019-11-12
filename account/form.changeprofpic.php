@@ -23,20 +23,47 @@ if (!empty($_POST['changeprofpic'])){
 		if ($passwordencrypted != $dbpassword) {
 			$temperror = "Het ingevulde wachtwoord is niet correct, vul deze opnieuw in";
 		}
+		
 		else{
+			//checks if the files are filled in, doesn't run otherwise
+			if (!empty($_FILES['profilepic']) && isset($_FILES['profilepic'])) {
 			
+			//defines the place and path of the picture	
+				$target_dir = "../storage/profilepictures/".$LoggedinID;
+				//$target_file = $target_dir . $LoggedinID);
+				$uploadOk = 1;
+				$imageFileType = pathinfo($target_dir,PATHINFO_EXTENSION);
+			
+			//sets picture in database	
+				move_uploaded_file($_FILES["profilepic"]["tmp_name"], $target_dir);
+				$setprofpic = "UPDATE user SET `profile_picture` = '/storage/profilepictures/$LoggedinID' WHERE `user-ID` = $LoggedinID";
+				$result2 = mysqli_query($dbConnection, $setprofpic);
+		
+			//if success, run temporary success	message
+				if($result2 != false) {
+				$tempsucces = "Profile picture has been changed";
+				$uploadOk = 1;
+				}
+				
+			//if failed, run temporary error message	
+				else {
+					$temperror = "File is not an image.";
+					$uploadOk = 0;
+				}
+			}
 		}
 	}
-	
+	var_dump($uploadOk);
 }
+
 ?>
 
     <!-- Start coding here! :D -->
-<form action="/upload/" method="post" enctype="multipart/form-data">
+<form action="/account/" method="post" enctype="multipart/form-data">
 		Selecteer hier je profielfoto (max. grootte is 2 MB): 
 		<input type="file" name="profilepic" id="profpic" value="choose a file" ><br>
 		Vul hier je wachtwoord in: <input type="password" name="password"><br>
 		<button type="submit" value="Submit" name="submit">Submit</button><br>
 		<input type="hidden" name="changeprofpic" value="true">
-		</form>
+</form>
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
