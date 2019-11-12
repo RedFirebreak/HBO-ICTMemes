@@ -22,21 +22,24 @@
 ?>
 
 <h1 class="page-header">
-    Users
+    Gerapporteerde memes/comments
     <p class="lead">Alle users in de database</p>
 </h1>
 
 <div class="row placeholders">
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Aantal users</h4>
+        <h4>Aantal comment-reports</h4>
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
+                    $aantalquery = "SELECT COUNT(*) aantal FROM `comment-report`
+					inner join comments on `comment-report`.`comment-ID`=comments.`comment-ID`
+					inner join meme on comments.`meme-ID`=meme.`meme-ID`
+					where `school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT COUNT(*) aantal from user";
+                    $aantalquery = "SELECT COUNT(*) aantal from `comment-report`";
                   }
 
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
@@ -47,82 +50,53 @@
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Unverified</h4>
+        <h4>Aantal meme-reports</h4>
         <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0 AND schoolnaam='$LoggedinSchool'";
+                    $aantalquery = "SELECT count(*) amount FROM `meme-report`
+									inner join meme on `meme-report`.`meme-ID`=meme.`meme-ID`
+									where `school`='$LoggedinSchool'";
                   }
                   if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=0";
+                    $aantalquery = "SELECT count(*) amount FROM `meme-report`";
                   }
                   $aantalresult = mysqli_query($dbConnection, $aantalquery);
                   $aantalrow = mysqli_fetch_assoc($aantalresult);
                   $aantal = $aantalrow['amount'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Verified</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE is_verified=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-muted'><h2>$aantal</h2></span>";
-              ?>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Banned</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-mute'><h2>$aantal</h2></span>";
               ?>
     </div>
 </div>
 
 <hr>
 
-<!-- <h2 class="sub-header">Here's a table</h2> -->
+<h2 class="sub-header">Comment-reports</h2>
 <div class="table-responsive">
     <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
-                <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Report-ID</th>
+                <th>Comment-ID</th>
+                <th>Reporter-ID</th>
+                <th>Reported-ID</th>
+                <th>Datum</th>
+                <th>Overtreding</th>
+                <th>Beschrijving</th>
             </tr>
         </thead>
         <tbody>
             <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
+          $query = "SELECT `report-ID`, `comment-report`.`comment-ID`, `snitch-ID`, `boef-ID`, `comment-report`.`datum`, `overtreding`, `beschrijving` 
+					FROM `comment-report`
+					inner join comments on `comment-report`.`comment-ID`=comments.`comment-ID`
+					inner join meme on comments.`meme-ID`=meme.`meme-ID`
+					where `school`='$LoggedinSchool'";
         }
         if ($LoggedinUserrole == 'uber-admin') {
-          $query = "SELECT * FROM user";
+          $query = "SELECT * FROM `comment-report`";
         }
 
         // Peform the query and save it in $row
@@ -132,25 +106,13 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["user-ID"]. "</td>";
-                echo "<td>" . $row["usermail"]. "</td>";
-                echo "<td>" . $row["username"]. "</td>";
-                echo "<td>" . $row["schoolnaam"]. "</td>";
-                echo "<td>" . $row["laatste_login"]. "</td>";
-                echo "<td>" . $row["userrole"]. "</td>";
-                
-                // Verwerk de uitput van verified in "ja of nee"
-                if ($row["is_verified"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                // Verwerk de uitput van gebanned in "ja of nee"
-                if ($row["gebanned"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
+                echo "<td>" . $row["report-ID"]. "</td>";
+                echo "<td>" . $row["comment-ID"]. "</td>";
+                echo "<td>" . $row["snitch-ID"]. "</td>";
+                echo "<td>" . $row["boef-ID"]. "</td>";
+                echo "<td>" . $row["datum"]. "</td>";
+                echo "<td>" . $row["overtreding"]. "</td>";
+				echo "<td>" . $row["beschrijving"]. "</td>";
                 
                 echo "</tr>";
                }
@@ -161,19 +123,80 @@
         </tbody>
         <tfoot>
             <tr>
-                <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Report-ID</th>
+                <th>Comment-ID</th>
+                <th>Reporter-ID</th>
+                <th>Reported-ID</th>
+                <th>Datum</th>
+                <th>Overtreding</th>
+                <th>Beschrijving</th>
             </tr>
         </tfoot>
     </table>
 </div>
 
+<h2 class="sub-header">Meme-reports</h2>
+<div class="table-responsive">
+    <table id="usertable1" class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>Report-ID</th>
+                <th>Meme-ID</th>
+                <th>Reporter-ID</th>
+                <th>Reported-ID</th>
+                <th>Datum</th>
+                <th>Overtreding</th>
+                <th>Beschrijving</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+        // Set the query
+        if ($LoggedinUserrole == 'admin') {
+          $query = "SELECT `report-ID`, `meme-report`.`meme-ID`, `snitch-ID`, `boef-ID`, `meme-report`.`datum`, `overtreding`, `beschrijving` 
+					FROM `meme-report`
+					inner join meme on `meme-report`.`meme-ID`=meme.`meme-ID`
+					where `school`='$LoggedinSchool'";
+        }
+        if ($LoggedinUserrole == 'uber-admin') {
+          $query = "SELECT * FROM `meme-report`";
+        }
+
+        // Peform the query and save it in $row
+        $result = mysqli_query($dbConnection, $query);
+
+          if ($result->num_rows > 0) {
+            // output data of each row
+              while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>" . $row["report-ID"]. "</td>";
+                echo "<td>" . $row["meme-ID"]. "</td>";
+                echo "<td>" . $row["snitch-ID"]. "</td>";
+                echo "<td>" . $row["boef-ID"]. "</td>";
+                echo "<td>" . $row["datum"]. "</td>";
+                echo "<td>" . $row["overtreding"]. "</td>";
+				echo "<td>" . $row["beschrijving"]. "</td>";
+                
+                echo "</tr>";
+               }
+            } else {
+               echo "0 results";
+            }
+        ?>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Report-ID</th>
+                <th>Meme-ID</th>
+                <th>Reporter-ID</th>
+                <th>Reported-ID</th>
+                <th>Datum</th>
+                <th>Overtreding</th>
+                <th>Beschrijving</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
 
 </div>
 <!--/row-->
@@ -184,6 +207,12 @@
 <script>
 $(document).ready(function() {
     $('#usertable').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
+</script>
+<script>
+$(document).ready(function() {
+    $('#usertable1').DataTable();
     $('.dataTables_length').addClass('bs-select');
 });
 </script>

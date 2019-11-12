@@ -133,7 +133,7 @@ require ("func.adminheader.php");
                     <li><a href="?page=memes">Memes</a></li>
                     <li><a href="?page=tags">Tags</a></li>
                     <li><a href="?page=votes">Upvote/Downvotes</a></li>
-                    <li><a href="?page=reported">Geraporteerde memes/comments</a></li>
+                    <li><a href="?page=reported">Gerapporteerde memes/comments</a></li>
                     <li><a href="?page=comments">Comments</a></li>
                     <li><a href="?page=verification">Emailverificatie</a></li>
                     <li><a href="?page=error">Errors</a></li>

@@ -28,7 +28,8 @@
 </h1>
 
 <div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
+    <?php if ($LoggedinUserrole == 'uber-admin') { ?>
+	<div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal scholen</h4>
         <span class="text-muted">
@@ -40,12 +41,18 @@
 				  ?>
         </span>
     </div>
+	<?php } ?>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal admins</h4>
         <span class="text-muted">
             <?php 
-					$query = "select count(username) from user where userrole in ('admin', 'uber-admin');";
+					if ($LoggedinUserrole == 'admin') {
+						$query = "select count(username) from user where userrole in ('admin', 'uber-admin') and schoolnaam in ('$LoggedinSchool');";
+					}
+					if ($LoggedinUserrole == 'uber-admin') {
+						$query = "select count(username) from user where userrole in ('admin', 'uber-admin');";
+					}
 					$result = $dbConnection->query($query);
 					$whatevz = mysqli_fetch_assoc($result);
 					echo $whatevz['count(username)'];
@@ -70,7 +77,12 @@
 <div class="table-responsive">
     <table id="admintable" class="table table-striped table-bordered" style="width:100%">
         <?php
-				  $query = "select schoolnaam from school order by 1";
+				  if ($LoggedinUserrole == 'admin') {
+					$query = "select schoolnaam from school where schoolnaam='$LoggedinSchool' order by 1";
+				  }
+				  if ($LoggedinUserrole == 'uber-admin') {
+					$query = "select schoolnaam from school order by 1";
+				  }
 				  $result = $dbConnection->query($query);
 				  while ($record = mysqli_fetch_assoc($result))
 				  {

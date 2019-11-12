@@ -22,7 +22,7 @@
 ?>
 
 <h1 class="page-header">
-    Users
+    Verificatie
     <p class="lead">Alle users in de database</p>
 </h1>
 
@@ -79,23 +79,6 @@
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
     </div>
-    <div class="col-xs-6 col-sm-3 placeholder text-center">
-        <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
-        <h4>Banned</h4>
-        <?php
-                // Set the query
-                  if ($LoggedinUserrole == 'admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1 AND schoolnaam='$LoggedinSchool'";
-                  }
-                  if ($LoggedinUserrole == 'uber-admin') {
-                    $aantalquery = "SELECT count(*) amount FROM `user` WHERE gebanned=1";
-                  }
-                  $aantalresult = mysqli_query($dbConnection, $aantalquery);
-                  $aantalrow = mysqli_fetch_assoc($aantalresult);
-                  $aantal = $aantalrow['amount'];
-                  echo "<span class='text-mute'><h2>$aantal</h2></span>";
-              ?>
-    </div>
 </div>
 
 <hr>
@@ -105,24 +88,26 @@
     <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>Verificatie-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Verificatiecode</th>
+                <th>Datum</th>
+                <th>Soort</th>
+                <th>Geverifieerd</th>
+                <th>Geverifieerd Door</th>
             </tr>
         </thead>
         <tbody>
             <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
+          $query = "select `verificatie-ID`, emailverificatie.`user-ID`, `verificatiecode`, `rowdatum`, `soort`, `geverifieerd`, `geverifieerd_door` 
+					from emailverificatie 
+					inner join user on emailverificatie.`user-ID`=user.`user-ID` 
+					where `schoolnaam` in ('$LoggedinSchool')";
         }
         if ($LoggedinUserrole == 'uber-admin') {
-          $query = "SELECT * FROM user";
+          $query = "SELECT * FROM emailverificatie";
         }
 
         // Peform the query and save it in $row
@@ -132,24 +117,23 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["user-ID"]. "</td>";
-                echo "<td>" . $row["usermail"]. "</td>";
-                echo "<td>" . $row["username"]. "</td>";
-                echo "<td>" . $row["schoolnaam"]. "</td>";
-                echo "<td>" . $row["laatste_login"]. "</td>";
-                echo "<td>" . $row["userrole"]. "</td>";
+                echo "<td>" . $row["verificatie-ID"]. "</td>";
+				echo "<td>" . $row["user-ID"]. "</td>";
+                echo "<td>" . $row["verificatiecode"]. "</td>";
+                echo "<td>" . $row["rowdatum"]. "</td>";
+                echo "<td>" . $row["soort"]. "</td>";
                 
                 // Verwerk de uitput van verified in "ja of nee"
-                if ($row["is_verified"] == 1) {
+                if ($row["geverifieerd"] == 1) {
                   echo "<td>Ja</td>";
                 } else{
                   echo "<td>Nee</td>";
                 }
                 // Verwerk de uitput van gebanned in "ja of nee"
-                if ($row["gebanned"] == 1) {
-                  echo "<td>Ja</td>";
+                if (empty($row["geverifieerd_door"])) {
+                  echo "<td>E-mail</td>";
                 } else{
-                  echo "<td>Nee</td>";
+                  echo "<td>" . $row["geverifieerd_door"]. "</td>";
                 }
                 
                 echo "</tr>";
@@ -161,14 +145,13 @@
         </tbody>
         <tfoot>
             <tr>
+                <th>Verificatie-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>Verificatiecode</th>
+                <th>Datum</th>
+                <th>Soort</th>
+                <th>Geverifieerd</th>
+                <th>Geverifieerd Door</th>
             </tr>
         </tfoot>
     </table>
