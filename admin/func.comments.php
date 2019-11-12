@@ -105,24 +105,23 @@
     <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>comment-ID</th>
+                <th>meme-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>inhoud</th>
+                <th>datum</th>
             </tr>
         </thead>
         <tbody>
             <?php
         // Set the query
         if ($LoggedinUserrole == 'admin') {
-          $query = "SELECT * FROM user WHERE schoolnaam='$LoggedinSchool'";
+          $query = "select `comment-ID`, comments.`meme-ID`, comments.`user-ID`, `inhoud`, comments.`datum` from comments 
+					inner join meme on comments.`meme-ID`=meme.`meme-ID`
+					where `school` in ('$LoggedinSchool')";
         }
         if ($LoggedinUserrole == 'uber-admin') {
-          $query = "SELECT * FROM user";
+          $query = "SELECT * FROM comments";
         }
 
         // Peform the query and save it in $row
@@ -132,28 +131,13 @@
             // output data of each row
               while($row = $result->fetch_assoc()) {
                 echo "<tr>";
-                echo "<td>" . $row["user-ID"]. "</td>";
-                echo "<td>" . $row["usermail"]. "</td>";
-                echo "<td>" . $row["username"]. "</td>";
-                echo "<td>" . $row["schoolnaam"]. "</td>";
-                echo "<td>" . $row["laatste_login"]. "</td>";
-                echo "<td>" . $row["userrole"]. "</td>";
-                
-                // Verwerk de uitput van verified in "ja of nee"
-                if ($row["is_verified"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                // Verwerk de uitput van gebanned in "ja of nee"
-                if ($row["gebanned"] == 1) {
-                  echo "<td>Ja</td>";
-                } else{
-                  echo "<td>Nee</td>";
-                }
-                
-                echo "</tr>";
-               }
+				echo "<td>" . $row['comment-ID'] . "</td>";
+				echo "<td>" . $row['meme-ID'] . "</td>";
+				echo "<td>" . $row['user-ID'] . "</td>";
+				echo "<td>" . $row['inhoud'] . "</td>";
+				echo "<td>" . $row['datum'] . "</td>";
+				echo "<tr>";
+              }
             } else {
                echo "0 results";
             }
@@ -161,14 +145,11 @@
         </tbody>
         <tfoot>
             <tr>
+                <th>comment-ID</th>
+                <th>meme-ID</th>
                 <th>User-ID</th>
-                <th>Usermail</th>
-                <th>Username</th>
-                <th>Schoolnaam</th>
-                <th>Laatste Login</th>
-                <th>Userrol</th>
-                <th>Verified</th>
-                <th>Banned</th>
+                <th>inhoud</th>
+                <th>datum</th>
             </tr>
         </tfoot>
     </table>

@@ -66,9 +66,9 @@
 
 <hr>
 
-<h2 class="sub-header">Here's a table</h2>
+<h2 class="sub-header">De admin-tabel</h2>
 <div class="table-responsive">
-    <table class="table table-striped">
+    <table id="admintable" class="table table-striped table-bordered" style="width:100%">
         <?php
 				  $query = "select schoolnaam from school order by 1";
 				  $result = $dbConnection->query($query);
