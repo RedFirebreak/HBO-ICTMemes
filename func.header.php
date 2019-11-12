@@ -148,12 +148,6 @@
             echo "</li>";
             echo "</ul> <!-- .cd-main-nav -->";
             echo "</nav> <!-- .cd-main-nav-wrapper -->";
-        
-            echo "<a href='#0' class='cd-nav-trigger'><span></span></a>";
-            echo "<form class='form-inline my-2 my-lg-0'>";
-            echo "<input class='form-control mr-sm-2' type='search' placeholder='Search' aria-label='Search'>";
-            echo "<button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button>";
-            echo "</form>";
           }
           ?>
 
