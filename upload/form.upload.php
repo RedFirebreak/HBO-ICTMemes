@@ -28,6 +28,7 @@
 		<br>
 		<p>Filter tags! (Hoofdletter gevoelig):</p>
 		<input id="search_input" placeholder="Type to filter"><br>
+		
 		<select name="tags" id="theList" class="List" required>
 			<?php
 				//tags ophalen
