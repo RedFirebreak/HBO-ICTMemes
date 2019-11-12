@@ -289,7 +289,7 @@
 
                                               echo"<div class='row'>";
                                               echo"<div class='col-md-2'>";
-                                              echo"<img alt='userpic' src='$commentpfpic' class='rounded img-thumbnail user-thumbnail' />";
+                                              echo"<a href='/account/?account=$commentusername'><img alt='userpic' src='$commentpfpic' class='rounded img-thumbnail user-thumbnail' /><a>";
                                               echo"</div>";
                                               echo"<div class='col-md-10'>";
                                               echo"<b>$commentusername </b>";
@@ -404,8 +404,9 @@
                         <div class="col-md-3">
                             <div class="sticky-top" style="top: 82px;">
                                 <h1>User-info</h1>
-                                <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
-                                    src="<?php echo $memeuserpic?>" />
+                                <a href='/account/?account=<?php echo $memeusername?>'>
+                                  <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>" />
+                                </a>
                                 <p style="word-wrap:break-word">
                                     <?php
                       

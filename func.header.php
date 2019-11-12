@@ -65,6 +65,9 @@
 <!-- Jquery -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
+<!-- lazy loading possibilities -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyloadxt/1.0.0/jquery.lazyloadxt.min.js"></script>
+
 <!-- Bootstrap core CSS -->
 <link href="/src/css/bootstrap.min.css" rel="stylesheet">
 

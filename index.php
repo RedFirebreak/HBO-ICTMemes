@@ -68,7 +68,7 @@
                                 <hr>
                                 <?php
                                     if (file_exists($memelocation)) {
-                                      echo "<a href='/meme/?id=$memeid'><img src='$memelocation'class='memeimage rounded mx-auto d-block' alt='...'></a>";
+                                      echo "<a href='/meme/?id=$memeid'><img src='/storage/meme/loading.gif' data-src='$memelocation'class='memeimage rounded mx-auto d-block' alt='...'></a>";
                                   } else {
                                       echo "<div class='alert alert-danger' role='alert'>";
                                       echo "De afbeelding kon helaas niet gevonden worden.</div>";
@@ -82,7 +82,9 @@
                             <div class="col-md-4 divmemeinfo">
                                 <div class="row">
                                     <div class="col-md-4">
+                                      <a href='/account/?account=<?php echo $memeusername?>'>
                                         <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>" />
+                                      </a>
                                     </div>
                                     <div class="col-md-8">
                                         <p style="word-wrap:break-word">

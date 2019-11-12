@@ -44,7 +44,7 @@
                             $memelocation  .= $row["locatie"]; 
                             $memeschool  = $row["school"];
 
-                            echo "<a href='/meme/?id=$memeid'><img class='rounded img-thumbnail user-thumbnail memeaccountimage' alt='$memetitle'src='$memelocation'/></a>";
+                            echo "<a href='/meme/?id=$memeid'><img class='rounded img-thumbnail user-thumbnail memeaccountimage' alt='$memetitle'src='/storage/meme/loading.gif' data-src='$memelocation'/></a>";
                             echo "  ";
                         }
                     } else { // User has not posted anything ?>

@@ -2,6 +2,7 @@
 *
 # Except this file
 !.gitignore
+!.loading.gif
 !2019
 !2020
 !2021
