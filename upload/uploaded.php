@@ -124,17 +124,30 @@
 												}
 										}
 									//check query
-										if (!$result || !$memeins || !$dinges) {
-											customlog("uploaded", "error", "An upload form couldn't be sent: the query failed.");
+									if (!$result) {
+										customlog("uploaded", "error", "the result query check failed.");
+										echo "<div class='alert alert-danger' role='alert'>
+										Er was een probleem bij het versturen van de meme. Je accountaanvraag kon niet verwerkt worden Probeer het later nog eens.
+										</div>";
+
+									}
+									if (!$memeins) {
+										customlog("uploaded", "error", "the inserting meme row query failed.");
+										echo "<div class='alert alert-danger' role='alert'>
+										Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
+										</div>";
+									}
+									if (!$dinges) {
+										customlog("uploaded", "error", "Tags query failed the query failed.");
 											
-											echo "<div class='alert alert-danger' role='alert'>
-											Er was een probleem bij het versturen van de meme. Probeer het later nog eens.
-											</div>";
-										} else {
-											echo "<div class='alert alert-success' role='alert'>
-											Dank je! Je meme is geupload.
-											</div>";
-										}
+										echo "<div class='alert alert-danger' role='alert'>
+										Er was een probleem bij het versturen van de meme. Tags konden niet toegevoegd worden aan je meme. Probeer het later nog eens.
+										</div>";
+									} else {
+										echo "<div class='alert alert-success' role='alert'>
+										Dank je! Je meme is geupload.
+										</div>";
+									}
 							}
 					}
 				
