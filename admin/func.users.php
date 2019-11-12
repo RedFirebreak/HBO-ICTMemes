@@ -19,6 +19,120 @@
           require ("notallowed.php");
           exit;
         }
+		
+		if (isset($_POST['reg_user'])) {
+			// receive all input values from the form
+			  $username = mysqli_real_escape_string($dbConnection, $_POST['username']);
+			  $email = mysqli_real_escape_string($dbConnection, $_POST['email']);
+			  $password_1 = mysqli_real_escape_string($dbConnection, $_POST['password_1']);
+			  $password_2 = mysqli_real_escape_string($dbConnection, $_POST['password_2']);
+			  if ($LoggedinUserrole == 'uber-admin') {
+				$school = mysqli_real_escape_string($dbConnection, $_POST['school']);
+				$rol = mysqli_real_escape_string($dbConnection, $_POST['rol']);
+			  }
+			  if ($LoggedinUserrole == 'admin') {
+				$school = $LoggedinSchool;
+				$rol = 'user';
+			  }
+			  $verificatie = mysqli_real_escape_string($dbConnection, $_POST['verified']);
+			
+			// form validation: ensure that the form is correctly filled ...
+			// by adding (array_push()) corresponding error unto $errors array
+			  if (empty($username)) {
+				  //array_push($errors, "Username is verplicht");
+				  echo "<div class='alert alert-danger' role='alert'>";
+				  echo "Username is verplicht.";
+				  echo "</div>";
+				  return;
+				}
+			  if (empty($email)) {
+				  //array_push($errors, "Email is required");
+				  echo "<div class='alert alert-danger' role='alert'>";
+				  echo "Email is verplicht.";
+				  echo "</div>";
+				  return;
+				}
+			  if (empty($password_1)) {
+				  //array_push($errors, "Password is required");
+				  echo "<div class='alert alert-danger' role='alert'>";
+				  echo "Password is verplicht.";
+				  echo "</div>";
+				  return;
+				}
+			  if ($password_1 != $password_2) {
+				//array_push($errors, "The two passwords do not match");
+				echo "<div class='alert alert-danger' role='alert'>";
+				echo "De twee passwords komen niet overeen.";
+				echo "</div>";
+				return;
+			  }
+			  // Validate password strength
+				$uppercase = preg_match('@[A-Z]@', $password_1);
+				$lowercase = preg_match('@[a-z]@', $password_1);
+				$number    = preg_match('@[0-9]@', $password_1);
+
+				//Maak de eventuele error message klaar
+				$passreqerror = "";
+				$passreqerror .= "<div class='alert alert-danger' role='alert'>";
+				$passreqerror .= 'Password moet minimaal 8 characters zijn, 1 hoofdletter, 1 kleine letter en 1 nummer bevatten.';
+				$passreqerror .= "</div>";
+
+				if ($uppercase = 0) {echo $passreqerror; return;} // Check voor lowercase
+				if ($lowercase = 0) {echo $passreqerror; return;} // Check voor uppercase
+				if ($number = 0) {echo $passreqerror; return;} // Check voor nummer
+				if (strlen($password_1) < 8) {echo $passreqerror; return;} // Check voor lengte
+
+			  // Kijk nu of er al iets overeenkomt in de database
+				// Maak het lowercase om te kijken of 
+				$lowercaseusername = strtolower($username);
+				$lowercaseemail = strtolower($email);
+
+			  // first check the database to make sure 
+			  // a user does not already exist with the same username and/or email
+			  // $sqlchecktaken = "SELECT `username`, `usermail` FROM user WHERE username='$username' OR usermail='$lowercaseemail' LIMIT 1";
+			  // $result = mysqli_query($dbConnection, $sqlchecktaken);
+			  // $user = mysqli_fetch_assoc($result);
+
+			  $sql = "SELECT `username`, `usermail` FROM user WHERE username='$username' OR usermail='$lowercaseemail' LIMIT 1";
+			  $result = mysqli_query($dbConnection, $sql);
+			  $row = mysqli_fetch_assoc($result);
+
+			  // Convert the output to lowercase to compare the outputs 
+			  $querylowercaseusername = strtolower($row['username']);
+			  $querylowercaseemail = strtolower($row['usermail']);
+
+			  // Check if username is taken
+			  if ($querylowercaseusername === $lowercaseusername) {
+			    echo "<div class='alert alert-danger' role='alert'>";
+			    echo "Deze username bestaat al. Probeer het nog eens met een andere username.";
+			    echo "</div>";
+				
+			  }
+				// Check if mail is taken
+					if ($querylowercaseemail === $lowercaseemail) {
+					  echo "<div class='alert alert-danger' role='alert'>";
+					  echo "Deze email is al geregistreerd. Probeer het nog eens met een ander email of log in met de huidige.";
+					  echo "</div>";
+					  // Log the failed existing mail
+					  Customlog("Register", "log", "A user just tried registering with an existing email ($username - $email - With $school)");
+					return;
+					}
+
+				   // If there is no matching user, register it!
+
+				// Check if the query resulted 0 rows, just to be sure. If it does, we are sure that there is no user with the same username and/or
+
+				if (mysqli_num_rows($result) < 1) {
+					//register user if there are no errors in the form
+					$password = md5($password_1);//encrypt the password before saving in the database. Usefull :)
+
+					$query = "INSERT INTO user (username, usermail, wachtwoord, userrole, schoolnaam, profile_picture, is_verified) 
+							VALUES('$username', '$lowercaseemail', '$password', '$rol', '$school','/storage/profilepictures/default.png', $verificatie)";
+					mysqli_query($dbConnection, $query);
+
+					Customlog("Register", "log", "New User created! ($username - With $email)");
+				}
+		}
 ?>
 
 <h1 class="page-header">
@@ -285,6 +399,77 @@
 </div>
 
 
+<h2 class="sub-header">User toevoegen</h2>
+<form action="?page=users" method="post">
+	<p>Username<br>
+        <input type="text" name="username" required></p>
+
+    <p>Email<br>
+        <input type="email" name="email" required></p>
+
+<?php 	if ($LoggedinUserrole == 'uber-admin') { ?>
+    <p>School<br>
+        <select name="school">
+            <?php
+            // Query voor alle schoolnamen, en vervolgens ze in een dropdown zetten
+			$sql = "SELECT schoolnaam s FROM school ORDER by 1;";
+            $result = $dbConnection->query($sql);
+
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row["s"]. "'>" . $row["s"] . "</option>";
+                }
+            } else {
+                echo "0 results";
+            }
+            ?>
+        </select>
+        <p>
+		
+	<p>Userrol<br>
+		<select name="rol">
+			<?php
+			//querry voor alle rollen, en vervolgens ze in een dropdown zetten
+			$sql = "SELECT userrole r FROM rollen ORDER by 1;";
+			$result = $dbConnection->query($sql);
+			if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "<option value='" . $row["r"]. "'>" . $row["r"] . "</option>";
+                }
+            } else {
+                echo "0 results";
+            }
+		}
+            ?>
+        </select>
+        <p>
+		
+            <p>Password<br>
+                <input type="password" id="password_1" name="password_1" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    required></p>
+            <div class="col-md-6" id="message">
+                <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                <p id="number" class="invalid">A <b>number</b></p>
+                <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+            </div>
+
+
+            <p>Confirm password<br>
+                <input type="password" name="password_2" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required></p>
+				
+		<p>Verificatie<br>
+		<select name="verified">
+			<option value="1">Wel geverifieerd</option>
+			<option value="0">Niet geverifieerd</option>
+		</select></p>
+				
+		<button type="submit" class="btn btn-primary" name="reg_user">Register</button>
+</form>
+
+
 </div>
 <!--/row-->
 </div>
@@ -297,5 +482,66 @@ $(document).ready(function() {
     $('.dataTables_length').addClass('bs-select');
 });
 </script>
+<script>
+            var myInput = document.getElementById("password_1");
+            var letter = document.getElementById("letter");
+            var capital = document.getElementById("capital");
+            var number = document.getElementById("number");
+            var length = document.getElementById("length");
+
+            document.getElementById("message").style.display = "none";
+
+            // When the user clicks on the password field, show the message box
+            myInput.onfocus = function() {
+              document.getElementById("message").style.display = "block";
+            }
+
+            // When the user clicks outside of the password field, hide the message box
+            myInput.onblur = function() {
+              document.getElementById("message").style.display = "none";
+            }
+
+            // When the user starts to type something inside the password field
+            myInput.onkeyup = function() {
+              // Validate lowercase letters
+              var lowerCaseLetters = /[a-z]/g;
+              if(myInput.value.match(lowerCaseLetters)) {  
+                letter.classList.remove("invalid");
+                letter.classList.add("valid");
+              } else {
+                letter.classList.remove("valid");
+                letter.classList.add("invalid");
+              }
+              
+              // Validate capital letters
+              var upperCaseLetters = /[A-Z]/g;
+              if(myInput.value.match(upperCaseLetters)) {  
+                capital.classList.remove("invalid");
+                capital.classList.add("valid");
+              } else {
+                capital.classList.remove("valid");
+                capital.classList.add("invalid");
+              }
+
+              // Validate numbers
+              var numbers = /[0-9]/g;
+              if(myInput.value.match(numbers)) {  
+                number.classList.remove("invalid");
+                number.classList.add("valid");
+              } else {
+                number.classList.remove("valid");
+                number.classList.add("invalid");
+              }
+              
+              // Validate length
+              if(myInput.value.length >= 8) {
+                length.classList.remove("invalid");
+                length.classList.add("valid");
+              } else {
+                length.classList.remove("valid");
+                length.classList.add("invalid");
+              }
+            }
+            </script>
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
