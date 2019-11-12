@@ -90,7 +90,7 @@ CREATE TABLE `error` (
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` int(30) NOT NULL,
+  `meme-titel` varchar(200) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `locatie` varchar(200) NOT NULL,
