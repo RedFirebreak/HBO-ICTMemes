@@ -67,6 +67,34 @@
 <!--/row-->
 </div>
 </div>
+<?php 
+if (!empty($_POST['addtag'])){
+	$newtag = mysqli_real_escape_string($dbConnection, $_POST["tag"]);
+	
+	if ($Loggedin) {
+		if (isset($_POST["submit"])){
+		$sql = "SELECT `tag-id` FROM tags";
+		$result = mysqli_query($dbConnection, $sql);
+		$row = mysqli_fetch_assoc($result);
+		$tagID = $row['tag-id'];
+		$tagID++; 	
+		
+		$addtag = "INSERT INTO tags (`tag-ID`, `tagnaam`) VALUES ($tagID,$newtag)";
+		
+		$insert = mysqli_query($dbConnection, $addtag);
+		}
+	}
+}
+
+
+?>
+
+<p> Klik op onderstaande button om een tag toe te voegen aan de website </p>
+<form action="func.tags.php" id="update" method="post">
+<button type="text" value="tag" name="tag">tag toevoegen</button>
+<input type="hidden" name="addtag" value="true">
+<button type="submit" value="submit" name="submit">submit</button>
+</form>
 <!--/.container-->
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
