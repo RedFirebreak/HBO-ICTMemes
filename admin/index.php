@@ -62,142 +62,166 @@ require ("func.adminheader.php");
 
 <!-- html + navbar now! -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
-    <title>HBO-ICTMemes administrator</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!--[if lt IE 9]>
-			<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-    <link href="css/styles.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <!-- Fontawesome -->
-    <script src="https://kit.fontawesome.com/03fd3b0aa1.js" crossorigin="anonymous"></script>
+    <title>HBO-ICTMemes Adminpanel</title>
 
-    <!-- Datatables -->
-    <link rel="stylesheet" type="text/css"
-        href="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/b-html5-1.6.1/fh-3.1.6/sl-1.3.1/datatables.min.css" />
+    <!-- Datatables, Jquery, bootstrap -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4-4.1.1/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/cr-1.5.2/fc-3.3.0/fh-3.1.6/rr-1.2.6/sc-2.0.1/sl-1.3.1/datatables.min.js"></script>
 
-    <script type="text/javascript"
-        src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.20/af-2.3.4/b-1.6.1/b-html5-1.6.1/fh-3.1.6/sl-1.3.1/datatables.min.js">
-    </script>
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/stylesheet.css">
 
-
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/admin/">HBO-ICTMemes Admin page</a>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>HBO-ICTMemes Adminpanel</h3>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/admin/">Dashboard</a></li>
-                    <li><a href="/">Go back </a></li>
-                </ul>
+
+            <ul class="list-unstyled components">
+                <p><?php echo "Hallo $LoggedinUsername <br>[$LoggedinUserrole]"?></p>
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/admin/">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="#">Analytics[WIP]</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Overzichten</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="?page=users">Users</a></li>
+                        <li><a href="?page=schooladmins">Scholen en Schooladmins</a></li>
+                        <li><a href="?page=memes">Memes</a></li>
+                        <li><a href="?page=tags">Tags</a></li>
+                        <li><a href="?page=support">Support</a></li>
+                        <li><a href="?page=votes">Upvote/Downvotes</a></li>
+                        <li><a href="?page=reported">Gerapporteerde memes/comments</a></li>
+                        <li><a href="?page=comments">Comments</a></li>
+                        <li><a href="?page=verification">Emailverificatie</a></li>
+                        <li><a href="?page=error">Errors</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                </li>
+                <li>
+                    <a href="/" class="article">Terug naar de website</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class='col-md-10'>
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/admin/">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/">Terug naar site</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <!-- Start the content here! -->
+            <div class="container-fluid">
+	            <div class="row">
+		            <div class="col-md-12">
+                    <?php // Check welke pagina naar voren moet komen
+                        if (!empty($_GET)) {
+                            switch ($_GET['page']) {
+                            case 'users':
+                                require("func.users.php");
+                                break;
+                            case 'schooladmins':
+                                require("func.schooladmin.php");
+                                break;
+                            case 'memes':
+                                require("func.meme.php");
+                                break;
+                            case 'tags':
+                                require("func.tags.php");
+                                break;
+                            case 'support':
+                                require("func.support.php");
+                                break;
+                            case 'votes':
+                                require("func.votes.php");
+                                break;
+                            case 'reported':
+                                require("func.reported.php");
+                                break;
+                            case 'comments':
+                                require("func.comments.php");
+                                break;
+                            case 'verification':
+                                require("func.verification.php");
+                                break;
+                            case 'error':
+                                require("func.error.php");
+                                break;
+
+                            }
+                        } else {
+                            require("homepage.php");
+                        }
+                    ?>
+                </div>
             </div>
         </div>
-    </nav>
-    <div class="container-fluid">
-        <div class="row row-offcanvas row-offcanvas-left">
-            <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Info</a></li>
-                    <li><a href="#"><?php echo "Hello $LoggedinUsername [$LoggedinUserrole]"?></a></li>
-                    <?php
-              if ($LoggedinUserrole == 'admin') {
-                echo "<li><a href='#'>Dit admin account ziet alleen gebruikers van de school: $LoggedinSchool.</a></li>";
-              }
-            ?>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Navigation</a></li>
-                    <li><a href="/admin/">Dashboard</a></li>
-                    <li><a href="#">Analytics[WIP]</a></li>
-                </ul>
-                <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Overzichten</a></li>
-                    <li><a href="?page=users">Users</a></li>
-                    <li><a href="?page=schooladmins">Scholen en Schooladmins</a></li>
-                    <li><a href="?page=memes">Memes</a></li>
-                    <li><a href="?page=tags">Tags</a></li>
-					<li><a href="?page=support">Support</a></li>
-                    <li><a href="?page=votes">Upvote/Downvotes</a></li>
-                    <li><a href="?page=reported">Gerapporteerde memes/comments</a></li>
-                    <li><a href="?page=comments">Comments</a></li>
-                    <li><a href="?page=verification">Emailverificatie</a></li>
-                    <li><a href="?page=error">Errors</a></li>
-                </ul>
-            </div>
-            <!--/span-->
+        
+        
+        
+            <!-- End content -->
+        </div>
+    </div>
 
-            <div class="col-sm-9 col-md-10 main">
-                <!--toggle sidebar button for smaller devices (mobile)-->
-                <p class="visible-xs">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas"><i
-                            class="far fa-compass"></i></button>
-                </p>
-                <!-- End html / navbar/ Getting on with it! -->
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 
-                <?php // Check welke pagina naar voren moet komen
-          if (!empty($_GET)) {
-            switch ($_GET['page']) {
-              case 'users':
-                  require("func.users.php");
-                  break;
-              case 'schooladmins':
-                  require("func.schooladmin.php");
-                  break;
-              case 'memes':
-                  require("func.meme.php");
-                  break;
-              case 'tags':
-                  require("func.tags.php");
-                  break;
-              case 'support':
-                  require("func.support.php");
-                  break;
-              case 'votes':
-                  require("func.votes.php");
-                  break;
-              case 'reported':
-                  require("func.reported.php");
-                  break;
-              case 'comments':
-                  require("func.comments.php");
-                  break;
-              case 'verification':
-                  require("func.verification.php");
-                  break;
-              case 'error':
-                  require("func.error.php");
-                  break;
-
-            }
-          } else {
-            require("homepage.php");
-          }
-          ?>
-
-                <footer>
-                    <p class="pull-right">©2019 HBO-ICTMemes</p>
-                </footer>
-
-                <!-- script references 
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>-->
-                <script src="js/bootstrap.min.js"></script>
-                <script src="js/scripts.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
 </body>
 
 </html>
