@@ -20,6 +20,15 @@
       require ("notallowed.php");
       exit;
     }
+	
+	//query voor het toevoegen van een rij
+	if ($LoggedinUserrole == 'uber-admin') {
+		if (isset($_POST['submit'])) {
+			$nieuwschool = mysqli_real_escape_string($dbConnection, $_POST['name']);
+			$sql = "insert into school (`schoolnaam`) values ('$nieuwschool')";
+			$result = $dbConnection->query($sql);
+		}
+	}
 ?>
 
 <h1 class="page-header">
@@ -100,8 +109,14 @@
                   ?>
     </table>
 </div>
-
-
+<?php
+if ($LoggedinUserrole == 'uber-admin') { ?>
+<h2 class="sub-header">Rij toevoegen</h2>
+<form action="?page=schooladmins" method="post">
+	<input type="text" name="name" id="name">
+	<input type="submit" name="submit" value="Toevoegen">
+</form>
+<?php } ?>
 </div>
 <!--/row-->
 </div>
