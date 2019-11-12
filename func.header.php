@@ -148,6 +148,8 @@
             echo "</li>";
             echo "</ul> <!-- .cd-main-nav -->";
             echo "</nav> <!-- .cd-main-nav-wrapper -->";
+        
+            echo "<a href='#0' class='cd-nav-trigger'><span></span></a>";
           }
           ?>
 
