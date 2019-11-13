@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -12,4 +12,4 @@
 
     <!-- Start coding here! :D -->
 
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
+    <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

@@ -1,4 +1,3 @@
-
 <?php
     /*
         [DESCRIPTION]
@@ -10,22 +9,23 @@
     */
 ?>
 
-    <!-- Start coding here! :D -->
-	<head>
-		<meta charset="utf-8">
-		<title>Password Reset</title>
-	</head>
-	
-	<body>
-		
-		<form action= "/hbo-ictmemes/account/resetpassword.php" method="post">
-		<p>In order to regain acces to your account, please enter your e-mailadress down below.<br>
-		An e-mail will be sent that will contain a new password.
-		</p>
-		E-mail:<input type="email" name="ëmail">
-		<input type="submit" value="send">
-		</form>
-		
-	</body>
+<!-- Start coding here! :D -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Password Reset</title>
+</head>
+
+<body>
+
+    <form action="/account/resetpassword.php" method="post">
+        <p>Om weer toegang te krijgen tot je account, vul hieronder je opgegeven e-mailadres en gebruikersnaam in. <br>
+            Er zal een e-mail verzonden worden met daarin een link om een nieuw wachtwoord te registreren.</p>
+        Gebruikersnaam:<br><input type="text" name="username"><br>
+        E-mail:<br><input type="email" name="email"><br>
+        <input type="submit" value="send">
+    </form>
+
+</body>
 
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

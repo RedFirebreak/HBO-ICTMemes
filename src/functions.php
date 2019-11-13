@@ -21,7 +21,7 @@
         */
     function Customlog ($docname, $type, $error) {
       $logcation  = checkpathtosrc();
-      $logcation  .= "logs/";
+      $logcation  .= "logs";
 
       //cause functions are "local". Import db connection and open it:
         //Check database connection:
@@ -43,10 +43,10 @@
           //Format it nicely
             $finalerrormessage = "$checktime | $ip | $docname | LOG: $error \n";
 
-              //Create/Write in file general error file.
-               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);  
+            //Create/Write in file general error file.
+              $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);  
               //Create/Write in file of today, fill the file and close it.
                 $errorfile = fopen("$logcation/filtered/{$checkdate}_NORMAL.log", "a");
                 fwrite($errorfile, $finalerrormessage);
@@ -60,16 +60,15 @@
           case "error":
           //This is an error, we should probably fix this!
           //Format it nicely
-          $finalerrormessage = "$checktime | $ip | $docname | ERROR: $error\n";
-           
-              //Create/Write in file general error file.
+            $finalerrormessage = "$checktime | $ip | $docname | ERROR: $error\n";
+            //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
-             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_ERROR.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
+            //Create/Write in file of today, fill the file and close it.
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_ERROR.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
 
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','ERROR','$safeerror')";
@@ -86,31 +85,27 @@
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_CRITICAL.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
-               
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_CRITICAL.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','CRITICAL','$safeerror')";
                 $dbConnection->query($sql);
-
             // Send an email to the main email! We need to fix this ASAP
             error_log("$finalerrormessage",1, "error@hbo-ictmemes.nl","From: system@hbo-ictmemes.nl");
-
               break;
           default:
           //If you need it to be logged somewhere, but you did not properly specify it. This default should catch it
           //Format it nicely
           $finalerrormessage = "$checktime | $ip | $docname | DEFAULT: $safeerror\n";
-
-              //Create/Write in file general error file.
+            //Create/Write in file general error file.
               $errorfile = fopen("$logcation/{$checkdate}_AllLogs.log", "a");
               fwrite($errorfile, $finalerrormessage);
               fclose($errorfile);  
-             //Create/Write in file of today, fill the file and close it.
-               $errorfile = fopen("$logcation/filtered/{$checkdate}_DEFAULT.log", "a");
-               fwrite($errorfile, $finalerrormessage);
-               fclose($errorfile);
+            //Create/Write in file of today, fill the file and close it.
+              $errorfile = fopen("$logcation/filtered/{$checkdate}_DEFAULT.log", "a");
+              fwrite($errorfile, $finalerrormessage);
+              fclose($errorfile);
 
             // Database part:
                 $sql = "INSERT INTO `error`(`locatie`, `soort`, `bericht`) VALUES ('$docname','DEFAULT','$safeerror')";
@@ -173,21 +168,30 @@
   function checkpathtosrc () {
       //Check if the function is called from the existing directories
       $Searchin = getcwd();
-      $subdirectoryaccount = "account";
-      $subdirectoryadmin = "admin";
-      $subdirectorymeme = "meme";
-      $subdirectorysrc = "src";
-      $subdirectoryupload = "upload";
-      $subdirectoryverify = "verify";
+
+      if( strpos( $Searchin, 'hbo-ictmemes.nl' ) !== false) {
+        $subdirectoryaccount = "/account";
+        $subdirectoryadmin = "/admin";
+        $subdirectorymeme = "/meme";
+        $subdirectorysrc = "/src";
+        $subdirectoryupload = "/upload";
+        $subdirectoryverify = "/verify";
+      } else {
+        $subdirectoryaccount = "account";
+        $subdirectoryadmin = "admin";
+        $subdirectorymeme = "meme";
+        $subdirectorysrc = "src";
+        $subdirectoryupload = "upload";
+        $subdirectoryverify = "verify";
+      }
       
-      $logcation = "src/";
+      $logcation = 'src/';
       if( strpos( $Searchin, $subdirectoryaccount ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryadmin ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectorymeme ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectorysrc ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryupload ) !== false) {$logcation = "../src/";}
       if( strpos( $Searchin, $subdirectoryverify ) !== false) {$logcation = "../src/";}
-
       return $logcation;
   }
 
@@ -227,24 +231,7 @@
     // Create a random string of 8 numbers
     $verificationcode = randomNumber(8);
 
-    // Check if the value is allowed
-    if ($safesoort = "emailverificatie") {
-      $safesoort = "emailverificatie";
-    } elseif ($safesoort = "wachtwoordreset") {
-      $safesoort = "wachtwoordreset";
-    } else {
-      // Inform user that something went wrong
-            echo "<div class='alert alert-danger' role='alert'>";
-            echo "De email-verificatie aanvraag kon niet verwerkt worden. De administrators zijn op de hoogte van dit probleem.";
-            echo "</div>";
-          //Log the attempt, this is a critical event since no email-verification has been sent and the account will be useless.
-          Customlog("SendEmail", "error", "sendemailverification heeft een verkeerde soort gekregen ($soort)!! ($username - With $email)");
-          return;
-    }
     // Save the emailverification-code
-      // Prepare the emailverification-code
-
-      // sla de verificatie op
       $query = "INSERT INTO emailverificatie (`user-ID`, verificatiecode, soort ) 
       VALUES('$userid', '$verificationcode', '$safesoort')";
       mysqli_query($dbConnection, $query);
@@ -260,7 +247,7 @@
         // Set the subject
           $subject = "HBO-ICTMemes - Email verificatie";
         }
-      // Als dit een emailverificatie is
+      // Als dit een wachtwoordreset is
       if ($safesoort == "wachtwoordreset") {
         $sitename = "https://www.hbo-ictmemes.nl/verify/?wachtwoordreset=true&username=$safeusername&mail=$safeemail&code=$verificationcode";
         $checkpath = checkpathtosrc();
@@ -327,8 +314,6 @@
       $config  = checkpathtosrc();
       $config .= "config.php";
       require "$config";
-
-      $returnarray=array("correct" => 100, "Apple" => 200, "Banana" => 300, "Cherry" => 400);
 
       //check if captcha was filled
       if(!$captcha){

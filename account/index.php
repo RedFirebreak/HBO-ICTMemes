@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,45 +10,85 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-    <!-- Start coding here! :D -->
-    <?php require('func.accountpooll.php'); ?>
-    <?php require('func.accountinfo.php'); ?>
-
-    <!-- If own account -->
-    <?php require('func.management.php'); ?>
-
-    <div class="jumbotron">
-      <div class="container">
-        <h1 class="display-3">Accountpage</h1>
-        <p>Display account stuff here</p>
-
-      </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Stuff n' Things</h2>
-            </div>
-
-            <div class="col-md-6">
-                <h2>More Stuff n' Things</h2>
-                <h2><a href="/admin/">If admin</a></h2>
+    <body>
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3">Accountpage</h1>
             </div>
         </div>
-    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    <?php require('func.accountpooll.php'); ?>
+                    <h2>Door de user geuploade memes:</h2>
+                    <?php
+                    
+                    $sql = "SELECT * FROM meme WHERE `user-id`='$caughtuserid' ORDER by `meme-ID` DESC;";
+                    $result = $dbConnection->query($sql);
+                    if ($result->num_rows > 0) { // This will also happen if the user is not logged in.
+                      // output data of each row
+                        while($row = $result->fetch_assoc()) {
+                            $memelocation = ".."; // to make pathing variable from the homepage
+                            $memeid  = $row["meme-ID"];
+                            $memetitle  = $row["meme-titel"];
+                            $memeuser  = $row["user-ID"];
+                            $memedate  = $row["datum"];
+                            $memelocation  .= $row["locatie"]; 
+                            $memeschool  = $row["school"];
 
-  </body>
+                            echo "<a href='/meme/?id=$memeid'><img class='rounded img-thumbnail user-thumbnail memeaccountimage' alt='$memetitle'src='/storage/meme/loading.gif' data-src='$memelocation'/></a>";
+                            echo "  ";
+                        }
+                    } else { // User has not posted anything ?>
+                    <p>
+                        <div class='alert alert-info' role='alert'>
+                            De user heeft nog geen memes geupload!
+                        </div>
+                        <br><br><br>
+                    </p>
+                    <?php
+                    }
+                    ?>
 
-  <footer>
-    <?php require("../func.footer.php"); ?>
-  </footer>
-</html>
+                </div>
+                <div class="col-md-3">
+                    <div class="sticky-top" style="top: 82px;">
+                        <h1>User-info</h1>
+                        <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
+                            src="<?php echo $memeuserpic?>" />
+                        <p style="word-wrap:break-word">
+                            <?php
+                    
+                      // Echo userinfo of the meme
+                        echo "Gebruiker: <b>" .$memeusername . '</b><br>';
+                        if ($memeuserrole == 'admin') {echo "Admin <br>";}
+                        if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
+                        echo $memeuserschool . '<br>';
+
+                        if($LoggedinID == $caughtuserid) {
+
+                            require('func.management.php');
+                            ?>
+                            <?php
+                        //require('func.accountinfo.php');
+                        
+                        }
+                        ?>
+
+                    </div>
+                </div>
+            </div>
+    </body>
+    <footer>
+        <?php require("../func.footer.php"); ?>
+    </footer>
+
+    </html>

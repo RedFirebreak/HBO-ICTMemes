@@ -7,40 +7,39 @@
         Author:     Janine
         Date:       11-10-2019
     */
-
-	$username = $_POST['username'];
-	$newusername = $_POST['newusername'];
-	$email = $_POST['email'];
-	$password = $_POST['password'];
+if (!empty($_POST['changeusername'])){
+	$newusername = mysqli_real_escape_string($dbConnection, $_POST["newusername"]);
+	$password = mysqli_real_escape_string($dbConnection, $_POST["password"]);
+	$passwordencrypted = md5($password);
 	
-	$sql = "UPDATE user SET naam = '$newusername' WHERE usermail= '$email'"; //sql query voor updaten username
-	$sql2 = "SELECT wachtwoord from user WHERE user-id = '$loggedinID'";
-    $result = $dbConnection->query($sql);
-	$result2 = $dbConnection->query($sql2);
+	$sql = "UPDATE user SET username='$newusername' WHERE `user-id`= '$LoggedinID'"; //sql query voor updaten username
+	$sql2 = "SELECT wachtwoord from user WHERE `user-id` = '$LoggedinID'";
 	
 	if ($Loggedin) {
-		if ($password == $result2) {
-			$result;
-			echo "your username has been updated to: $newusername <br>";
-			echo "A confirmation email will be sent to your mail, when confirmed, this change will be 'permanent'. <br>";
-		}
-		else {
-			echo "Your password does not seem to match your profile.";
-		}
-	} 	
-	else {
-		echo "Nobody is logged in, please log in before trying to change a username";
+		$result_password = mysqli_query($dbConnection,$sql2);
+		$row = mysqli_fetch_assoc($result_password);
+		$dbpassword = $row['wachtwoord'];
+		
+			if ($passwordencrypted != $dbpassword) {
+				$temperror = "de username of wachtwoord is niet correct, vul deze opnieuw in";
+			} else {
+				$result_newname = mysqli_query($dbConnection,$sql);
+				$tempsuccess = "De gebruikersnaam is veranderd naar: $newusername. Log opnieuw in om de wijziging door te zetten.<br>";
+			}
 	}
-      
+	else {
+		$temperror = "Log eerst in, voor er gebruik kan worden gemaakt van deze functie";
+	}
+}  
+   
 ?>
+<form action="/account/" id="update" method="post">
+    Nieuwe gebruikersnaam: <input type="text" name="newusername"><br>
+    Wachtwoord: <input type="password" name="password"><br>
+	<input type="hidden" name="changeusername" value="true">
 
-<form id="update" method="post">
-			current username: <input type="text" name="username"><br>
-			New username: <input type="text" name="newusername"><br>
-			email: <input type="text" name="email"><br>
-			password: <input type="text" name="password"><br>
-			
-			<button type="submit" value="Submit">Submit</button>
-			<button type="reset" value="Reset">Reset</button>
-		</form>
+    <button type="submit" value="Submit">Submit</button>
+    <button type="reset" value="Reset">Reset</button>
+</form>
+<br> <br>
 <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->

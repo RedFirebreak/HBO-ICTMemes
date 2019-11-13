@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 11 nov 2019 om 10:17
+-- Gegenereerd op: 13 nov 2019 om 10:25
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.3.11
 
@@ -90,7 +90,7 @@ CREATE TABLE `error` (
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `meme-titel` int(30) NOT NULL,
+  `meme-titel` varchar(200) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
   `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `locatie` varchar(200) NOT NULL,
@@ -135,6 +135,19 @@ CREATE TABLE `overtredingen` (
   `overtreding` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `overtredingen`
+--
+
+INSERT INTO `overtredingen` (`overtreding`) VALUES
+('dierenmishandeling'),
+('mishandeling'),
+('nsfw'),
+('offensief'),
+('ongepast'),
+('pornografisch materi'),
+('racisme');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +174,15 @@ CREATE TABLE `rollen` (
   `userrole` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `rollen`
+--
+
+INSERT INTO `rollen` (`userrole`) VALUES
+('admin'),
+('uber-admin'),
+('user');
+
 -- --------------------------------------------------------
 
 --
@@ -170,6 +192,16 @@ CREATE TABLE `rollen` (
 CREATE TABLE `school` (
   `schoolnaam` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `school`
+--
+
+INSERT INTO `school` (`schoolnaam`) VALUES
+('Hanze'),
+('HvA'),
+('NHL Stenden'),
+('Windesheim');
 
 -- --------------------------------------------------------
 
@@ -199,6 +231,61 @@ CREATE TABLE `tags` (
   `tagnaam` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Gegevens worden geëxporteerd voor tabel `tags`
+--
+
+INSERT INTO `tags` (`tag-ID`, `tagnaam`) VALUES
+(11, 'AdminPost'),
+(12, 'Funny'),
+(13, 'Animals'),
+(14, 'Anime & Manga'),
+(15, 'Anime Waifu'),
+(16, 'Anime Wallpaper'),
+(17, 'Apex Legends'),
+(19, 'Awesome'),
+(20, 'Car'),
+(21, 'Comic & Webtoon'),
+(22, 'Cosplay'),
+(23, 'Countryballs'),
+(24, 'Cozy & Comfy'),
+(25, 'Crappy Design'),
+(26, 'Drawing, DIY & Crafts'),
+(27, 'Food & Drinks'),
+(28, 'Football'),
+(29, 'Fortnite'),
+(30, 'Game of Thrones ⚔️'),
+(31, 'Gaming'),
+(32, 'GIF'),
+(33, 'History'),
+(34, 'Horror'),
+(35, 'K-Pop'),
+(36, 'Latest News'),
+(37, 'League of Legends'),
+(38, 'LEGO'),
+(39, 'Marvel & DC'),
+(40, 'Meme'),
+(41, 'Movie & TV'),
+(42, 'Music'),
+(43, 'NBA'),
+(44, 'Overwatch'),
+(45, 'PC Master Race'),
+(46, 'Pokémon'),
+(47, 'Politics'),
+(48, 'Relationship'),
+(49, 'Savage'),
+(50, 'Satisfying'),
+(51, 'Science & Tech'),
+(52, 'Star Wars'),
+(53, 'Sport'),
+(54, 'Wallpaper'),
+(55, 'Wholesome:heartbeat:'),
+(56, 'WTF'),
+(57, 'Dark Humor'),
+(58, 'Relationship'),
+(59, 'Shitpost'),
+(60, 'ICT');
+
 -- --------------------------------------------------------
 
 --
@@ -208,7 +295,8 @@ CREATE TABLE `tags` (
 CREATE TABLE `upvote` (
   `upvote-ID` int(10) UNSIGNED NOT NULL,
   `meme-ID` int(10) UNSIGNED NOT NULL,
-  `user-ID` int(10) UNSIGNED NOT NULL
+  `user-ID` int(10) UNSIGNED NOT NULL,
+  `soort` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -336,6 +424,7 @@ ALTER TABLE `tags`
 --
 ALTER TABLE `upvote`
   ADD PRIMARY KEY (`upvote-ID`),
+  ADD UNIQUE KEY `uni_vote` (`meme-ID`,`user-ID`),
   ADD KEY `meme-ID` (`meme-ID`),
   ADD KEY `user-ID` (`user-ID`);
 
@@ -404,7 +493,7 @@ ALTER TABLE `support`
 -- AUTO_INCREMENT voor een tabel `tags`
 --
 ALTER TABLE `tags`
-  MODIFY `tag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `tag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT voor een tabel `upvote`
@@ -477,8 +566,8 @@ ALTER TABLE `private-info`
 -- Beperkingen voor tabel `upvote`
 --
 ALTER TABLE `upvote`
-  ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`),
-  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
+  ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
 -- Beperkingen voor tabel `user`

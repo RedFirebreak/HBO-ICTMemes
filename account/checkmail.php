@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,25 +10,27 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-    <!-- Start coding here! :D -->
-    <?php require('func.accountpooll.php'); ?>
-    <?php require('func.accountinfo.php'); ?>
+    <body>
 
-    <!-- If own account -->
-    <?php require('func.management.php'); ?>
+        <!-- Start coding here! :D -->
+        <?php require('func.accountpooll.php'); ?>
+        <?php require('func.accountinfo.php'); ?>
 
-  </body>
+        <!-- If own account -->
+        <?php require('func.management.php'); ?>
 
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    </body>
+
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>

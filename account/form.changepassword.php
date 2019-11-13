@@ -1,52 +1,57 @@
 <?php
-$password = $_POST['oldpassword'];
-$newpassword = $_POST['newpassword'];
-$newpassword2 = $_POST['newpassword2'];
-$email = $_POST['email'];
+if (!empty($_POST['changepassword'])){
+	$password = mysqli_real_escape_string($dbConnection, $_POST["oldpassword"]);
+	$passwordencrypted = md5($password);
 
-$sql = "UPDATE user SET wachtwoord = '$newpassword' WHERE usermail = '$email'"; //sql query voor veranderen oud wachtwoord
-$sql2 = "UPDATE user SET vorig_wachtwoord = $password WHERE usermail = $email"; //sql query voor doorschuiven oud wachtwoord
-$sql3 = "SELECT `wachtwoord` FROM `user` WHERE usermail = '$email'"; //sql query voor checken wachtwoord
-$result = $dbConnection->query($sql);
-$result2 = $dbConnection->query($sql2);
-$dbpassword = $dbConnection->query($sql3);
+	$newpassword = mysqli_real_escape_string($dbConnection, $_POST["newpassword"]);
+	$newpasswordencrypted = md5($newpassword);
 
-if ($loggedin) {
- 	if ($password == $dbpassword) {
-  		$result; //verander password in het nieuwe password
-  		$result2; // schuif het vorige password door naar de vorige_wachtwoord kolom in database
-  		echo 'Your update has been saved';
+	$newpassword2 = mysqli_real_escape_string($dbConnection, $_POST["newpassword2"]);
+
+	$sql = "UPDATE user SET wachtwoord = '$newpasswordencrypted' WHERE `user-id` = '$LoggedinID'"; //sql query voor veranderen oud wachtwoord
+	$sql2 = "SELECT `wachtwoord` FROM `user` WHERE `user-id` = '$LoggedinID'"; //sql query voor checken wachtwoord
+	
+	if ($Loggedin) {
+		$result2 = mysqli_query($dbConnection, $sql2);
+		$row2 = mysqli_fetch_assoc($result2);
+		$dbpassword = $row2['wachtwoord'];
+
+		if ($passwordencrypted == $dbpassword) {
+			if ($newpassword != $newpassword2) {
+				$temperror = "De twee getypte wachtwoorden komen niet overeen, probeer opnieuw";
+			} else {
+			//verander password in het nieuwe password
+			$result = mysqli_query($dbConnection, $sql);
+			$tempsuccess = 'Je wachtwoord is gewijzigd';
+			}
+		} else {
+			$temperror = 'Je huidige wachtwoord matcht niet met het ingevulde wachtwoord';
+		}
+	} else {
+		$temperror = 'Log eerst in, voor gebruik kan worden gemaakt van deze functie';
 	}
- 	else {
-  		echo 'The filled in password does not seem to match your password';
- 	}
 }
-else {
- 	echo 'Please log in to change your password'
-}
-
-
-
 ?>
 
 <!-- Start coding here! :D -->
- <!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
- <title>change password</title>
- </head>
-  <body>
-<form changepassword "/form.changepassword.php">
- Email address:<br>
- <input type="text" name="email">
- <br>
- Old password:<br>
- <input type="text" name="oldpassword">
- <br>
- New password:<br>
- <input type="text" name="newpassword">
- <br>
- New password again:<br>
- <input type="text" name="newpassword2">
- <br>
- <input type="submit" name="submit">
+<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
+<title>change password</title>
+</head>
+<body>
+<form action="/account/" id="update" method="post">
+      <form id="changepassword" method="post">
+        Huidig wachtwoord:<br>
+        <input type="password" name="oldpassword">
+        <br>
+        Nieuw wachtwoord:<br>
+        <input type="password" name="newpassword">
+        <br>
+        Herhaal nieuwe wachtwoord:<br>
+        <input type="password" name="newpassword2">
+		<input type="hidden" name="changepassword" value="true">
+        <br>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
 </form>
+<br> <br>
 </body>

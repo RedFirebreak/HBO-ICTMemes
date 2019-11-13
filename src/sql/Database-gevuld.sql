@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 05:36 PM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Gegenereerd op: 11 nov 2019 om 10:14
+-- Serverversie: 10.4.8-MariaDB
+-- PHP-versie: 7.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comment-report`
+-- Tabelstructuur voor tabel `comment-report`
 --
 
 CREATE TABLE `comment-report` (
@@ -39,7 +39,7 @@ CREATE TABLE `comment-report` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comment-report`
+-- Gegevens worden geëxporteerd voor tabel `comment-report`
 --
 
 INSERT INTO `comment-report` (`report-ID`, `comment-ID`, `snitch-ID`, `boef-ID`, `datum`, `overtreding`, `beschrijving`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `comment-report` (`report-ID`, `comment-ID`, `snitch-ID`, `boef-ID`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Tabelstructuur voor tabel `comments`
 --
 
 CREATE TABLE `comments` (
@@ -63,7 +63,7 @@ CREATE TABLE `comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `comments`
+-- Gegevens worden geëxporteerd voor tabel `comments`
 --
 
 INSERT INTO `comments` (`comment-ID`, `meme-ID`, `user-ID`, `inhoud`, `datum`) VALUES
@@ -78,7 +78,7 @@ INSERT INTO `comments` (`comment-ID`, `meme-ID`, `user-ID`, `inhoud`, `datum`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `emailverificatie`
+-- Tabelstructuur voor tabel `emailverificatie`
 --
 
 CREATE TABLE `emailverificatie` (
@@ -92,7 +92,7 @@ CREATE TABLE `emailverificatie` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `emailverificatie`
+-- Gegevens worden geëxporteerd voor tabel `emailverificatie`
 --
 
 INSERT INTO `emailverificatie` (`verificatie-ID`, `user-ID`, `verificatiecode`, `rowdatum`, `soort`, `geverifieerd`, `geverifieerd_door`) VALUES
@@ -110,12 +110,13 @@ INSERT INTO `emailverificatie` (`verificatie-ID`, `user-ID`, `verificatiecode`, 
 (12, 12, 6688, '2019-10-30 17:40:37', 'wachtwoordreset', 1, 1),
 (13, 13, 8800, '2019-10-30 17:40:37', 'emailverificatie', 1, 4),
 (14, 14, 3355, '2019-10-30 17:40:37', 'emailverificatie', 1, 4),
-(15, 15, 5577, '2019-10-30 17:40:37', 'emailverificatie', 1, 1);
+(15, 15, 5577, '2019-10-30 17:40:37', 'emailverificatie', 1, 1),
+(16, 16, 6182740, '2019-11-11 09:02:56', 'emailverificatie', 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `error`
+-- Tabelstructuur voor tabel `error`
 --
 
 CREATE TABLE `error` (
@@ -127,7 +128,7 @@ CREATE TABLE `error` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `error`
+-- Gegevens worden geëxporteerd voor tabel `error`
 --
 
 INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
@@ -137,43 +138,80 @@ INSERT INTO `error` (`error-ID`, `locatie`, `datum`, `soort`, `bericht`) VALUES
 (4, 'Homepage', '2019-10-27 16:34:24', 'CRITICAL', 'WHO\'S DONE IT'),
 (5, 'Homepage', '2019-10-27 16:34:45', 'ERROR', 'STEFAN DID IT AGAIN DIDNT HE'),
 (6, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:23:54', 'ERROR', '[Line: 18][8] Undefined index: loggedin'),
-(7, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:45:01', 'ERROR', '[Line: 18][8] Undefined index: loggedin');
+(7, 'SYSTEM-C:xampphtdocsHBO-ICTMemesfunc.header.php', '2019-10-30 17:45:01', 'ERROR', '[Line: 18][8] Undefined index: loggedin'),
+(8, 'SYSTEM-C:xampphtdocsuploaduploaded.php', '2019-11-08 20:16:43', 'ERROR', '[Line: 35][2] mysqli_real_escape_string() expects parameter 2 to be string, array given'),
+(9, 'SYSTEM-C:xampphtdocsuploaduploaded.php', '2019-11-08 20:16:43', 'ERROR', '[Line: 52][2] mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given'),
+(10, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:02:16', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(11, 'SYSTEM-C:xampphtdocssrcfunctions.php', '2019-11-11 10:02:57', 'ERROR', '[Line: 285][2] mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set()'),
+(12, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:08', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(13, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:39', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(14, 'SYSTEM-C:xampphtdocsaccountlogin.php', '2019-11-11 10:03:58', 'ERROR', '[Line: 38][8] Undefined variable: loggedin'),
+(15, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(16, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(17, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(18, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(19, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(20, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(21, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(22, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(23, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(24, 'Home-memeimage', '2019-11-11 10:04:03', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(25, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(26, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(27, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(28, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(29, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(30, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(31, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(32, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(33, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(34, 'Home-memeimage', '2019-11-11 10:11:11', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(35, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 10, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(36, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 9, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(37, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 8, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(38, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 7, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(39, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 6, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(40, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 5, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(41, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 4, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(42, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 3, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(43, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 2, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )'),
+(44, 'Home-memeimage', '2019-11-11 10:11:20', 'ERROR', 'The homepage found an image that does not exist!(ID: 1, location: ./memestorage/oktober/, user: 5, Date: 2019-10-24 00:00:00 )');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meme`
+-- Tabelstructuur voor tabel `meme`
 --
 
 CREATE TABLE `meme` (
   `meme-ID` int(10) UNSIGNED NOT NULL,
   `meme-titel` varchar(30) NOT NULL,
   `user-ID` int(10) UNSIGNED DEFAULT NULL,
-  `datum` date NOT NULL,
+  `datum` timestamp NOT NULL DEFAULT current_timestamp(),
   `locatie` varchar(200) NOT NULL,
   `school` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `meme`
+-- Gegevens worden geëxporteerd voor tabel `meme`
 --
 
 INSERT INTO `meme` (`meme-ID`, `meme-titel`, `user-ID`, `datum`, `locatie`, `school`) VALUES
-(1, 'Memey-boi1', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
-(2, 'Memey-boi2', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
-(3, 'Memey-boi3', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
-(4, 'Memey-boi4', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool2'),
-(5, 'Memey-boi5', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
-(6, 'Memey-boi6', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3'),
-(7, 'Memey-boi7', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
-(8, 'Memey-boi8', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool4'),
-(9, 'Memey-boi9', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool1'),
-(10, 'Memey-boi10', 5, '2019-10-24', '/memestorage/oktober/', 'voorbeeldschool3');
+(1, 'Memey-boi1', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool1'),
+(2, 'Memey-boi2', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool1'),
+(3, 'Memey-boi3', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool2'),
+(4, 'Memey-boi4', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool2'),
+(5, 'Memey-boi5', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3'),
+(6, 'Memey-boi6', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3'),
+(7, 'Memey-boi7', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
+(8, 'Memey-boi8', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool4'),
+(9, 'Memey-boi9', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool1'),
+(10, 'Memey-boi10', 5, '2019-10-23 22:00:00', '/memestorage/oktober/', 'voorbeeldschool3');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `meme-report`
+-- Tabelstructuur voor tabel `meme-report`
 --
 
 CREATE TABLE `meme-report` (
@@ -189,7 +227,7 @@ CREATE TABLE `meme-report` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `memetag`
+-- Tabelstructuur voor tabel `memetag`
 --
 
 CREATE TABLE `memetag` (
@@ -201,7 +239,7 @@ CREATE TABLE `memetag` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `overtredingen`
+-- Tabelstructuur voor tabel `overtredingen`
 --
 
 CREATE TABLE `overtredingen` (
@@ -209,7 +247,7 @@ CREATE TABLE `overtredingen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `overtredingen`
+-- Gegevens worden geëxporteerd voor tabel `overtredingen`
 --
 
 INSERT INTO `overtredingen` (`overtreding`) VALUES
@@ -222,7 +260,7 @@ INSERT INTO `overtredingen` (`overtreding`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `private-info`
+-- Tabelstructuur voor tabel `private-info`
 --
 
 CREATE TABLE `private-info` (
@@ -238,7 +276,7 @@ CREATE TABLE `private-info` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `rollen`
+-- Tabelstructuur voor tabel `rollen`
 --
 
 CREATE TABLE `rollen` (
@@ -246,7 +284,7 @@ CREATE TABLE `rollen` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `rollen`
+-- Gegevens worden geëxporteerd voor tabel `rollen`
 --
 
 INSERT INTO `rollen` (`userrole`) VALUES
@@ -257,7 +295,7 @@ INSERT INTO `rollen` (`userrole`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `school`
+-- Tabelstructuur voor tabel `school`
 --
 
 CREATE TABLE `school` (
@@ -265,7 +303,7 @@ CREATE TABLE `school` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `school`
+-- Gegevens worden geëxporteerd voor tabel `school`
 --
 
 INSERT INTO `school` (`schoolnaam`) VALUES
@@ -277,7 +315,7 @@ INSERT INTO `school` (`schoolnaam`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `support`
+-- Tabelstructuur voor tabel `support`
 --
 
 CREATE TABLE `support` (
@@ -285,29 +323,29 @@ CREATE TABLE `support` (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `naam` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `onderwerp` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `school` varchar(30) COLLATE utf8_bin NOT NULL,
+  `school` varchar(30) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `inhoud` varchar(500) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `datum` date NOT NULL,
   `opgelost` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `support`
+-- Gegevens worden geëxporteerd voor tabel `support`
 --
 
-INSERT INTO `support` (`support-ID`, `email`, `naam`, `onderwerp`, `inhoud`, `datum`, `opgelost`) VALUES
-(1, 'janwillem@hotmail.com', '', 'login probleem', 'ik kan niet inloggen ', '2019-10-15', 0),
-(2, 'willemjan@hotmail.com', '', 'niet registreren', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
-(3, 'Basdeejay@hotmail.com', '', 'meme submut', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
-(4, 'khalidwonder@st.hanze.nl', '', 'henk de tank-meme', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
-(5, 'gigid\'agostino@st.windesheim.nl', '', 'geen account', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
-(6, 'alcazarvevo@discotheek.com', '', 'video', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
-(7, 'earhtwindfire@st.NHL.nl', '', 'tags', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
+INSERT INTO `support` (`support-ID`, `email`, `naam`, `onderwerp`, `school`, `inhoud`, `datum`, `opgelost`) VALUES
+(1, 'janwillem@hotmail.com', '', 'login probleem', '', 'ik kan niet inloggen ', '2019-10-15', 0),
+(2, 'willemjan@hotmail.com', '', 'niet registreren', '', 'ik probeer een account aan te maken maar ik krijg een error.', '2019-10-15', 1),
+(3, 'Basdeejay@hotmail.com', '', 'meme submut', '', 'ik probeer een meme toe te voegen maar deze werkt niet.', '2019-10-13', 1),
+(4, 'khalidwonder@st.hanze.nl', '', 'henk de tank-meme', '', 'waarom staan er nog geen henk tatje memes op de website', '2019-10-13', 0),
+(5, 'gigid\'agostino@st.windesheim.nl', '', 'geen account', '', 'ik wil een meme posten maar ik wil geen account aanmaken kan dit?', '2019-10-05', 1),
+(6, 'alcazarvevo@discotheek.com', '', 'video', '', 'ik probeer een video te uploaden maar dit lukt niet, kan dit eigenlijk wel?', '2019-10-12', 1),
+(7, 'earhtwindfire@st.NHL.nl', '', 'tags', '', 'ik zie geen tags op de tag pagina, ligt dit aan mij of aan jullie?', '2019-10-09', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tags`
+-- Tabelstructuur voor tabel `tags`
 --
 
 CREATE TABLE `tags` (
@@ -316,7 +354,7 @@ CREATE TABLE `tags` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `tags`
+-- Gegevens worden geëxporteerd voor tabel `tags`
 --
 
 INSERT INTO `tags` (`tag-ID`, `tagnaam`) VALUES
@@ -334,7 +372,7 @@ INSERT INTO `tags` (`tag-ID`, `tagnaam`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `upvote`
+-- Tabelstructuur voor tabel `upvote`
 --
 
 CREATE TABLE `upvote` (
@@ -346,7 +384,7 @@ CREATE TABLE `upvote` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Tabelstructuur voor tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -355,7 +393,7 @@ CREATE TABLE `user` (
   `username` varchar(30) NOT NULL,
   `wachtwoord` varchar(200) NOT NULL,
   `vorig_wachtwoord` varchar(200) DEFAULT NULL,
-  `profile_picture` varchar(300) COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
+  `profile_picture` varchar(300) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT '/storage/profilepictures/default.png',
   `schoolnaam` varchar(50) DEFAULT NULL,
   `laatste_login` datetime DEFAULT NULL,
   `aantal_foute_logins` tinyint(3) UNSIGNED DEFAULT 0,
@@ -365,7 +403,7 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Gegevens worden geëxporteerd voor tabel `user`
 --
 
 INSERT INTO `user` (`user-ID`, `usermail`, `username`, `wachtwoord`, `vorig_wachtwoord`, `profile_picture`, `schoolnaam`, `laatste_login`, `aantal_foute_logins`, `userrole`, `is_verified`, `gebanned`) VALUES
@@ -383,14 +421,15 @@ INSERT INTO `user` (`user-ID`, `usermail`, `username`, `wachtwoord`, `vorig_wach
 (12, 'crediteur@mail.com', 'crediteur', 'debiteur', '', '', 'voorbeeldschool2', '2019-10-17 07:00:00', 0, 'user', 1, 0),
 (13, 'debiteur@mail.com', 'debiteur', 'crediteur', 'crediteur<3', '', 'voorbeeldschool2', '2019-10-14 07:00:00', 0, 'user', 1, 0),
 (14, 'bobcattweed@mail.com', 'bobcattweed', 'BringTheweed', '', '', 'voorbeeldschool3', '2019-10-14 22:00:00', 0, 'admin', 1, 0),
-(15, 'egg@mail.com', 'eggisland', 'chickenChicken', 'CluckCluck', '', 'voorbeeldschool4', '0000-00-00 00:00:00', 1, 'user', 1, 0);
+(15, 'egg@mail.com', 'eggisland', 'chickenChicken', 'CluckCluck', '', 'voorbeeldschool4', '0000-00-00 00:00:00', 1, 'user', 1, 0),
+(16, 'tombeugels@hotmail.com', 'tom', '0f141392f18c390695b0db24f1995523', NULL, '/storage/profilepictures/default.png', 'voorbeeldschool1', '2019-11-11 10:03:58', 0, 'uber-admin', 1, 0);
 
 --
--- Indexes for dumped tables
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
--- Indexes for table `comment-report`
+-- Indexen voor tabel `comment-report`
 --
 ALTER TABLE `comment-report`
   ADD PRIMARY KEY (`report-ID`),
@@ -400,7 +439,7 @@ ALTER TABLE `comment-report`
   ADD KEY `overtreding` (`overtreding`);
 
 --
--- Indexes for table `comments`
+-- Indexen voor tabel `comments`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`comment-ID`),
@@ -408,7 +447,7 @@ ALTER TABLE `comments`
   ADD KEY `user-ID` (`user-ID`);
 
 --
--- Indexes for table `emailverificatie`
+-- Indexen voor tabel `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
   ADD PRIMARY KEY (`verificatie-ID`),
@@ -417,25 +456,21 @@ ALTER TABLE `emailverificatie`
   ADD KEY `user-ID` (`user-ID`);
 
 --
--- Indexes for table `error`
+-- Indexen voor tabel `error`
 --
 ALTER TABLE `error`
   ADD PRIMARY KEY (`error-ID`);
 
 --
--- Indexes for table `meme`
+-- Indexen voor tabel `meme`
 --
 ALTER TABLE `meme`
   ADD PRIMARY KEY (`meme-ID`),
-  ADD UNIQUE KEY `meme-titel_4` (`meme-titel`),
-  ADD KEY `meme-titel` (`meme-titel`),
-  ADD KEY `meme-titel_2` (`meme-titel`),
-  ADD KEY `meme-titel_3` (`meme-titel`),
   ADD KEY `user-ID` (`user-ID`),
   ADD KEY `school` (`school`);
 
 --
--- Indexes for table `meme-report`
+-- Indexen voor tabel `meme-report`
 --
 ALTER TABLE `meme-report`
   ADD PRIMARY KEY (`report-ID`),
@@ -445,7 +480,7 @@ ALTER TABLE `meme-report`
   ADD KEY `overtreding` (`overtreding`);
 
 --
--- Indexes for table `memetag`
+-- Indexen voor tabel `memetag`
 --
 ALTER TABLE `memetag`
   ADD PRIMARY KEY (`memetag-ID`),
@@ -453,43 +488,43 @@ ALTER TABLE `memetag`
   ADD KEY `memetag_ibfk_2` (`tag-ID`);
 
 --
--- Indexes for table `overtredingen`
+-- Indexen voor tabel `overtredingen`
 --
 ALTER TABLE `overtredingen`
   ADD PRIMARY KEY (`overtreding`);
 
 --
--- Indexes for table `private-info`
+-- Indexen voor tabel `private-info`
 --
 ALTER TABLE `private-info`
   ADD PRIMARY KEY (`user-ID`);
 
 --
--- Indexes for table `rollen`
+-- Indexen voor tabel `rollen`
 --
 ALTER TABLE `rollen`
   ADD PRIMARY KEY (`userrole`);
 
 --
--- Indexes for table `school`
+-- Indexen voor tabel `school`
 --
 ALTER TABLE `school`
   ADD PRIMARY KEY (`schoolnaam`);
 
 --
--- Indexes for table `support`
+-- Indexen voor tabel `support`
 --
 ALTER TABLE `support`
   ADD PRIMARY KEY (`support-ID`);
 
 --
--- Indexes for table `tags`
+-- Indexen voor tabel `tags`
 --
 ALTER TABLE `tags`
   ADD PRIMARY KEY (`tag-ID`);
 
 --
--- Indexes for table `upvote`
+-- Indexen voor tabel `upvote`
 --
 ALTER TABLE `upvote`
   ADD PRIMARY KEY (`upvote-ID`),
@@ -497,7 +532,7 @@ ALTER TABLE `upvote`
   ADD KEY `user-ID` (`user-ID`);
 
 --
--- Indexes for table `user`
+-- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user-ID`),
@@ -506,81 +541,81 @@ ALTER TABLE `user`
   ADD KEY `schoolnaam` (`schoolnaam`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT for table `comment-report`
+-- AUTO_INCREMENT voor een tabel `comment-report`
 --
 ALTER TABLE `comment-report`
   MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
   MODIFY `comment-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `emailverificatie`
+-- AUTO_INCREMENT voor een tabel `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
-  MODIFY `verificatie-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `verificatie-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `error`
+-- AUTO_INCREMENT voor een tabel `error`
 --
 ALTER TABLE `error`
-  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `error-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT for table `meme`
+-- AUTO_INCREMENT voor een tabel `meme`
 --
 ALTER TABLE `meme`
-  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `meme-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT for table `meme-report`
+-- AUTO_INCREMENT voor een tabel `meme-report`
 --
 ALTER TABLE `meme-report`
   MODIFY `report-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `memetag`
+-- AUTO_INCREMENT voor een tabel `memetag`
 --
 ALTER TABLE `memetag`
-  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `memetag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `support`
+-- AUTO_INCREMENT voor een tabel `support`
 --
 ALTER TABLE `support`
   MODIFY `support-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `tags`
+-- AUTO_INCREMENT voor een tabel `tags`
 --
 ALTER TABLE `tags`
   MODIFY `tag-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `upvote`
+-- AUTO_INCREMENT voor een tabel `upvote`
 --
 ALTER TABLE `upvote`
   MODIFY `upvote-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `user-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `user-ID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Constraints for dumped tables
+-- Beperkingen voor geëxporteerde tabellen
 --
 
 --
--- Constraints for table `comment-report`
+-- Beperkingen voor tabel `comment-report`
 --
 ALTER TABLE `comment-report`
   ADD CONSTRAINT `comment-report_ibfk_1` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
@@ -589,27 +624,27 @@ ALTER TABLE `comment-report`
   ADD CONSTRAINT `comment-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
 
 --
--- Constraints for table `comments`
+-- Beperkingen voor tabel `comments`
 --
 ALTER TABLE `comments`
   ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `comments_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
--- Constraints for table `emailverificatie`
+-- Beperkingen voor tabel `emailverificatie`
 --
 ALTER TABLE `emailverificatie`
   ADD CONSTRAINT `emailverificatie_ibfk_1` FOREIGN KEY (`geverifieerd_door`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `emailverificatie_ibfk_5` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
--- Constraints for table `meme`
+-- Beperkingen voor tabel `meme`
 --
 ALTER TABLE `meme`
   ADD CONSTRAINT `meme_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
 
 --
--- Constraints for table `meme-report`
+-- Beperkingen voor tabel `meme-report`
 --
 ALTER TABLE `meme-report`
   ADD CONSTRAINT `meme-report_ibfk_1` FOREIGN KEY (`boef-ID`) REFERENCES `user` (`user-ID`) ON DELETE SET NULL,
@@ -618,27 +653,27 @@ ALTER TABLE `meme-report`
   ADD CONSTRAINT `meme-report_ibfk_4` FOREIGN KEY (`overtreding`) REFERENCES `overtredingen` (`overtreding`);
 
 --
--- Constraints for table `memetag`
+-- Beperkingen voor tabel `memetag`
 --
 ALTER TABLE `memetag`
   ADD CONSTRAINT `memetag_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
   ADD CONSTRAINT `memetag_ibfk_2` FOREIGN KEY (`tag-ID`) REFERENCES `tags` (`tag-ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `private-info`
+-- Beperkingen voor tabel `private-info`
 --
 ALTER TABLE `private-info`
   ADD CONSTRAINT `private-info_ibfk_1` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
--- Constraints for table `upvote`
+-- Beperkingen voor tabel `upvote`
 --
 ALTER TABLE `upvote`
   ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`),
   ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
 
 --
--- Constraints for table `user`
+-- Beperkingen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`schoolnaam`) REFERENCES `school` (`schoolnaam`) ON DELETE SET NULL ON UPDATE CASCADE,

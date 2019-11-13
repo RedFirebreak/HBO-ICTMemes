@@ -1,5 +1,5 @@
 <!DOCTYPEhtml>
-<?php
+    <?php
     /*
         [DESCRIPTION]
         This file does (something).
@@ -10,50 +10,40 @@
     */
 ?>
 
-<html>
-  <head>
-    <!-- Edit the pagename only -->
-    <title>HBO-Memes - INSERT MEMETITLE</title>
-    <?php require('../func.header.php'); ?>
-  </head>
+    <html>
 
-  <body>
+    <head>
+        <!-- Edit the pagename only -->
+        <title>HBO-Memes - INSERT MEMETITLE</title>
+        <?php require('../func.header.php'); ?>
+    </head>
 
-    <!-- Start coding here! :D -->
-	<?php
+    <body>
+
+        <!-- Start coding here! :D -->
+        <?php
 	//Hier sturen we de password reset mail
 	
-	if (isset($_POST['email'])) {
+	if (isset($_POST['email']) && !empty($_POST['email']) && isset($_POST['username']) && !empty($_POST['username'])) {
+		
 		echo "klaar";
 		//data schoonmaken
-		$safemail = mysqli_real_escape_string($dbconnection, $_POST['email']);
-		
-		//bestemming
-		$to = $safemail;
-		
-		//onderwerp
-		$subject = "Password recovery";
-		
-		//bericht
-		$sql = "select verificatiecode from emailverificatie where usermail=" . $safemail;
+		$safemail = mysqli_real_escape_string($dbConnection, $_POST['email']);
+		$safeusername = mysqli_real_escape_string($dbConnection, $_POST['username']);
+		$sql = "select usermail from user where usermail = '{$_POST['email']}';";
 		$result = $dbConnection->query($sql);
-		$vercode = $result->fetch_assoc();
-		$message = "Enter the following code in the website to reset your password: <br>" . $vercode['verificatiecode'];
-		
-		//verstuurder
-		$headers = "From: Reset@hbo-ictmemes.nl";
-		
-		
-		//versturen van bericht
-		mail($to, $subject, $message, headers);
+		if ($result) {
+			sendemailverification($safeusername, $safemail, "wachtwoordreset");
+		}
 	}
 	?>
-	
-    <?php require('form.reset.php'); ?>
 
-  </body>
+        <?php require('form.reset.php'); ?>
 
-  <footer>
-    <?php require('../func.footer.php'); ?>
-  </footer>
-</html>
+    </body>
+
+    <footer>
+        <?php require('../func.footer.php'); ?>
+    </footer>
+
+    </html>
