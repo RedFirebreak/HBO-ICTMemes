@@ -23,7 +23,6 @@
 
 <h1 class="page-header">
     Memes
-    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
 </h1>
 
 <?php 
@@ -80,7 +79,7 @@
 
 <h2 class="sub-header">De meme-tabel</h2>
 <div class="table-responsive">
-    <table id="memetable" class="table table-striped table-bordered" style="width:100%">
+    <table id="usertable" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>meme-ID</th>
@@ -89,6 +88,8 @@
                 <th>datum</th>
                 <th>locatie</th>
                 <th>school</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -102,17 +103,121 @@
 					$result = $dbConnection->query($query);
 					while ($record = mysqli_fetch_assoc($result))
 					{
+                        $titel =$record['meme-titel'];
+                        $locatie = $record['locatie'];
+                        $school = $record['school'];
+                        $memeid = $record['meme-ID'];
+
+                        $modalid = $record['meme-ID'];
+                        $modaltitle = $record['meme-titel'];
 						echo "<tr>
 						<td>".$record['meme-ID']."</td>
 						<td>".$record['meme-titel']."</td>
 						<td>".$record['user-ID']."</td>
 						<td>".$record['datum']."</td>
 						<td>".$record['locatie']."</td>
-						<td>".$record['school']."</td>
-						</tr>";
+                        <td>".$record['school']."</td>"
+                        ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal" class="fas fa-pencil-alt"></i></td>
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete en edit modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel">
+                                Edit <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens wijzigen.</p>
+                                    <form action="/admin/?page=editrow" method="post">
+
+                                        Usertitel:<br>
+                                        <input type="text" name="newtitel" value="<?php echo $titel ?>" required><br>
+                                        Locatie:<br>
+                                        <input type="text" name="newlocatie" value="<?php echo $locatie?>" required><br>
+                                        School:<br>
+                                        <input type="text" name="newschool" value="<?php echo $school ?>" required><br>
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven wijzigen.<br>
+
+                                        <input type="hidden" name="soort" value="memes" required>
+                                        <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="memes" required>
+                                        <input type="hidden" name="locatie" value="<?php echo $locatie ?>" required>
+                                        <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+						echo "</tr>";
 					}
 					?>
         </tbody>
+        <tfoot>
+            <tr>
+                <th>meme-ID</th>
+                <th>meme-titel</th>
+                <th>user-ID</th>
+                <th>datum</th>
+                <th>locatie</th>
+                <th>school</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </tfoot>
     </table>
 </div>
 
@@ -123,4 +228,9 @@
 </div>
 <!--/.container-->
 
-<!-- This file is going to be required on a page. No need to put ending or starting html tags! -->
+<script>
+$(document).ready(function() {
+    $('#usertable').DataTable();
+    $('.dataTables_length').addClass('bs-select');
+});
+</script>

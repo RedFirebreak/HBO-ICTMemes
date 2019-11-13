@@ -22,7 +22,6 @@
 ?>
 <h1 class="page-header">
     School admins
-    <p class="lead">(<a href="http://www.bootply.com/128936">with off-canvas sidebar</a>)</p>
 </h1>
 
 <div class="row placeholders">
@@ -30,7 +29,7 @@
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal users</h4>
         <span class="text-muted">
-		<?php
+            <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM user WHERE schoolnaam='$LoggedinSchool'";
@@ -44,13 +43,13 @@
                   $aantal = $aantalrow['aantal'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-		</span>
+        </span>
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal admins</h4>
         <span class="text-muted">
-		<?php 
+            <?php 
 					if ($LoggedinUserrole == 'admin') {
 						$query = "select count(username) from user where userrole in ('admin', 'uber-admin') and schoolnaam in ('$LoggedinSchool');";
 					}
@@ -62,13 +61,13 @@
 					$aantal = $whatevz['count(username)'];
 					echo "<span class='text-muted'><h2>$aantal</h2></span>";
 				  ?>
-		</span>
+        </span>
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal comments</h4>
         <span class="text-muted">
-		<?php
+            <?php
                 // Set the query
                   if ($LoggedinUserrole == 'admin') {
                     $aantalquery = "SELECT COUNT(*) aantal FROM comments 
@@ -84,13 +83,13 @@
                   $aantal = $aantalrow['aantal'];
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
-			  </span>
+        </span>
     </div>
     <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal memes</h4>
         <span class="text-muted">
-		<?php 
+            <?php 
 					if ($LoggedinUserrole == 'uber-admin'){
 						$query = "select count(`meme-ID`) from meme";
 					}
@@ -102,9 +101,9 @@
 					$aantal = $whatevz['count(`meme-ID`)'];
 					echo "<span class='text-muted'><h2>$aantal</h2></span>";
 				  ?>
-		</span>
+        </span>
     </div>
- <?php
+    <?php
 			if ($LoggedinUserrole == 'uber-admin'){
 				$query = "select schoolnaam from school order by 1";
 				$result = $dbConnection->query($query);

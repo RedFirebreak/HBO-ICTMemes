@@ -52,7 +52,7 @@
                   echo "<span class='text-muted'><h2>$aantal</h2></span>";
               ?>
     </div>
-	<div class="col-xs-6 col-sm-3 placeholder text-center">
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
         <!-- <img src="#" class="center-block img-responsive img-circle" alt="Generic placeholder thumbnail">  THIS IS SO YOU CAN IMPORT AN IMAGE -->
         <h4>Aantal soort: CRITICAL</h4>
         <?php

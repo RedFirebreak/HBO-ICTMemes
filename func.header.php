@@ -65,6 +65,9 @@
 <!-- Jquery -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
+<!-- lazy loading possibilities -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazyloadxt/1.0.0/jquery.lazyloadxt.min.js"></script>
+
 <!-- Bootstrap core CSS -->
 <link href="/src/css/bootstrap.min.css" rel="stylesheet">
 
@@ -94,6 +97,10 @@
                   echo "<li><a href='/'>Homepage</a></li>";
                   echo "<li><a href='/upload/'>Upload</a></li>";
                   echo "<li><a href='/tags.php'>Tags</a></li>";
+
+                    echo "<li><form action='/search.php' method='post'><input style='font-size: 1.1em;' name='search' class='searchbar' type='search' placeholder='Search' aria-label='Search'></li>";
+                    echo "<li><button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button></li></form>";
+
                     echo "<li>";
                     echo "<a href='#0' class='cd-subnav-trigger'><span>Account</span></a>";
                     echo "<ul>";
@@ -125,6 +132,10 @@
             echo "<nav class='cd-main-nav-wrapper'>";
             echo "<ul class='cd-main-nav'>";
               echo "<li><a href='/'>Homepage</a></li>";
+
+              echo "<li><form action='/search.php' method='post'><input style='font-size: 1.1em;' name='search' class='searchbar' type='search' placeholder='Search' aria-label='Search'></li>";
+              echo "<li><button class='btn btn-outline-success my-2 my-sm-0' type='submit'>Search</button></li></form>";
+
                 echo "<li>";
                 echo "<a href='#0' class='cd-subnav-trigger'><span>Account</span></a>";
                 echo "<ul>";

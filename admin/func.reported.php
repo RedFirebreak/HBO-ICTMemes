@@ -83,6 +83,7 @@
                 <th>Datum</th>
                 <th>Overtreding</th>
                 <th>Beschrijving</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -112,7 +113,55 @@
                 echo "<td>" . $row["boef-ID"]. "</td>";
                 echo "<td>" . $row["datum"]. "</td>";
                 echo "<td>" . $row["overtreding"]. "</td>";
-				echo "<td>" . $row["beschrijving"]. "</td>";
+                echo "<td>" . $row["beschrijving"]. "</td>";
+                
+                $modalid = $row["report-ID"];
+                $modaltitle = $row["beschrijving"];
+                $memereportID = $row["report-ID"];
+
+                ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="report1" required>
+                                        <input type="hidden" name="reportid" value="<?php echo $memereportID ?>"
+                                            required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
                 
                 echo "</tr>";
                }
@@ -130,6 +179,7 @@
                 <th>Datum</th>
                 <th>Overtreding</th>
                 <th>Beschrijving</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>
@@ -147,6 +197,7 @@
                 <th>Datum</th>
                 <th>Overtreding</th>
                 <th>Beschrijving</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -175,8 +226,56 @@
                 echo "<td>" . $row["boef-ID"]. "</td>";
                 echo "<td>" . $row["datum"]. "</td>";
                 echo "<td>" . $row["overtreding"]. "</td>";
-				echo "<td>" . $row["beschrijving"]. "</td>";
+				        echo "<td>" . $row["beschrijving"]. "</td>";
                 
+                $modalid = $row["report-ID"];
+                $modaltitle = $row["beschrijving"];
+                $commentreportID = $row["report-ID"];
+
+                ?>
+
+            <td><i data-toggle="modal" data-target="#<?php echo $modalid ?>Modal2" class="fa fa-trash"></i></td>
+            </tr>
+
+            <!-- Geef elke row zijn eigen delete modal mee -->
+            <div class="modal fade" id="<?php echo $modalid ?>Modal2" tabindex="-1" role="dialog"
+                aria-labelledby="<?php echo $modalid ?>ModalLabel2" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="<?php echo $modalid ?>ModalLabel2">
+                                Delete <?php echo $modaltitle?></h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-row align-items-center">
+                                <div class="col-auto my-1">
+                                    <p>Let op! Hiermee kan je de gegevens verwijderen!</p>
+                                    <form action="/admin/?page=deleterow" method="post">
+
+                                        <input type="checkbox" required>Ja ik wil de gegeven verwijderen.<br>
+
+                                        <input type="hidden" name="soort" value="report2" required>
+                                        <input type="hidden" name="reportid" value="<?php echo $commentreportID ?>"
+                                            required>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+
                 echo "</tr>";
                }
             } else {
@@ -193,6 +292,7 @@
                 <th>Datum</th>
                 <th>Overtreding</th>
                 <th>Beschrijving</th>
+                <th>Delete</th>
             </tr>
         </tfoot>
     </table>

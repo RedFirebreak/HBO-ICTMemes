@@ -68,7 +68,7 @@
                                 <hr>
                                 <?php
                                     if (file_exists($memelocation)) {
-                                      echo "<a href='/meme/?id=$memeid'><img src='$memelocation'class='memeimage rounded mx-auto d-block' alt='...'></a>";
+                                      echo "<a href='/meme/?id=$memeid'><img src='/storage/meme/loading.gif' data-src='$memelocation'class='memeimage rounded mx-auto d-block' alt='...'></a>";
                                   } else {
                                       echo "<div class='alert alert-danger' role='alert'>";
                                       echo "De afbeelding kon helaas niet gevonden worden.</div>";
@@ -82,7 +82,10 @@
                             <div class="col-md-4 divmemeinfo">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>" />
+                                        <a href='/account/?account=<?php echo $memeusername?>'>
+                                            <img class="rounded img-thumbnail user-thumbnail" alt="Userpic"
+                                                src="<?php echo $memeuserpic?>" />
+                                        </a>
                                     </div>
                                     <div class="col-md-8">
                                         <p style="word-wrap:break-word">
@@ -95,13 +98,28 @@
                                   echo "Posted: " . $memedate;
                                 ?>
                                     </div>
-                                    <div style="min-height: 200px;"class="col-md-12">
-                                        <div class="d-none d-md-block">
-                                            <!-- Hide on smaller devices -->
-                                            <hr>
-                                            <p style="margin: 1px 0;"><b>Top Comment:</b></p>
+                                    <div class="col-md-12">
+                                        <?php
+                                        // Get tagnaam to display
+                                        $querytagnaam = "SELECT t.tagnaam tag
+                                                          from tags t
+                                                          join memetag mt on t.`tag-ID`= mt.`tag-ID`
+                                                          where mt.`meme-id`='$memeid'";
+                                        $resultstagnaam = mysqli_query($dbConnection, $querytagnaam);
+                                        $rowtagnaam = mysqli_fetch_assoc($resultstagnaam);
+                                        $rowtagnaam = $rowtagnaam['tag'];
+                                        echo "<h4>Tag: $rowtagnaam</h4"
+                                        ?>
+                                    </div>
+                                </div>
 
-                                            <?php
+                                <div style="min-height: 200px;" class="col-md-12">
+                                    <div class="d-none d-md-block">
+                                        <!-- Hide on smaller devices -->
+                                        <hr>
+                                        <p style="margin: 1px 0;"><b>Top Comment:</b></p>
+
+                                        <?php
                                       // Check if someone commented
                                       $query = "SELECT * FROM comments WHERE `meme-ID`= '$memeid' ORDER by `datum` ASC LIMIT 1";
                                       $results = mysqli_query($dbConnection, $query);
@@ -125,86 +143,102 @@
                                       }
                                       ?>
 
-                                        </div>
-
-                                        <a class="btn btn-primary" style="color:#FFF;"
-                                            href="/meme/?id=<?php echo $memeid?>">Comments</a>
                                     </div>
 
-                                    <div class="memereport col-md-12 text-center">
-                                    
-                                      <p></p>
-                                      <script type="text/javascript"> // Upvote!
-                                          $(document).ready(function(){
-                                            $("#<?php echo $memeid ?>upvote").click(function(){
+                                    <a class="btn btn-primary" style="color:#FFF;"
+                                        href="/meme/?id=<?php echo $memeid?>">Comments</a>
+                                </div>
 
-                                              if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) {
+                                <div class="memereport col-md-12 text-center">
+
+                                    <p></p>
+                                    <script type="text/javascript">
+                                    // Upvote!
+                                    $(document).ready(function() {
+                                        $("#<?php echo $memeid ?>upvote").click(function() {
+
+                                            if ($('#<?php echo $memeid ?>upvote').hasClass("upvote")) {
                                                 //alert('hi')
-                                                    } else {
-                                              // Calculate a new value, if the div has class
-                                              $('#<?php echo $memeid ?>upvotespan').html(parseInt($('#<?php echo $memeid ?>upvotespan').html(), 10)+1)
+                                            } else {
+                                                // Calculate a new value, if the div has class
+                                                $('#<?php echo $memeid ?>upvotespan').html(parseInt($(
+                                                        '#<?php echo $memeid ?>upvotespan')
+                                                    .html(), 10) + 1)
 
-                                              if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) { // Only -1 if it has been downvoted
-                                              $("#<?php echo $memeid ?>downvotespan").text($("#<?php echo $memeid ?>downvotespan").text()-1);
-                                              }
-                                              // Change colors 
-                                              $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
-                                              $( '#<?php echo $memeid ?>downvote' ).removeClass( 'downvote' );
-
-                                                    
-                                                  $.ajax({
-                                                      type: 'POST',
-                                                      url: '/voting.php',
-                                                      data: { 
-                                                          'memeid': '<?php echo $memeid ?>', 
-                                                          'user': '<?php echo $LoggedinID ?>',
-                                                          'soort': 'upvote' 
-                                                      },
-                                                      success: function(data) {
-                                                          //alert(data);
-                                                      }
-                                                  });
-                                                    }
-
-
-                                        });
-                                      });
-                                      </script>
-                                      <script type="text/javascript"> // Downvote!
-                                          $(document).ready(function(){
-                                            $("#<?php echo $memeid ?>downvote").click(function(){
-
-                                              if ( $( '#<?php echo $memeid ?>downvote' ).hasClass( "downvote" ) ) {
-                                                //alert('hi')
-                                                    } else {
-                                              // Calculate a new value, if the div has class
-                                              $('#<?php echo $memeid ?>downvotespan').html(parseInt($('#<?php echo $memeid ?>downvotespan').html(), 10)+1)
-                                              if ( $( '#<?php echo $memeid ?>upvote' ).hasClass( "upvote" ) ) { // Only -1 if it has been upvoted
-                                              $("#<?php echo $memeid ?>upvotespan").text($("#<?php echo $memeid ?>upvotespan").text()-1);
-                                              }
-                                              // Change colors
-                                              $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
-                                              $( '#<?php echo $memeid ?>upvote' ).removeClass( 'upvote' );
-
-                                                  $.ajax({
-                                                      type: 'POST',
-                                                      url: '/voting.php',
-                                                      data: { 
-                                                          'memeid': '<?php echo $memeid ?>', 
-                                                          'user': '<?php echo $LoggedinID ?>',
-                                                          'soort': 'downvote' 
-                                                      },
-                                                      success: function(data) {
-                                                          //alert(data);
-                                                      }
-                                                  });
+                                                if ($('#<?php echo $memeid ?>downvote').hasClass(
+                                                        "downvote"
+                                                    )) { // Only -1 if it has been downvoted
+                                                    $("#<?php echo $memeid ?>downvotespan").text($(
+                                                            "#<?php echo $memeid ?>downvotespan")
+                                                        .text() - 1);
                                                 }
+                                                // Change colors 
+                                                $('#<?php echo $memeid ?>upvote').addClass('upvote');
+                                                $('#<?php echo $memeid ?>downvote').removeClass(
+                                                    'downvote');
+
+
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/voting.php',
+                                                    data: {
+                                                        'memeid': '<?php echo $memeid ?>',
+                                                        'user': '<?php echo $LoggedinID ?>',
+                                                        'soort': 'upvote'
+                                                    },
+                                                    success: function(data) {
+                                                        //alert(data);
+                                                    }
+                                                });
+                                            }
+
+
                                         });
-                                      });
-                                      </script>
-                                      <hr>
-                                        <div class="row">
-                                          <?php
+                                    });
+                                    </script>
+                                    <script type="text/javascript">
+                                    // Downvote!
+                                    $(document).ready(function() {
+                                        $("#<?php echo $memeid ?>downvote").click(function() {
+
+                                            if ($('#<?php echo $memeid ?>downvote').hasClass(
+                                                    "downvote")) {
+                                                //alert('hi')
+                                            } else {
+                                                // Calculate a new value, if the div has class
+                                                $('#<?php echo $memeid ?>downvotespan').html(parseInt($(
+                                                        '#<?php echo $memeid ?>downvotespan')
+                                                    .html(), 10) + 1)
+                                                if ($('#<?php echo $memeid ?>upvote').hasClass(
+                                                        "upvote")) { // Only -1 if it has been upvoted
+                                                    $("#<?php echo $memeid ?>upvotespan").text($(
+                                                            "#<?php echo $memeid ?>upvotespan")
+                                                        .text() - 1);
+                                                }
+                                                // Change colors
+                                                $('#<?php echo $memeid ?>downvote').addClass(
+                                                    'downvote');
+                                                $('#<?php echo $memeid ?>upvote').removeClass('upvote');
+
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: '/voting.php',
+                                                    data: {
+                                                        'memeid': '<?php echo $memeid ?>',
+                                                        'user': '<?php echo $LoggedinID ?>',
+                                                        'soort': 'downvote'
+                                                    },
+                                                    success: function(data) {
+                                                        //alert(data);
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    });
+                                    </script>
+                                    <hr>
+                                    <div class="row">
+                                        <?php
                                           // Check if the user voted on the post previously, 
                                           $hasvoted = "SELECT soort FROM upvote WHERE `meme-id`='$memeid' AND `user-id`='$LoggedinID' LIMIT 1";
                                           $votedresult = mysqli_query($dbConnection, $hasvoted);
@@ -214,21 +248,23 @@
                                             switch ($voteresult) {
                                               case 'upvote':
                                                   ?>
-                                                    <script type="text/javascript"> // Upvote!
-                                                        $(document).ready(function(){
-                                                            $( '#<?php echo $memeid ?>upvote' ).addClass( 'upvote' );
-                                                        });
-                                                    </script>
-                                                  <?php
+                                        <script type="text/javascript">
+                                        // Upvote!
+                                        $(document).ready(function() {
+                                            $('#<?php echo $memeid ?>upvote').addClass('upvote');
+                                        });
+                                        </script>
+                                        <?php
                                                   break;
                                               case 'downvote':
                                                 ?>
-                                                <script type="text/javascript"> // Downvote!
-                                                    $(document).ready(function(){
-                                                        $( '#<?php echo $memeid ?>downvote' ).addClass( 'downvote' );
-                                                    });
-                                                </script>
-                                              <?php
+                                        <script type="text/javascript">
+                                        // Downvote!
+                                        $(document).ready(function() {
+                                            $('#<?php echo $memeid ?>downvote').addClass('downvote');
+                                        });
+                                        </script>
+                                        <?php
                                               break;
                                           }
                                         }
@@ -246,40 +282,57 @@
                                           ?>
 
 
-                                          <div class="col-md-4">
-                                          <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span id="<?php echo $memeid ?>upvotespan" class="badge"><?php echo $amountupvote ?></span></i>
-                                          
-                                          </div>
+                                        <div class="col-md-4">
+                                            <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span
+                                                    id="<?php echo $memeid ?>upvotespan"
+                                                    class="badge"><?php echo $amountupvote ?></span></i>
 
-                                          <div class="col-md-4">
-                                          <i id="<?php echo $memeid ?>downvote" class="fas fa-chevron-down"><span id="<?php echo $memeid ?>downvotespan" class="badge"><?php echo $amountdownvote ?></span></i>
-                                          </div>
+                                        </div>
 
-                                          <div class="col-md-4">
-                                          <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal" class="fas fa-dumpster"></i>
-                                          </div>
+                                        <div class="col-md-4">
+                                            <i id="<?php echo $memeid ?>downvote" class="fas fa-chevron-down"><span
+                                                    id="<?php echo $memeid ?>downvotespan"
+                                                    class="badge"><?php echo $amountdownvote ?></span></i>
+                                        </div>
 
-                                          <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                              <div class="modal-header">
-                                                <h3 class="modal-title" id="<?php echo $memeid ?>ModalLabel">Rapporteer meme: <?php echo $memetitle?></h3>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <span aria-hidden="true">&times;</span>
-                                                </button>
-                                              </div>
-                                              <div class="modal-body">
+                                        <div class="col-md-4">
+                                            <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal"
+                                                class="fas fa-dumpster"></i>
+                                        </div>
 
-                                                <div class="form-row align-items-center">
-                                                  <div class="col-auto my-1">
-                                                    <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
-                                                    <p>Let op! Hiermee kan je een meme rapporteren voor verschillende rededenen. Niet de bedoeling? Klik dan op "sluiten"</p>
-                                                    <h3>Meme: <?php echo $memetitle?></h3>
-                                                    <label class="custom-control-label" for="customControlAutosizing">Kies een overtreding</label>
-                                                    
-                                                    <form action="/report.php" method="post">
-                                                    <select name="overtreding" class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                                                    <?php
+                                        <!-- Geef elke meme een eigen modal om te reported -->
+                                        <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1"
+                                            role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="<?php echo $memeid ?>ModalLabel">
+                                                            Rapporteer meme: <?php echo $memetitle?></h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <div class="form-row align-items-center">
+                                                            <div class="col-auto my-1">
+                                                                <label class="mr-sm-2 sr-only"
+                                                                    for="inlineFormCustomSelect">Preference</label>
+                                                                <p>Let op! Hiermee kan je een meme rapporteren voor
+                                                                    verschillende rededenen. Niet de bedoeling? Klik dan
+                                                                    op "sluiten"</p>
+                                                                <h3>Meme: <?php echo $memetitle?></h3>
+                                                                <label class="custom-control-label"
+                                                                    for="customControlAutosizing">Kies een
+                                                                    overtreding</label>
+
+                                                                <form action="/report.php" method="post">
+                                                                    <select name="overtreding"
+                                                                        class="custom-select mr-sm-2"
+                                                                        id="inlineFormCustomSelect">
+                                                                        <?php
                                                       $sqlovertredingen = "SELECT * FROM overtredingen ORDER by overtreding ASC;";
                                                       $resultovertredingen = mysqli_query($dbConnection, $sqlovertredingen);
                                                       
@@ -296,49 +349,55 @@
                                                       
 
                                                     ?>
-                                                    </select>
-                                                    <br><br>
+                                                                    </select>
+                                                                    <br><br>
 
-                                                    <label class="custom-control-label" for="customControlAutosizing">Toevoeging</label>
-                                                    <input type="text" name="Toevoeging" required>
-                                                    <?php echo recaptchaform ();?>
-                                                    <input type="hidden" name="memeid" value="<?php echo $memeid ?>" required>
-                                                    <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
-                                                    <input type="hidden" name="meme" value="true" required>
-                                                    <input type="hidden" name="comment" value="false" required>
-                                                  </div>
+                                                                    <label class="custom-control-label"
+                                                                        for="customControlAutosizing">Toevoeging</label>
+                                                                    <input type="text" name="Toevoeging" required>
+                                                                    <?php echo recaptchaform ();?>
+                                                                    <input type="hidden" name="memeid"
+                                                                        value="<?php echo $memeid ?>" required>
+                                                                    <input type="hidden" name="loggedinID"
+                                                                        value="<?php echo $LoggedinID ?>" required>
+                                                                    <input type="hidden" name="meme" value="true"
+                                                                        required>
+                                                                    <input type="hidden" name="comment" value="false"
+                                                                        required>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Sluiten</button>
+                                                        <button type="submit" class="btn btn-danger">Rapporteer</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            
-                                              </div>
-                                              <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
-                                                <button type="submit" class="btn btn-danger">Rapporteer</button>
-                                                </form>
-                                              </div>
                                             </div>
-                                          </div>
                                         </div>
 
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- End meme card -->
+                    </div>
+                    <!-- End meme card -->
 
-                        <?php
+                    <?php
                       }
                   } else {
                       ?>
-                        <p>
-                            Welkom! Wij zijn HBO-ICTMemes. Ons doel is om zo veel mogelijk memes aan te bieden aan
-                            studenten, voor studenten. <br>
-                            <b>Om ons grote aanbod aan memes te kunnen zien moet er ingelogd worden.</b>
-                        </p>
+                    <p>
+                        Welkom! Wij zijn HBO-ICTMemes. Ons doel is om zo veel mogelijk memes aan te bieden aan
+                        studenten, voor studenten. <br>
+                        <b>Om ons grote aanbod aan memes te kunnen zien moet er ingelogd worden.</b>
+                    </p>
 
 
-                        <?php
+                    <?php
                   }
                 ?>
 
@@ -372,6 +431,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="text-center">
