@@ -131,9 +131,6 @@ require ("func.adminheader.php");
 
             <ul class="list-unstyled CTAs">
                 <li>
-                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-                </li>
-                <li>
                     <a href="/" class="article">Terug naar de website</a>
                 </li>
             </ul>
