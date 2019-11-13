@@ -90,7 +90,7 @@
                 echo "<td>" . $row['datum'] . "</td>";
         
                 $modalid = $row['comment-ID'];
-                $modaltitle = $row["upvote-ID"];
+                $modaltitle = $row['inhoud'];
                 $commentid = $row['comment-ID'];
 
                 ?>
