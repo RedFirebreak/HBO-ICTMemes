@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 11 nov 2019 om 16:32
+-- Gegenereerd op: 13 nov 2019 om 10:25
 -- Serverversie: 10.4.8-MariaDB
 -- PHP-versie: 7.3.11
 
@@ -566,8 +566,8 @@ ALTER TABLE `private-info`
 -- Beperkingen voor tabel `upvote`
 --
 ALTER TABLE `upvote`
-  ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`),
-  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`);
+  ADD CONSTRAINT `upvote_ibfk_1` FOREIGN KEY (`meme-ID`) REFERENCES `meme` (`meme-ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `upvote_ibfk_2` FOREIGN KEY (`user-ID`) REFERENCES `user` (`user-ID`) ON DELETE CASCADE;
 
 --
 -- Beperkingen voor tabel `user`
