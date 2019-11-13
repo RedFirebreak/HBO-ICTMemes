@@ -401,12 +401,32 @@
                   }
                 ?>
 
-                </div>
-                <div class="col-md-3">
-                    <div class="sticky-top" style="top: 82px;">
-                        <h1>Sticky-Info</h1>
-                        <p>Tags, uploads, info and other stuff will be displayed here. Come back later when we have
-                            actually done stuff!</p>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="sticky-top" style="top: 82px;">
+						<?php
+							if ($Loggedin) {
+								//queries voor info
+								$query = "select count(*) aantal from meme where `user-ID`='$LoggedinID';";
+								$result = $dbConnection->query($query);
+								$memeaantal = mysqli_fetch_assoc($result)['aantal'];
+								$sql = "select count(*) aantal from comments where `user-ID`='$LoggedinID';";
+								$result = $dbConnection->query($sql);
+								$commentaantal = mysqli_fetch_assoc($result)['aantal'];
+								if (empty($memeaantal)) {$memeaantal='0';}
+								if (empty($commentaantal)) {$commentaantal='0';}
+								
+								//tekst
+								echo "<h1>Sticky-Info</h1>
+								<p>
+								Welkom ".$LoggedinUsername."!<br>
+								Je hebt ".$memeaantal." memes geupload.<br>
+								Je hebt ".$commentaantal." comments geplaatst.
+								</p>";
+							}
+							
+						?>
+                        </div>
                     </div>
                 </div>
             </div>
