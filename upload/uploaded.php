@@ -107,9 +107,8 @@
 										$memeins = $dbConnection->query($sql);
 
 									//tags inserten
-										$sql5 = "INSERT INTO `memetag`(`tag-ID`, `meme-ID`) VALUES ('$memeID', '$safetag')";
+										$sql5 = "INSERT INTO `memetag`(`tag-ID`, `meme-ID`) VALUES ('$safetag', '$memeID')";
 										$inserttag = mysqli_query($dbConnection, $sql5);
-
 									//check query
 									if (!$result) {
 										customlog("uploaded", "error", "the result query check failed.");
