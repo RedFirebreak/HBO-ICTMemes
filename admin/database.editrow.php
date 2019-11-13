@@ -39,7 +39,14 @@ switch ($soort) {
                     echo "</div>";
                     // Log the failed attempt
                     Customlog("Change-user", "critical", "Admin $LoggedinID tried changing a uberadmin($userid)!.");
-                    header('Refresh: 2; URL=/admin/?page=users');
+                    ?>
+                    <script type="text/javascript">
+                        window.setTimeout(function(){
+                            // Move to a new location
+                            window.location.href = "/admin/?page=users";
+                        }, 2500);
+                    </script>
+                    <?php
                     break;
                 } elseif ($userrole == 'admin') {
                     echo "<div class='alert alert-danger' role='alert'>";
@@ -47,8 +54,15 @@ switch ($soort) {
                     echo "</div>";
                     // Log the failed attempt
                     Customlog("Change-user", "critical", "Admin $LoggedinID tried changing another admin($userid)!.");
-                    header('Refresh: 2; URL=/admin/?page=users');
-                    break;
+                    ?>
+                <script type="text/javascript">
+                    window.setTimeout(function(){
+                        // Move to a new location
+                        window.location.href = "/admin/?page=users";
+                    }, 2500);
+                </script>
+                <?php
+                break;
                 }
             } // User is now allowed to edit the row!
 
@@ -61,21 +75,49 @@ switch ($soort) {
             echo "User successvol gewijzigd";
             echo "</div>";
             Customlog("Change-user", "log", "Admin $LoggedinID successfully changed user $userid.");
-            header('Refresh: 2; URL=/admin/?page=users');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=users";
+                }, 2500);
+            </script>
+            <?php
             break;
         } else {
             echo "<div class='alert alert-danger' role='alert'>";
             echo "User kon niet gewijzigd worden.";
             echo "</div>";
             Customlog("Change-user", "error", "Admin $LoggedinID tried changing a user. The query failed.");
-            header('Refresh: 2; URL=/admin/?page=users');
-        break;
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=users";
+                }, 2500);
+            </script>
+            <?php
+            break;
         }
-        header('Refresh: 2; URL=/admin/?page=users');
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                // Move to a new location
+                window.location.href = "/admin/?page=users";
+            }, 2500);
+        </script>
+        <?php
         break;
     case 'scholenenadmins':
         // not supported yet
-        header('Refresh: 2; URL=/admin/');
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                // Move to a new location
+                window.location.href = "/admin/";
+            }, 2500);
+        </script>
+        <?php
         break;
     case 'memes':
         $newtitel = mysqli_real_escape_string($dbConnection, $_POST['newtitel']);
@@ -90,17 +132,38 @@ switch ($soort) {
             echo "Meme successvol gewijzigd";
             echo "</div>";
             Customlog("Change-meme", "log", "Admin $LoggedinID successfully changed meme $memeid.");
-            header('Refresh: 2; URL=/admin/?page=memes');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=memes";
+                }, 2500);
+            </script>
+            <?php
             break;
         } else {
             echo "<div class='alert alert-danger' role='alert'>";
             echo "Meme kon niet gewijzigd worden.";
             echo "</div>";
             Customlog("Change-meme", "error", "Admin $LoggedinID tried changing a meme. The query failed.");
-            header('Refresh: 2; URL=/admin/?page=memes');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=memes";
+                }, 2500);
+            </script>
+            <?php
             break;
         }
-        header('Refresh: 2; URL=/admin/?page=memes');
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                // Move to a new location
+                window.location.href = "/admin/?page=memes";
+            }, 2500);
+        </script>
+        <?php
         break;
     case 'tags':
         // Get the tagid
@@ -118,7 +181,14 @@ switch ($soort) {
             echo "</div>";
             // Log the failed attempt
             Customlog("Change-Tag", "critical", "Admin $LoggedinID tried changing AdminPost.");
-            header('Refresh: 2; URL=/admin/?page=tags');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=tags";
+                }, 2500);
+            </script>
+            <?php
             break;
         }
         // Delete the post
@@ -131,17 +201,38 @@ switch ($soort) {
             echo "Tag successvol gewijzigd";
             echo "</div>";
             Customlog("Change-Tag", "log", "Admin $LoggedinID successfully changed tag $tagid.");
-            header('Refresh: 2; URL=/admin/?page=tags');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=tags";
+                }, 2500);
+            </script>
+            <?php
             break;
         } else {
             echo "<div class='alert alert-danger' role='alert'>";
             echo "Tag kon niet gewijzigd worden.";
             echo "</div>";
             Customlog("Change-Tag", "error", "Admin $LoggedinID tried changing a tag. The query failed.");
-            header('Refresh: 2; URL=/admin/?page=tags');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=tags";
+                }, 2500);
+            </script>
+            <?php
             break;
         }
-        header('Refresh: 2; URL=/admin/?page=tags');
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                // Move to a new location
+                window.location.href = "/admin/?page=tags";
+            }, 2500);
+        </script>
+        <?php
         break;
     case 'support':
         $supportid = mysqli_real_escape_string($dbConnection, $_POST['supportid']);
@@ -160,17 +251,38 @@ switch ($soort) {
             echo "Support ticket successvol gewijzigd";
             echo "</div>";
             Customlog("Change-support", "log", "Admin $LoggedinID successfully changed support ticket $tagid.");
-            header('Refresh: 2; URL=/admin/?page=support');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=support";
+                }, 2500);
+            </script>
+            <?php
             break;
         } else {
             echo "<div class='alert alert-danger' role='alert'>";
             echo "Support ticket kon niet gewijzigd worden.";
             echo "</div>";
             Customlog("Change-support", "error", "Admin $LoggedinID tried changing a support ticket. The query failed.");
-            header('Refresh: 2; URL=/admin/?page=support');
+            ?>
+            <script type="text/javascript">
+                window.setTimeout(function(){
+                    // Move to a new location
+                    window.location.href = "/admin/?page=support";
+                }, 2500);
+            </script>
+            <?php
             break;
         }
-        header('Refresh: 2; URL=/admin/?page=support');
+        ?>
+        <script type="text/javascript">
+            window.setTimeout(function(){
+                // Move to a new location
+                window.location.href = "/admin/?page=support";
+            }, 2500);
+        </script>
+        <?php
         break;
 }
 
