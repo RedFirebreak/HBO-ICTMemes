@@ -107,26 +107,9 @@
 										$memeins = $dbConnection->query($sql);
 										if ($memeins) {
 											//tags nog weer apart
-												//meme-ID achterhalen
-												$memeID;
-												
 												//tags inserten
-												$sqltagmeme = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-														Values ('$memeID', '$safetag');";
-												$inserttag = mysqli_query($dbConnection, $sqltagmeme);
-												
-												/* For multiple tags, not supported yet
-												$query = "SELECT `tag-ID`, tagnaam from tags order by 1";
-												$result = $dbConnection->query($query);
-												while ($record = $result->fetch_assoc())
-												{
-													if (in_array($record['tagnaam'], $_POST['tags'])){
-														$sql = "INSERT INTO memetag (`meme-ID`, `tag-ID`)
-														Values ('$memeID', '".$record['tag-ID']."');";
-														$dinges = $dbConnection->query($sql);
-													}
-												}
-												*/
+												$sql5 = "INSERT INTO `memetag`(`tag-ID`, `meme-ID`) VALUES ('$memeID', '$safetag')";
+												$inserttag = mysqli_query($dbConnection, $sql5);
 										}
 									//check query
 									if (!$result) {

@@ -391,8 +391,8 @@
                   } else {
                       ?>
                     <p>
-                        Welkom! Wij zijn HBO-ICTMemes. Ons doel is om zo veel mogelijk memes aan te bieden aan
-                        studenten, voor studenten. <br>
+                        Welkom! Wij zijn HBO-ICTMemes. Ons doel is om zo veel mogelijk memes aan te bieden voor
+                        studenten, door studenten. <br>
                         <b>Om ons grote aanbod aan memes te kunnen zien moet er ingelogd worden.</b>
                     </p>
 
