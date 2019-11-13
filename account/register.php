@@ -29,7 +29,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-            <?php require('func.register.php'); ?> 
+            <?php
+            if ($Loggedin) {
+                  echo "<div class='alert alert-success' role='alert'>";
+                  echo "Het lijkt erop dat je al ingelogd bent! Niet jou account? Of wil je opnieuw inloggen? <a style='color: red;' href='?logout=1'>Log-uit</a>";
+                  echo "</div>";
+                } else {
+
+             require('func.register.php'); ?> 
             <?php require('form.register.php'); ?>           
             </div>
 
@@ -97,6 +104,9 @@
               }
             }
             </script>
+            <?php
+            }
+            ?>
         </div>
     </div>
   </body>

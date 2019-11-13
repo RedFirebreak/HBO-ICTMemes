@@ -167,6 +167,8 @@ switch ($soort) {
         $row = mysqli_fetch_assoc($result);
         $adminpostid = $row['tag-id'];
 
+        // Set all the memes with this tag
+
         if ($adminpostid == $tagid) {
             echo "<div class='alert alert-danger' role='alert'>";
             echo "AdminPost mag niet verwijderd worden!";
@@ -183,6 +185,36 @@ switch ($soort) {
             <?php
             break;
         }
+
+        
+
+        // Get Meme
+        $sql = "SELECT `tag-id` FROM tags WHERE tagnaam='Meme' LIMIT 1";
+        $result = mysqli_query($dbConnection, $sql);
+        $row = mysqli_fetch_assoc($result);
+        $memepostid = $row['tag-id'];
+
+        // Check if tagid is not meme
+        if ($memepostid == $tagid) {
+            echo "<div class='alert alert-danger' role='alert'>";
+            echo "Meme mag niet verwijderd worden!";
+            echo "</div>";
+            // Log the failed attempt
+            Customlog("Delete-Tag", "error", "Admin $LoggedinID tried deleting Meme.");
+            ?>
+            <script type="text/javascript">
+            window.setTimeout(function() {
+                // Move to a new location
+                window.location.href = "/admin/?page=tags";
+            }, 2500);
+            </script>
+            <?php
+            break;
+        }
+        // Change all existing memes to "memetag"
+        $sql2 = "UPDATE `memetag` SET `tag-id`='$memepostid' WHERE `tag-id`='$tagid'";
+        $result2 = mysqli_query($dbConnection, $sql2);
+
         // Delete the post
         $sql2 = "DELETE FROM tags WHERE `tag-id`='$tagid'";
         $result2 = mysqli_query($dbConnection, $sql2);

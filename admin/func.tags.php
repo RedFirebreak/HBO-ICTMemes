@@ -38,6 +38,18 @@
 				?>
         </span>
     </div>
+    <div class="col-xs-6 col-sm-3 placeholder text-center">
+        <form action="/admin/?page=tags" id="update" method="post" class="form-inline">
+            <div class="form-group mb-2">
+            Voeg een tag aan de website:
+                <input type="hidden" name="addtag" value="true">
+            </div>
+            <div class="form-group mx-sm-3 mb-2">
+                <input name="tag" type="text" class="form-control" id="inputPassword2" placeholder="Tagnaam!" required>
+            </div>
+            <button type="submit" value="submit" name="submit" class="btn btn-primary mb-2">Verzend</button>
+        </form>
+    </div>
 </div>
 
 <hr>
@@ -169,28 +181,42 @@
 </div>
 <?php 
 if (!empty($_POST['addtag'])){
-	$newtag = mysqli_real_escape_string($dbConnection, $_POST["tag"]);
-	
+	$newaddedtag = mysqli_real_escape_string($dbConnection, $_POST["tag"]);	
 	if ($Loggedin) {
 		if (isset($_POST["submit"])){
-		$sql = "SELECT `tag-id` FROM tags";
-		$result = mysqli_query($dbConnection, $sql);
-		$row = mysqli_fetch_assoc($result);
-		$tagID = $row['tag-id'];
-		$tagID++; 	
-		
-		$addtag = "INSERT INTO tags (`tag-ID`, `tagnaam`) VALUES ($tagID,$newtag)";
-		
-		$insert = mysqli_query($dbConnection, $addtag);
+            $sqladdtag = "INSERT INTO tags (`tagnaam`) VALUES ('$newaddedtag')";
+            $insertaddtag = mysqli_query($dbConnection, $sqladdtag);
+            if ($insertaddtag) {
+                echo "<div class='alert alert-success' role='alert'>";
+                echo "Tag toegevoegd";
+                echo "</div>";
+                Customlog("Add-Tag", "log", "Admin $LoggedinID successfully added tag $newaddedtag.");
+                ?>
+                <script type="text/javascript">
+                    window.setTimeout(function(){
+                        // Move to a new location
+                        window.location.href = "/admin/?page=tags";
+                    }, 2500);
+                </script>
+                <?php
+            } else {
+                echo "<div class='alert alert-danger' role='alert'>";
+                echo "Tag kon niet worden toegevoegd.";
+                echo "</div>";
+                Customlog("Add-Tag", "error", "Admin $LoggedinID tried adding a tag. The query failed.");
+                ?>
+                <script type="text/javascript">
+                    window.setTimeout(function(){
+                        // Move to a new location
+                        window.location.href = "/admin/?page=tagss";
+                    }, 2500);
+                </script>
+                <?php
+            }       
 		}
 	}
 }
 ?>
-<form action="func.tags.php" id="update" method="post">
-    Voeg een tag aan de website:<input type="text" value="tag" name="tag"><br>
-    <input type="hidden" name="addtag" value="true">
-    <button type="submit" value="submit" name="submit">submit</button>
-</form>
 
 <!--/.container-->
 <!-- Popper.JS -->

@@ -35,7 +35,7 @@
                     <h2>Voer hier je login-gegevens in</h2><br>
 
                     <?php
-                if ($loggedin) {
+                if ($Loggedin) {
                   echo "<div class='alert alert-success' role='alert'>";
                   echo "Het lijkt erop dat je al ingelogd bent! Niet jou account? Of wil je opnieuw inloggen? <a style='color: red;' href='?logout=1'>Log-uit</a>";
                   echo "</div>";
