@@ -105,12 +105,11 @@
 										$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
 										('$safename', '$LoggedinID', '$sql_file', '$school');";
 										$memeins = $dbConnection->query($sql);
-										if ($memeins) {
-											//tags nog weer apart
-												//tags inserten
-												$sql5 = "INSERT INTO `memetag`(`tag-ID`, `meme-ID`) VALUES ('$memeID', '$safetag')";
-												$inserttag = mysqli_query($dbConnection, $sql5);
-										}
+
+									//tags inserten
+										$sql5 = "INSERT INTO `memetag`(`tag-ID`, `meme-ID`) VALUES ('$memeID', '$safetag')";
+										$inserttag = mysqli_query($dbConnection, $sql5);
+
 									//check query
 									if (!$result) {
 										customlog("uploaded", "error", "the result query check failed.");
