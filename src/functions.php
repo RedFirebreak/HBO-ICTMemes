@@ -342,4 +342,11 @@
       }
 // the actual checking of the mail
     }
+
+    // Check for needles in a haystack (search in array function), returns a boolean
+    // Example 1: echo in_array_any( [3,9], [5,8,3,1,2] ); // true, since 3 is present
+    // Example 2: echo in_array_any( [4,9], [5,8,3,1,2] ); // false, neither 4 nor 9 is present
+    function in_array_any($needles, $haystack) {
+      return !empty(array_intersect($needles, $haystack));
+   }
 ?>

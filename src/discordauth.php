@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>HBO-ICTMemes</title>
+    <title>wut</title>
     <?php
       require "../func.header.php";
     ?>
@@ -10,8 +10,7 @@
 
 
 <?php
-echo ('Main screen turn on!<br/><br/>');
-
+use RestCord\DiscordClient;
 // Get configdata
       // Get key from config
       $config  = checkpathtosrc();
@@ -22,7 +21,7 @@ echo ('Main screen turn on!<br/><br/>');
 $provider = new \Wohali\OAuth2\Client\Provider\Discord([
     'clientId' => $config['discordclientid'],
     'clientSecret' => $config['discordclientsecret'],
-    'redirectUri' => $config['discordredirecturi']
+    'redirectUri' => 'http://localhost/src/discordauth.php'
 ]);
 
 if (!isset($_GET['code'])) {
@@ -59,15 +58,60 @@ if (!isset($_GET['code'])) {
 
         echo '<h2>Resource owner details:</h2>';
         printf('Hello %s#%s!<br/><br/>', $user->getUsername(), $user->getDiscriminator());
-        var_export($user->toArray());
+        //var_export($user->toArray());
+        $discorduser = $user->toArray();
+
+        // Set variables!
+        $discordusername = $discorduser['username'];
+        $discorduserverified = $discorduser['verified'];
+        $discorduserid = (int) $discorduser['id'];
+        $discorduseravatar = $discorduser['avatar'];
+        $discorduseremail = $discorduser['email'];
+        $discordname = "$discordusername#" . $discorduser['discriminator'];
 
     } catch (Exception $e) {
-
         // Failed to get user details
         exit('Oh dear...');
 
     }
 }
+if ($discordusername) {
+    echo "<h1>Discord userinfo</h2>";
+    echo "Username: $discordusername" . "<br>";
+    echo "IsVerified: $discorduserverified" . "<br>";
+    echo "ID: $discorduserid" . "<br>";
+    echo "Email: $discorduseremail" . "<br>";
+    echo "Avatar: $discorduseravatar" . "<br>";
+    echo "Discordname: $discordname" . "<br>";
+
+    // Now that we have all the user info from discord itself. We can check with our installed bot if this user has special roles
+        // Setup Restcord to ask our bot something
+
+        $discordbottoken = $config['discordbottoken'];
+        $discord = new DiscordClient(['token' => $discordbottoken]);
+
+        // Check which guild(server) we have to check something for, then get the user from the guild
+        $discordguildid = $config['discordguildid'];
+        $discordmember = $discord->guild->getGuildMember(['guild.id' => $discordguildid, 'user.id' => $discorduserid]);
+
+        // Convert from object to array
+        $discordmember = (array)$discordmember;
+        $discordmemberroles = (array)$discordmember['roles'];
+
+        // Check if the user is administrator
+        $discordadminid = explode(", ", $config['allowedrole']);
+        $isdiscordadmin = in_array_any($discordadminid, $discordmemberroles);
+
+        if ($isdiscordadmin) {
+            echo "User is an admin WOOP!!";
+        } else {
+            echo "User is not an admin";
+        }
+
+} else {
+    echo "Userinfo could not be fetched :(";
+}
+
 ?>
 
 <body>
