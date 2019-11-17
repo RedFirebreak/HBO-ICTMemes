@@ -25,7 +25,6 @@
 
                 <?php
                 if(!empty($_GET)){
-                    if($Loggedin) {
                     ?>
                     <div class="row">
                         <div class="col-md-9">
@@ -186,7 +185,10 @@
                                         $amountdownvote = $amountdownvote['amount'];
                                         ?>
 
-
+                                        <?php
+                                        if ($Loggedin) {
+                                            // If the user is logged in, show the vote/report buttons
+                                        ?>
                                         <div class="col-md-4">
                                         <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span id="<?php echo $memeid ?>upvotespan" class="badge"><?php echo $amountupvote ?></span></i>
                                         
@@ -199,6 +201,17 @@
                                         <div class="col-md-4">
                                         <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal" class="fas fa-dumpster"></i>
                                         </div>
+
+                                        <?php
+                                        } else {
+                                            // if not, show a "log in to vote" button
+                                        ?>
+                                        <div class="col-md-12">
+                                            <p>Log in om te stemmen of een reactie achter te laten!</p>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
 
                                         <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -280,11 +293,12 @@
                                               $commentid = $row['comment-ID'];
 
                                               // Get username and userpiclocation
-                                              $query = "SELECT username, profile_picture FROM user WHERE `user-ID`='$commentuser'";
+                                              $query = "SELECT username, profile_picture, userrole FROM user WHERE `user-ID`='$commentuser'";
                                               $results = mysqli_query($dbConnection, $query);
                                               $row2 = mysqli_fetch_assoc($results);
 
                                               $commentusername = $row2['username'];
+                                              $commentuserrole = $row2['userrole'];
                                               $commentpfpic = $row2['profile_picture'];
 
                                               echo"<div class='row'>";
@@ -293,19 +307,24 @@
                                               echo"</div>";
                                               echo"<div class='col-md-10'>";
                                               echo"<b>$commentusername </b>";
-                                              if ($memeuserrole == 'admin') {echo " (Admin) <br>";}
-                                              if ($memeuserrole == 'uber-admin') {echo "(Hoofd-Admin) <br>";}
+                                              if ($commentuserrole == 'admin') {echo " (Admin) <br>";}
+                                              if ($commentuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
                                               echo "<p class='memecomment' style='font-size: 1.4rem;''>". htmlspecialchars($commentinhoud) ."</p>";
-
                                               ?>
 
                                         <div class="memereport col-md-12 text-center">
                                         <div class="row">
                                             <div class="col-md-9">
                                           </div>
-                                          <div class="col-md-3">
-                                          <i data-toggle="modal" data-target="#<?php echo $commentid ?>Modal" class="fas fa-dumpster"></i>
-                                          </div>
+                                          <?php
+                                          if ($Loggedin) {
+                                          ?>
+                                            <div class="col-md-3">
+                                            <i data-toggle="modal" data-target="#<?php echo $commentid ?>Modal" class="fas fa-dumpster"></i>
+                                            </div>
+                                          <?php
+                                          }
+                                          ?>
 
                                           <div class="modal fade" id="<?php echo $commentid ?>Modal" tabindex="-1" role="dialog" aria-labelledby="<?php echo $commentid ?>ModalLabel" aria-hidden="true">
                                           <div class="modal-dialog" role="document">
@@ -343,7 +362,6 @@
                                                     ?>
                                                     </select>
                                                     <br><br>
-
                                                     <label class="custom-control-label" for="customControlAutosizing">Toevoeging</label>
                                                     <input type="text" name="Toevoeging" required>
                                                     <?php echo recaptchaform ();?>
@@ -352,11 +370,8 @@
                                                     <input type="hidden" name="loggedinID" value="<?php echo $LoggedinID ?>" required>
                                                     <input type="hidden" name="comment" value="true" required>
                                                     <input type="hidden" name="meme" value="false" required>
-
                                                   </div>
                                                 </div>
-                                              
-
                                               </div>
                                               <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Sluiten</button>
@@ -386,6 +401,11 @@
                                 </div>
                             </div>
                             <!-- End meme card -->
+                            <?php
+                            if ($Loggedin) {
+                              // Only comment if you are logged in.
+                            ?>
+                            
                             <div class="row memecards">
                                 <div class="col-md-12">
                                     <form action="func.sendcomment.php" method="post">
@@ -398,8 +418,9 @@
                                     </form>
                                 </div>
                             </div>
-
-
+                          <?php
+                          }
+                          ?>
                         </div>
                         <div class="col-md-3">
                             <div class="sticky-top" style="top: 82px;">
@@ -408,26 +429,19 @@
                                   <img class="rounded img-thumbnail user-thumbnail" alt="Userpic" src="<?php echo $memeuserpic?>" />
                                 </a>
                                 <p style="word-wrap:break-word">
-                                    <?php
-                      
-                      // Echo userinfo of the meme
-                        echo "Gebruiker: " .$memeusername . '<br>';
-                        if ($memeuserrole == 'admin') {echo "Admin <br>";}
-                        if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
-                        echo $memeuserschool . '<br>';
-                        echo "Posted: " . $memedate;
-                      ?>
+                                  <?php
+                                  // Echo userinfo of the meme
+                                    echo "Gebruiker: " .$memeusername . '<br>';
+                                    if ($memeuserrole == 'admin') {echo "Admin <br>";}
+                                    if ($memeuserrole == 'uber-admin') {echo "Hoofd-Admin <br>";}
+                                    echo $memeuserschool . '<br>';
+                                    echo "Posted: " . $memedate;
+                                  ?>
                                 </p>
                             </div>
                         </div>
                     </div>
                     <?php
-              } else {
-              //Nobody is logged in.
-              echo "<div class='alert alert-danger' role='alert'>";
-              echo "Je moet ingelogd zijn om deze pagina te kunnen bekijken.";
-              echo "</div>";
-            }
         } else {
             // No get request
             echo "<div class='alert alert-danger' role='alert'>";

@@ -17,7 +17,7 @@
     <p>Email<br>
         <input type="email" name="email" required></p>
 
-    <p>School<br>
+    <p>School (Om school specifieke memes te zien!)<br>
         <select name="school">
             <?php
             // Query voor alle schoolnamen, en vervolgens ze in een dropdown zetten
