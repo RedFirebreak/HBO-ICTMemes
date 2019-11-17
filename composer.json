@@ -1,0 +1,15 @@
+{
+    "name": "sjilderda/hboictmemes",
+    "description": "This is HBOICTMemes",
+    "type": "project",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "RedFirebreak",
+            "email": "sjilderda@gmail.com"
+        }
+    ],
+    "require": {
+        "wohali/oauth2-discord-new": "^1.0"
+    }
+}

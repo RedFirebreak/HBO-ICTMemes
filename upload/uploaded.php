@@ -36,6 +36,16 @@
 				//data schoonmaken
 					$safename = mysqli_real_escape_string($dbConnection, $_POST['name']);
 					$safetag = mysqli_real_escape_string($dbConnection, $_POST['tags']);
+					$school = mysqli_real_escape_string($dbConnection, $_POST['school']);
+
+					// Kijk of er met "school" geknoeid is
+						if (!$school == $LoggedinSchool OR !$school == 'geen') {
+							// Check of de user voor zijn eigen school wil uploaden of voor de "geen" school. Als dat niet zo is, stop hier al.
+							echo "<div class='alert alert-danger' role='alert'>";
+							echo "Je mag niet voor een andere school uploaden";
+							echo "</div>";
+							return;
+						}
 
 						//meme uploaden
 						$target_dir = "../storage/meme/".date("Y")."/".date("n")."/";
@@ -97,10 +107,6 @@
 								} else {
 				//~~~~~~~~~~~~~~~~hier wordt de sql gedaan.~~~~~~~~~~~~~~~~~~
 									
-									//school achterhalen
-										$sql = "Select schoolnaam from user where `user-ID`='". $LoggedinID ."';";
-										$result = $dbConnection->query($sql);
-										$school = mysqli_fetch_assoc($result)['schoolnaam'];
 									//query(s) maken
 										$sql = "INSERT INTO meme (`meme-titel`, `user-ID`, `locatie`, `school`) Values 
 										('$safename', '$LoggedinID', '$sql_file', '$school');";

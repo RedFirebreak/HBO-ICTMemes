@@ -21,14 +21,19 @@
 		<form action="/upload/" method="post" enctype="multipart/form-data">
 		<p>Selecteer hier je meme (max. grootte is 2 MB):</p>
 		<input type="file" name="meme" id="meme" value="choose a file" >
+
 		<p>Voer een naam voor de meme in:</p>
 		<input type="text" name="name" id="name">
-		<p>Selecteer de tags voor je meme:</p>
 
-		<br>
+		<p>Deze meme is voor:</p>
+		<select name="school" required>
+		<option value='geen'>Iedereen</option>
+		<option value='<?php echo $LoggedinSchool?>'>Alleen mijn school</option>
+		</select>
+
+		<p>Selecteer de tags voor je meme:</p>
 		<p>Filter tags! (Hoofdletter gevoelig):</p>
 		<input id="search_input" placeholder="Type to filter"><br>
-		
 		<select name="tags" id="theList" class="List" required>
 			<?php
 				//tags ophalen

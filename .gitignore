@@ -6,3 +6,6 @@ src/config.php
 *.zip
 *.tar.gz
 *.rar
+
+# Dont upload the composer stuff #
+/vendor/

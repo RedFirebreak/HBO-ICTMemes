@@ -34,7 +34,7 @@
                   if ($LoggedinUserrole == "uber-admin") {
                     $sql = "SELECT * FROM meme ORDER by `meme-ID` DESC;";
                   } else {
-                    $sql = "SELECT * FROM meme WHERE `school`='$LoggedinSchool' ORDER by `meme-ID` DESC;";
+                    $sql = "SELECT * FROM meme WHERE `school`='$LoggedinSchool' OR `school`='Geen' ORDER by `meme-ID` DESC;";
                   }
     
                   $result = $dbConnection->query($sql);
@@ -64,7 +64,17 @@
                         <div class="row memecards">
                             <!-- Load the meme - part -->
                             <div class="col-md-8 divmemeimage">
-                                <h3><b><?php echo $memetitle?></b></h3>
+                                <h3><b><?php 
+                                echo "$memetitle </b>";
+
+                                // Check if it was posted for a school
+                                if ($memeschool == 'geen') {
+                                    // Everyone can see this!
+                                } else {
+                                    echo " -- $memeschool";
+                                }
+                                
+                                ?></h3>
                                 <hr>
                                 <?php
                                     if (file_exists($memelocation)) {
@@ -281,7 +291,10 @@
                                           $amountdownvote = $amountdownvote['amount'];
                                           ?>
 
-
+                                        <?php
+                                        if ($Loggedin) {
+                                            // If the user is logged in, show the vote/report buttons
+                                        ?>
                                         <div class="col-md-4">
                                             <i id="<?php echo $memeid ?>upvote" class="fas fa-chevron-up"><span
                                                     id="<?php echo $memeid ?>upvotespan"
@@ -299,7 +312,17 @@
                                             <i data-toggle="modal" data-target="#<?php echo $memeid ?>Modal"
                                                 class="fas fa-dumpster"></i>
                                         </div>
-
+                                        <?php
+                                        } else {
+                                            // if not, show a "log in to vote" button
+                                        ?>
+                                        <div class="col-md-12">
+                                            <p>Log in om te stemmen!</p>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                
                                         <!-- Geef elke meme een eigen modal om te reported -->
                                         <div class="modal fade" id="<?php echo $memeid ?>Modal" tabindex="-1"
                                             role="dialog" aria-labelledby="<?php echo $memeid ?>ModalLabel"
@@ -417,13 +440,19 @@
 								if (empty($commentaantal)) {$commentaantal='0';}
 								
 								//tekst
-								echo "<h1>Sticky-Info</h1>
+								echo "
 								<p>
-								Welkom ".$LoggedinUsername."!<br>
+								<b>Welkom ".$LoggedinUsername."!</b><br>
 								Je hebt ".$memeaantal." memes geupload.<br>
 								Je hebt ".$commentaantal." comments geplaatst.
 								</p>";
-							}
+							} else {
+                                echo "<h1>Goedendag!</h1>
+								<p>
+                                Log in om school-specifieke memes te zien en zelf memes toe te voegen aan de collectie.<br>
+                                <a href='account/login.php'>Klik hier om naar de inlogpagina te gaan</a>
+								</p>";
+                            }
 							
 						?>
                         </div>

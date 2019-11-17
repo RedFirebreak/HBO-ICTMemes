@@ -14,6 +14,11 @@
         <div class="container">
             <h1 class="display-3">Search</h1>
             <?php
+            if ($Loggedin) {
+              echo "<p>Hallo $LoggedinUsername, jouw zoekresultaat laat ook resultaten van de $LoggedinSchool zien!";
+            } else {
+              echo "<p>Hallo gebruiker! Log in om meer zoekresultaten te zien van jouw school!";
+            }
         if (!empty($_POST['search'])) {
           $search = mysqli_real_escape_string($dbConnection, $_POST['search']);
         } else {
@@ -28,7 +33,14 @@
         if ($search) {
           $nietgevonden = 0;
           // Tags
+          if ($Loggedin) {
+            // For logged in users
             $sql = "SELECT tagnaam t FROM tags WHERE tagnaam like '%$search%' ORDER by tagnaam ASC;";
+          } else {
+            // For not logged in users
+            $sql = "SELECT tagnaam t FROM tags WHERE tagnaam like '%$search%' ORDER by tagnaam ASC;";
+          }
+
             $result = $dbConnection->query($sql);
             
             if ($result->num_rows > 0) {
@@ -45,14 +57,25 @@
                 $nietgevonden++;
             }
           // Meme met tags
+          if ($Loggedin) {
+            // Query for logged in users
             $sql2 = "SELECT t.`tagnaam` tagnaam, m.`meme-titel` titel, m.`meme-id` id, m.`locatie` loc
             FROM memetag mt
-            
             JOIN tags t on mt.`tag-id` = t.`tag-id`
             JOIN meme m on mt.`meme-id` = m.`meme-id` 
-            
-            WHERE t.tagnaam like '%$search%'
+            WHERE t.tagnaam like '%$search%' AND m.`school`='geen' OR
+            t.tagnaam like '%$search%' AND m.`school`='$LoggedinSchool'
             ORDER by m.`meme-id` ASC;";
+            } else {
+              // Query for logged out users
+              $sql2 = "SELECT t.`tagnaam` tagnaam, m.`meme-titel` titel, m.`meme-id` id, m.`locatie` loc
+              FROM memetag mt
+              JOIN tags t on mt.`tag-id` = t.`tag-id`
+              JOIN meme m on mt.`meme-id` = m.`meme-id` 
+              WHERE t.tagnaam like '%$search%' AND m.`school`='geen'
+              ORDER by m.`meme-id` ASC;";
+            }
+
             $result2 = $dbConnection->query($sql2);
             
             if ($result2->num_rows > 0) {
@@ -73,7 +96,20 @@
               $nietgevonden++;
             }
           // Meme - Titelnaam
-            $sql3 = "SELECT `meme-titel` titel, `meme-id` id, `locatie` loc FROM meme WHERE `meme-titel` like '%$search%' ORDER by `meme-id` ASC;";
+          if ($Loggedin) {
+            // Query for logged in users
+            $sql3 = "SELECT `meme-titel` titel, `meme-id` id, `locatie` loc
+            FROM meme
+            WHERE `meme-titel` like '%$search%' AND `school`='geen' OR
+            `meme-titel` like '%$search%' AND `school`='$LoggedinSchool'
+            ORDER by `meme-id` ASC;";
+          } else {
+            // Query for logged out users
+            $sql3 = "SELECT `meme-titel` titel, `meme-id` id, `locatie` loc
+            FROM meme
+            WHERE `meme-titel` like '%$search%' AND `school`='geen'
+            ORDER by `meme-id` ASC;";
+          }
             $result3= $dbConnection->query($sql3);
             if ($result3->num_rows > 0) {
               echo "<h1>De volgende memes hebben '$search' in de titel:<br></h1>";
@@ -111,9 +147,24 @@
               $nietgevonden++;
             }
           // Comment 
-            $sql5 = "SELECT inhoud, `meme-id` FROM comments where inhoud like '%$search%' ORDER by datum ASC;";
-            $result5 = $dbConnection->query($sql5);
-            
+          if ($Loggedin) {
+            // Query for logged in users
+            $sql5 = "SELECT c.inhoud, c.`meme-id`
+            FROM comments C
+            JOIN meme m on c.`meme-id` = m.`meme-id` 
+            where inhoud like '%$search%' AND m.`school`='geen'; or
+            inhoud like '%$search%' AND m.`school`='$LoggedinSchool';
+            ORDER by datum ASC;";
+          } else {
+            // Query for logged in users
+            $sql5 = "SELECT c.inhoud, c.`meme-id`
+            FROM comments C
+            JOIN meme m on c.`meme-id` = m.`meme-id` 
+            where inhoud like '%$search%' AND m.`school`='geen';
+            ORDER by datum ASC;";
+          }
+
+            $result5 = $dbConnection->query($sql5);  
             if ($result5->num_rows > 0) {
                 // output data of each row
                 $commentgevonden = true;

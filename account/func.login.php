@@ -105,9 +105,9 @@
             }
 
           echo "<div class='alert alert-success' role='alert'>";
-          echo "Success! Je bent nu ingelogd. Over 3 seconden wordt je doorgestuurd naar de homepagina.";
+          echo "Success! Je bent nu ingelogd. Over 1 seconden wordt je doorgestuurd naar de homepagina.";
           echo "</div>";
-          header("Refresh:3; url=../index.php");
+          header("Refresh:1; url=../index.php");
           return;
         } else {
           $_SESSION['loggedin'] = false;

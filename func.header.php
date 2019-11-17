@@ -1,4 +1,7 @@
 <?php
+      // Initialise composer
+      require ('vendor/autoload.php');
+
       // Check for config
       require "src/config.php";
 
