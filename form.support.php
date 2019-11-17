@@ -27,8 +27,6 @@
 
     <p>Selecteer uw school</p>
     <select name="school">
-        <option value='geen'>Geen</option>
-
         <?php
             // Query voor alle schoolnamen, en vervolgens ze in een dropdown zetten
             $sql = "SELECT schoolnaam s FROM school ORDER by 1;";
