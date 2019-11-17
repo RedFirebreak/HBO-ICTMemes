@@ -15,6 +15,7 @@
             <h1 class="display-3">HBO-ICTMemes</h1>
             <p>Welkom op HBO-ICTMemes
                 <?php 
+                var_dump($_SESSION);
           if ($LoggedinUserrole == "uber-admin") {
             echo "<br>Hallo uber-admin! Je kunt alle memes zien van alle scholen.";
           }
