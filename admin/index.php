@@ -16,7 +16,11 @@
         $LoggedinUserrole = $_SESSION['userrole'];
         $LoggedinVerified = $_SESSION['is_verified'];
         $LoggedinGebanned = $_SESSION['banned'];
-        $LoggedinSchool = $_SESSION['schoolnaam'];
+
+        $discordloggedin = $_SESSION['discordloggedin'];
+        $discordadminallowed =  $_SESSION['discordallowed'];
+        $discordname = $_SESSION['discordname'];
+
       } else {
         $_SESSION['notice'] = "You are not logged in";
         $Loggedin = false;
@@ -27,6 +31,10 @@
         $LoggedinVerified = "";
         $LoggedinGebanned = "";
         $LoggedinSchool = "";
+
+        $discordloggedin = "";
+        $discordadminallowed =  "";
+        $discordname = "";
       }
 
       // To logout from any location
@@ -39,7 +47,12 @@
         unset($_SESSION['userrole']);
         unset($_SESSION['is_verified']);
         unset($_SESSION['banned']);
-        
+        unset($_SESSION['schoolnaam']);
+        unset($_SESSION['discordloggedin']);
+        unset($_SESSION['discordallowed']);
+        unset($_SESSION['discordname']);
+        unset($_SESSION['discordtoken']);
+
         header('Refresh: 0; url=/');
       }
 
@@ -55,6 +68,13 @@ if (!$LoggedinUserrole == 'admin' OR !$LoggedinUserrole == 'uber-admin' OR $Logg
   require ("notallowed.php");
   exit;
 }
+
+// Check if this user has te right discord role
+if (!$discordadminallowed) {
+    //Er is geen admin ingelogd, maar een user
+    require ("discordnotallowed.php");
+    exit;
+  }
 
 // When we are allowed! Continue
 require ("func.adminheader.php");
@@ -209,7 +229,6 @@ require ("func.adminheader.php");
                             case 'editrow':
                                 require("database.editrow.php");
                                 break;
-
                             }
                         } else {
                             require("homepage.php");

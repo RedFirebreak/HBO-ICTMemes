@@ -31,6 +31,11 @@
         $LoggedinVerified = $_SESSION['is_verified'];
         $LoggedinGebanned = $_SESSION['banned'];
         $LoggedinSchool = $_SESSION['schoolnaam'];
+
+        $discordloggedin = $_SESSION['discordloggedin'];
+        $discordadminallowed =  $_SESSION['discordallowed'];
+        $discordname = $_SESSION['discordname'];
+        // Exists, but not set due to security: $_SESSION['discordtoken'];
       } else {
         $_SESSION['notice'] = "You are not logged in";
         $Loggedin = false;
@@ -41,6 +46,9 @@
         $LoggedinVerified = "";
         $LoggedinGebanned = "";
         $LoggedinSchool = "";
+        $discordloggedin = "";
+        $discordadminallowed =  "";
+        $discordname = "";
       }
 
       // To logout from any location
@@ -54,7 +62,11 @@
         unset($_SESSION['is_verified']);
         unset($_SESSION['banned']);
         unset($_SESSION['schoolnaam']);
-        
+        unset($_SESSION['discordloggedin']);
+        unset($_SESSION['discordallowed']);
+        unset($_SESSION['discordname']);
+        unset($_SESSION['discordtoken']);
+
         header('Refresh: 0; url=/');
       }
     ?>

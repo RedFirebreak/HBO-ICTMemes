@@ -22,7 +22,12 @@
       // Required for discordauth
         $config['discordclientid'] = '';
         $config['discordclientsecret'] = '';
-        $config['discordredirecturi'] = 'https://../discordauth.php';
+        $config['discordbottoken'] = '';
+        $config['discordredirecturi'] = 'http://../src/discordauth.php';
+
+      // For discord role-authentication
+        $config['discordguildid'] = ;
+        $config['allowedrole'] = "644314678121179742237, 64431804646775923202107";
 
       // The key from google for recaptcha
         $config['recaptchakey'] = "";
